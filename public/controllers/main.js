@@ -3,7 +3,8 @@ angular.module('MyApp')
     $scope.alphabet = ['0-9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
       'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
       'Y', 'Z'];
-    /*$scope.location = ['Bangalore', 'Delhi'];*/
+    /*$scope.country = ['India']*/
+    /*$scope.city = ['Bangalore', 'Delhi'];*/
     /*$scope.neighborhood = { 'Bangalore': ['Kormangala', 'JP Nagar', 'Indiranagar', 'MG Road'],
                               'Delhi': ['Connaught Place', 'Dwarka', 'Janak Puri', 'Saket', 'Defence Colony', 'Hauz Khas']
                             };*/
@@ -16,9 +17,9 @@ angular.module('MyApp')
     
     $scope.headingTitle = 'all activities';
     $scope.activities = Activity.query();                               //changed
-    /*$scope.filterByLocation = function(genre) {
-      $scope.activities = Activity.query({ location: location });
-      $scope.headingTitle = location;
+    /*$scope.filterByCity = function(genre) {
+      $scope.activities = Activity.query({ city: city });
+      $scope.headingTitle = city;
     };*/
     $scope.filterByGenre = function(genre) {
       $scope.activities = Activity.query({ genre: genre });             //changed

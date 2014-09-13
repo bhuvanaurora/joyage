@@ -21,9 +21,5 @@ angular.module('MyApp')
             $scope.activity.subscribers.splice(index, 1);
           });
         };
-
-        $scope.nextEpisode = activity.episodes.filter(function(episode) {
-          return new Date(episode.firstAired) > new Date();
-        })[0];
       });
     });

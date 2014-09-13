@@ -2,12 +2,12 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <div class="media">
-        <div class="pull-left">
+        <div class="text-center">
           <h2 class="media-heading text-center">
-            {{activity.name}}
+            {{activity.title}}
           </h2>
           <hr>
-          <img class="media-object img-rounded" ng-src="{{activity.poster}}">
+          <img class="media-object img-rounded" ng-src="/images/{{activity.poster}}">
           <div class="text-center" ng-if="currentUser">
             <div ng-show="!isSubscribed()">
               <button ng-click="subscribe()" style="width:50%" class="btn btn-block btn-success">
@@ -21,46 +21,39 @@
             </div>
           </div>
           <div class="text-center" ng-show="!currentUser">
-            <a class="btn btn-block btn-primary" href="#/login">Login to Subscribe</a>
+            <a class="btn btn-block btn-primary" href="#/login">Login to Bookmark</a>
           </div>
-        </div>
-        <div class="media-body">
-          <!--h2 class="media-heading">
-            {{activity.name}}
-          </h2-->
-          <h4 ng-show="activity.status === 'Continuing'">
-            <span class="ion-calendar"></span>
-            {{activity.airsDayOfWeek}} <em>{{activity.airsTime}}</em> on
-            {{activity.network}}
-          </h4>
-          <h4 ng-show="activity.status === 'Ended'">
-            Status: <span class="text-danger">Ended</span>
-          </h4>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="alert alert-info" ng-show="nextEpisode">
-    The next episode starts {{nextEpisode.firstAired | fromNow}}.
   </div>
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <!--span class="ion-film-marker"></span-->Description
+      Description
+      <p class="pull-right">
+        <span class="ion-clock"></span>
+        {{activity.timeOfActivity}}
+        {{activity.dateOfActivity | date: 'short'}}
+      </p>
     </div>
+    <!--div class="media-body">
+      <h4 ng-show="activity.status === 'Continuing'">
+        <span class="ion-calendar"></span>
+        {{activity.dateOfActivity}} <em>{{activity.timeOfActivity}}</em>
+      </h4>
+      <h4 ng-show="activity.status === 'Ended'">
+        Status: <span class="text-danger">Ended</span>
+      </h4>
+    </div-->
     <div class="panel-body">
-      <div class="episode" ng-repeat="episode in activity.episodes">
-        <h4>{{episode.episodeName}}
-        <small>Season {{episode.season}}, Episode {{episode.episodeNumber}}</small>
-        </h4>
-        <p>
-          <span class="ion-clock"></span>
-          {{episode.firstAired | date: 'short'}}
-        </p>
-        <p>{{activity.overview}}</p>
-        <p>{{episode.overview}}</p>
-      </div>
+      <p>{{activity.description}}</p>
+      <h4>{{activity.price}}</h4>
     </div>
+    <p class="panel-body">{{activity.location}}, {{activity.neighborhood}}</p>
+    <p>{{activity.address}}</p>
+    <p>{{activity.phone}}</p>
+    <a href="{{activity.website}}">{{activity.website}}</a>
   </div>
+  
 </div>

@@ -90,11 +90,11 @@
                 
                 <div class="fade-repeat col-xs-4 col-md-3" ng-repeat="activity in activities | filter:query | orderBy:'rating':true">
                     <a href="/activities/{{activity._id}}">
-                        <img class="img-rounded" ng-src="{{activity.poster}}" width="100%"/>
+                        <img class="img-rounded" ng-src="/images/{{activity.poster}}" width="100%"/>
                     </a>
                     <div class="text-center">
-                        <a href="/activities/{{activity._id}}">{{activity.name}}</a>
-                        <p class="text-muted">Episodes: {{activity.episodes.length}}</p>
+                        <a href="/activities/{{activity._id}}">{{activity.title}}</a>
+                        <p class="text-muted">{{activity.location}}({{activity.neighborhood}})</p>
                     </div>
                 </div>
             </div>

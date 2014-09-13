@@ -22,25 +22,24 @@ var tokenSecret = 'your unique secret';
 
 var activitySchema = new mongoose.Schema({
   _id: Number,
-  name: String,
-  airsDayOfWeek: String,
-  airsTime: String,
-  firstAired: Date,
-  genre: [String],
-  network: String,
-  overview: String,
-  ratingCount: Number,
-  status: String,
-  poster: String,
+  title: String,
+  dateOfActivity: String,
+  timeOfActivity: String,
+  city: String,
+  location: String,
+  address: String,
+  phone: String,
+  Website: String,
+  neighborhood: String,
+  country: String,
+  genre: [String],                              //categories
+  description: String,
+  status: String,                               //'Continuing' or 'Ended'
+  poster: String,                               //Image url
+  price: String,
+  timeAdded: Date.now(),
   subscribers: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
-  }],
-  episodes: [{
-      season: Number,
-      episodeNumber: Number,
-      episodeName: String,
-      firstAired: Date,
-      overview: String
   }]
 });
 
