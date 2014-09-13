@@ -1,19 +1,19 @@
 angular.module('MyApp')
-  .controller('AddCtrl', function($scope, $alert, Show) {
-    $scope.addShow = function() {
-      Show.save({ showName: $scope.showName }).$promise
+  .controller('AddCtrl', function($scope, $alert, Activity) {
+    $scope.addActivity = function() {
+      Activity.save({ activityName: $scope.activityName }).$promise
         .then(function() {
-          $scope.showName = '';
+          $scope.activityName = '';
           $scope.addForm.$setPristine();
           $alert({
-            content: 'TV show has been added.',
+            content: 'Activity has been added.',
             animation: 'fadeZoomFadeDown',
             type: 'material',
             duration: 3
           });
         })
         .catch(function(response) {
-          $scope.showName = '';
+          $scope.activityName = '';
           $scope.addForm.$setPristine();
           $alert({
             content: response.data.message,

@@ -1,26 +1,28 @@
+// Changes made
+
 angular.module('MyApp')
-  .controller('DetailCtrl', function($scope, $rootScope, $routeParams, Show, Subscription) {
-      Show.get({ _id: $routeParams.id }, function(show) {
-        $scope.show = show;
+  .controller('DetailCtrl', function($scope, $rootScope, $routeParams, Activity, Subscription) {
+      Activity.get({ _id: $routeParams.id }, function(activity) {
+        $scope.activity = activity;
 
         $scope.isSubscribed = function() {
-          return $scope.show.subscribers.indexOf($rootScope.currentUser._id) !== -1;
+          return $scope.activity.subscribers.indexOf($rootScope.currentUser._id) !== -1;
         };
 
         $scope.subscribe = function() {
-          Subscription.subscribe(show).success(function() {
-            $scope.show.subscribers.push($rootScope.currentUser._id);
+          Subscription.subscribe(activity).success(function() {
+            $scope.activity.subscribers.push($rootScope.currentUser._id);
           });
         };
 
         $scope.unsubscribe = function() {
-          Subscription.unsubscribe(show).success(function() {
-            var index = $scope.show.subscribers.indexOf($rootScope.currentUser._id);
-            $scope.show.subscribers.splice(index, 1);
+          Subscription.unsubscribe(activity).success(function() {
+            var index = $scope.activity.subscribers.indexOf($rootScope.currentUser._id);
+            $scope.activity.subscribers.splice(index, 1);
           });
         };
 
-        $scope.nextEpisode = show.episodes.filter(function(episode) {
+        $scope.nextEpisode = activity.episodes.filter(function(episode) {
           return new Date(episode.firstAired) > new Date();
         })[0];
       });

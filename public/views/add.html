@@ -1,13 +1,13 @@
 <div class="container">
   <div class="panel panel-default">
-    <div class="panel-heading">Add TV Show</div>
+    <div class="panel-heading">Add Activity</div>
     <div class="panel-body">
-      <form class="form" method="post" ng-submit="addShow()" name="addForm">
-        <div class="form-group" ng-class="{ 'has-error' : addForm.showName.$invalid && addForm.showName.$dirty }">
+      <form class="form" method="post" ng-submit="addActivity()" name="addForm">
+        <div class="form-group" ng-class="{ 'has-error' : addForm.activityName.$invalid && addForm.activityName.$dirty }">
           <label class="control-label">Name</label>
-          <input class="form-control" type="text" name="showName" ng-model="showName" placeholder="Enter TV show name" required autofocus>
-          <div class="help-block text-danger" ng-if="addForm.showName.$dirty" ng-messages="addForm.showName.$error">
-            <div ng-message="required">TV show name is required.</div>
+          <input class="form-control" type="text" name="activityName" ng-model="activityName" placeholder="Enter Activity name" required autofocus>
+          <div class="help-block text-danger" ng-if="addForm.activityName.$dirty" ng-messages="addForm.activityName.$error">
+            <div ng-message="required">Activity name is required.</div>
           </div>
         </div>
         <button class="btn btn-primary" type="submit" ng-disabled="addForm.$invalid">Add</button>

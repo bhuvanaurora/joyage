@@ -1,19 +1,81 @@
-<div class="jumbotron">
-    <div class="container">
-        <ul class="alphabet">
-            <li ng-repeat="char in alphabet">
-                <span ng-click="filterByAlphabet(char)">{{char}}</span>
-            </li>
-        </ul>
-        <ul class="genres">
-            <li ng-repeat="genre in genres">
-                <span ng-click="filterByGenre(genre)">{{genre}}</span>
-            </li>
-        </ul>
+
+<div id="new-home" style="margin-bottom:20px;">
+    <div id="filter-and-sort-bars">
+        <div id="activity-filter">
+            <section class="container_27 clearfix">
+                <section class="grid_27">                        
+                    I'm looking for <span class="filter-select" data-filter-id="category-filter">
+                        <a id="categories-select" style="text-decoration:none;color:#0095dd;" onclick='displayMenu();' onmouseover='this.style.color="#cd7f32";' onmouseout='this.style.color="#0095dd";'>{{headingTitle}}</a></span>
+                        in Bangalore<!--span id="neighborhoods-select" class="filter-select" data-filter-id="neighborhood-filter">Bangalore</span-->.
+                </section>
+            </section>
+            <div id="filter-container" style="margin-top:40px;">
+                <section class="container_27 clearfix">
+                    <section class="grid_27">
+                        <div id="category-filter" class="filter-options" data-filter-type="categories">
+                            <!--div class="show-all-activities-button" data-fid="clear">all activities</div>
+                            <div class="clear"></div-->
+                            <ul class="genres">
+                                <li><span ng-click='allActivities()'>Show all activities</span></li>
+                            </ul>
+                            <div>
+                                <div class="filter-column">
+                                    <div id="filter-icon-1" class="filter-icon"></div>
+                                    <div class="filter-heading">Active &amp; Outdoor</div>    
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[0])" class="filter-sub" data-fid="79">{{genres[0]}}</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[1])" class="filter-sub" data-fid="80">{{genres[1]}}</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[2])" class="filter-sub" data-fid="81">{{genres[2]}}</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[3])" class="filter-sub" data-fid="82">{{genres[3]}}</div>
+                                </div>        
+                                <div class="filter-column">
+                                    <div id="filter-icon-2" class="filter-icon"></div>
+                                    <div class="filter-heading">Bars &amp; Drinking</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[4])" class="filter-sub" data-fid="83">{{genres[4]}}</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[5])" class="filter-sub" data-fid="84">{{genres[5]}}</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[6])" class="filter-sub" data-fid="85">{{genres[6]}}</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[7])" class="filter-sub" data-fid="86">{{genres[7]}}</div>
+                                </div>
+                                <div class="filter-column">
+                                    <div id="filter-icon-3" class="filter-icon"></div>
+                                    <div class="filter-heading">Classes &amp; Exhibits</div>                                
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[8])" class="filter-sub" data-fid="87">{{genres[8]}}</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[9])" class="filter-sub" data-fid="88">{{genres[9]}}</div>
+                                </div>
+                                <div class="filter-column">
+                                    <div id="filter-icon-4" class="filter-icon"></div>
+                                    <div class="filter-heading">Food &amp; Dining</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[10])" class="filter-sub" data-fid="90">{{genres[10]}}</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[11])" class="filter-sub" data-fid="94">{{genres[11]}}</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[12])" class="filter-sub" data-fid="92">{{genres[12]}}</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[13])" class="filter-sub" data-fid="91">{{genres[13]}}</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[14])" class="filter-sub" data-fid="93">{{genres[14]}}</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[15])" class="filter-sub" data-fid="102">{{genres[15]}}</div>
+                                </div>
+                                <div class="filter-column">
+                                    <div id="filter-icon-5" class="filter-icon"></div>
+                                    <div class="filter-heading">Shows &amp; Entertainment</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[16])" class="filter-sub" data-fid="95">{{genres[16]}}</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[17])" class="filter-sub" data-fid="101">{{genres[17]}}</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[18])" class="filter-sub" data-fid="96">{{genres[18]}}</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[19])" class="filter-sub" data-fid="97">{{genres[19]}}</div>
+                                </div>
+                                <div class="filter-column">
+                                    <div id="filter-icon-6" class="filter-icon"></div>
+                                    <div class="filter-heading">Date Spots</div>                                            
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[20])" class="filter-sub" data-fid="103">{{genres[20]}}</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[21])" class="filter-sub" data-fid="105">{{genres[21]}}</div>
+                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[22])" class="filter-sub" data-fid="107">{{genres[22]}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="container">
+<div class="container" style>
     <div class="panel panel-default">
         <div class="panel-heading">
             {{headingTitle}}
@@ -23,13 +85,16 @@
         </div>
         <div class="panel-body">
             <div class="row show-list">
-                <div class="fade-repeat col-xs-4 col-md-3" ng-repeat="show in shows | filter:query | orderBy:'rating':true">
-                    <a href="/shows/{{show._id}}">
-                        <img class="img-rounded" ng-src="{{show.poster}}" width="100%"/>
+                
+                <!-- Changes made -->
+                
+                <div class="fade-repeat col-xs-4 col-md-3" ng-repeat="activity in activities | filter:query | orderBy:'rating':true">
+                    <a href="/activities/{{activity._id}}">
+                        <img class="img-rounded" ng-src="{{activity.poster}}" width="100%"/>
                     </a>
                     <div class="text-center">
-                        <a href="/shows/{{show._id}}">{{show.name}}</a>
-                        <p class="text-muted">Episodes: {{show.episodes.length}}</p>
+                        <a href="/activities/{{activity._id}}">{{activity.name}}</a>
+                        <p class="text-muted">Episodes: {{activity.episodes.length}}</p>
                     </div>
                 </div>
             </div>

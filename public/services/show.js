@@ -1,4 +1,4 @@
 angular.module('MyApp')
-  .factory('Show', function($resource) {
-    return $resource('/api/shows/:_id');
+  .factory('Activity', function($resource) {                //changed
+    return $resource('/api/activities/:_id');               //changed
   });

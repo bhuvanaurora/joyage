@@ -20,7 +20,7 @@ var _ = require('lodash');
 
 var tokenSecret = 'your unique secret';
 
-var showSchema = new mongoose.Schema({
+var activitySchema = new mongoose.Schema({
   _id: Number,
   name: String,
   airsDayOfWeek: String,
@@ -29,7 +29,6 @@ var showSchema = new mongoose.Schema({
   genre: [String],
   network: String,
   overview: String,
-  rating: Number,
   ratingCount: Number,
   status: String,
   poster: String,
@@ -80,7 +79,7 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 };
 
 var User = mongoose.model('User', userSchema);
-var Show = mongoose.model('Show', showSchema);
+var Activity = mongoose.model('Activity', activitySchema);
 
 mongoose.connect('localhost');
 
@@ -213,8 +212,8 @@ app.get('/api/users', function(req, res, next) {
 
 
 
-app.get('/api/shows', function(req, res, next) {
-  var query = Show.find();
+app.get('/api/activities', function(req, res, next) {
+  var query = Activity.find();
   if (req.query.genre) {
     query.where({ genre: req.query.genre });
   } else if (req.query.alphabet) {
@@ -222,20 +221,32 @@ app.get('/api/shows', function(req, res, next) {
   } else {
     query.limit(12);
   }
-  query.exec(function(err, shows) {
+  query.exec(function(err, activities) {
     if (err) return next(err);
-    res.send(shows);
+    res.send(activities);
   });
 });
 
-app.get('/api/shows/:id', function(req, res, next) {
-  Show.findById(req.params.id, function(err, show) {
+app.get('/api/activities/:id', function(req, res, next) {
+  Activity.findById(req.params.id, function(err, activity) {
     if (err) return next(err);
-    res.send(show);
+    res.send(activity);
   });
 });
 
-app.post('/api/shows', function (req, res, next) {
+app.post('/api/activities', function(req, res, next) {
+  var activity = new Activity({
+    name: req.body.name,
+    //email: req.body.email,
+    //password: req.body.password
+  });
+  activity.save(function(err) {
+    if (err) return next(err);
+    res.send(200);
+  });
+});
+
+/*app.post('/api/shows', function (req, res, next) {
   var seriesName = req.body.showName
     .toLowerCase()
     .replace(/ /g, '_')
@@ -315,13 +326,13 @@ app.post('/api/shows', function (req, res, next) {
       res.send(200);
     });
   });
-});
+});*/
 
 app.post('/api/subscribe', ensureAuthenticated, function(req, res, next) {
-  Show.findById(req.body.showId, function(err, show) {
+  Activity.findById(req.body.activityId, function(err, activity) {
     if (err) return next(err);
-    show.subscribers.push(req.user._id);
-    show.save(function(err) {
+    activity.subscribers.push(req.user._id);
+    activity.save(function(err) {
       if (err) return next(err);
       res.send(200);
     });
@@ -329,11 +340,11 @@ app.post('/api/subscribe', ensureAuthenticated, function(req, res, next) {
 });
 
 app.post('/api/unsubscribe', ensureAuthenticated, function(req, res, next) {
-  Show.findById(req.body.showId, function(err, show) {
+  Activity.findById(req.body.activityId, function(err, activity) {
     if (err) return next(err);
-    var index = show.subscribers.indexOf(req.user._id);
-    show.subscribers.splice(index, 1);
-    show.save(function(err) {
+    var index = activity.subscribers.indexOf(req.user._id);
+    activity.subscribers.splice(index, 1);
+    activity.save(function(err) {
       if (err) return next(err);
       res.send(200);
     });
@@ -354,8 +365,8 @@ app.listen(app.get('port'), function() {
 });
 
 agenda.define('send email alert', function(job, done) {
-  Show.findOne({ name: job.attrs.data }).populate('subscribers').exec(function(err, show) {
-    var emails = show.subscribers.map(function(user) {
+  Activity.findOne({ name: job.attrs.data }).populate('subscribers').exec(function(err, activity) {
+    var emails = activity.subscribers.map(function(user) {
       if (user.facebook) {
         return user.facebook.email;
       } else if (user.google) {
@@ -365,7 +376,7 @@ agenda.define('send email alert', function(job, done) {
       }
     });
 
-    var upcomingEpisode = show.episodes.filter(function(episode) {
+    var upcomingEpisode = activity.episodes.filter(function(episode) {
       return new Date(episode.firstAired) > new Date();
     })[0];
 
@@ -377,8 +388,8 @@ agenda.define('send email alert', function(job, done) {
     var mailOptions = {
       from: 'Fred Foo ✔ <foo@blurdybloop.com>',
       to: emails.join(','),
-      subject: show.name + ' is starting soon!',
-      text: show.name + ' starts in less than 2 hours on ' + show.network + '.\n\n' +
+      subject: activity.name + ' is starting soon!',
+      text: activity.name + ' starts in less than 2 hours on ' + activity.network + '.\n\n' +
         'Episode ' + upcomingEpisode.episodeNumber + ' Overview\n\n' + upcomingEpisode.overview
     };
 

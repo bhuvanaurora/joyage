@@ -3,18 +3,23 @@
 <head>
   <base href="/">
   <meta charset="utf-8">
-  <title>ShowTrackr</title>
-  <link href="favicon.png" rel="icon" type="image/png">
+  <title>Joyage</title>
+  <!--link href="favicon.png" rel="icon" type="image/png"-->
   <link href='http://fonts.googleapis.com/css?family=Roboto|Montserrat:400,700|Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
   <link href="//cdn.jsdelivr.net/ionicons/1.4.1/css/ionicons.min.css" rel="stylesheet">
   <link href="stylesheets/animate.css" rel="stylesheet">
+  <link href="stylesheets/dragon.css" rel="stylesheet">
   <link href="stylesheets/style.css" rel="stylesheet">
+  <link href="stylesheets/1080-27-grid.css" rel="stylesheet">
+  <link href="stylesheets/custom.css" rel="stylesheet">
+  <link href="stylesheets/mapbox.css" rel="stylesheet">
+  
 </head>
 <body>
 <div ng-controller="NavbarCtrl" class="navbar navbar-default navbar-static-top" role="navigation" bs-navbar>
   <div class="navbar-header">
     <a class="navbar-brand" href="/">
-      <span>Show<strong>Trackr</strong></span>
+      <span><strong>Joyage</strong></span>
     </a>
   </div>
   <ul class="nav navbar-nav">
@@ -26,7 +31,7 @@
     <li data-match-route="/signup"><a href="/signup">Sign up</a></li>
   </ul>
   <ul class="nav navbar-nav pull-right" ng-if="currentUser">
-    <li class="navbar-text" ng-bind="currentUser.email"></li>
+    <li class="navbar-text" ng-bind="currentUser.name"></li>
     <li><a href="javascript:void(0)" ng-click="logout()">Logout</a></li>
   </ul>
 </div>
@@ -56,7 +61,22 @@
 <script src="services/show.js"></script>
 <script src="services/subscription.js"></script>
 
+<!--script src="js/dragon.js"></script>
+<script src="js/libraries.js"></script>
+<script src="js/head.min.js"></script>
+<script src="js/widgets.js"></script-->
+
 <!--<script src="app.min.js"></script>-->
 <!--<script src="templates.js"></script>-->
+<script>
+  function displayMenu() {
+    var elem = document.getElementById("filter-container");
+    if (elem.style.display == "block") {
+      elem.style.display = "none";
+    } else {
+      elem.style.display = "block";
+    }
+  };
+</script>
 </body>
 </html>
