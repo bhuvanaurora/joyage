@@ -20,8 +20,20 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
         controller: 'SignupCtrl'
       })
       .when('/add', {
-        templateUrl: 'views/add.html',
+        templateUrl: 'views/pages/add.html',
         controller: 'AddCtrl'
+      })
+      .when('/about', {
+        templateUrl: 'views/pages/about.html'
+      })
+      .when('/jobs', {
+        templateUrl: 'views/pages/jobs.html'
+      })
+      .when('/privacy', {
+        templateUrl: 'views/pages/privacy.html'
+      })
+      .when('/tos', {
+        templateUrl: 'views/pages/tos.html'
       })
       .otherwise({
         redirectTo: '/'

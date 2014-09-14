@@ -1,9 +1,9 @@
 angular.module('MyApp')
   .controller('AddCtrl', function($scope, $alert, Activity) {
     $scope.addActivity = function() {
-      Activity.save({ activityName: $scope.activityName }).$promise
+      Activity.save({ activityTitle: $scope.activityTitle }).$promise
         .then(function() {
-          $scope.activityName = '';
+          $scope.activityTitle = '';
           $scope.addForm.$setPristine();
           $alert({
             content: 'Activity has been added.',
@@ -13,7 +13,7 @@ angular.module('MyApp')
           });
         })
         .catch(function(response) {
-          $scope.activityName = '';
+          $scope.activityTitle = '';
           $scope.addForm.$setPristine();
           $alert({
             content: response.data.message,
@@ -22,5 +22,32 @@ angular.module('MyApp')
             duration: 3
           });
         });
+      
+      /*var id = $scope.activityTitle + (new Date).getTime();
+      var activity = new Activity({_id: "id",
+                                    title: "title",
+                                    dateOfActivity: "date",
+                                    timeOfActivity: "time",
+                                    city: "city",
+                                    location: "loca",
+                                    address: "add",
+                                    phone: "phone",
+                                    Website: "website",
+                                    neighborhood: "neigh",
+                                    country: "cont",
+                                    genre: ["Bars"],                          
+                                    description: "desc",
+                                    status: "Continuing",                               
+                                    poster: "",                               
+                                    price: "Rs 250",
+                                    timeAdded: Date.now()
+                                  });
+      
+      activity.save(function(err){
+        if (err) {
+          console.log(err);
+        }
+      });*/
+      
     };
   });

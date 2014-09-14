@@ -44,3 +44,12 @@ body:after { content: ''; background-image: url(//pls.webtype.com/v.gif?ct=43269
  font-style: normal;
  font-weight: bold;
 }
+.footer-links a {
+    font-family: "BentonSans Light" !important;
+    font-size: 14px !important;
+    margin-top: 8px;
+}
+.headings {
+    font-size: 14px !important;
+    font-weight: 100 !important;
+}
