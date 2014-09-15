@@ -53,3 +53,20 @@ body:after { content: ''; background-image: url(//pls.webtype.com/v.gif?ct=43269
     font-size: 14px !important;
     font-weight: 100 !important;
 }
+.source-link {
+    margin-top: 10px;
+    text-decoration: none;
+    color: #4583b1;
+}
+.source-link a:hover {
+    text-decoration: blink;
+}
+.media-heading {
+    margin-top: 20px;
+}
+.media-subheading {
+    font-size: 16px;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    color: rgba(0,0,0,0.5);
+}

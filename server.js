@@ -13,7 +13,8 @@ var async = require('async');
 var request = require('request');
 var xml2js = require('xml2js');
 
-var agenda = require('agenda')({ db: { address: 'localhost:27017/test' } });
+/*var agenda = require('agenda')({ db: { address: 'localhost:27017/test' } });*/
+var agenda = require('agenda')({ db: { address: 'mongodb://<bhuvan>:<joyage_database_password>@ds035280.mongolab.com:35280/joyage_database' } });
 var sugar = require('sugar');
 var nodemailer = require('nodemailer');
 var _ = require('lodash');
@@ -23,13 +24,14 @@ var tokenSecret = 'your unique secret';
 var activitySchema = new mongoose.Schema({
   _id: Number,
   title: String,
-  dateOfActivity: String,
+  dateOfActivity: [String],
   timeOfActivity: String,
   city: String,
   location: String,
   address: String,
   phone: String,
-  Website: String,
+  sourceWebsite: String,
+  locationWebsite: String,
   neighborhood: String,
   country: String,
   genre: [String],                              //categories
@@ -38,6 +40,9 @@ var activitySchema = new mongoose.Schema({
   poster: String,                               //Image url
   price: String,
   timeAdded: Date.now(),
+  facebookLink: String,
+  twitterLink: String(),
+  zomatoLink: String(),
   subscribers: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }]
@@ -80,7 +85,8 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 var User = mongoose.model('User', userSchema);
 var Activity = mongoose.model('Activity', activitySchema);
 
-mongoose.connect('localhost');
+/*mongoose.connect('localhost');*/
+mongoose.connect('mongodb://<bhuvan>:<joyage_database_password>@ds035280.mongolab.com:35280/joyage_database')
 
 var app = express();
 

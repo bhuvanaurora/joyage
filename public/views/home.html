@@ -80,21 +80,20 @@
         <div class="panel-heading">
             {{headingTitle}}
             <div class="pull-right">
-                <input class="search" type="text" ng-model="query.name" placeholder="Search...">
+                <input class="search" type="text" ng-model="query" placeholder="Search...">
             </div>
         </div>
         <div class="panel-body">
-            <div class="row show-list">
-                
-                <!-- Changes made -->
-                
-                <div class="fade-repeat col-xs-4 col-md-3" ng-repeat="activity in activities | filter:query | orderBy:'rating':true">
-                    <a href="/activities/{{activity._id}}">
-                        <img class="img-rounded" ng-src="/images/{{activity.poster}}" width="100%"/>
-                    </a>
-                    <div class="text-center">
-                        <a href="/activities/{{activity._id}}">{{activity.title}}</a>
-                        <p class="text-muted">{{activity.location}}({{activity.neighborhood}})</p>
+            <div class="row show-list">                
+                <div class="fade-repeat col-xs-4 col-md-3" ng-repeat="activity in activities | filter:query | orderBy:'-title':true">
+                    <div style="height:300px;">
+                        <a href="/activities/{{activity._id}}">
+                            <img class="img-rounded" style="max-height: 200px;" ng-src="/images/{{activity.poster}}" width="100%"/>
+                        </a>
+                        <div class="text-center">
+                            <a href="/activities/{{activity._id}}">{{activity.title}}</a>
+                            <p class="text-muted">{{activity.location}}({{activity.neighborhood}})</p>
+                        </div>
                     </div>
                 </div>
             </div>
