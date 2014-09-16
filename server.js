@@ -13,8 +13,8 @@ var async = require('async');
 var request = require('request');
 var xml2js = require('xml2js');
 
-/*var agenda = require('agenda')({ db: { address: 'localhost:27017/test' } });*/
-var agenda = require('agenda')({ db: { address: 'mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database' } });
+var agenda = require('agenda')({ db: { address: 'localhost:27017/test' } });
+/*var agenda = require('agenda')({ db: { address: 'mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database' } });*/
 var sugar = require('sugar');
 var nodemailer = require('nodemailer');
 var _ = require('lodash');
@@ -31,6 +31,8 @@ var activitySchema = new mongoose.Schema({
   address: String,
   phone: String,
   sourceWebsite: String,
+  sourceName: String,
+  sourceDescription: String,
   locationWebsite: String,
   neighborhood: String,
   country: String,
@@ -38,11 +40,17 @@ var activitySchema = new mongoose.Schema({
   description: String,
   status: String,                               //'Continuing' or 'Ended'
   poster: String,                               //Image url
+  photoCredit: String,
+  photoCreditLink: String,
   price: String,
-  timeAdded: Date.now(),
+  //timeAdded: Date.now(),
   facebookLink: String,
   twitterLink: String(),
   zomatoLink: String(),
+  payment: String,
+  moreInfo: String,
+  operatingDays: [String],
+  operatingTime: [String],
   subscribers: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }]
@@ -85,8 +93,8 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 var User = mongoose.model('User', userSchema);
 var Activity = mongoose.model('Activity', activitySchema);
 
-/*mongoose.connect('localhost');*/
-mongoose.connect('mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database')
+mongoose.connect('localhost');
+/*mongoose.connect('mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database')*/
 
 var app = express();
 

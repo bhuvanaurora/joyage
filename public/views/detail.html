@@ -1,70 +1,152 @@
 <div class="container">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <div class="media">
-        <div class="text-center">
-          <h2 class="media-heading text-center">
+  
+  <!----------------- Left Panel --------------->
+  
+  <div class="left">
+    <div class="" id="activityDetails">
+      <div class="panel-body" style="margin-right: 20px;">
+        <div class="media">
+          <h2 class="media-heading">
             {{activity.title}}
           </h2>
-          <hr>
-            <p class="media-subheading">At {{activity.location}}, {{activity.neighborhood}}</p>
-          <img class="img-rounded" style="margin-bottom:20px;max-height:600px;" ng-src="/images/{{activity.poster}}">
-          <div class="text-center" ng-if="currentUser">
-            <div ng-show="!isSubscribed()">
-              <button ng-click="subscribe()" style="width:40%" class="btn btn-success">
-                <span class="ion-plus"></span> Bookmark
-              </button>
-            </div>
-            <div ng-show="isSubscribed()">
-              <button ng-click="unsubscribe()" style="width:40%" class="btn btn-danger">
-                <span class="ion-minus"></span> Bookmarked
-              </button>
-            </div>
+          
+          <hr style="margin-left:-40px;">
+            
+          <p class="media-subheading">At {{activity.location}}, {{activity.neighborhood}}</p>
+          
+          <img id="poster"ng-src="/images/{{activity.poster}}">
+          
+          <div class="description" ng-if="activity.description" style="margin-bottom:20px;">
+            <div style="margin-bottom:8px;" class="business"><a href="/"><b>Joyage</b></a></div>
+            <div style="font-size: 15px;">{{activity.description}}</div>
           </div>
-          <div class="text-center" ng-show="!currentUser">
-            <a class="btn btn-block btn-primary" href="#/login">Login to Bookmark</a>
+          <div class="description" id="description"
+               onload="function changeFontSize(){
+                  if (activity.description!=="") {
+                    document.getElementById("description").style.font-size="15px"
+                  }
+               }();">
+    
+            <div style="margin-bottom:8px;" class="business"><a href="{{activity.sourceWebsite}}"><b>{{activity.sourceName}}</b></a></div>
+            <div style="font-size: 13px">{{activity.sourceDescription}}</div>
+    
           </div>
+          <div class="source-link"><a href="{{activity.sourceWebsite}}">View Original Source</a></div>
         </div>
       </div>
     </div>
   </div>
+    
+  <!-------------------------- Right Panel ------------------------>
+  
+    <!--------------- Address -------------->
 
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      Description
-      <p class="pull-right">
-        <span class="ion-clock"></span>
-        {{activity.timeOfActivity}} |
-        {{activity.dateOfActivity[0] | date: 'short'}} <span ng-if="activity.dateOfActivity[1]">to {{activity.dateOfActivity[1] | date: 'short'}}</span>
-      </p>
+  <div class="right">
+    <div class="panel panel-default panel-right" style="width:100%;margin-bottom:20px;margin-top:-10px;">
+      <iframe width="100%" height="400" frameborder="1" scrolling="yes" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAH9Ep3WI0XkKd54inw2dGXakKf9NeYmYU&amp;q=40+%2C+St.+Marks+Road+Bangalore+%2C+560001+Bangalore+India"> 
+      </iframe>
+      <div class="address-head col-xs-12">{{activity.location}}</div>
+      <div class="address">{{activity.address}}</div>
+      <div class="address">{{activity.city}}</div>
+      <div class="address" style="margin-bottom:15px;">{{activity.phone}}</div>
     </div>
-    <div class="panel-body">
-      <div>{{activity.description}}</div>
-      <div class="source-link" style="font-style:italic;font-size:12px;"><a href="{{activity.sourceWebsite}}">View Original Source</a></div>
-      <h4 ng-if="activity.price">{{activity.price}}</h4>
+    
+    <!--------------- Bookmark -------------->
+    
+    <div class="panel panel-default panel-right" style="margin-top:-10px;">
+      <div class="panel-heading">
+        <div ng-if="currentUser">
+          <div ng-show="!isSubscribed()">
+            <button ng-click="subscribe()" class="btn btn-block btn-success" style="border-radius:10px;">
+              <span class="ion-plus"></span> Bookmark
+            </button>
+          </div>
+          <div ng-show="isSubscribed()">
+            <button ng-click="unsubscribe()" class="btn btn-block btn-danger">
+              <span class="ion-minus"></span> Bookmarked
+            </button>
+          </div>
+        </div>
+        <div class="" ng-show="!currentUser">
+          <a class="btn btn-block btn-primary" href="#/login">Login to Bookmark</a>
+        </div>
+      </div>
     </div>
-    <iframe width="100%" height="400" frameborder="1" scrolling="yes" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAH9Ep3WI0XkKd54inw2dGXakKf9NeYmYU&amp;q=40+%2C+St.+Marks+Road+Bangalore+%2C+560001+Bangalore+India"> 
-    </iframe>
-    <!--iframe width='100%' height='500px' frameBorder='0' src='https://a.tiles.mapbox.com/v4/bhuvanaurora.jgl3d40o/attribution,zoompan,zoomwheel,geocoder,share.html?access_token=pk.eyJ1IjoiYmh1dmFuYXVyb3JhIiwiYSI6ImpXNGx6M2sifQ.MkWqppvNEZKjosqWxOZeog'></iframe-->
-    <div class="panel-body">
-      <div class="col-md-4">
-        <p>{{activity.address}}</p>
+    
+    <!--------------- Date and Time -------------->
+    
+    <div class="panel panel-default panel-right">
+      <div class="panel-body">
+        <table style="width:100%">
+          <tr>
+            <td>
+              <div class="text-center">
+                <span ng-if="activity.timeOfActivity" class="ion-clock"></span>
+                {{activity.timeOfActivity}}<br />
+                {{activity.dateOfActivity[0] | date: 'short'}} <span ng-if="activity.dateOfActivity[1]">to {{activity.dateOfActivity[1] | date: 'short'}}</span>
+              </div>
+            </td>
+            <td><div class="info-title text-center" ng-if="activity.price">PRICE<br /><span class="info-text" style="font-size:16px;">{{activity.price}}</span></div></td>
+          </tr>
+        </table>
       </div>
-      <div class="col-md-4">
-        <p ng-if="activity.phone">{{activity.phone}}</p>
-        <span class="source-link" ng-if="activity.locationWebsite"><a href="{{activity.locationWebsite}}">Website</a></span>
+    </div>
+    
+    <!--------------- Payment -------------->
+    
+    <div class="panel panel-default panel-right" ng-if="activity.payment"  class="payment">
+      <a href="{{activity.payment}}"><button class="btn btn-primary btn-block">Buy tickets</button></a>
+    </div>
+    
+    <!--------------- Web Links -------------->
+
+    <div class="panel panel-default panel-right" style="height:50px;"
+            ng-if="activity.locationWebsite || activity.zomatoLink || activity.facebookLink || activity.twitterLink">
+      <table class="link-table">
+        <tr>
+          <td>
+            <div class="text-center link-div">
+              <a href="{{activity.locationWebsite}}" ng-if="activity.locationWebsite"><div class="text-center">Website</div></a>
+            </div>
+          </td>
+          <td>
+            <div class="text-center link-div">
+              <a href="{{activity.zomatoLink}}" ng-if="activity.zomatoLink"><div class="text text-center">Zomato</div></a>
+            </div>
+          </td>
+          <td>
+            <div class="text-center link-div">
+              <a href="{{activity.facebookLink}}" ng-if="activity.facebookLink"><div class="text text-center">Facebook</div></a>
+            </div>
+          </td>
+          <td>
+            <div class="text-center link-div">
+              <a href="{{activity.twitterLink}}" ng-if="activity.twitterLink"><div class="text text-center">Twitter</div></a>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    
+    <!--------------- Additional Info -------------->
+    
+    <div class="panel panel-default panel-right" ng-if="activity.moreInfo">
+      <div class="panel-body">
+        <div class="info-title">MORE INFO</div>
+        <div class="info-text">{{activity.moreInfo}}</div>
       </div>
-      <div class="col-md-4">
-        <span class="source-link" ng-if="activity.facebookLink"><a href="{{activity.facebookLink}}">Facebook</a></span>
-        <span class="source-link" ng-if="activity.twitterLink"><a href="{{activity.twitterLink}}">Twitter</a></span>
-        <span class="source-link" ng-if="activity.zomatokLink"><a href="{{activity.zomatoLink}}">Zomato</a></span>
-      </div>
+    </div>
+    
+    <!--------------- Photo Credit -------------->
+    
+    <div class="panel-right" ng-if="activity.photoCredit">
+      <div class="info-title" style="margin-left: 20px;">PHOTO CREDITS</div>
+      <div class="info-text" style="margin-left: 20px;"><a href="{{activity.photoCreditLink}}">{{activity.photoCredit}}</a></div>
     </div>
   </div>
-  
 </div>
 
-<footer id="footer-1080" style="margin-bottom:-20px;">
+<footer id="footer-1080" style="margin-bottom:-20px;z-index: 1001;clear:both;">
     <div class="container_27 clearfix">
         <div class="grid_4 pull-left">
             <div class="headings">JOYAGE</div>

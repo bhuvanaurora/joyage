@@ -7,7 +7,9 @@ software. Please contact WebType with any questions: www.webtype.com
 */
 
 body:after { content: ''; background-image: url(//pls.webtype.com/v.gif?ct=43269,43269,43269,43272,43272,43272,43270,43270,43270,43271,43271,43271&r=6990&p=6088&h=7jAG6XrLk0BdvNadj4N7eg%3d%3d); }
-
+body {
+    background-color: rgba(0,0,0,0.03);
+}
 @font-face {
  font-family: "BentonSans";
  src: url("//cloud.webtype.com/webtype/ff/2/95630e6a-7ed6-46be-9eb7-2e86fea7141e");
@@ -46,11 +48,11 @@ body:after { content: ''; background-image: url(//pls.webtype.com/v.gif?ct=43269
 }
 .footer-links a {
     font-family: "BentonSans Light" !important;
-    font-size: 14px !important;
+    font-size: 12px !important;
     margin-top: 8px;
 }
 .headings {
-    font-size: 14px !important;
+    font-size: 12px !important;
     font-weight: 100 !important;
 }
 .source-link {
@@ -69,4 +71,94 @@ body:after { content: ''; background-image: url(//pls.webtype.com/v.gif?ct=43269
     margin-top: -20px;
     margin-bottom: 20px;
     color: rgba(0,0,0,0.5);
+}
+#activityDetails {
+    float: left;
+    margin-left: auto;
+    margin-bottom: 0px;
+    margin-top: -10px;
+}
+#poster {
+    margin-bottom: 20px;
+    max-height: 400px;
+    width: 600px;
+    /*max-width: 700px;*/
+}
+.description {
+    text-align: justify;
+    width: 600px;
+}
+.media-heading {
+    width: 600px;
+    text-align: left;
+}
+.business {
+    text-transform: uppercase;
+    font-size: 12px;
+}
+.business a:hover {
+    text-decoration: none;
+    color: orange;
+}
+.business a {
+    text-decoration: none;
+    color: orange;
+}
+.panel-right {
+    border-radius: 6px;
+    box-shadow: none;
+    margin-top:-5px;
+    margin-bottom: 20px;
+    max-width: 400px;
+}
+.source-link {
+    font-style: italic;
+    font-size: 12px;
+}
+.info-title {
+    color:rgba(0,0,0,0.4);
+    font-size: 13px;
+}
+.info-text {
+    color: rgba(0,0,0,1);
+    font-size: 12px;
+}
+.address {
+    margin-left: 35px;
+    color: rgba(0,0,0,0.6);
+    font-size: 13px;
+}
+.address-head {
+    margin-left: 20px;
+    color: rgba(0,0,0,1);
+    font-size: 16px;
+    margin-top: 0px;
+    padding-top: 10px;
+}
+.link-div a {
+    text-decoration: none;
+    color: rgba(0,0,0,0.6);
+}
+.link-div a:hover {
+    text-decoration: none;
+    color: #4583b1;
+}
+.left {
+    float: left;
+    width: 60%;
+    background-color: white;
+    margin-top: -10px;
+    padding-bottom: 10%;
+}
+.right {
+    float: right;
+    width: 37%;
+}
+.link-table {
+    width: 100%;
+    vertical-align: middle;
+    margin-top: 15px;
+}
+a:hover {
+    text-decoration: none;
 }

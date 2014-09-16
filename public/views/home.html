@@ -1,4 +1,6 @@
 
+<!----------------------------- Categories -------------------------------------->
+
 <div id="new-home" style="margin-bottom:20px;">
     <div id="filter-and-sort-bars">
         <div id="activity-filter">
@@ -75,7 +77,9 @@
     </div>
 </div>
 
-<div class="container" style>
+<!------------------------------------------ Activities ----------------------------------->
+
+<!--div class="container" style>
     <div class="panel panel-default">
         <div class="panel-heading">
             {{headingTitle}}
@@ -83,6 +87,7 @@
                 <input class="search" type="text" ng-model="query" placeholder="Search...">
             </div>
         </div>
+        
         <div class="panel-body">
             <div class="row show-list">                
                 <div class="fade-repeat col-xs-4 col-md-3" ng-repeat="activity in activities | filter:query | orderBy:'-title':true">
@@ -96,6 +101,32 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div-->
+
+<div class="container">
+    <div class="panel panel-default" style="box-shadow: none;border: none;">
+        <div class="panel-heading" style="background-color: white;">
+            {{headingTitle}}
+            <div class="pull-right">
+                <input class="search" type="text" ng-model="query" placeholder="Search...">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="fade-repeat col-xs-4 col-md-4" ng-repeat="activity in activities | filter:query | orderBy:'-title':true">
+        <div style="height:400px;margin-bottom:-50px;" class="single-activity-box">
+            <div class="activity-image" style="width:334px;height:222px;overflow:hidden;">
+                <a href="/activities/{{activity._id}}">
+                    <img class="img-rounded" style="max-height: 300px;" ng-src="/images/{{activity.poster}}" width="100%"/>
+                </a>
+            </div>
+            <div class="activity-info" style="padding:15px;background-color:white;width:334px;overflow:hidden;height:80px;">
+                <a href="/activities/{{activity._id}}">{{activity.title}}</a>
+                <p class="text-muted">{{activity.location}}({{activity.neighborhood}})</p>
             </div>
         </div>
     </div>

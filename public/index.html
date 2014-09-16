@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Author -------
+<!----------------
     Bhuvan Arora
 ------------------>
 <html ng-app="MyApp">
@@ -70,10 +70,13 @@
 <script>
   function displayMenu() {
     var elem = document.getElementById("filter-container");
+    var container = document.getElementById("new-home");
     if (elem.style.display == "block") {
       elem.style.display = "none";
+      container.style.marginBottom = "20px";
     } else {
       elem.style.display = "block";
+      container.style.marginBottom = "272px";
     }
   };
 </script>
