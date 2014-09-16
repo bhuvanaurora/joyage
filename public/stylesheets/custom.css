@@ -162,3 +162,19 @@ body {
 a:hover {
     text-decoration: none;
 }
+.activity-image {
+    width: 334px;
+    height: 222px;
+    overflow: hidden;
+}
+.activity-info {
+    padding: 15px;
+    background-color: white;
+    width: 334px;
+    overflow: hidden;
+    height: 80px;
+}
+.single-activity-box {
+    height: 400px;
+    margin-bottom: -50px;
+}
