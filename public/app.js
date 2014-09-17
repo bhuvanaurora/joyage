@@ -20,7 +20,7 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
         controller: 'SignupCtrl'
       })
       .when('/add', {
-        templateUrl: 'views/pages/add.html',
+        templateUrl: 'views/add.html',
         controller: 'AddCtrl'
       })
       .when('/about', {

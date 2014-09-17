@@ -1,4 +1,4 @@
-<div class="container">
+<!--div class="container">
   <div class="panel panel-default">
     <div class="panel-heading">
       Add Activity
@@ -14,7 +14,7 @@
           </div>
         </div>
         <button class="btn btn-primary" type="submit" ng-disabled="addForm.$invalid">Add</button>
-      </form>
+      </form-->
       
       
       <!--form class="form" method="post" ng-submit="addActivity()" name="addForm">
@@ -23,6 +23,29 @@
       </form-->
       
       
+    <!--/div>
+  </div>
+</div-->
+
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Add Activity
+      <p class="pull-right">{{currentUser.email}}</p>
+    </div>
+    <div class="panel-body">
+      <form class="form" method="post" ng-submit="addActivity()" name="addForm">
+        <div class="help-block text-danger" ng-messages="">
+        <input class="form-control" type="text" name="title" ng-model="title" placeholder="Activity Title" required autofocus>
+        <!--input class="form-control" type="text" name="title" ng-model="title" placeholder="Activity Title" required autofocus>
+        <input class="form-control" type="text" name="title" ng-model="title" placeholder="Activity Title" required autofocus>
+        <input class="form-control" type="text" name="title" ng-model="title" placeholder="Activity Title" required autofocus>
+        <input class="form-control" type="text" name="title" ng-model="title" placeholder="Activity Title" required autofocus>
+        <input class="form-control" type="text" name="title" ng-model="title" placeholder="Activity Title" required autofocus>
+        <input class="form-control" type="text" name="title" ng-model="title" placeholder="Activity Title" required autofocus>
+        -->
+        <button class="btn btn-primary" type="submit">Add</button>
+      </form>
     </div>
   </div>
 </div>

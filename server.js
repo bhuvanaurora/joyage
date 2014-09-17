@@ -43,7 +43,7 @@ var activitySchema = new mongoose.Schema({
   photoCredit: String,
   photoCreditLink: String,
   price: String,
-  //timeAdded: Date.now(),
+  timeAdded: { type: Date, default: Date.now() },
   facebookLink: String,
   twitterLink: String(),
   zomatoLink: String(),
@@ -249,12 +249,15 @@ app.get('/api/activities/:id', function(req, res, next) {
 
 app.post('/api/activities', function(req, res, next) {
   var activity = new Activity({
-    name: req.body.name,
+    _id: 1,
+    title: req.body.title
     //email: req.body.email,
     //password: req.body.password
   });
   activity.save(function(err) {
-    if (err) return next(err);
+    if (err) {
+      return next(err);
+    }
     res.send(200);
   });
 });

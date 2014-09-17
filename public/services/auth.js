@@ -63,7 +63,7 @@ angular.module('MyApp')
       },
       googleLogin: function() {
         gapi.auth.authorize({
-          client_id: '55262601920-5jhf3qth89okujq6a7lh8bqc9epr8475.apps.googleusercontent.com',
+          client_id: '412023566724-lbjlu1k9tg0331k3s29vghhac45f8916.apps.googleusercontent.com',      // Joyage API
           scope: 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read',
           immediate: false
         }, function(token) {
