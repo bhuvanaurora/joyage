@@ -47,7 +47,8 @@ angular.module('MyApp')
                       zomatoLink: $scope.zomatoLink,
                       payment: $scope.payment,
                       moreInfo: $scope.moreInfo,
-                      moreInfoLink: $scope.moreInfoLink
+                      moreInfoLink: $scope.moreInfoLink,
+                      addedBy: $scope.addedBy
                       },
         function() {
           $scope.title = '';

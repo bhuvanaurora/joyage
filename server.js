@@ -281,7 +281,8 @@ app.post('/api/activities', function(req, res, next) {
     moreInfo: req.body.moreInfo,
     moreInfoLink: req.body.moreInfoLink,
     sourceName: req.body.sourceName,
-    sourceDescription: req.body.sourceDescription
+    sourceDescription: req.body.sourceDescription,
+    addedBy: req.body.addedBy
   });
   
   activity.save(function(err) {
