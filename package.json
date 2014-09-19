@@ -1,6 +1,6 @@
 {
   "name": "joyage",
-  "version": "0.0.0-4",
+  "version": "0.0.0-5",
   "scripts": {
     "test": "karma start public/test/karma.conf.js",
     "start": "node server.js"

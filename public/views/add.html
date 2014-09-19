@@ -10,9 +10,26 @@
         <input class="form-control" type="text" name="title" ng-model="title" placeholder="Activity Title" required autofocus><br />
         <textarea class="form-control" type="text" name="description" ng-model="description" placeholder="Curator's Description"></textarea><br />
         
-        <label class="control-label">Date of Activity</label><br />
-        <h6>Start Date</h6><input class="form-control" type="date" name="dateOfActivity" ng-model="dateOfActivity" style="width:300px">
-        <h6>End Date</h6><input class="form-control" type="date" name="endDateOfActivity" ng-model="endDateOfActivity" style="width:300px"><br />
+        <fieldset>
+          <legend>Categories</legend>
+          <ul class="genres">
+            <li ng-repeat="genre in genres">
+              <span ng-click="addCategory(genre)">{{genre}}</span>
+            </li>
+          </ul>
+          <h4 ng-if="categories[0]">Selected Categories</h4>
+          <ul class="genres">
+            <li ng-repeat="selectedCategory in categories">
+              <span ng-click="removeCategory(selectedCategory)">{{selectedCategory}}</span>
+            </li>
+          </ul>
+        </fieldset>
+        
+        <fieldset>
+          <legend>Activity Time</legend>
+          <h6>Start Date</h6><input class="form-control" type="date" name="dateOfActivity" ng-model="dateOfActivity" style="width:300px">
+          <h6>End Date</h6><input class="form-control" type="date" name="endDateOfActivity" ng-model="endDateOfActivity" style="width:300px"><br />
+        </fieldset>
         
         <label class="control-label">Time of Activity</label>
         <input class="form-control" type="time" name="timeOfActivity" ng-model="timeOfActivity" style="width:300px"><br />
@@ -67,20 +84,7 @@
           <input class="form-control" type="text" name="twitterLink" ng-model="twitterLink" placeholder="Twitter Link"><br />
         </fieldset>
         
-        <fieldset>
-          <legend>Categories</legend>
-          <ul class="genres">
-            <li ng-repeat="genre in genres">
-              <span ng-click="addCategory(genre)">{{genre}}</span>
-            </li>
-          </ul>
-          <h4 ng-if="categories[0]">Selected Categories</h4>
-          <ul class="genres">
-            <li ng-repeat="selectedCategory in categories">
-              <span ng-click="removeCategory(selectedCategory)">{{selectedCategory}}</span>
-            </li>
-          </ul>
-        </fieldset>
+        
         
         <input type="text" name="addedBy" ng-hide="true" ng-model="addedBy" value="currentUser.email">
         
