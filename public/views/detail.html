@@ -45,7 +45,7 @@
     <div class="panel panel-default panel-right" style="width:100%;margin-bottom:20px;margin-top:-10px;">
       <iframe width="100%" height="400" frameborder="1" scrolling="yes" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAH9Ep3WI0XkKd54inw2dGXakKf9NeYmYU&amp;q=40+%2C+St.+Marks+Road+Bangalore+%2C+560001+Bangalore+India"> 
       </iframe>
-      <div class="address-head col-xs-12">{{activity.location}}</div>
+      <div class="address-head">{{activity.location}}</div>
       <div class="address">{{activity.address}}</div>
       <div class="address">{{activity.city}}</div>
       <div class="address" style="margin-bottom:15px;">{{activity.phone}}</div>
@@ -53,23 +53,21 @@
     
     <!--------------- Bookmark -------------->
     
-    <div class="panel panel-default panel-right" style="margin-top:-10px;">
-      <div class="panel-heading">
-        <div ng-if="currentUser">
-          <div ng-show="!isSubscribed()">
-            <button ng-click="subscribe()" class="btn btn-block btn-success" style="border-radius:10px;">
-              <span class="ion-plus"></span> Bookmark
-            </button>
-          </div>
-          <div ng-show="isSubscribed()">
-            <button ng-click="unsubscribe()" class="btn btn-block btn-danger">
-              <span class="ion-minus"></span> Bookmarked
-            </button>
-          </div>
+    <div class="panel panel-default panel-right">
+      <div ng-if="currentUser">
+        <div ng-show="!isSubscribed()">
+          <button ng-click="subscribe()" class="btn btn-block btn-success" style="font-weight:100;">
+            <span class="ion-plus"></span> Bookmark
+          </button>
         </div>
-        <div class="" ng-show="!currentUser">
-          <a class="btn btn-block btn-primary" href="#/login">Login to Bookmark</a>
+        <div ng-show="isSubscribed()">
+          <button ng-click="unsubscribe()" class="btn btn-block btn-danger" style="font-weight:100;">
+            <span class="ion-minus"></span> Bookmarked
+          </button>
         </div>
+      </div>
+      <div class="" ng-show="!currentUser">
+        <a class="btn btn-block btn-primary" href="#/login" style="color:white;font-weight:100;">Login to Bookmark</a>
       </div>
     </div>
     
@@ -82,11 +80,11 @@
             <td>
               <div class="text-center">
                 <span ng-if="activity.timeOfActivity" class="ion-clock"></span>
-                {{activity.timeOfActivity}}<br />
-                {{activity.dateOfActivity[0] | date: 'short'}} <span ng-if="activity.dateOfActivity[1]">to {{activity.dateOfActivity[1] | date: 'short'}}</span>
+                {{activity.timeOfActivity | date: 'shortTime'}}<br />
+                {{activity.dateOfActivity | date: 'mediumDate'}} <span ng-if="activity.endDateOfActivity">to {{activity.endDateOfActivity | date: 'mediumDate'}}</span>
               </div>
             </td>
-            <td><div class="info-title text-center" ng-if="activity.price">PRICE<br /><span class="info-text" style="font-size:16px;">{{activity.price}}</span></div></td>
+            <td><div class="info-title text-center" ng-if="activity.price">PRICE<br /><span class="info-text" style="font-size:16px;">{{activity.currency}} {{activity.price}}</span></div></td>
           </tr>
         </table>
       </div>
@@ -133,7 +131,8 @@
     <div class="panel panel-default panel-right" ng-if="activity.moreInfo">
       <div class="panel-body">
         <div class="info-title">MORE INFO</div>
-        <div class="info-text">{{activity.moreInfo}}</div>
+        <div class="info-text" ng-if="activity.moreInfoLink"><a href="{{activity.moreInfoLink}}">{{activity.moreInfo}}</a></div>
+        <div class="info-text" ng-if="!activity.moreInfoLink">{{activity.moreInfo}}</div>
       </div>
     </div>
     

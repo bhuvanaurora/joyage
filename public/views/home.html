@@ -90,11 +90,11 @@
     </div>
 </div>
 <div class="container" >
-    <div class="fade-repeat col-xs-4 col-md-4" ng-repeat="activity in activities | filter:query | orderBy:'-title':true">
+    <div class="fade-repeat col-xs-4 col-md-4" ng-repeat="activity in activities | filter:query | orderBy:'timeAdded':true">
         <div class="single-activity-box">
             <div class="activity-image">
                 <a href="/activities/{{activity._id}}">
-                    <img class="img-rounded" style="max-height:300px;" ng-src="/images/{{activity.poster}}" width="100%"/>
+                    <img style="max-height:300px;" ng-src="/images/{{activity.poster}}" width="100%"/>
                 </a>
             </div>
             <div class="activity-info">
