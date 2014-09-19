@@ -13,8 +13,8 @@ var async = require('async');
 var request = require('request');
 var xml2js = require('xml2js');
 
-var agenda = require('agenda')({ db: { address: 'localhost:27017/test' } });
-/*var agenda = require('agenda')({ db: { address: 'mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database' } });*/
+/*var agenda = require('agenda')({ db: { address: 'localhost:27017/test' } });*/
+var agenda = require('agenda')({ db: { address: 'mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database' } });
 var sugar = require('sugar');
 var nodemailer = require('nodemailer');
 var _ = require('lodash');
@@ -54,6 +54,7 @@ var activitySchema = new mongoose.Schema({
   moreInfoLink: String,
   operatingDays: [String],
   operatingTime: [String],
+  addedBy: String,
   subscribers: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }]
@@ -96,8 +97,8 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 var User = mongoose.model('User', userSchema);
 var Activity = mongoose.model('Activity', activitySchema);
 
-mongoose.connect('localhost');
-/*mongoose.connect('mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database');*/
+/*mongoose.connect('localhost');*/
+mongoose.connect('mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database');
 
 var app = express();
 

@@ -1,33 +1,4 @@
-<!--div class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      Add Activity
-      <p class="pull-right">{{currentUser.email}}</p>
-    </div>
-    <div class="panel-body">
-      <form class="form" method="post" ng-submit="addActivity()" name="addForm">
-        <div class="form-group" ng-class="{ 'has-error' : addForm.activityTitle.$invalid && addForm.activityTitle.$dirty }">
-          <label class="control-label">Title</label>
-          <input class="form-control" type="text" name="activityTitle" ng-model="activityTitle" placeholder="Enter Activity title" required autofocus>
-          <div class="help-block text-danger" ng-if="addForm.activityTitle.$dirty" ng-messages="addForm.activityTitle.$error">
-            <div ng-message="required">Activity title is required.</div>
-          </div>
-        </div>
-        <button class="btn btn-primary" type="submit" ng-disabled="addForm.$invalid">Add</button>
-      </form-->
-      
-      
-      <!--form class="form" method="post" ng-submit="addActivity()" name="addForm">
-        <input class="form-control" type="text" name="activityTitle" ng-model="activityTitle" placeholder="Enter Activity Title">
-          <button class="btn btn-primary" type="submit">Add</button>
-      </form-->
-      
-      
-    <!--/div>
-  </div>
-</div-->
-
-<div class="container">
+<div class="container" ng-if="currentUser.email === 'bhuvan.aurora@gmail.com' || currentUser.email === 'raj.muppa@gmail.com'">
   <div class="panel panel-default">
     <div class="panel-heading">
       Add Activity
