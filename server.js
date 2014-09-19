@@ -165,7 +165,7 @@ app.post('/auth/facebook', function(req, res, next) {
   var encodedSignature = signedRequest.split('.')[0];
   var payload = signedRequest.split('.')[1];
 
-  var appSecret = '298fb6c080fda239b809ae418bf49700';
+  var appSecret = 'b6ade547a86b0c809a3703226229a47d';
 
   var expectedSignature = crypto.createHmac('sha256', appSecret).update(payload).digest('base64');
   expectedSignature = expectedSignature.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
@@ -328,6 +328,9 @@ app.use(function(err, req, res, next) {
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+
+
 
 agenda.define('send email alert', function(job, done) {
   Activity.findOne({ name: job.attrs.data }).populate('subscribers').exec(function(err, activity) {
