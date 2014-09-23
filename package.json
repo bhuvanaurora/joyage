@@ -1,6 +1,11 @@
 {
   "name": "joyage",
-  "version": "0.0.0-6",
+  "subdomain": "joyage",
+  "domains": [
+    "www.joyage.in",
+    "joyage.in"
+  ],
+  "version": "0.0.0-9",
   "scripts": {
     "test": "karma start public/test/karma.conf.js",
     "start": "node server.js"
@@ -36,7 +41,6 @@
     "karma-jasmine": "^0.1.5",
     "karma-phantomjs-launcher": "^0.1.4"
   },
-  "subdomain": "joyage",
   "engines": {
     "node": "0.10.x"
   }

@@ -36,6 +36,7 @@ angular.module('MyApp')
                       locationWebsite: $scope.locationWebsite,
                       neighborhood: $scope.neighborhood,
                       country: $scope.country,
+                      mapLocation: $scope.mapLocation,
                       status: "Continuing",
                       poster: $scope.poster,
                       photoCredit: $scope.photoCredit,
@@ -46,6 +47,7 @@ angular.module('MyApp')
                       twitterLink: $scope.twitterLink,
                       zomatoLink: $scope.zomatoLink,
                       payment: $scope.payment,
+                      goodies: $scope.goodies,
                       moreInfo: $scope.moreInfo,
                       moreInfoLink: $scope.moreInfoLink,
                       addedBy: $scope.addedBy
@@ -65,6 +67,7 @@ angular.module('MyApp')
           $scope.locationWebsite = '';
           $scope.neighborhood = '';
           $scope.country = '';
+          $scope.mapLocation = '';
           $scope.poster = '';
           $scope.photoCredit = '';
           $scope.photoCreditLink = '';
@@ -73,6 +76,7 @@ angular.module('MyApp')
           $scope.twitterLink = '';
           $scope.zomatoLink = '';
           $scope.payment = '';
+          $scope.goodies = '';
           $scope.moreInfo = '';
           $scope.moreInfoLink = '';
           $alert({

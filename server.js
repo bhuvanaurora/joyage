@@ -47,14 +47,16 @@ var activitySchema = new mongoose.Schema({
   price: String,
   timeAdded: { type: Date, default: Date.now() },
   facebookLink: String,
-  twitterLink: String(),
-  zomatoLink: String(),
+  twitterLink: String,
+  zomatoLink: String,
   payment: String,
+  goodies: String,
   moreInfo: String,
   moreInfoLink: String,
   operatingDays: [String],
   operatingTime: [String],
   addedBy: String,
+  mapLocation: String,
   subscribers: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }]
@@ -268,6 +270,7 @@ app.post('/api/activities', function(req, res, next) {
     locationWebsite: req.body.locationWebsite,
     neighborhood: req.body.neighborhood,
     country: req.body.country,
+    mapLocation: req.body.mapLocation,
     status: req.body.status,
     poster: req.body.poster,
     photoCredit: req.body.photoCredit,
@@ -278,6 +281,7 @@ app.post('/api/activities', function(req, res, next) {
     zomatoLink: req.body.zomatoLink,
     twitterLink: req.body.twitterLink,
     payment: req.body.payment,
+    goodies: req.body.payment,
     moreInfo: req.body.moreInfo,
     moreInfoLink: req.body.moreInfoLink,
     sourceName: req.body.sourceName,
@@ -328,8 +332,6 @@ app.use(function(err, req, res, next) {
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
-
-
 
 
 agenda.define('send email alert', function(job, done) {

@@ -4,7 +4,7 @@ angular.module('MyApp')
   .controller('DetailCtrl', function($scope, $rootScope, $routeParams, Activity, Subscription) {
       Activity.get({ _id: $routeParams.id }, function(activity) {
         $scope.activity = activity;
-
+        
         $scope.isSubscribed = function() {
           return $scope.activity.subscribers.indexOf($rootScope.currentUser._id) !== -1;
         };
