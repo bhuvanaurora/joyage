@@ -47,6 +47,7 @@ angular.module('MyApp')
                       twitterLink: $scope.twitterLink,
                       zomatoLink: $scope.zomatoLink,
                       payment: $scope.payment,
+                      bookRide:$scope.bookRide,
                       goodies: $scope.goodies,
                       moreInfo: $scope.moreInfo,
                       moreInfoLink: $scope.moreInfoLink,
@@ -76,6 +77,7 @@ angular.module('MyApp')
           $scope.twitterLink = '';
           $scope.zomatoLink = '';
           $scope.payment = '';
+          $scope.bookRide = '';
           $scope.goodies = '';
           $scope.moreInfo = '';
           $scope.moreInfoLink = '';
