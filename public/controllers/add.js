@@ -36,7 +36,7 @@ angular.module('MyApp')
                       locationWebsite: $scope.locationWebsite,
                       neighborhood: $scope.neighborhood,
                       country: $scope.country,
-                      mapLocation: $scope.mapLocation,
+                      /*mapLocation: $scope.mapLocation,*/
                       status: "Continuing",
                       poster: $scope.poster,
                       photoCredit: $scope.photoCredit,
