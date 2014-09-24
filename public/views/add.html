@@ -1,4 +1,4 @@
-<div class="container" ng-if="currentUser.email === 'bhuvan.aurora@gmail.com' || currentUser.email === 'raj.muppa@gmail.com'">
+<div class="container">
   <div class="panel panel-default">
     <div class="panel-heading">
       Add Activity
@@ -38,7 +38,7 @@
           <legend>Location Details</legend>
           <input class="form-control" type="text" name="location" ng-model="location" placeholder="Location" required><br />
           <input class="form-control" type="text" name="address" ng-model="address" placeholder="Address"><br />
-          <input class="form-control" type="text" name="neighborhood" ng-model="neighborhood" placeholder="Neighborhood"><br />
+          <input class="form-control" type="text" name="neighborhood" ng-model="neighborhood" placeholder="Neighborhood" required><br />
           
           <select style="width:300px;" name="city" ng-model="city">
             <option value="Bangalore" selected>Bangalore</option>
