@@ -14,7 +14,7 @@
             
           <p class="media-subheading">At {{activity.location}}, {{activity.neighborhood}}</p>
           
-          <img id="poster"ng-src="/images/{{activity.poster}}">
+          <img id="poster"ng-src="/images/{{activity.poster}}" alt="{{activity.title}}">
           
           <div class="description" ng-if="activity.description" style="margin-bottom:20px;">
             <div style="margin-bottom:8px;" class="business"><a href="/"><b>Joyage</b></a></div>
@@ -41,7 +41,7 @@
   
     <!-------------- Goodies -------------->
     
-  <div class="panel panel-default panel-right" ng-if="activity.goodies">
+  <div class="panel panel-default panel-right" ng-if="activity.goodies"  style="width:100%;margin-bottom:20px;margin-top:-10px;">
     <div class="panel-body">
       <div class="info-title">GOODIES</div>
       <div class="info-text">{{activity.goodies}}</div>

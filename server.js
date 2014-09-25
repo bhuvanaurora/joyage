@@ -22,7 +22,7 @@ var _ = require('lodash');
 var tokenSecret = 'your unique secret';
 
 var activitySchema = new mongoose.Schema({
-  _id: Number,
+  _id: String,
   title: String,
   dateOfActivity: String,
   endDateOfActivity: String,
@@ -256,7 +256,7 @@ app.get('/api/activities/:id', function(req, res, next) {
 
 app.post('/api/activities', function(req, res, next) {
   var activity = new Activity({
-    _id: (new Date).getTime(),
+    _id: req.body.id,
     title: req.body.title,
     description: req.body.description,
     genre: req.body.genre,

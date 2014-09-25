@@ -5,7 +5,7 @@
       <p class="pull-right">{{currentUser.email}}</p>
     </div>
     <div class="panel-body">
-      <form class="form" method="post" ng-submit="addActivity()" name="addForm">
+      <form class="form" method="post" ng-submit="addActivity()" name="addForm" enctype="multipart/form-data">
         <div class="help-block text-danger" ng-messages="">
         <input class="form-control" type="text" name="title" ng-model="title" placeholder="Activity Title" required autofocus><br />
         <textarea class="form-control" type="text" name="description" ng-model="description" placeholder="Curator's Description"></textarea><br />
@@ -34,6 +34,7 @@
         <label class="control-label">Time of Activity</label>
         <input class="form-control" type="time" name="timeOfActivity" ng-model="timeOfActivity" style="width:300px"><br />
         <br />
+        
         <fieldset>
           <legend>Location Details</legend>
           <input class="form-control" type="text" name="location" ng-model="location" placeholder="Location" required><br />
@@ -52,23 +53,29 @@
           <!--input class="form-control" type="text" name="mapLocation" ng-model="mapLocation" placeholder="Map Location (https://developers.google.com/maps/documentation/embed/start)"><br /-->
         </fieldset>
         <br />
+        
         <fieldset>
           <legend>Source Details</legend>
           <input class="form-control" type="text" name="sourceName" ng-model="sourceName" placeholder="Source"><br />
           <input class="form-control" type="text" name="sourceWebsite" ng-model="sourceWebsite" placeholder="Link to the source"><br />
           <textarea class="form-control" type="text" name="sourceDescription" ng-model="sourceDescription" placeholder="Description from source"></textarea><br />
         </fieldset>
+        
         <input class="form-control" type="text" name="goodies" ng-model="goodies" placeholder="Goodies"><br />
         <input class="form-control" type="text" name="moreInfo" ng-model="moreInfo" placeholder="More Info"><br />
         <input class="form-control" type="text" name="moreInfoLink" ng-model="moreInfoLink" placeholder="More Info Link"><br />
         <br />
+        
         <fieldset>
           <legend>HQ Image</legend>
+          <!--input type="hidden" name="MAX_FILE_SIZE" value="1000" /-->
+          
           <input class="form-control" type="text" name="poster" ng-model="poster" placeholder="Image name"><br />
           <input class="form-control" type="text" name="photoCredit" ng-model="photoCredit" placeholder="Photo Credits"><br />
           <input class="form-control" type="text" name="photoCreditLink" ng-model="photoCreditLink" placeholder="Photo Credit Link"><br />
         </fieldset>
         <br />
+        
         <fieldset>
           <legend>Payment Details</legend>
           <select style="width:300px" name="currency" ng-model="currency">
@@ -80,6 +87,7 @@
           <input class="form-control" type="text" name="bookRide" ng-model="bookRide" placeholder="Link to ride booking"><br />
         </fieldset>
         <br />
+        
         <fieldset>
           <legend>Social Network Links</legend>
           <input class="form-control" type="text" name="facebookLink" ng-model="facebookLink" placeholder="Facebook Link"><br />
@@ -91,6 +99,7 @@
         
         <button class="btn btn-primary" type="submit">Add</button>
       </form>
+      
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 angular.module('MyApp')
-  .controller('AddCtrl', ['$scope', '$alert', 'Activity', function($scope, $alert, Activity) {
+  .controller('AddCtrl', ['$scope', '$alert', '$http', 'Activity', function($scope, $alert, $http, Activity) {
     
     $scope.genres = ['Athletic Activities', 'Fitness Classes', 'Hiking & Biking',
                      'Nature Appreciation', 'Bars', 'Breweries & Distilleries',
@@ -19,7 +19,11 @@ angular.module('MyApp')
     
     $scope.addActivity = function() {
       
-      Activity.save({ id: (new Date).getTime(),
+      var id;
+      var title = $scope.title.split(" ");
+      id = title.join("-");
+      
+      Activity.save({ id: id,
                       title: $scope.title,
                       description: $scope.description,
                       genre: $scope.categories,
