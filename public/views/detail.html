@@ -31,7 +31,7 @@
             <div style="font-size: 13px">{{activity.sourceDescription}}</div>
     
           </div>
-          <div class="source-link"><a href="{{activity.sourceWebsite}}">View Original Source</a></div>
+          <div class="source-link" ng-if="activity.sourceWebsite"><a href="{{activity.sourceWebsite}}">View Original Source</a></div>
         </div>
       </div>
     </div>
