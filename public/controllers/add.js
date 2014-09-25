@@ -1,6 +1,8 @@
 angular.module('MyApp')
   .controller('AddCtrl', ['$scope', '$alert', '$http', 'Activity', function($scope, $alert, $http, Activity) {
     
+    alert("Have you added the pictures? Add the HQ pictures first.");
+    
     $scope.genres = ['Athletic Activities', 'Fitness Classes', 'Hiking & Biking',
                      'Nature Appreciation', 'Bars', 'Breweries & Distilleries',
                       'Featured Cocktails', 'Happy Hours', 'Classes', 'Exhibits & Galleries',

@@ -162,8 +162,16 @@
     
     <!--------------- Book Ride -------------->
     
-    <div class="panel panel-default panel-right" ng-if="activity.bookRide"  class="payment">
+    <div class="panel panel-default panel-right" ng-if="activity.bookRide" class="payment">
       <a href="{{activity.bookRide}}"><button class="btn btn-primary btn-block">Book your ride</button></a>
+    </div>
+    
+    <!---------------- Tags (Not to be removed; for better SEO) ------------------>
+    
+    <div class="panel panel-default panel-right" ng-hide=true>
+      <ul class="genres">
+        <li ng-repeat="tag in activity.genre">{{tag}}</li>
+      </ul>
     </div>
     
   </div>

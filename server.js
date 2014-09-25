@@ -118,6 +118,14 @@ app.use(function (req, res, next) {
         next();
     }
 });
+app.use(function (req, res, next) {
+    if ('/humans.txt' == req.url) {
+        res.type('text/plain')
+        res.send("<b>Developers</b>\nBhuvan Arora\nbhuvan.aurora@gmail.com");
+    } else {
+        next();
+    }
+});
 
 function ensureAuthenticated(req, res, next) {
   if (req.headers.authorization) {
