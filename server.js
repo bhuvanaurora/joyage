@@ -110,6 +110,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(function (req, res, next) {
+    if ('/robots.txt' == req.url) {
+        res.type('text/plain')
+        res.send("User-agent: *\nDisallow: /images/");
+    } else {
+        next();
+    }
+});
 
 function ensureAuthenticated(req, res, next) {
   if (req.headers.authorization) {
