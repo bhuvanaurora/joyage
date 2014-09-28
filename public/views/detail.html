@@ -70,7 +70,7 @@
     
     <!--------------- Bookmark -------------->
     
-    <div class="panel panel-default panel-right">
+    <div class="panel panel-default panel-right" ng-show="!isDone()">
       <div ng-if="currentUser">
         <div ng-show="!isSubscribed()">
           <button ng-click="subscribe()" class="btn btn-block btn-success" style="font-weight:100;">
@@ -85,6 +85,26 @@
       </div>
       <div class="" ng-show="!currentUser">
         <a class="btn btn-block btn-primary" href="#/login" style="color:white;font-weight:100;">Login to Bookmark</a>
+      </div>
+    </div>
+    
+    <!--------------- Done it button -------------->
+    
+    <div class="panel panel-default panel-right">
+      <div ng-if="currentUser">
+        <div ng-show="!isDone()">
+          <button ng-click="markDone()" class="btn btn-block btn-success" style="font-weight:100;">
+            <span class="ion-plus"></span> Done it
+          </button>
+        </div>
+        <div ng-show="isDone()">
+          <button ng-click="markUndone()" class="btn btn-block btn-danger" style="font-weight:100;">
+            <span class="ion-minus"></span> I've done this
+          </button>
+        </div>
+      </div>
+      <div class="" ng-show="!currentUser">
+        <a class="btn btn-block btn-primary" href="#/login" style="color:white;font-weight:100;">Login to mark done</a>
       </div>
     </div>
     

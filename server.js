@@ -60,6 +60,9 @@ var activitySchema = new mongoose.Schema({
   mapLocation: String,
   subscribers: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
+  }],
+  doneIt: [{
+    type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }]
 });
 
@@ -331,6 +334,29 @@ app.post('/api/unsubscribe', ensureAuthenticated, function(req, res, next) {
     if (err) return next(err);
     var index = activity.subscribers.indexOf(req.user._id);
     activity.subscribers.splice(index, 1);
+    activity.save(function(err) {
+      if (err) return next(err);
+      res.send(200);
+    });
+  });
+});
+
+app.post('/api/markDone', ensureAuthenticated, function(req, res, next) {
+  Activity.findById(req.body.activityId, function(err, activity) {
+    if (err) return next(err);
+    activity.doneIt.push(req.user._id);
+    activity.save(function(err) {
+      if (err) return next(err);
+      res.send(200);
+    });
+  });
+});
+
+app.post('/api/markUndone', ensureAuthenticated, function(req, res, next) {
+  Activity.findById(req.body.activityId, function(err, activity) {
+    if (err) return next(err);
+    var index = activity.doneIt.indexOf(req.user._id);
+    activity.doneIt.splice(index, 1);
     activity.save(function(err) {
       if (err) return next(err);
       res.send(200);

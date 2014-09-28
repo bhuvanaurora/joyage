@@ -1,7 +1,8 @@
 // Changes made
 
 angular.module('MyApp')
-  .controller('DetailCtrl', function($scope, $rootScope, $routeParams, Activity, Subscription) {
+  .controller('DetailCtrl', ['$scope', '$rootScope', '$routeParams', 'Activity', 'Subscription', 'DoneIt',
+                             function($scope, $rootScope, $routeParams, Activity, Subscription, DoneIt) {
       Activity.get({ _id: $routeParams.id }, function(activity) {
         $scope.activity = activity;
         
@@ -21,5 +22,22 @@ angular.module('MyApp')
             $scope.activity.subscribers.splice(index, 1);
           });
         };
+        
+        $scope.isDone = function() {
+          return $scope.activity.doneIt.indexOf($rootScope.currentUser._id) !== -1;
+        };
+        
+        $scope.markDone = function() {
+          DoneIt.markDone(activity).success(function() {
+            $scope.activity.doneIt.push($rootScope.currentUser._id);
+          });
+        };
+        
+        $scope.markUndone = function() {
+          DoneIt.markUndone(activity).success(function() {
+            var index = $scope.activity.doneIt.indexOf($rootScope.currentUser._id);
+            $scope.activity.doneIt.splice(index, 1);
+          });
+        }
       });
-    });
+    }]);

@@ -1,6 +1,5 @@
 angular.module('MyApp')
   .controller('MainCtrl', function($scope, Activity) {
-    /*$scope.country = ['India']*/
     /*$scope.city = ['Bangalore', 'Delhi'];*/
     /*$scope.neighborhood = { 'Bangalore': ['Kormangala', 'JP Nagar', 'Indiranagar', 'MG Road'],
                               'Delhi': ['Connaught Place', 'Dwarka', 'Janak Puri', 'Saket', 'Defence Colony', 'Hauz Khas']
@@ -21,10 +20,6 @@ angular.module('MyApp')
     $scope.filterByGenre = function(genre) {
       $scope.activities = Activity.query({ genre: genre });             //changed
       $scope.headingTitle = genre;
-    };
-    $scope.filterByAlphabet = function(char) {
-      $scope.activities = Activity.query({ alphabet: char });           //changed
-      $scope.headingTitle = char;
     };
     $scope.allActivities = function(){
       $scope.activities = Activity.query();
