@@ -5,7 +5,7 @@
       <p class="pull-right">{{currentUser.email}}</p>
     </div>
     <div class="panel-body">
-      <form class="form" method="post" ng-submit="addActivity()" name="addForm" enctype="multipart/form-data">
+      <form class="form" method="post" ng-submit="addActivity()" name="addForm">
         <div class="help-block text-danger" ng-messages="">
         <input class="form-control" type="text" name="title" ng-model="title" placeholder="Activity Title" required autofocus><br />
         <textarea class="form-control" type="text" name="description" ng-model="description" placeholder="Curator's Description"></textarea><br />

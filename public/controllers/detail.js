@@ -1,8 +1,8 @@
 // Changes made
 
 angular.module('MyApp')
-  .controller('DetailCtrl', ['$scope', '$rootScope', '$routeParams', 'Activity', 'Subscription', 'DoneIt',
-                             function($scope, $rootScope, $routeParams, Activity, Subscription, DoneIt) {
+  .controller('DetailCtrl', ['$scope', '$rootScope', '$routeParams', 'Activity', 'Subscription', 'DoneIt', 'Tips',
+                             function($scope, $rootScope, $routeParams, Activity, Subscription, DoneIt, Tips) {
       Activity.get({ _id: $routeParams.id }, function(activity) {
         $scope.activity = activity;
         
@@ -38,6 +38,14 @@ angular.module('MyApp')
             var index = $scope.activity.doneIt.indexOf($rootScope.currentUser._id);
             $scope.activity.doneIt.splice(index, 1);
           });
-        }
+        };
+        
+        $scope.addTips = function(tip) {
+          $scope.activity.tips.push(tip);
+          Tips.addTip(activity).success(function() {
+            $scope.tip = '';
+          });
+        };
+
       });
     }]);

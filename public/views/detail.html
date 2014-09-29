@@ -186,6 +186,18 @@
       <a href="{{activity.bookRide}}"><button class="btn btn-primary btn-block">Book your ride</button></a>
     </div>
     
+    <!--------------- Tips --------------------->
+    
+    <div class="panel panel-default panel-right">
+      <ul class="genres">
+        <li ng-repeat="tip in activity.tips">{{tip.text}}</li>
+      </ul>
+      <form class="form" method="post" ng-submit="addTips(tip)" name="tipsForm" style="margin-top:-10px;">
+        <input class="form-control" type="text" name="tip" ng-model="tip" placeholder="Leave a tip for others .." maxlength=140>
+        <button class="btn btn-primary btn-block" type="submit">Add tip</button>
+      </form>
+    </div>
+    
     <!---------------- Tags (Not to be removed; for better SEO) ------------------>
     
     <div class="panel panel-default panel-right" ng-hide=true>

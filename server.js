@@ -58,6 +58,10 @@ var activitySchema = new mongoose.Schema({
   operatingTime: [String],
   addedBy: String,
   mapLocation: String,
+  tips: [{
+    text: String,
+    tipper: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+  }],
   subscribers: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }],
@@ -255,8 +259,6 @@ app.get('/api/activities', function(req, res, next) {
   var query = Activity.find();
   if (req.query.genre) {
     query.where({ genre: req.query.genre });
-  } else if (req.query.alphabet) {
-    query.where({ name: new RegExp('^' + '[' + req.query.alphabet + ']', 'i') });
   } else {
     query.limit(12);
   }
@@ -357,6 +359,20 @@ app.post('/api/markUndone', ensureAuthenticated, function(req, res, next) {
     if (err) return next(err);
     var index = activity.doneIt.indexOf(req.user._id);
     activity.doneIt.splice(index, 1);
+    activity.save(function(err) {
+      if (err) return next(err);
+      res.send(200);
+    });
+  });
+});
+
+app.post('/api/tips', ensureAuthenticated, function(req, res, next) {
+  Activity.findById(req.body.activityId, function(err, activity) {
+    if (err) return next(err);
+    activity.tips.push({
+      text: req.body.tips.splice(-1),
+      tipper: req.user._id
+    });
     activity.save(function(err) {
       if (err) return next(err);
       res.send(200);
