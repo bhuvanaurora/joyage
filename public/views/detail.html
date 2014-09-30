@@ -14,12 +14,17 @@
             
           <p class="media-subheading">At {{activity.location}}, {{activity.neighborhood}}</p>
           
-          <img id="poster"ng-src="/images/{{activity.poster}}" alt="{{activity.title}}">
+          <img id="poster" ng-src="/images/{{activity.poster}}" alt="{{activity.title}}" />
+            
+          <!----------------- Joyage description -------------->
           
           <div class="description" ng-if="activity.description" style="margin-bottom:20px;">
             <div style="margin-bottom:8px;" class="business"><a href="/"><b>Joyage</b></a></div>
             <div style="font-size: 15px;">{{activity.description}}</div>
           </div>
+          
+          <!----------------- Source description -------------->
+          
           <div class="description" id="description"
                onload="function changeFontSize(){
                   if (activity.description!=="") {
@@ -29,10 +34,31 @@
     
             <div style="margin-bottom:8px;" class="business"><a href="{{activity.sourceWebsite}}"><b>{{activity.sourceName}}</b></a></div>
             <div style="font-size: 13px">{{activity.sourceDescription}}</div>
-    
           </div>
+          
           <div class="source-link" ng-if="activity.sourceWebsite"><a href="{{activity.sourceWebsite}}">View Original Source</a></div>
         </div>
+        
+        <!---------------- Artist / Chef corner --------------->
+        
+        <div ng-if="activity.corner">
+          <h4>{{activity.corner}}</h4>
+          <img ng-src="/images/{{activity.cornerPic}}" alt="activity.corner" />
+          <p>{{activity.cornerText}}</p>
+        </div>
+        
+        <!-------------------- Media News --------------------->
+        
+        <div ng-if="activity.media[0]">
+          <h4>In Media</h4>
+          <ul>
+            <li ng-repeat="media in activity.media">
+              <h5>{{media.title}}</h5>
+              <a href="{{media.link}}">{{media.text}}</a>
+            </li>
+          </ul>
+        </div>
+        
       </div>
     </div>
   </div>
@@ -208,6 +234,29 @@
     
   </div>
 </div>
+
+<!----------------------- Suggested Activities -------------------------------------->
+
+<section style="background-color:rgba(0,0,0,0.1)">
+  <div class="container">
+    <h4 style="margin-top:30px;" class="text-center">Suggested activities</h4>
+    <div style="margin-top:20px" class="fade-repeat col-xs-4 col-md-4" ng-repeat="act in activities | orderBy:'timeAdded':true">
+        <div class="single-activity-box">
+            <div class="activity-image">
+                <a href="/activities/{{act._id}}">
+                    <img style="height:222px;" ng-src="/images/{{act.poster}}" width="100%" alt="{{act.title}}" />
+                </a>
+            </div>
+            <div class="activity-info">
+                <a href="/activities/{{act._id}}">
+                    {{act.title}}
+                    <p class="text-muted">{{act.location}} ({{act.neighborhood}})</p>
+                </a>
+            </div>
+        </div>
+    </div>
+  </div>
+</section>
   
 <!---------------------------- Footer ---------------------------->
 

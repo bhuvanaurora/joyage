@@ -58,6 +58,9 @@ var activitySchema = new mongoose.Schema({
   operatingTime: [String],
   addedBy: String,
   mapLocation: String,
+  corner: String,
+  cornerPic: String,
+  cornerText: String,
   tips: [{
     text: String,
     tipper: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
@@ -67,6 +70,11 @@ var activitySchema = new mongoose.Schema({
   }],
   doneIt: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
+  }],
+  media: [{
+    title: String,
+    text: String,
+    link: String
   }]
 });
 
@@ -253,14 +261,16 @@ app.get('/api/users', function(req, res, next) {
   });
 });
 
-
-
 app.get('/api/activities', function(req, res, next) {
   var query = Activity.find();
-  if (req.query.genre) {
+  if (req.query.genre && req.query.limit) {
+    query.where({genre: req.query.genre}).limit(req.query.limit);
+  } else if (req.query.genre) {
     query.where({ genre: req.query.genre });
+  } else if (req.query.limit) {
+    query.limit(req.query.limit);
   } else {
-    query.limit(12);
+    query.limit(100);
   }
   query.exec(function(err, activities) {
     if (err) return next(err);
@@ -309,7 +319,11 @@ app.post('/api/activities', function(req, res, next) {
     moreInfoLink: req.body.moreInfoLink,
     sourceName: req.body.sourceName,
     sourceDescription: req.body.sourceDescription,
-    addedBy: req.body.addedBy
+    addedBy: req.body.addedBy,
+    corner: req.body.corner,
+    cornerPic: req.body.cornerPic,
+    cornerText: req.body.cornerText,
+    media: req.body.media
   });
   
   activity.save(function(err) {

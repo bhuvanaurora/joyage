@@ -25,6 +25,36 @@ angular.module('MyApp')
       var title = $scope.title.split(" ");
       id = title.join("-");
       
+      var media;
+      if (mediaTitle1) {
+        media.push({
+          title: $scope.mediaTitle1,
+          text: $scope.mediaText1,
+          link: $scope.mediaLink1
+        })
+      }
+      if (mediaTitle2) {
+        media.push({
+          title: $scope.mediaTitle2,
+          text: $scope.mediaText2,
+          link: $scope.mediaLink2
+        })
+      }
+      if (mediaTitle3) {
+        media.push({
+          title: $scope.mediaTitle3,
+          text: $scope.mediaText3,
+          link: $scope.mediaLink3
+        })
+      }
+      if (mediaTitle4) {
+        media.push({
+          title: $scope.mediaTitle4,
+          text: $scope.mediaText4,
+          link: $scope.mediaLink4
+        })
+      }
+      
       Activity.save({ id: id,
                       title: $scope.title,
                       description: $scope.description,
@@ -35,6 +65,7 @@ angular.module('MyApp')
                       city: $scope.city,
                       location: $scope.location,
                       address: $scope.address,
+                      media: media,
                       phone: $scope.phone,
                       sourceName: $scope.sourceName,
                       sourceDescription: $scope.sourceDescription,
@@ -57,7 +88,10 @@ angular.module('MyApp')
                       goodies: $scope.goodies,
                       moreInfo: $scope.moreInfo,
                       moreInfoLink: $scope.moreInfoLink,
-                      addedBy: $scope.addedBy
+                      addedBy: $scope.addedBy,
+                      corner: $scope.corner,
+                      cornerPic: $scope.cornerPic,
+                      cornerText: $scope.cornerText
                       },
         function() {
           $scope.title = '';
@@ -87,6 +121,9 @@ angular.module('MyApp')
           $scope.goodies = '';
           $scope.moreInfo = '';
           $scope.moreInfoLink = '';
+          $scope.corner = '';
+          $scope.cornerPic = '';
+          $scope.cornerText = '';
           $alert({
             content: 'Activity has been added.',
             placement: 'top-right',

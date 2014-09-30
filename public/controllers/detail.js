@@ -3,8 +3,11 @@
 angular.module('MyApp')
   .controller('DetailCtrl', ['$scope', '$rootScope', '$routeParams', 'Activity', 'Subscription', 'DoneIt', 'Tips',
                              function($scope, $rootScope, $routeParams, Activity, Subscription, DoneIt, Tips) {
+    
       Activity.get({ _id: $routeParams.id }, function(activity) {
         $scope.activity = activity;
+        
+        $scope.activities = Activity.query({limit: 3, id: activity._id});
         
         $scope.isSubscribed = function() {
           return $scope.activity.subscribers.indexOf($rootScope.currentUser._id) !== -1;
