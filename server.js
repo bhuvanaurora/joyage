@@ -408,7 +408,7 @@ app.listen(app.get('port'), function() {
 });
 
 
-agenda.define('send email alert', function(job, done) {
+/*agenda.define('send email alert', function(job, done) {
   Activity.findOne({ name: job.attrs.data }).populate('subscribers').exec(function(err, activity) {
     var emails = activity.subscribers.map(function(user) {
       if (user.facebook) {
@@ -420,21 +420,21 @@ agenda.define('send email alert', function(job, done) {
       }
     });
 
-    var upcomingEpisode = activity.episodes.filter(function(episode) {
+    var upcomingActivity = activity.episodes.filter(function(episode) {
       return new Date(episode.firstAired) > new Date();
     })[0];
 
     var smtpTransport = nodemailer.createTransport('SMTP', {
       service: 'SendGrid',
-      auth: { user: 'hslogin', pass: 'hspassword00' }
+      auth: { user: 'bhuvanaurora', pass: 'joyage_sendGrid_password' }
     });
 
     var mailOptions = {
-      from: 'Fred Foo ✔ <foo@blurdybloop.com>',
+      from: 'Joyage ✔ <foo@blurdybloop.com>',
       to: emails.join(','),
-      subject: activity.name + ' is starting soon!',
-      text: activity.name + ' starts in less than 2 hours on ' + activity.network + '.\n\n' +
-        'Episode ' + upcomingEpisode.episodeNumber + ' Overview\n\n' + upcomingEpisode.overview
+      subject: activity.title + ' is starting soon!',
+      text: activity.title + ' starts in less than 2 hours at ' + activity.location + '.\n\n' +
+        ' Joyage '
     };
 
     smtpTransport.sendMail(mailOptions, function(error, response) {
@@ -453,4 +453,4 @@ agenda.on('start', function(job) {
 
 agenda.on('complete', function(job) {
   console.log("Job %s finished", job.attrs.name);
-});
+});*/
