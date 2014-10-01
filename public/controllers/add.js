@@ -25,30 +25,30 @@ angular.module('MyApp')
       var title = $scope.title.split(" ");
       id = title.join("-");
       
-      var media;
+      var mediaVar = [];
       if ($scope.mediaTitle1) {
-        media.push({
+        mediaVar.push({
           title: $scope.mediaTitle1,
           text: $scope.mediaText1,
           link: $scope.mediaLink1
         })
       }
       if ($scope.mediaTitle2) {
-        media.push({
+        mediaVar.push({
           title: $scope.mediaTitle2,
           text: $scope.mediaText2,
           link: $scope.mediaLink2
         })
       }
       if ($scope.mediaTitle3) {
-        media.push({
+        mediaVar.push({
           title: $scope.mediaTitle3,
           text: $scope.mediaText3,
           link: $scope.mediaLink3
         })
       }
       if ($scope.mediaTitle4) {
-        media.push({
+        mediaVar.push({
           title: $scope.mediaTitle4,
           text: $scope.mediaText4,
           link: $scope.mediaLink4
@@ -65,7 +65,7 @@ angular.module('MyApp')
                       city: $scope.city,
                       location: $scope.location,
                       address: $scope.address,
-                      media: media,
+                      media: mediaVar,
                       phone: $scope.phone,
                       sourceName: $scope.sourceName,
                       sourceDescription: $scope.sourceDescription,

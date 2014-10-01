@@ -5,7 +5,7 @@
     "www.joyage.in",
     "joyage.in"
   ],
-  "version": "0.0.0-25",
+  "version": "0.0.0-27",
   "scripts": {
     "test": "karma start public/test/karma.conf.js",
     "start": "node server.js"
