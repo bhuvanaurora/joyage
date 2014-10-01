@@ -1,7 +1,7 @@
 angular.module('MyApp')
   .controller('AddCtrl', ['$scope', '$alert', '$http', 'Activity', function($scope, $alert, $http, Activity) {
     
-    alert("Have you added the pictures? Add the HQ pictures first.");
+    //alert("Have you added the pictures? Add the HQ pictures first.");
     
     $scope.genres = ['Athletic Activities', 'Fitness Classes', 'Hiking & Biking',
                      'Nature Appreciation', 'Bars', 'Breweries & Distilleries',
@@ -26,28 +26,28 @@ angular.module('MyApp')
       id = title.join("-");
       
       var media;
-      if (mediaTitle1) {
+      if ($scope.mediaTitle1) {
         media.push({
           title: $scope.mediaTitle1,
           text: $scope.mediaText1,
           link: $scope.mediaLink1
         })
       }
-      if (mediaTitle2) {
+      if ($scope.mediaTitle2) {
         media.push({
           title: $scope.mediaTitle2,
           text: $scope.mediaText2,
           link: $scope.mediaLink2
         })
       }
-      if (mediaTitle3) {
+      if ($scope.mediaTitle3) {
         media.push({
           title: $scope.mediaTitle3,
           text: $scope.mediaText3,
           link: $scope.mediaLink3
         })
       }
-      if (mediaTitle4) {
+      if ($scope.mediaTitle4) {
         media.push({
           title: $scope.mediaTitle4,
           text: $scope.mediaText4,
