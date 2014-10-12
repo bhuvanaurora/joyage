@@ -35,6 +35,10 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
       .when('/tos', {
         templateUrl: 'views/pages/tos.html'
       })
+      .when('/profile/:id', {
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -89,7 +89,13 @@ var userSchema = new mongoose.Schema({
   google: {
     id: String,
     email: String
-  }
+  },
+  subscribedActivities: [{
+    type: String
+  }],
+  doneActivities: [{
+    type: String
+  }]
 });
 
 userSchema.pre('save', function(next) {
@@ -148,13 +154,15 @@ function ensureAuthenticated(req, res, next) {
     try {
       var decoded = jwt.decode(token, tokenSecret);
       if (decoded.exp <= Date.now()) {
-        res.send(400, 'Access token has expired');
+        res.status(400).send('Access token has expired');
+        //res.send(400, 'Access token has expired');                                      // Deprecated
       } else {
         req.user = decoded.user;
         return next();
       }
     } catch (err) {
-      return res.send(500, 'Error parsing token');
+      return res.status(500).send('Error parsing token');
+      //return res.send(500, 'Error parsing token');                                      // Deprecated
     }
   } else {
     return res.send(401);
@@ -174,7 +182,9 @@ app.post('/auth/signup', function(req, res, next) {
   var user = new User({
     name: req.body.name,
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    subscribedActivities: [],
+    doneActivities: []
   });
   user.save(function(err) {
     if (err) return next(err);
@@ -218,7 +228,9 @@ app.post('/auth/facebook', function(req, res, next) {
       facebook: {
         id: profile.id,
         email: profile.email
-      }
+      },
+      subscribedActivities: [],
+      doneActivities: []
     });
     user.save(function(err) {
       if (err) return next(err);
@@ -240,7 +252,9 @@ app.post('/auth/google', function(req, res, next) {
       google: {
         id: profile.id,
         email: profile.emails[0].value
-      }
+      },
+      subscribedActivities: [],
+      doneActivities: []
     });
     user.save(function(err) {
       if (err) return next(err);
@@ -258,6 +272,14 @@ app.get('/api/users', function(req, res, next) {
   User.findOne({ email: req.query.email }, function(err, user) {
     if (err) return next(err);
     res.send({ available: !user });
+  });
+});
+
+app.get('/api/profile/:id', function(req, res, next) {
+  console.log(req.params.id);
+  User.findById(req.params.id, function(err, profile) {
+    if (err) return next(err);
+    res.send(profile);
   });
 });
 
@@ -335,6 +357,13 @@ app.post('/api/activities', function(req, res, next) {
 });
 
 app.post('/api/subscribe', ensureAuthenticated, function(req, res, next) {
+  User.findById(req.user._id, function(err, user) {
+    if (err) return next(err);
+    user.subscribedActivities.push(req.body.activityId);
+    user.save(function(err) {
+    if (err) return next(err);
+    });
+  });
   Activity.findById(req.body.activityId, function(err, activity) {
     if (err) return next(err);
     activity.subscribers.push(req.user._id);
@@ -346,6 +375,14 @@ app.post('/api/subscribe', ensureAuthenticated, function(req, res, next) {
 });
 
 app.post('/api/unsubscribe', ensureAuthenticated, function(req, res, next) {
+  User.findById(req.user._id, function(err, user) {
+    if (err) return next(err);
+    var index = user.subscribedActivities.indexOf(req.body.activityId);
+    user.subscribedActivities.splice(index, 1);
+    user.save(function(err) {
+      if (err) return next(err);
+    });
+  });
   Activity.findById(req.body.activityId, function(err, activity) {
     if (err) return next(err);
     var index = activity.subscribers.indexOf(req.user._id);
@@ -358,6 +395,13 @@ app.post('/api/unsubscribe', ensureAuthenticated, function(req, res, next) {
 });
 
 app.post('/api/markDone', ensureAuthenticated, function(req, res, next) {
+  User.findById(req.user._id, function(err, user) {
+    if (err) return next(err);
+    user.doneActivities.push(req.body.activityId);
+    user.save(function(err) {
+    if (err) return next(err);
+    });
+  });
   Activity.findById(req.body.activityId, function(err, activity) {
     if (err) return next(err);
     activity.doneIt.push(req.user._id);
@@ -369,6 +413,14 @@ app.post('/api/markDone', ensureAuthenticated, function(req, res, next) {
 });
 
 app.post('/api/markUndone', ensureAuthenticated, function(req, res, next) {
+  User.findById(req.user._id, function(err, user) {
+    if (err) return next(err);
+    var index = user.doneActivities.indexOf(req.body.activityId);
+    user.doneActivities.splice(index, 1);
+    user.save(function(err) {
+      if (err) return next(err);
+    });
+  });
   Activity.findById(req.body.activityId, function(err, activity) {
     if (err) return next(err);
     var index = activity.doneIt.indexOf(req.user._id);
