@@ -361,7 +361,7 @@ app.post('/api/subscribe', ensureAuthenticated, function(req, res, next) {
     if (err) return next(err);
     user.subscribedActivities.push(req.body.activityId);
     user.save(function(err) {
-    if (err) return next(err);
+      if (err) return next(err);
     });
   });
   Activity.findById(req.body.activityId, function(err, activity) {
