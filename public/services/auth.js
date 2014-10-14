@@ -59,7 +59,7 @@ angular.module('MyApp')
               });
             });
           });
-        }, { scope: 'email, public_profile' });
+        }, { scope: 'email, public_profile, user_friends' });
       },
       googleLogin: function() {
         gapi.auth.authorize({

@@ -82,6 +82,8 @@ var userSchema = new mongoose.Schema({
   name: { type: String, trim: true, required: true },
   email: { type: String, unique: true, lowercase: true, trim: true },
   password: String,
+  gender: String,
+  age: String,
   facebook: {
     id: String,
     email: String
@@ -225,7 +227,9 @@ app.post('/auth/facebook', function(req, res, next) {
       return res.send(token);
     }
     var user = new User({
-      name: profile.name,
+      name: profile.first_name,
+      gender: profile.gender,
+      age: profile.age_range,
       facebook: {
         id: profile.id,
         email: profile.email
@@ -474,7 +478,7 @@ app.listen(app.get('port'), function() {
     });
 
     var upcomingActivity = activity.episodes.filter(function(episode) {
-      return new Date(episode.firstAired) > new Date();
+      return new Date(timeOfActivity) > new Date();
     })[0];
 
     var smtpTransport = nodemailer.createTransport('SMTP', {
@@ -483,7 +487,7 @@ app.listen(app.get('port'), function() {
     });
 
     var mailOptions = {
-      from: 'Joyage ✔ <foo@blurdybloop.com>',
+      from: 'Joyage ✔ <contact@joyage.in>',
       to: emails.join(','),
       subject: activity.title + ' is starting soon!',
       text: activity.title + ' starts in less than 2 hours at ' + activity.location + '.\n\n' +
@@ -496,9 +500,44 @@ app.listen(app.get('port'), function() {
       done();
     });
   });
+});*/
+
+/*agenda.define('send email alert', function(job, done) {
+  console.log('I"m inside agenda now');
+  /*Activity.findOne({ name: job.attrs.data }).populate('subscribers').exec(function(err, activity) {
+    var emails = activity.subscribers.map(function(user) {
+      if (user.facebook) {
+        return user.facebook.email;
+      } else if (user.google) {
+        return user.google.email;
+      } else {
+        return user.email;
+      }
+    });*/
+    
+/*    var smtpTransport = nodemailer.createTransport('SMTP', {
+      service: 'SendGrid',
+      auth: { user: 'bhuvanaurora', pass: 'joyage_sendGrid_password' }
+    });
+    
+    var mailOptions = {
+      from: 'Joyage',
+      //to: emails.join(','),
+      to: 'Bhuvan Arora<bhuvan.aurora@gmail.com>',
+      subject: 'Welcome to Joyage!',
+      text: 'Hey guys welcome to Joyage. This is an automatically generated test mail.'
+    };
+    
+    smtpTransport.sendMail(mailOptions, function(error, response) {
+      console.log('Message sent:' + response.message);
+      smtpTransport.close();
+      done();
+    });
+  //});
 });
 
-//agenda.start();
+console.log('This is where agenda should start');
+agenda.start();
 
 agenda.on('start', function(job) {
   console.log("Job %s starting", job.attrs.name);
