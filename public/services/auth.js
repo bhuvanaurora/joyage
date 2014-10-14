@@ -9,7 +9,7 @@ angular.module('MyApp')
     // Asynchronously initialize Facebook SDK
     $window.fbAsyncInit = function() {
       FB.init({
-        appId: '624059410963642',
+        appId: '1463495237249090',
         responseType: 'token',
         version: 'v2.0'
       });
@@ -140,6 +140,7 @@ angular.module('MyApp')
       logout: function() {
         delete $window.localStorage.token;
         $rootScope.currentUser = null;
+        $location.path("/");
         $alert({
           content: 'You have been logged out.',
           animation: 'fadeZoomFadeDown',

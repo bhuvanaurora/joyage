@@ -204,6 +204,7 @@ app.post('/auth/login', function(req, res, next) {
 });
 
 app.post('/auth/facebook', function(req, res, next) {
+  console.log('I"m in auth/facebook');
   var profile = req.body.profile;
   var signedRequest = req.body.signedRequest;
   var encodedSignature = signedRequest.split('.')[0];
@@ -275,7 +276,7 @@ app.get('/api/users', function(req, res, next) {
   });
 });
 
-app.get('/api/profile/:id', function(req, res, next) {
+app.get('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
   console.log(req.params.id);
   User.findById(req.params.id, function(err, profile) {
     if (err) return next(err);
