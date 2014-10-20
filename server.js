@@ -17,6 +17,7 @@ var xml2js = require('xml2js');
 var agenda = require('agenda')({ db: { address: 'mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database' } });
 var sugar = require('sugar');
 var nodemailer = require('nodemailer');
+var sendgrid = require('sendgrid')('bhuvanaurora', 'joyage_sendGrid_password');
 var _ = require('lodash');
 
 var tokenSecret = 'your unique secret';
@@ -351,7 +352,10 @@ app.post('/api/activities', function(req, res, next) {
     cornerPic: req.body.cornerPic,
     cornerText: req.body.cornerText,
     media: req.body.media
-  });
+  },
+  activity.poster('image', req.files.image, function(err) {
+    if (err) next(err);
+  }));
   
   activity.save(function(err) {
     if (err) {
@@ -464,7 +468,6 @@ app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-
 /*agenda.define('send email alert', function(job, done) {
   Activity.findOne({ name: job.attrs.data }).populate('subscribers').exec(function(err, activity) {
     var emails = activity.subscribers.map(function(user) {
@@ -502,42 +505,7 @@ app.listen(app.get('port'), function() {
   });
 });*/
 
-/*agenda.define('send email alert', function(job, done) {
-  console.log('I"m inside agenda now');
-  /*Activity.findOne({ name: job.attrs.data }).populate('subscribers').exec(function(err, activity) {
-    var emails = activity.subscribers.map(function(user) {
-      if (user.facebook) {
-        return user.facebook.email;
-      } else if (user.google) {
-        return user.google.email;
-      } else {
-        return user.email;
-      }
-    });*/
-    
-/*    var smtpTransport = nodemailer.createTransport('SMTP', {
-      service: 'SendGrid',
-      auth: { user: 'bhuvanaurora', pass: 'joyage_sendGrid_password' }
-    });
-    
-    var mailOptions = {
-      from: 'Joyage',
-      //to: emails.join(','),
-      to: 'Bhuvan Arora<bhuvan.aurora@gmail.com>',
-      subject: 'Welcome to Joyage!',
-      text: 'Hey guys welcome to Joyage. This is an automatically generated test mail.'
-    };
-    
-    smtpTransport.sendMail(mailOptions, function(error, response) {
-      console.log('Message sent:' + response.message);
-      smtpTransport.close();
-      done();
-    });
-  //});
-});
-
-console.log('This is where agenda should start');
-agenda.start();
+/*agenda.start();
 
 agenda.on('start', function(job) {
   console.log("Job %s starting", job.attrs.name);
@@ -546,3 +514,20 @@ agenda.on('start', function(job) {
 agenda.on('complete', function(job) {
   console.log("Job %s finished", job.attrs.name);
 });*/
+
+//Activity.query();
+
+if (false === true) {
+  var email = new sendgrid.Email ({
+    to: 'bhuvan.aurora@gmail.com',
+    toname: 'Bhuvan Arora',
+    from: 'contact@joyage.in',
+    fromname: 'Joyage',
+    subject: 'Joyage test mail',
+    text: 'Congratulations, email works'
+  });
+  sendgrid.send(email, function(err, json) {
+    if (err) return console.error(err);
+    //console.log(json);
+  });
+}
