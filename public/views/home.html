@@ -98,8 +98,8 @@
                     <li style="display:inline;"><a href=""><span ng-click="pageClick(10)">10</span></a></li>
                 </ul>
                 <select style="width:300px;" name="sortOrder" ng-model="sortOrder">
-                    <option value="timeAdded">New on Joyage</option>
-                    <option value="-dateOfActivity">Upcoming</option>
+                    <option value="timeAdded" ng-click="sort(1)">New on Joyage</option>
+                    <option value="dateOfActivity" ng-click="sort(2)">Upcoming</option>
                     <option>Popularity</option>
                     <option>Trending</option>
                 </select>
@@ -119,7 +119,7 @@
             </div>
             <div class="activity-info">
                 <a href="/activities/{{activity._id}}">
-                    {{activity.title}} {{activity.dateOfActivity}}
+                    {{activity.title}} {{activity.timeAdded}}
                     <p class="text-muted">{{activity.location}} ({{activity.neighborhood}})</p>
                 </a>
             </div>

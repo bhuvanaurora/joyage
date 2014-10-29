@@ -291,15 +291,24 @@ app.get('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
 
 app.get('/api/activities', function(req, res, next) {
   var query = Activity.find();
+  
   if (req.query.genre && req.query.limit) {
     query.where({genre: req.query.genre}).limit(req.query.limit);
   } else if (req.query.genre) {
-    query.where({ genre: req.query.genre }).limit(9 * req.query.page);
+    query.where({ genre: req.query.genre }).limit(9 * req.query.page).sort(req.query.sortOrder);
   } else if (req.query.limit) {
     query.limit(req.query.limit);
   } else {
-    query.limit(9 * req.query.page);
+    if (req.query.sortOrder === 'dateOfActivity') {
+      console.log(new Date().valueOf());
+      query.where('dateOfActivity').gte(new Date().valueOf()).sort('-dateOfActivity').limit(9 * req.query.page);
+    } else if (req.query.sortOrder === 'timeAdded') {
+      query.limit(9 * req.query.page).sort('timeAdded');
+    } else {
+      query.limit(9 * req.query.page);
+    }
   }
+  
   query.exec(function(err, activities) {
     if (err) return next(err);
     res.send(activities);
@@ -322,6 +331,7 @@ app.post('/api/activities', function(req, res, next) {
     dateOfActivity: req.body.dateOfActivity,
     endDateOfActivity: req.body.endDateOfActivity,
     timeOfActivity: req.body.timeOfActivity,
+    timeAdded: new Date,
     city: req.body.city,
     location: req.body.location,
     address: req.body.address,

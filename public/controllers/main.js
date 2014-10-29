@@ -12,7 +12,9 @@ angular.module('MyApp')
                       'Theater & Shows', 'Activites for Two', 'Food & Dining', 'Bars & Drinking'];
     
     $scope.headingTitle = 'all activities';
-    $scope.activities = Activity.query({ page: 1 });
+    
+    $scope.sortOrder = 'timeAdded';
+    $scope.activities = Activity.query({ page: 1,  sortOrder: $scope.sortOrder });
     
     /*$scope.filterByCity = function(genre) {
       $scope.activities = Activity.query({ city: city });
@@ -30,13 +32,21 @@ angular.module('MyApp')
       displayMenu();
     };
     
-    $scope.sortOrder = 'timeAdded';
     $scope.pageClick = function(value) {
       console.log($scope.headingTitle);
       if ($scope.headingTitle !== "all activities") {
-        $scope.activities = Activity.query({ genre: $scope.headingTitle, page: value });
+        $scope.activities = Activity.query({ genre: $scope.headingTitle, page: value, sortOrder: $scope.sortOrder });
       } else {
-        $scope.activities = Activity.query({ page: value });
+        $scope.activities = Activity.query({ page: value, sortOrder: $scope.sortOrder });
       }
+    }
+    
+    $scope.sort = function(sortType) {
+      if (sortType === 1) {
+        $scope.sortOrder = 'timeAdded';
+      } else if (sortType === 2) {
+        $scope.sortOrder = 'dateOfActivity'
+      }
+      $scope.activities = Activity.query({ page: 1, sortOrder: $scope.sortOrder });
     }
   });
