@@ -84,22 +84,42 @@
         <div class="panel-heading" style="background-color:white;">
             {{headingTitle}}
             <div class="pull-right">
+                <ul style="list-style:none;display:inline;">
+                    Page
+                    <li style="display:inline;"><a href=""><span ng-click="pageClick(1)">1</span></a></li>
+                    <li style="display:inline;"><a href=""><span ng-click="pageClick(2)">2</span></a></li>
+                    <li style="display:inline;"><a href=""><span ng-click="pageClick(3)">3</span></a></li>
+                    <li style="display:inline;"><a href=""><span ng-click="pageClick(4)">4</span></a></li>
+                    <li style="display:inline;"><a href=""><span ng-click="pageClick(5)">5</span></a></li>
+                    <li style="display:inline;"><a href=""><span ng-click="pageClick(6)">6</span></a></li>
+                    <li style="display:inline;"><a href=""><span ng-click="pageClick(7)">7</span></a></li>
+                    <li style="display:inline;"><a href=""><span ng-click="pageClick(8)">8</span></a></li>
+                    <li style="display:inline;"><a href=""><span ng-click="pageClick(9)">9</span></a></li>
+                    <li style="display:inline;"><a href=""><span ng-click="pageClick(10)">10</span></a></li>
+                </ul>
+                <select style="width:300px;" name="sortOrder" ng-model="sortOrder">
+                    <option value="timeAdded">New on Joyage</option>
+                    <option value="-dateOfActivity">Upcoming</option>
+                    <option>Popularity</option>
+                    <option>Trending</option>
+                </select>
                 <input class="search" type="text" ng-model="query" placeholder="Search...">
             </div>
         </div>
     </div>
 </div>
 <div class="container" >
-    <div class="fade-repeat col-xs-4 col-md-4" ng-repeat="activity in activities | filter:query | orderBy:'timeAdded':true">
+    <div class="fade-repeat col-xs-4 col-md-4" ng-repeat="activity in activities | filter:query | orderBy:sortOrder:true">
         <div class="single-activity-box">
             <div class="activity-image">
                 <a href="/activities/{{activity._id}}">
-                    <img style="height:222px;" ng-src="/images/{{activity.poster}}" width="100%" alt="{{activity.title}}" />
+                    <!--img style="height:222px;" ng-src="/images/{{activity.poster}}" width="100%" alt="{{activity.title}}" /-->
+                    <img style="height:222px;" ng-src="/images/{{activity.title}}.jpg" width="100%" alt="{{activity.title}}" />
                 </a>
             </div>
             <div class="activity-info">
                 <a href="/activities/{{activity._id}}">
-                    {{activity.title}}
+                    {{activity.title}} {{activity.dateOfActivity}}
                     <p class="text-muted">{{activity.location}} ({{activity.neighborhood}})</p>
                 </a>
             </div>

@@ -294,11 +294,11 @@ app.get('/api/activities', function(req, res, next) {
   if (req.query.genre && req.query.limit) {
     query.where({genre: req.query.genre}).limit(req.query.limit);
   } else if (req.query.genre) {
-    query.where({ genre: req.query.genre });
+    query.where({ genre: req.query.genre }).limit(9 * req.query.page);
   } else if (req.query.limit) {
     query.limit(req.query.limit);
   } else {
-    query.limit(100);
+    query.limit(9 * req.query.page);
   }
   query.exec(function(err, activities) {
     if (err) return next(err);
