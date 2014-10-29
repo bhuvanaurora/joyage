@@ -69,9 +69,11 @@ var activitySchema = new mongoose.Schema({
   subscribers: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }],
+  subscriptions: { type: Number, default: 0 },
   doneIt: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }],
+  completions: { type: Number, default: 0 },
   media: [{
     title: String,
     text: String,
@@ -96,9 +98,11 @@ var userSchema = new mongoose.Schema({
   subscribedActivities: [{
     type: String
   }],
+  subscriptions: { type: Number, default: 0 },
   doneActivities: [{
     type: String
-  }]
+  }],
+  completions: { type: Number, default: 0 }
 });
 
 userSchema.pre('save', function(next) {
@@ -303,7 +307,9 @@ app.get('/api/activities', function(req, res, next) {
       console.log(new Date().valueOf());
       query.where('dateOfActivity').gte(new Date().valueOf()).sort('-dateOfActivity').limit(9 * req.query.page);
     } else if (req.query.sortOrder === 'timeAdded') {
-      query.limit(9 * req.query.page).sort('timeAdded');
+      query.sort('timeAdded').limit(9 * req.query.page);
+    } else if (req.query.sortOrder === 'popularity') {
+      query.sort('-subscriptions').limit(9 * req.query.page);
     } else {
       query.limit(9 * req.query.page);
     }
@@ -379,6 +385,11 @@ app.post('/api/subscribe', ensureAuthenticated, function(req, res, next) {
   User.findById(req.user._id, function(err, user) {
     if (err) return next(err);
     user.subscribedActivities.push(req.body.activityId);
+    if (user.subscriptions) {
+      user.subscriptions += 1;
+    } else {
+      user.subscriptions = 1;
+    }
     user.save(function(err) {
       if (err) return next(err);
     });
@@ -386,6 +397,11 @@ app.post('/api/subscribe', ensureAuthenticated, function(req, res, next) {
   Activity.findById(req.body.activityId, function(err, activity) {
     if (err) return next(err);
     activity.subscribers.push(req.user._id);
+    if (activity.subscriptions) {
+      activity.subscriptions += 1;
+    } else {
+      activity.subscriptions = 1;
+    }
     activity.save(function(err) {
       if (err) return next(err);
       res.send(200);
@@ -398,6 +414,7 @@ app.post('/api/unsubscribe', ensureAuthenticated, function(req, res, next) {
     if (err) return next(err);
     var index = user.subscribedActivities.indexOf(req.body.activityId);
     user.subscribedActivities.splice(index, 1);
+    user.subscriptions -= 1;
     user.save(function(err) {
       if (err) return next(err);
     });
@@ -406,6 +423,7 @@ app.post('/api/unsubscribe', ensureAuthenticated, function(req, res, next) {
     if (err) return next(err);
     var index = activity.subscribers.indexOf(req.user._id);
     activity.subscribers.splice(index, 1);
+    activity.subscriptions -= 1;
     activity.save(function(err) {
       if (err) return next(err);
       res.send(200);
@@ -417,6 +435,11 @@ app.post('/api/markDone', ensureAuthenticated, function(req, res, next) {
   User.findById(req.user._id, function(err, user) {
     if (err) return next(err);
     user.doneActivities.push(req.body.activityId);
+    if (user.completions) {
+      user.completions += 1;
+    } else {
+      user.completions = 1;
+    }
     user.save(function(err) {
     if (err) return next(err);
     });
@@ -424,6 +447,11 @@ app.post('/api/markDone', ensureAuthenticated, function(req, res, next) {
   Activity.findById(req.body.activityId, function(err, activity) {
     if (err) return next(err);
     activity.doneIt.push(req.user._id);
+    if (activity.completions) {
+      activity.completions += 1;
+    } else {
+      activity.completions = 1;
+    }
     activity.save(function(err) {
       if (err) return next(err);
       res.send(200);
@@ -436,6 +464,7 @@ app.post('/api/markUndone', ensureAuthenticated, function(req, res, next) {
     if (err) return next(err);
     var index = user.doneActivities.indexOf(req.body.activityId);
     user.doneActivities.splice(index, 1);
+    user.completions -= 1;
     user.save(function(err) {
       if (err) return next(err);
     });
@@ -444,6 +473,7 @@ app.post('/api/markUndone', ensureAuthenticated, function(req, res, next) {
     if (err) return next(err);
     var index = activity.doneIt.indexOf(req.user._id);
     activity.doneIt.splice(index, 1);
+    activity.completions -= 1;
     activity.save(function(err) {
       if (err) return next(err);
       res.send(200);

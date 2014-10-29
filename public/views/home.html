@@ -100,7 +100,7 @@
                 <select style="width:300px;" name="sortOrder" ng-model="sortOrder">
                     <option value="timeAdded" ng-click="sort(1)">New on Joyage</option>
                     <option value="dateOfActivity" ng-click="sort(2)">Upcoming</option>
-                    <option>Popularity</option>
+                    <option value="popularity" ng-click="sort(3)">Popularity</option>
                     <option>Trending</option>
                 </select>
                 <input class="search" type="text" ng-model="query" placeholder="Search...">
@@ -119,8 +119,10 @@
             </div>
             <div class="activity-info">
                 <a href="/activities/{{activity._id}}">
-                    {{activity.title}} {{activity.timeAdded}}
+                    {{activity.title}}
                     <p class="text-muted">{{activity.location}} ({{activity.neighborhood}})</p>
+                    <strong>B</strong> {{activity.subscriptions}}
+                    <strong> D</strong> {{activity.completions}}
                 </a>
             </div>
         </div>

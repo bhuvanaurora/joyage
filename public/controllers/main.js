@@ -45,7 +45,9 @@ angular.module('MyApp')
       if (sortType === 1) {
         $scope.sortOrder = 'timeAdded';
       } else if (sortType === 2) {
-        $scope.sortOrder = 'dateOfActivity'
+        $scope.sortOrder = 'dateOfActivity';
+      } else if (sortType === 3) {
+        $scope.sortOrder === 'popularity';
       }
       $scope.activities = Activity.query({ page: 1, sortOrder: $scope.sortOrder });
     }
