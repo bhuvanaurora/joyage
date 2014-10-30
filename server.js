@@ -211,7 +211,6 @@ app.post('/auth/login', function(req, res, next) {
 });
 
 app.post('/auth/facebook', function(req, res, next) {
-  console.log('I"m in auth/facebook');
   var profile = req.body.profile;
   var signedRequest = req.body.signedRequest;
   var encodedSignature = signedRequest.split('.')[0];
@@ -286,7 +285,6 @@ app.get('/api/users', function(req, res, next) {
 });
 
 app.get('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
-  console.log(req.params.id);
   User.findById(req.params.id, function(err, profile) {
     if (err) return next(err);
     res.send(profile);
@@ -304,20 +302,34 @@ app.get('/api/activities', function(req, res, next) {
     query.limit(req.query.limit);
   } else {
     if (req.query.sortOrder === 'dateOfActivity') {
-      console.log(new Date().valueOf());
-      query.where('dateOfActivity').gte(new Date().valueOf()).sort('-dateOfActivity').limit(9 * req.query.page);
+      query.where('dateOfActivity').gte(new Date().valueOf()).sort('dateOfActivity').skip(9 * (req.query.page-1)).limit(9);
     } else if (req.query.sortOrder === 'timeAdded') {
-      query.sort('timeAdded').limit(9 * req.query.page);
+      query.sort('timeAdded').skip(9 * (req.query.page-1)).limit(9);
     } else if (req.query.sortOrder === 'popularity') {
-      query.sort('-subscriptions').limit(9 * req.query.page);
+      query.sort('-subscriptions').skip(9 * (req.query.page-1)).limit(9);
     } else {
-      query.limit(9 * req.query.page);
+      query.skip(9 * (req.query.page-1)).limit(9);
     }
   }
   
+  var date = new Date().getTime();
+  act = [];
+  var j = 0;
   query.exec(function(err, activities) {
     if (err) return next(err);
-    res.send(activities);
+    for (i=0; i<activities.length; i++) {
+      if (date <= Date.parse(activities[i].dateOfActivity)) {
+        act[j] = activities[i];
+        ++j;
+      } else if (!activities[i].dateOfActivity) {
+        act[j] = activities[i];
+        ++j;
+      } else if(activities[i].dateOfActivity === "") {
+        act[j] = activities[i];
+        ++j;
+      } 
+    }
+    res.send(act);
   });
 });
 
