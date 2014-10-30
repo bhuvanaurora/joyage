@@ -302,7 +302,7 @@ app.get('/api/activities', function(req, res, next) {
     query.limit(req.query.limit);
   } else {
     if (req.query.sortOrder === 'dateOfActivity') {
-      query.where('dateOfActivity').gte(new Date().valueOf()).sort('dateOfActivity').skip(9 * (req.query.page-1)).limit(9);
+      query.where('dateOfActivity').gte(new Date().valueOf()).sort('-dateOfActivity').skip(9 * (req.query.page-1)).limit(9);
     } else if (req.query.sortOrder === 'timeAdded') {
       query.sort('timeAdded').skip(9 * (req.query.page-1)).limit(9);
     } else if (req.query.sortOrder === 'popularity') {

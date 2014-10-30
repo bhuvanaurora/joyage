@@ -21,8 +21,6 @@ angular.module('MyApp')
       $scope.headingTitle = city;
     };*/
     
-    $scope.date = new Date();
-    
     $scope.filterByGenre = function(genre) {
       $scope.activities = Activity.query({ genre: genre, page: 1, sortOrder: $scope.sortOrder });
       $scope.headingTitle = genre;
