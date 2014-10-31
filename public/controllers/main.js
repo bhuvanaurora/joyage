@@ -1,5 +1,5 @@
 angular.module('MyApp')
-  .controller('MainCtrl', function($scope, Activity) {
+  .controller('MainCtrl', ['$scope', 'Activity', function($scope, Activity) {
     /*$scope.city = ['Bangalore', 'Delhi'];*/
     /*$scope.neighborhood = { 'Bangalore': ['Kormangala', 'JP Nagar', 'Indiranagar', 'MG Road'],
                               'Delhi': ['Connaught Place', 'Dwarka', 'Janak Puri', 'Saket', 'Defence Colony', 'Hauz Khas']
@@ -15,7 +15,7 @@ angular.module('MyApp')
     
     $scope.sortOrder = 'timeAdded';
     $scope.activities = Activity.query({ page: 1,  sortOrder: $scope.sortOrder });
-    
+
     /*$scope.filterByCity = function(genre) {
       $scope.activities = Activity.query({ city: city });
       $scope.headingTitle = city;
@@ -49,6 +49,10 @@ angular.module('MyApp')
       } else if (sortType === 3) {
         $scope.sortOrder === 'popularity';
       }
-      $scope.activities = Activity.query({ page: 1, sortOrder: $scope.sortOrder });
+      if ($scope.headingTitle !== "all activities") {
+        $scope.activities = Activity.query({ genre: $scope.headingTitle, page: 1, sortOrder: $scope.sortOrder });
+      } else {
+        $scope.activities = Activity.query({ page: 1, sortOrder: $scope.sortOrder });
+      }
     }
-  });
+  }]);

@@ -297,7 +297,15 @@ app.get('/api/activities', function(req, res, next) {
   if (req.query.genre && req.query.limit) {
     query.where({genre: req.query.genre}).limit(req.query.limit);
   } else if (req.query.genre) {
-    query.where({ genre: req.query.genre }).limit(9 * req.query.page).sort(req.query.sortOrder);
+    if (req.query.sortOrder === 'timeAdded') {
+      query.where({ genre: req.query.genre }).sort('timeAdded').skip(9 * (req.query.page-1)).limit(9);
+    } else if (req.query.sortOrder === 'popularity') {
+      query.where({ genre: req.query.genre }).sort('-subscriptions').skip(9 * (req.query.page-1)).limit(9);
+    } else if (req.query.sortOrder === 'dateOfActivity') {
+      query.where({ genre: req.query.genre }).where('dateOfActivity').gte(new Date().valueOf()).sort('-dateOfActivity').skip(9 * (req.query.page-1)).limit(9);
+    } else {
+      query.where({ genre: req.query.genre }).skip(9 * (req.query.page-1)).limit(9);
+    }
   } else if (req.query.limit) {
     query.limit(req.query.limit);
   } else {
