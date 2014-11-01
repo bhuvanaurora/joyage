@@ -12,6 +12,7 @@ var moment = require('moment');
 var async = require('async');
 var request = require('request');
 var xml2js = require('xml2js');
+var textSearch = require('mongoose-text-search');
 
 /*var agenda = require('agenda')({ db: { address: 'localhost:27017/test' } });*/
 var agenda = require('agenda')({ db: { address: 'mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database' } });
@@ -80,6 +81,9 @@ var activitySchema = new mongoose.Schema({
     link: String
   }]
 });
+
+activitySchema.plugin(textSearch);
+activitySchema.index({ genre: 'text' });
 
 var userSchema = new mongoose.Schema({
   name: { type: String, trim: true, required: true },
@@ -293,6 +297,11 @@ app.get('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
 
 app.get('/api/activities', function(req, res, next) {
   var query = Activity.find();
+  /*Activity.textSearch('Bars', function (err, output) {
+    //if (err) return next(err);
+    var inspect = require('util').inspect;
+    console.log(inspect(output, { depth: null }));
+  });*/
   
   if (req.query.genre && req.query.limit) {
     query.where({genre: req.query.genre}).limit(req.query.limit);
@@ -325,19 +334,23 @@ app.get('/api/activities', function(req, res, next) {
   var j = 0;
   query.exec(function(err, activities) {
     if (err) return next(err);
-    for (i=0; i<activities.length; i++) {
-      if (date <= Date.parse(activities[i].dateOfActivity)) {
-        act[j] = activities[i];
-        ++j;
-      } else if (!activities[i].dateOfActivity) {
-        act[j] = activities[i];
-        ++j;
-      } else if(activities[i].dateOfActivity === "") {
-        act[j] = activities[i];
-        ++j;
-      } 
+    if (!req.query.limit) {
+      for (i=0; i<activities.length; i++) {
+        if (date <= Date.parse(activities[i].dateOfActivity)) {
+          act[j] = activities[i];
+          ++j;
+        } else if (!activities[i].dateOfActivity) {
+          act[j] = activities[i];
+          ++j;
+        } else if(activities[i].dateOfActivity === "") {
+          act[j] = activities[i];
+          ++j;
+        } 
+      }
+      res.send(act);
+    } else {
+      res.send(activities);
     }
-    res.send(act);
   });
 });
 

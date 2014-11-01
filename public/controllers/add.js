@@ -1,8 +1,6 @@
 angular.module('MyApp')
   .controller('AddCtrl', ['$scope', '$alert', '$http', 'Activity', function($scope, $alert, $http, Activity) {
     
-    //alert("Have you added the pictures? Add the HQ pictures first.");
-    
     $scope.genres = ['Athletic Activities', 'Fitness Classes', 'Hiking & Biking',
                      'Nature Appreciation', 'Bars', 'Breweries & Distilleries',
                       'Featured Cocktails', 'Happy Hours', 'Classes', 'Exhibits & Galleries',
@@ -18,6 +16,9 @@ angular.module('MyApp')
       $scope.categories.splice($scope.categories.indexOf(selectedCategory), 1);
       $scope.genres.push(selectedCategory);
     }
+    $scope.city = 'Bangalore';
+    $scope.country = 'India';
+    $scope.currency = 'Rs';
     
     $scope.addActivity = function() {
       

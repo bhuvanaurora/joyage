@@ -5,7 +5,7 @@
     "www.joyage.in",
     "joyage.in"
   ],
-  "version": "0.0.0-40",
+  "version": "0.0.0-42",
   "scripts": {
     "test": "karma start public/test/karma.conf.js",
     "start": "node server.js"
@@ -22,6 +22,7 @@
     "moment": "^2.7.0",
     "mongoose": "^3.8.8",
     "mongoose-attachments": "^0.1.0",
+    "mongoose-text-search": "0.0.2",
     "morgan": "^1.0.0",
     "nodemailer": "^0.6.3",
     "request": "^2.34.0",
