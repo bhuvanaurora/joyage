@@ -141,7 +141,6 @@ var app = express();
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = 'prod';
 }
-console.log(process.env);
 
 app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
@@ -312,28 +311,32 @@ app.get('/api/activities', function(req, res, next) {
   if (req.query.genre && req.query.limit) {
     query.where({genre: req.query.genre}).limit(req.query.limit);
   } else if (req.query.genre) {
-    if (req.query.sortOrder === 'timeAdded') {
-      query.where({ genre: req.query.genre }).sort('timeAdded').skip(9 * (req.query.page-1)).limit(9);
-    } else if (req.query.sortOrder === 'popularity') {
-      query.where({ genre: req.query.genre }).sort('-subscriptions').skip(9 * (req.query.page-1)).limit(9);
-    } else if (req.query.sortOrder === 'dateOfActivity') {
+    if (req.query.sortOrder === 'timeAdded') {                                                                                          // Default category sort
+      query.where({ genre: req.query.genre }).where({ preview: {$ne: false} }).sort('timeAdded').skip(9 * (req.query.page-1)).limit(9);
+    } else if (req.query.sortOrder === 'popularity') {                                                                                  // Popularity category sort
+      query.where({ genre: req.query.genre }).where({ preview: {$ne: false} }).sort('-subscriptions').skip(9 * (req.query.page-1)).limit(9);
+    } else if (req.query.sortOrder === 'dateOfActivity') {                                                                              // Upcoming category sort
       //query.where({ genre: req.query.genre }).where('dateOfActivity').gte(new Date().valueOf()).sort('-dateOfActivity').skip(9 * (req.query.page-1)).limit(9);
-      query.where({ 'dateOfActivity': {'$exists': false} }).where({ genre: req.query.genre }).sort({ 'dateOfActivity': -1 }).skip(9 * (req.query.page-1)).limit(9); 
+      query.where({ 'dateOfActivity': {'$exists': false} }).where({ preview: {$ne: false} }).where({ genre: req.query.genre }).sort({ 'dateOfActivity': -1 }).skip(9 * (req.query.page-1)).limit(9); 
     } else {
-      query.where({ genre: req.query.genre }).skip(9 * (req.query.page-1)).limit(9);
+      query.where({ genre: req.query.genre }).where({ preview: {$ne: false} }).skip(9 * (req.query.page-1)).limit(9);
     }
-  } else if (req.query.limit) {
+  } else if (req.query.limit) {                                                                                                         // Suggested activities
     query.limit(req.query.limit);
   } else {
-    if (req.query.sortOrder === 'dateOfActivity') {
-      query.where('dateOfActivity').gte(new Date().valueOf()).sort('-dateOfActivity').skip(9 * (req.query.page-1)).limit(9);
-    } else if (req.query.sortOrder === 'timeAdded') {
-      query.sort('timeAdded').skip(9 * (req.query.page-1)).limit(9);
-    } else if (req.query.sortOrder === 'popularity') {
-      query.sort('-subscriptions').skip(9 * (req.query.page-1)).limit(9);
+    if (req.query.sortOrder === 'dateOfActivity') {                                                                                     // Upcoming sort
+      query.where('dateOfActivity').where({ preview: {$ne: false} }).gte(new Date().valueOf()).sort('-dateOfActivity').skip(9 * (req.query.page-1)).limit(9);
+    } else if (req.query.sortOrder === 'timeAdded') {                                                                                   // Default sort order
+      query.sort('timeAdded').where({ preview: {$ne: false} }).skip(9 * (req.query.page-1)).limit(9);
+    } else if (req.query.sortOrder === 'popularity') {                                                                                  // Popularity sort
+      query.sort('-subscriptions').where({ preview: {$ne: false} }).skip(9 * (req.query.page-1)).limit(9);
     } else {
-      query.skip(9 * (req.query.page-1)).limit(9);
+      query.skip(9 * (req.query.page-1)).where({ preview: {$ne: false} }).limit(9);
     }
+  }
+  
+  if (req.query.preview) {                                                                                                              // Admin console preview
+    query.where({ preview: req.query.preview });
   }
   
   var date = new Date().getTime();
@@ -528,6 +531,18 @@ app.post('/api/tips', ensureAuthenticated, function(req, res, next) {
     });
     activity.save(function(err) {
       if (err) return next(err);
+      res.send(200);
+    });
+  });
+});
+
+app.post('/api/acceptActivity', ensureAuthenticated, function(req, res, next) {
+  Activity.findById(req.body.activityId, function(err, activity) {
+    if (err) return next(err);
+    activity.preview = true;
+    activity.save(function(err) {
+      if (err) return next(err);
+      console.log("Activity pushed into production");
       res.send(200);
     });
   });

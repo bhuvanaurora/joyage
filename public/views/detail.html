@@ -233,8 +233,18 @@
       </ul>
     </div>
     
+    <!----------------------- Activity review ------------------------------------------>
+
+    <section style="background-color:rgba(0,0,0,0.2)" ng-if="activity.preview === false">
+      <div class="text-center">
+        <button class="btn btn-primary" ng-click="acceptActivity()">Accept Activity</button>
+      </div>
+    </section>
+    
   </div>
 </div>
+  
+
 
 <!----------------------- Suggested Activities -------------------------------------->
 

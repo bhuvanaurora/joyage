@@ -8,5 +8,21 @@
         <div class="panel-body">
             <a href="/add">Add activity</a>
         </div>
+        <div style="margin-top:20px" class="fade-repeat col-xs-4 col-md-4" ng-repeat="act in activities | orderBy:'timeAdded':true">
+            <div class="single-activity-box">
+                <div class="activity-image">
+                    <a href="/activities/{{act._id}}">
+                        <!--img style="height:222px;" ng-src="/images/{{act.poster}}" width="100%" alt="{{act.title}}" /-->
+                        <img style="height:222px;" ng-src="/images/{{act.title}}.jpg" width="100%" alt="{{act.title}}" />
+                    </a>
+                </div>
+                <div class="activity-info">
+                    <a href="/activities/{{act._id}}">
+                        {{act.title}}
+                        <p class="text-muted">{{act.location}} ({{act.neighborhood}})</p>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

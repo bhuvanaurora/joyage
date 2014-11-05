@@ -1,8 +1,8 @@
 // Changes made
 
 angular.module('MyApp')
-  .controller('DetailCtrl', ['$scope', '$rootScope', '$routeParams', 'Activity', 'Subscription', 'DoneIt', 'Tips',
-                             function($scope, $rootScope, $routeParams, Activity, Subscription, DoneIt, Tips) {
+  .controller('DetailCtrl', ['$scope', '$rootScope', '$routeParams', '$location', 'Activity', 'Subscription', 'DoneIt', 'Tips', 'Accept',
+                             function($scope, $rootScope, $routeParams, $location, Activity, Subscription, DoneIt, Tips, Accept) {
     
       Activity.get({ _id: $routeParams.id }, function(activity) {
         $scope.activity = activity;
@@ -48,6 +48,12 @@ angular.module('MyApp')
           Tips.addTip(activity).success(function() {
             $scope.tip = '';
           });
+        };
+        
+        $scope.acceptActivity = function() {
+            Accept.acceptActivity(activity).success(function() {
+                $location.path('/admin');
+            });
         };
 
       });
