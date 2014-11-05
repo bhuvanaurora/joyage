@@ -36,7 +36,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li data-match-route="/$"><a href="/">Home</a></li>
-      <li data-match-route="/add" ng-if="currentUser.email === 'raj.muppa@gmail.com' || currentUser.email === 'bhuvan.aurora@gmail.com'"><a href="/add">Add</a></li>
+      <li data-match-route="/admin" ng-if="currentUser.email === 'raj.muppa@gmail.com' || currentUser.email === 'bhuvan.aurora@gmail.com'"><a href="/admin">Admin</a></li>
     </ul>
     <ul class="nav navbar-nav pull-right" ng-if="!currentUser">
       <li data-match-route="/login"><a href="/login">Login</a></li>
@@ -68,6 +68,7 @@
   <script src="controllers/main.js"></script>
   <script src="controllers/detail.js"></script>
   <script src="controllers/add.js"></script>
+  <script src="controllers/admin.js"></script>
   <script src="controllers/navbar.js"></script>
   <script src="controllers/login.js"></script>
   <script src="controllers/signup.js"></script>

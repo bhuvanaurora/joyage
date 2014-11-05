@@ -23,6 +23,10 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
         templateUrl: 'views/add.html',
         controller: 'AddCtrl'
       })
+      .when('/admin', {
+        templateUrl: 'views/admin.html',
+        controller: 'AdminCtrl'
+      })
       .when('/about', {
         templateUrl: 'views/pages/about.html'
       })

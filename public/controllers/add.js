@@ -7,6 +7,7 @@ angular.module('MyApp')
                       'Brunch & Breakfast', 'Lunch', 'Dinner', 'Sweet Treats', 'Food Trucks & Pop-Ups',
                       'Tea & Coffeeshops', 'Concerts', 'Fun & Games', 'Nightlife & Parties',
                       'Theater & Shows', 'Activites for Two', 'Food & Dining', 'Bars & Drinking'];
+    
     $scope.categories = [];
     $scope.addCategory = function(genre) {
       $scope.categories.push(genre);

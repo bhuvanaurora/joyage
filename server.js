@@ -14,7 +14,7 @@ var request = require('request');
 var xml2js = require('xml2js');
 var textSearch = require('mongoose-text-search');
 
-/*var agenda = require('agenda')({ db: { address: 'localhost:27017/test' } });*/
+//var agenda = require('agenda')({ db: { address: 'localhost:27017/test' } });
 var agenda = require('agenda')({ db: { address: 'mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database' } });
 var sugar = require('sugar');
 var nodemailer = require('nodemailer');
@@ -63,6 +63,7 @@ var activitySchema = new mongoose.Schema({
   corner: String,
   cornerPic: String,
   cornerText: String,
+  preview: Boolean,
   tips: [{
     text: String,
     tipper: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
@@ -132,10 +133,15 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 var User = mongoose.model('User', userSchema);
 var Activity = mongoose.model('Activity', activitySchema);
 
-/*mongoose.connect('localhost');*/
+//mongoose.connect('localhost');
 mongoose.connect('mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database');
 
 var app = express();
+
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = 'prod';
+}
+console.log(process.env);
 
 app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
@@ -311,7 +317,8 @@ app.get('/api/activities', function(req, res, next) {
     } else if (req.query.sortOrder === 'popularity') {
       query.where({ genre: req.query.genre }).sort('-subscriptions').skip(9 * (req.query.page-1)).limit(9);
     } else if (req.query.sortOrder === 'dateOfActivity') {
-      query.where({ genre: req.query.genre }).where('dateOfActivity').gte(new Date().valueOf()).sort('-dateOfActivity').skip(9 * (req.query.page-1)).limit(9);
+      //query.where({ genre: req.query.genre }).where('dateOfActivity').gte(new Date().valueOf()).sort('-dateOfActivity').skip(9 * (req.query.page-1)).limit(9);
+      query.where({ 'dateOfActivity': {'$exists': false} }).where({ genre: req.query.genre }).sort({ 'dateOfActivity': -1 }).skip(9 * (req.query.page-1)).limit(9); 
     } else {
       query.where({ genre: req.query.genre }).skip(9 * (req.query.page-1)).limit(9);
     }
@@ -400,11 +407,9 @@ app.post('/api/activities', function(req, res, next) {
     corner: req.body.corner,
     cornerPic: req.body.cornerPic,
     cornerText: req.body.cornerText,
-    media: req.body.media
-  },
-  activity.poster('image', req.files.image, function(err) {
-    if (err) next(err);
-  }));
+    media: req.body.media,
+    preview: false
+  });
   
   activity.save(function(err) {
     if (err) {
