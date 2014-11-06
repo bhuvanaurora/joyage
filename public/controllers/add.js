@@ -1,6 +1,6 @@
 angular.module('MyApp')
-  .controller('AddCtrl', ['$scope', '$alert', '$routeParams', '$http', '$route', 'Activity', 'editedActivity',
-                          function($scope, $alert, $routeParams, $http, $route, Activity, editedActivity) {
+  .controller('AddCtrl', ['$scope', '$alert', '$routeParams', '$http', '$route', 'Activity', 'editedActivity', 'Profile',
+                          function($scope, $alert, $routeParams, $http, $route, Activity, editedActivity, Profile) {
     
     if ($routeParams.id) {
       
@@ -149,14 +149,6 @@ angular.module('MyApp')
           $route.reload();
         });
         
-        /*  function(response) {
-            $alert({
-              content: response.data.message,
-              placement: 'top-right',
-              type: 'material',
-              duration: 3
-            });
-          });*/
       };
       
     } else {

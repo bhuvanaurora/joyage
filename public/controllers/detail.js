@@ -50,8 +50,8 @@ angular.module('MyApp')
           });
         };
         
-        $scope.acceptActivity = function() {
-            Accept.acceptActivity(activity).success(function() {
+        $scope.acceptActivity = function(userId) {
+            Accept.acceptActivity(activity, userId).success(function() {
                 $alert({
                     content: 'Activity has been added.',
                     placement: 'top-right',

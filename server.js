@@ -92,6 +92,8 @@ var userSchema = new mongoose.Schema({
   password: String,
   gender: String,
   age: String,
+  curator: Boolean,
+  p2p: Boolean,
   facebook: {
     id: String,
     email: String
@@ -199,6 +201,8 @@ app.post('/auth/signup', function(req, res, next) {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
+    curator: false,
+    p2p: false,
     subscribedActivities: [],
     doneActivities: []
   });
@@ -243,6 +247,8 @@ app.post('/auth/facebook', function(req, res, next) {
       name: profile.first_name,
       gender: profile.gender,
       age: profile.age_range,
+      curator: false,
+      p2p: false,
       facebook: {
         id: profile.id,
         email: profile.email
@@ -267,6 +273,8 @@ app.post('/auth/google', function(req, res, next) {
     }
     var user = new User({
       name: profile.displayName,
+      curator: false,
+      p2p: false,
       google: {
         id: profile.id,
         email: profile.emails[0].value
@@ -322,7 +330,7 @@ app.get('/api/activities', function(req, res, next) {
       query.where({ genre: req.query.genre }).where({ preview: {$ne: false} }).skip(9 * (req.query.page-1)).limit(9);
     }
   } else if (req.query.limit) {                                                                                                         // Suggested activities
-    query.where({ 'dateOfActivity': {'$exists': false} }).limit(req.query.limit);
+    query.where({ preview: {$ne: false} }).where({ 'dateOfActivity': {'$exists': false} }).limit(req.query.limit);
   } else {
     if (req.query.sortOrder === 'dateOfActivity') {                                                                                     // Upcoming sort
       query.where('dateOfActivity').where({ preview: {$ne: false} }).gte(new Date().valueOf()).sort('-dateOfActivity').skip(9 * (req.query.page-1)).limit(9);
@@ -579,15 +587,24 @@ app.post('/api/tips', ensureAuthenticated, function(req, res, next) {
 });
 
 app.post('/api/acceptActivity', ensureAuthenticated, function(req, res, next) {
-  Activity.findById(req.body.activityId, function(err, activity) {
+  User.findById(req.body.userId, function(err, user) {
     if (err) return next(err);
-    activity.preview = true;
-    activity.save(function(err) {
-      if (err) return next(err);
-      console.log("Activity pushed into production");
-      res.send(200);
-    });
+    if (user.p2p === true) {
+      Activity.findById(req.body.activityId, function(err, activity) {
+        if (err) return next(err);
+        activity.preview = true;
+        activity.save(function(err) {
+          if (err) return next(err);
+          console.log("Activity pushed into production");
+          res.send(200);
+        });
+      });
+    } else {
+      console.log('Permission denied');
+      res.send(400);
+    }
   });
+  
 });
 
 app.post('/api/deleteActivity', ensureAuthenticated, function(req, res, next) {
@@ -601,7 +618,7 @@ app.post('/api/deleteActivity', ensureAuthenticated, function(req, res, next) {
   });
 });
 
-app.get('/api/editActivity/:id', function(req, res, next) {
+app.get('/api/editActivity/:id', ensureAuthenticated, function(req, res, next) {
   Activity.findById(req.params.id, function(err, activity) {
     if (err) return next(err);
     res.send(activity);

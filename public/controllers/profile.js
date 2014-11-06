@@ -1,7 +1,7 @@
 angular.module('MyApp')
   .controller('ProfileCtrl', ['$scope', '$routeParams', '$rootScope', 'Profile', 'Activity',
-                              function($scope, $routeParams, $rootScope, Profile, Activity) {
-
+                              function($scope, $routeParams, $rootScope, Profile, Activity) {                          
+    
     Profile.get({ _id: $routeParams.id }, function(profile) {
       $scope.profile = profile;
 
