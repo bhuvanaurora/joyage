@@ -1,9 +1,9 @@
 // Changes made
 
 angular.module('MyApp')
-  .controller('DetailCtrl', ['$scope', '$rootScope', '$routeParams', '$location', 'Activity', 'Subscription', 'DoneIt', 'Tips', 'Accept',
-                             function($scope, $rootScope, $routeParams, $location, Activity, Subscription, DoneIt, Tips, Accept) {
-    
+  .controller('DetailCtrl', ['$scope', '$rootScope', '$routeParams', '$location', '$alert', 'Activity', 'Subscription', 'DoneIt', 'Tips', 'Accept', 'Delete',
+                             function($scope, $rootScope, $routeParams, $location, $alert, Activity, Subscription, DoneIt, Tips, Accept, Delete) {
+        
       Activity.get({ _id: $routeParams.id }, function(activity) {
         $scope.activity = activity;
         
@@ -52,6 +52,24 @@ angular.module('MyApp')
         
         $scope.acceptActivity = function() {
             Accept.acceptActivity(activity).success(function() {
+                $alert({
+                    content: 'Activity has been added.',
+                    placement: 'top-right',
+                    type: 'success',
+                    duration: 3
+                  });
+                $location.path('/admin');
+            });
+        };
+        
+        $scope.deleteActivity = function() {
+            Delete.deleteActivity(activity).success(function() {
+                $alert({
+                    content: 'Activity deleted',
+                    placement: 'top-right',
+                    type: 'material',
+                    duration: 3
+                });
                 $location.path('/admin');
             });
         };

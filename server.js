@@ -322,7 +322,7 @@ app.get('/api/activities', function(req, res, next) {
       query.where({ genre: req.query.genre }).where({ preview: {$ne: false} }).skip(9 * (req.query.page-1)).limit(9);
     }
   } else if (req.query.limit) {                                                                                                         // Suggested activities
-    query.limit(req.query.limit);
+    query.where({ 'dateOfActivity': {'$exists': false} }).limit(req.query.limit);
   } else {
     if (req.query.sortOrder === 'dateOfActivity') {                                                                                     // Upcoming sort
       query.where('dateOfActivity').where({ preview: {$ne: false} }).gte(new Date().valueOf()).sort('-dateOfActivity').skip(9 * (req.query.page-1)).limit(9);
@@ -352,7 +352,7 @@ app.get('/api/activities', function(req, res, next) {
         } else if (!activities[i].dateOfActivity) {
           act[j] = activities[i];
           ++j;
-        } else if(activities[i].dateOfActivity === "") {
+        } else if (activities[i].dateOfActivity === "") {
           act[j] = activities[i];
           ++j;
         } 
@@ -368,6 +368,50 @@ app.get('/api/activities/:id', function(req, res, next) {
   Activity.findById(req.params.id, function(err, activity) {
     if (err) return next(err);
     res.send(activity);
+  });
+});
+
+app.put('/api/activities/:id', function(req, res, next) {
+  Activity.findById(req.params.id, function(err, activity) {
+    if (err) return next(err);
+    activity.title = req.body.title;
+    activity.description = req.body.description;
+    activity.genre = req.body.genre;
+    activity.dateOfActivity = req.body.dateOfActivity;
+    activity.endDateOfActivity = req.body.endDateOfActivity;
+    activity.timeOfActivity = req.body.timeOfActivity;
+    activity.city = req.body.city;
+    activity.neighborhood = req.body.neighborhood;
+    activity.location = req.body.location;
+    activity.address = req.body.address;
+    activity.phone = req.body.phone;
+    activity.country = req.body.country;
+    activity.sourceWebsite = req.body.sourceWebsite;
+    activity.locationWebsite = req.body.locationWebsite;
+    activity.poster = req.body.poster;
+    activity.photoCredit = req.body.photoCredit;
+    activity.photoCreditLink = req.body.photoCreditLink;
+    activity.currency = req.body.currency;
+    activity.price = req.body.price;
+    activity.facebookLink = req.body.facebookLink;
+    activity.twitterLink = req.body.twitterLink;
+    activity.zomatoLink = req.body.zomatoLink;
+    activity.payment = req.body.payment;
+    activity.bookRide = req.body.bookRide;
+    activity.goodies = req.body.goodies;
+    activity.moreInfo = req.body.moreInfo;
+    activity.moreInfoLink = req.body.moreInfoLink;
+    activity.sourceName = req.body.sourceName;
+    activity.sourceDescription = req.body.sourceDescription;
+    activity.corner = req.body.corner;
+    activity.cornerPic = req.body.cornerPic;
+    activity.cornerText = req.body.cornerText;
+    activity.media = req.body.media;
+    
+    activity.save(function(err) {
+      if (err) return next(err);
+      res.send(200);
+    });
   });
 });
 
@@ -401,7 +445,7 @@ app.post('/api/activities', function(req, res, next) {
     twitterLink: req.body.twitterLink,
     payment: req.body.payment,
     bookRide: req.body.bookRide,
-    goodies: req.body.payment,
+    goodies: req.body.goodies,
     moreInfo: req.body.moreInfo,
     moreInfoLink: req.body.moreInfoLink,
     sourceName: req.body.sourceName,
@@ -415,9 +459,7 @@ app.post('/api/activities', function(req, res, next) {
   });
   
   activity.save(function(err) {
-    if (err) {
-      return next(err);
-    }
+    if (err) return next(err);
     res.send(200);
   });
 });
@@ -545,6 +587,24 @@ app.post('/api/acceptActivity', ensureAuthenticated, function(req, res, next) {
       console.log("Activity pushed into production");
       res.send(200);
     });
+  });
+});
+
+app.post('/api/deleteActivity', ensureAuthenticated, function(req, res, next) {
+  Activity.findById(req.body.activityId, function(err, activity) {
+    if (err) return next(err);
+    activity.remove(function(err) {
+      if (err) return next(err);
+      console.log("Activity deleted");
+      res.send(200);
+    });
+  });
+});
+
+app.get('/api/editActivity/:id', function(req, res, next) {
+  Activity.findById(req.params.id, function(err, activity) {
+    if (err) return next(err);
+    res.send(activity);
   });
 });
 

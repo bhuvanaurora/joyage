@@ -235,11 +235,14 @@
     
     <!----------------------- Activity review ------------------------------------------>
 
-    <section style="background-color:rgba(0,0,0,0.2)" ng-if="activity.preview === false">
+    <div style="background-color:rgba(0,0,0,0.2)" ng-if="activity.preview === false">
       <div class="text-center">
         <button class="btn btn-primary" ng-click="acceptActivity()">Accept Activity</button>
+        <a href="/editActivity/{{activity._id}}">Edit</a>
+        <!--button class="btn btn-success" ng-click="editActivity()">Edit Activity</button-->
+        <button class="btn btn-danger" ng-click="deleteActivity()">Delete Activity</button>
       </div>
-    </section>
+    </div>
     
   </div>
 </div>

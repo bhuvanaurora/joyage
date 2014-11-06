@@ -11,6 +11,10 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
         templateUrl: 'views/detail.html',
         controller: 'DetailCtrl'
       })
+      .when('/editActivity/:id', {
+        templateUrl: 'views/add.html',
+        controller: 'AddCtrl'
+      })
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'

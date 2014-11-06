@@ -16,11 +16,12 @@
                         <img style="height:222px;" ng-src="/images/{{act.title}}.jpg" width="100%" alt="{{act.title}}" />
                     </a>
                 </div>
-                <div class="activity-info">
+                <div class="activity-info" style="height: 120px;">
                     <a href="/activities/{{act._id}}">
                         {{act.title}}
                         <p class="text-muted">{{act.location}} ({{act.neighborhood}})</p>
                     </a>
+                    <button class='btn btn-danger btn-block' ng-click='deleteActivity(act)'>Delete Activity</button>
                 </div>
             </div>
         </div>
