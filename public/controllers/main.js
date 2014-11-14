@@ -82,8 +82,8 @@ angular.module('MyApp')
       FB.ui({
         method: 'apprequests',
         message: 'Invite your facebook friends to Joyage',
-        max_recipients: 10,
-        maxRecipients: 10
+        max_recipients: 100,
+        maxRecipients: 100
       }, function(response) {
         console.log(response);
         if (response) {
