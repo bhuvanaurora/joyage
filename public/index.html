@@ -39,8 +39,8 @@
       <li data-match-route="/admin" ng-if="currentUser.curator === true"><a href="/admin/{{currentUser._id}}">Admin</a></li>
     </ul>
     <ul class="nav navbar-nav pull-right" ng-if="!currentUser">
-      <li data-match-route="/login"><a href="/login">Login</a></li>
-      <li data-match-route="/signup"><a href="/signup">Sign up</a></li>
+      <li data-match-route="/login"><a href="/login">Sign In</a></li>
+      <!--li data-match-route="/signup"><a href="/signup">Sign up</a></li-->
     </ul>
     <ul class="nav navbar-nav pull-right" ng-if="currentUser">
       <a href="/profile/{{currentUser._id}}"><li class="navbar-text" ng-bind="currentUser.name"></li></a>
@@ -82,6 +82,8 @@
   <script src="services/accept.js"></script>
   <script src="services/delete.js"></script>
   <script src="services/editedActivity.js"></script>
+  <script src="services/fb_appId.js"></script>
+  <script src="services/fb_connect.js"></script>
   
   <!--script src="js/mapbox.js"></script-->
   <script src="js/widgets.js"></script>

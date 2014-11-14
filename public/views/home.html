@@ -2,8 +2,18 @@
 <!----------------------------- Categories -------------------------------------->
 
 <div id="new-home" style="margin-bottom:20px;">
+    <button ng-click="facebookInviteFriends()">Invite</button>
+    <button ng-click="friends()">Friends</button>
+    <button ng-click="fb_share()">Share</button>
+    <button ng-click="fb_send_message()">Message</button>
+    <ul ng-if="friend_list">
+        <li ng-repeat="friend in friend_list.data">{{friend.name}} {{friend.location}} {{friend.id}}</li>
+    </ul>
     <div id="filter-and-sort-bars">
         <div id="activity-filter">
+            
+            
+            
             <section class="container_27 clearfix">
                 <section class="grid_27">                        
                     I'm looking for <span class="filter-select" data-filter-id="category-filter">
@@ -121,8 +131,8 @@
                 <a href="/activities/{{activity._id}}">
                     {{activity.title}}
                     <p class="text-muted">{{activity.location}} ({{activity.neighborhood}})</p>
-                    <strong>B</strong> {{activity.subscriptions}}
-                    <strong> D</strong> {{activity.completions}}
+                    <!--strong>B</strong> {{activity.subscriptions}}
+                    <strong> D</strong> {{activity.completions}}-->
                 </a>
             </div>
         </div>

@@ -19,6 +19,15 @@ angular.module('MyApp')
             $scope.genres.splice($scope.genres.indexOf($scope.categories[i]), 1);
           }
         }
+        $scope.addCategory = function(genre) {
+          $scope.categories.push(genre);
+          $scope.genres.splice($scope.genres.indexOf(genre), 1);
+        }
+        $scope.removeCategory = function(selectedCategory) {
+          $scope.categories.splice($scope.categories.indexOf(selectedCategory), 1);
+          $scope.genres.push(selectedCategory);
+        }
+
         $scope.title = activity.title;
         $scope.description = activity.description;
         $scope.dateOfActivity = activity.dateOfActivity;
@@ -109,7 +118,7 @@ angular.module('MyApp')
             link: $scope.mediaLink4
           })
         }
-        
+
         $scope.activity.title = $scope.title;
         $scope.activity.description = $scope.description;
         $scope.activity.genre = $scope.categories;

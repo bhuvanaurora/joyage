@@ -7,7 +7,7 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
         templateUrl: 'views/home.html',
         controller: 'MainCtrl'
       })
-      .when('/activities/:id', {                        // changed
+      .when('/activities/:id', {
         templateUrl: 'views/detail.html',
         controller: 'DetailCtrl'
       })
@@ -19,10 +19,10 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
-      .when('/signup', {
+      /*.when('/signup', {
         templateUrl: 'views/signup.html',
         controller: 'SignupCtrl'
-      })
+      })*/
       .when('/add', {
         templateUrl: 'views/add.html',
         controller: 'AddCtrl'

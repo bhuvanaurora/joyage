@@ -1,8 +1,40 @@
 // Changes made
 
 angular.module('MyApp')
-  .controller('DetailCtrl', ['$scope', '$rootScope', '$routeParams', '$location', '$alert', 'Activity', 'Subscription', 'DoneIt', 'Tips', 'Accept', 'Delete',
-                             function($scope, $rootScope, $routeParams, $location, $alert, Activity, Subscription, DoneIt, Tips, Accept, Delete) {
+  .controller('DetailCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$alert', 'fb_appId', 'Activity', 'Subscription', 'DoneIt', 'Tips', 'Accept', 'Delete',
+                             function($scope, $rootScope, $window, $routeParams, $location, $alert, fb_appId, Activity, Subscription, DoneIt, Tips, Accept, Delete) {
+        
+        $window.fbAsyncInit = function() {
+          FB.init({
+            appId: fb_appId,
+            responseType: 'token',
+            version: 'v2.2',
+            cookie: true,
+            status: true,
+            xfbml: true
+          });
+        };
+                               
+          // Share dialog
+         $scope.fb_share = function() {
+           FB.ui({
+             method: 'share_open_graph',
+             action_type: 'og.likes',
+             action_properties: JSON.stringify({
+               object: 'https://developers.facebook.com/docs'
+             })
+           }, function(response){});
+          }
+           // Post
+          $scope.fb_post = function() {
+            FB.api('/me/feed', 'post', {message: 'Whooppiieee!'}, function(response){
+                if (!response || response.error) {
+                    alert('Error occured');
+                } else {
+                    alert('Post ID: ' + response.id);
+                }
+            });
+          };
         
       Activity.get({ _id: $routeParams.id }, function(activity) {
         $scope.activity = activity;
@@ -10,7 +42,9 @@ angular.module('MyApp')
         $scope.activities = Activity.query({limit: 3, id: activity._id});
         
         $scope.isSubscribed = function() {
-          return $scope.activity.subscribers.indexOf($rootScope.currentUser._id) !== -1;
+            if ($rootScope.currentUser) {
+              return $scope.activity.subscribers.indexOf($rootScope.currentUser._id) !== -1;
+            }
         };
 
         $scope.subscribe = function() {
@@ -27,7 +61,9 @@ angular.module('MyApp')
         };
         
         $scope.isDone = function() {
-          return $scope.activity.doneIt.indexOf($rootScope.currentUser._id) !== -1;
+            if ($rootScope.currentUser) {
+                return $scope.activity.doneIt.indexOf($rootScope.currentUser._id) !== -1;
+            }
         };
         
         $scope.markDone = function() {

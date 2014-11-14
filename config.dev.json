@@ -1,0 +1,11 @@
+{
+    "sendgrid": {
+                    "id": "bhuvanaurora",
+                    "password": "joyage_sendGrid_password"
+                },
+    "db": "localhost",
+    "tokenSecret": "UnI@!#$_TOken_@#$%^%",
+    "facebook": {
+                    "appSecret": "d25d97e73bc4b7fb33715d33f0f55df2"    
+                }
+}
