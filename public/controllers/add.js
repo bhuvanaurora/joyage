@@ -1,6 +1,167 @@
-angular.module('MyApp')
+ angular.module('MyApp')
   .controller('AddCtrl', ['$scope', '$alert', '$routeParams', '$http', '$route', 'Activity', 'editedActivity', 'Profile',
                           function($scope, $alert, $routeParams, $http, $route, Activity, editedActivity, Profile) {
+
+/*    var imagesource = '';
+    $scope.value = true;
+    $scope.value = false;
+
+    $scope.addActivity = function() {
+        if ($scope.title) alert($scope.title);
+        alert($scope.link);
+        alert(imagesource);
+
+    }*/
+
+
+    if (!$routeParams.id) {
+      // ------------------------------------------------------------- For adding activities ------------------------------------------------------ //
+    
+      $scope.genres = ['Athletic Activities', 'Fitness Classes', 'Hiking & Biking',
+                       'Nature Appreciation', 'Bars', 'Breweries & Distilleries',
+                        'Featured Cocktails', 'Happy Hours', 'Classes', 'Exhibits & Galleries',
+                        'Brunch & Breakfast', 'Lunch', 'Dinner', 'Sweet Treats', 'Food Trucks & Pop-Ups',
+                        'Tea & Coffee shops', 'Concerts', 'Fun & Games', 'Nightlife & Parties',
+                        'Theater & Shows', 'Activites for Two', 'Food & Dining', 'Bars & Drinking'];
+      
+      $scope.categories = [];
+      $scope.addCategory = function(genre) {
+        $scope.categories.push(genre);
+        $scope.genres.splice($scope.genres.indexOf(genre), 1);
+      }
+      $scope.removeCategory = function(selectedCategory) {
+        $scope.categories.splice($scope.categories.indexOf(selectedCategory), 1);
+        $scope.genres.push(selectedCategory);
+      }
+      $scope.city = 'Bangalore';
+      $scope.country = 'India';
+      $scope.currency = 'Rs';
+      
+      $scope.addActivity = function() {
+      
+        var id;
+        var title = $scope.title.split(" ");
+        id = title.join("-");
+        
+        var mediaVar = [];
+        if ($scope.mediaTitle1) {
+          mediaVar.push({
+            title: $scope.mediaTitle1,
+            text: $scope.mediaText1,
+            link: $scope.mediaLink1
+          })
+        }
+        if ($scope.mediaTitle2) {
+          mediaVar.push({
+            title: $scope.mediaTitle2,
+            text: $scope.mediaText2,
+            link: $scope.mediaLink2
+          })
+        }
+        if ($scope.mediaTitle3) {
+          mediaVar.push({
+            title: $scope.mediaTitle3,
+            text: $scope.mediaText3,
+            link: $scope.mediaLink3
+          })
+        }
+        if ($scope.mediaTitle4) {
+          mediaVar.push({
+            title: $scope.mediaTitle4,
+            text: $scope.mediaText4,
+            link: $scope.mediaLink4
+          })
+        }
+        
+        Activity.save({ id: id,
+                        title: $scope.title,
+                        description: $scope.description,
+                        genre: $scope.categories,
+                        dateOfActivity: $scope.dateOfActivity,
+                        endDateOfActivity: $scope.endDateOfActivity,
+                        timeOfActivity: $scope.timeOfActivity,
+                        city: $scope.city,
+                        location: $scope.location,
+                        address: $scope.address,
+                        media: mediaVar,
+                        phone: $scope.phone,
+                        sourceName: $scope.sourceName,
+                        sourceDescription: $scope.sourceDescription,
+                        sourceWebsite: $scope.sourceWebsite,
+                        locationWebsite: $scope.locationWebsite,
+                        neighborhood: $scope.neighborhood,
+                        country: $scope.country,
+                        //mapLocation: $scope.mapLocation,
+                        status: "Continuing",
+                        poster: $scope.poster,
+                        photoCredit: $scope.photoCredit,
+                        photoCreditLink: $scope.photoCreditLink,
+                        currency: $scope.currency,
+                        price: $scope.price,
+                        facebookLink: $scope.facebookLink,
+                        twitterLink: $scope.twitterLink,
+                        zomatoLink: $scope.zomatoLink,
+                        payment: $scope.payment,
+                        bookRide:$scope.bookRide,
+                        goodies: $scope.goodies,
+                        moreInfo: $scope.moreInfo,
+                        moreInfoLink: $scope.moreInfoLink,
+                        addedBy: $scope.addedBy,
+                        corner: $scope.corner,
+                        cornerPic: $scope.cornerPic,
+                        cornerText: $scope.cornerText
+                        },
+          function() {
+            $scope.title = '';
+            $scope.description = '';
+            $scope.categories = '';
+            $scope.dateOfActivity = '';
+            $scope.timeOfActivity = '';
+            $scope.city = '';
+            $scope.location = '';
+            $scope.address = '';
+            $scope.phone = '';
+            $scope.sourceName = '';
+            $scope.sourceDescription = '';
+            $scope.sourceWebsite = '';
+            $scope.locationWebsite = '';
+            $scope.neighborhood = '';
+            $scope.country = '';
+            $scope.mapLocation = '';
+            $scope.poster = '';
+            $scope.photoCredit = '';
+            $scope.photoCreditLink = '';
+            $scope.price = '';
+            $scope.facebookLink = '';
+            $scope.twitterLink = '';
+            $scope.zomatoLink = '';
+            $scope.payment = '';
+            $scope.bookRide = '';
+            $scope.goodies = '';
+            $scope.moreInfo = '';
+            $scope.moreInfoLink = '';
+            $scope.corner = '';
+            $scope.cornerPic = '';
+            $scope.cornerText = '';
+            $alert({
+              content: 'Activity has been added.',
+              placement: 'top-right',
+              type: 'success',
+              duration: 3
+            });
+          },
+          function(response) {
+            $alert({
+              content: response.data.message,
+              placement: 'top-right',
+              type: 'material',
+              duration: 3
+            });
+          });
+      };
+    }
+    
+     // --------------------------------------------------------- For editing activities ----------------------------------------------------- //
     
     if ($routeParams.id) {
       
@@ -161,6 +322,8 @@ angular.module('MyApp')
       };
       
     } else {
+      
+    // ------------------------------------------------------------- For adding activities ------------------------------------------------------ //
     
       $scope.genres = ['Athletic Activities', 'Fitness Classes', 'Hiking & Biking',
                        'Nature Appreciation', 'Bars', 'Breweries & Distilleries',
@@ -185,6 +348,7 @@ angular.module('MyApp')
       $scope.addActivity = function() {
         
         var id;
+        //alert($scope.title);
         var title = $scope.title.split(" ");
         id = title.join("-");
         
@@ -236,7 +400,7 @@ angular.module('MyApp')
                         locationWebsite: $scope.locationWebsite,
                         neighborhood: $scope.neighborhood,
                         country: $scope.country,
-                        /*mapLocation: $scope.mapLocation,*/
+                        //mapLocation: $scope.mapLocation,
                         status: "Continuing",
                         poster: $scope.poster,
                         photoCredit: $scope.photoCredit,

@@ -2,12 +2,20 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       Add Activity
-      <p class="pull-right">{{currentUser.email}}</p>
+      <p class="pull-right">{{currentUser.facebook.email}}</p>
     </div>
     <div class="panel-body">
-      <form class="form" method="post" ng-submit="addActivity()" name="addForm">
+      <!--form ng-submit="submit()" ng-controller="AddController">
+        <input type="text" ng-model="text" name="text" />
+        <input type="submit" id="submit" value="submit" />
+      </form-->
+      <form class="form" method="post" ng-submit="addActivity()" name="addForm" ng-controller="AddCtrl">
         <div class="help-block text-danger" ng-messages="">
         <input class="form-control" type="text" name="title" ng-model="title" placeholder="Activity Title" required autofocus><br />
+        <!--input type="file" fileRead="vm.uploadme"-->
+        
+        
+        
         <textarea class="form-control" type="text" name="description" ng-model="description" placeholder="Curator's Description"></textarea><br />
         
         <fieldset>
@@ -51,6 +59,7 @@
           <input class="form-control" type="text" name="phone" style="width:300px;" maxlength="13" ng-model="phone" placeholder="Phone number"><br />
           <input class="form-control" type="text" name="locationWebsite" ng-model="locationWebsite" placeholder="Website"><br />
           <!--input class="form-control" type="text" name="mapLocation" ng-model="mapLocation" placeholder="Map Location (https://developers.google.com/maps/documentation/embed/start)"><br /-->
+
         </fieldset>
         <br />
         

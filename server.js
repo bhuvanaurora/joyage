@@ -166,7 +166,7 @@ mongoose.connect(config.db);
 
 var app = express();
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -409,51 +409,6 @@ app.get('/api/activities/:id', function(req, res, next) {
   });
 });
 
-app.put('/api/activities/:id', function(req, res, next) {
-  Activity.findById(req.params.id, function(err, activity) {
-    if (err) return next(err);
-    console.log(req.body.title);
-    activity.title = req.body.title;
-    activity.description = req.body.description;
-    activity.genre = req.body.genre;
-    activity.dateOfActivity = req.body.dateOfActivity;
-    activity.endDateOfActivity = req.body.endDateOfActivity;
-    activity.timeOfActivity = req.body.timeOfActivity;
-    activity.city = req.body.city;
-    activity.neighborhood = req.body.neighborhood;
-    activity.location = req.body.location;
-    activity.address = req.body.address;
-    activity.phone = req.body.phone;
-    activity.country = req.body.country;
-    activity.sourceWebsite = req.body.sourceWebsite;
-    activity.locationWebsite = req.body.locationWebsite;
-    activity.poster = req.body.poster;
-    activity.photoCredit = req.body.photoCredit;
-    activity.photoCreditLink = req.body.photoCreditLink;
-    activity.currency = req.body.currency;
-    activity.price = req.body.price;
-    activity.facebookLink = req.body.facebookLink;
-    activity.twitterLink = req.body.twitterLink;
-    activity.zomatoLink = req.body.zomatoLink;
-    activity.payment = req.body.payment;
-    activity.bookRide = req.body.bookRide;
-    activity.goodies = req.body.goodies;
-    activity.moreInfo = req.body.moreInfo;
-    activity.moreInfoLink = req.body.moreInfoLink;
-    activity.sourceName = req.body.sourceName;
-    activity.sourceDescription = req.body.sourceDescription;
-    activity.corner = req.body.corner;
-    activity.cornerPic = req.body.cornerPic;
-    activity.cornerText = req.body.cornerText;
-    activity.media = req.body.media;
-    
-    activity.save(function(err) {
-      if (err) return next(err);
-      res.send(200);
-    });
-  });
-});
-
 app.post('/api/activities', function(req, res, next) {
   var activity = new Activity({
     _id: req.body.id,
@@ -500,6 +455,51 @@ app.post('/api/activities', function(req, res, next) {
   activity.save(function(err) {
     if (err) return next(err);
     res.send(200);
+  });
+});
+
+app.put('/api/activities/:id', function(req, res, next) {
+  Activity.findById(req.params.id, function(err, activity) {
+    if (err) return next(err);
+    console.log(req.body.title);
+    activity.title = req.body.title;
+    activity.description = req.body.description;
+    activity.genre = req.body.genre;
+    activity.dateOfActivity = req.body.dateOfActivity;
+    activity.endDateOfActivity = req.body.endDateOfActivity;
+    activity.timeOfActivity = req.body.timeOfActivity;
+    activity.city = req.body.city;
+    activity.neighborhood = req.body.neighborhood;
+    activity.location = req.body.location;
+    activity.address = req.body.address;
+    activity.phone = req.body.phone;
+    activity.country = req.body.country;
+    activity.sourceWebsite = req.body.sourceWebsite;
+    activity.locationWebsite = req.body.locationWebsite;
+    activity.poster = req.body.poster;
+    activity.photoCredit = req.body.photoCredit;
+    activity.photoCreditLink = req.body.photoCreditLink;
+    activity.currency = req.body.currency;
+    activity.price = req.body.price;
+    activity.facebookLink = req.body.facebookLink;
+    activity.twitterLink = req.body.twitterLink;
+    activity.zomatoLink = req.body.zomatoLink;
+    activity.payment = req.body.payment;
+    activity.bookRide = req.body.bookRide;
+    activity.goodies = req.body.goodies;
+    activity.moreInfo = req.body.moreInfo;
+    activity.moreInfoLink = req.body.moreInfoLink;
+    activity.sourceName = req.body.sourceName;
+    activity.sourceDescription = req.body.sourceDescription;
+    activity.corner = req.body.corner;
+    activity.cornerPic = req.body.cornerPic;
+    activity.cornerText = req.body.cornerText;
+    activity.media = req.body.media;
+    
+    activity.save(function(err) {
+      if (err) return next(err);
+      res.send(200);
+    });
   });
 });
 
