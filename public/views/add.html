@@ -5,18 +5,38 @@
       <p class="pull-right">{{currentUser.facebook.email}}</p>
     </div>
     <div class="panel-body">
-      <!--form ng-submit="submit()" ng-controller="AddController">
-        <input type="text" ng-model="text" name="text" />
-        <input type="submit" id="submit" value="submit" />
-      </form-->
-      <form class="form" method="post" ng-submit="addActivity()" name="addForm" ng-controller="AddCtrl">
-        <div class="help-block text-danger" ng-messages="">
-        <input class="form-control" type="text" name="title" ng-model="title" placeholder="Activity Title" required autofocus><br />
-        <!--input type="file" fileRead="vm.uploadme"-->
-        
-        
-        
-        <textarea class="form-control" type="text" name="description" ng-model="description" placeholder="Curator's Description"></textarea><br />
+      <form class="form"
+            method="post"
+            ng-submit="addActivity()"
+            name="addForm"
+            ng-controller="AddCtrl">
+        <div class="help-block text-danger"
+             ng-messages="">
+        <input class="form-control"
+               type="text"
+               name="title"
+               ng-model="title"
+               placeholder="Activity Title"
+               required
+               autofocus>
+        <br />
+
+         <input type="file"
+                fileRead
+                required />
+          <img src="{{img}}" />
+          <!--input type="file" ng-file-reader accept="image/gif, image/jpeg, image/png" on-selected="onSelected( files )" on-readed="onReaded( event, file )" read-method="readMethod" filereader="../vendor/filereader.swf" multiple debug-mode="true">
+          <div ng-file-reader accept="image/gif, image/jpeg, image/png" on-selected="onSelected( files )" on-readed="onReaded( event, file )" read-method="readMethod" filereader="../vendor/filereader.swf" multiple debug-mode="true"></div>
+
+          <img src="{{imgData}}"-->
+
+
+
+        <textarea class="form-control"
+                  type="text"
+                  name="description"
+                  ng-model="description"
+                  placeholder="Curator's Description"></textarea><br />
         
         <fieldset>
           <legend>Categories</legend>
@@ -28,106 +48,320 @@
           <h4 ng-if="categories[0]">Selected Categories</h4>
           <ul class="genres">
             <li ng-repeat="selectedCategory in categories">
-              <span ng-click="removeCategory(selectedCategory)">{{selectedCategory}}</span>
+              <span ng-click="removeCategory(selectedCategory)">
+                {{selectedCategory}}
+              </span>
             </li>
           </ul>
         </fieldset>
         
         <fieldset>
           <legend>Activity Time</legend>
-          <h6>Start Date</h6><input class="form-control" type="date" name="dateOfActivity" ng-model="dateOfActivity" style="width:300px">
-          <h6>End Date</h6><input class="form-control" type="date" name="endDateOfActivity" ng-model="endDateOfActivity" style="width:300px"><br />
+          <h6>Start Date</h6>
+          <input class="form-control"
+                 type="date" name="dateOfActivity"
+                 ng-model="dateOfActivity"
+                 style="width:300px">
+          <h6>End Date</h6>
+          <input class="form-control"
+                 type="date"
+                 name="endDateOfActivity"
+                 ng-model="endDateOfActivity"
+                 style="width:300px">
+          <br />
         </fieldset>
         
         <label class="control-label">Time of Activity</label>
-        <input class="form-control" type="time" name="timeOfActivity" ng-model="timeOfActivity" style="width:300px"><br />
+        <input class="form-control"
+               type="time"
+               name="timeOfActivity"
+               ng-model="timeOfActivity"
+               style="width:300px"><br />
         <br />
         
         <fieldset>
           <legend>Location Details</legend>
-          <input class="form-control" type="text" name="location" ng-model="location" placeholder="Location" required><br />
-          <input class="form-control" type="text" name="address" ng-model="address" placeholder="Address"><br />
-          <input class="form-control" type="text" name="neighborhood" ng-model="neighborhood" placeholder="Neighborhood" required><br />
+          <input class="form-control"
+                 type="text"
+                 name="location"
+                 ng-model="location"
+                 placeholder="Location"
+                 required>
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="address"
+                 ng-model="address"
+                 placeholder="Address"><br />
+          <input class="form-control"
+                 type="text"
+                 name="neighborhood"
+                 ng-model="neighborhood"
+                 placeholder="Neighborhood"
+                 required><br />
           
-          <select style="width:300px;" name="city" ng-model="city">
+          <select style="width:300px;"
+                  name="city"
+                  ng-model="city">
             <option value="Bangalore">Bangalore</option>
           </select>
-          <select style="width:300px;" name="country" ng-model="country">
+          <select style="width:300px;"
+                  name="country"
+                  ng-model="country">
             <option value="India">India</option>
-          </select><br /><br />
+          </select>
+          <br />
+          <br />
           
-          <input class="form-control" type="text" name="phone" style="width:300px;" maxlength="13" ng-model="phone" placeholder="Phone number"><br />
-          <input class="form-control" type="text" name="locationWebsite" ng-model="locationWebsite" placeholder="Website"><br />
-          <!--input class="form-control" type="text" name="mapLocation" ng-model="mapLocation" placeholder="Map Location (https://developers.google.com/maps/documentation/embed/start)"><br /-->
+          <input class="form-control"
+                 type="text"
+                 name="phone"
+                 style="width:300px;"
+                 maxlength="13"
+                 ng-model="phone"
+                 placeholder="Phone number"><br />
+          <input class="form-control"
+                 type="text"
+                 name="locationWebsite"
+                 ng-model="locationWebsite"
+                 placeholder="Website">
+          <br />
+          <!--input class="form-control"
+                 type="text"
+                 name="mapLocation"
+                 ng-model="mapLocation"
+                 placeholder="Map Location (https://developers.google.com/maps/documentation/embed/start)">
+          <br /-->
 
         </fieldset>
         <br />
         
         <fieldset>
           <legend>Source Details</legend>
-          <input class="form-control" type="text" name="sourceName" ng-model="sourceName" placeholder="Source"><br />
-          <input class="form-control" type="text" name="sourceWebsite" ng-model="sourceWebsite" placeholder="Link to the source"><br />
-          <textarea class="form-control" type="text" name="sourceDescription" ng-model="sourceDescription" placeholder="Description from source"></textarea><br />
+          <input class="form-control"
+                 type="text"
+                 name="sourceName"
+                 ng-model="sourceName"
+                 placeholder="Source">
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="sourceWebsite"
+                 ng-model="sourceWebsite"
+                 placeholder="Link to the source">
+          <br />
+          <textarea class="form-control"
+                    type="text"
+                    name="sourceDescription"
+                    ng-model="sourceDescription"
+                    placeholder="Description from source">
+
+                    </textarea>
+          <br />
         </fieldset>
         
-        <input class="form-control" type="text" name="goodies" ng-model="goodies" placeholder="Goodies"><br />
-        <input class="form-control" type="text" name="moreInfo" ng-model="moreInfo" placeholder="More Info"><br />
-        <input class="form-control" type="text" name="moreInfoLink" ng-model="moreInfoLink" placeholder="More Info Link"><br />
+        <input class="form-control"
+               type="text"
+               name="goodies"
+               ng-model="goodies"
+               placeholder="Goodies">
+        <br />
+        <input class="form-control"
+               type="text"
+               name="moreInfo"
+               ng-model="moreInfo"
+               placeholder="More Info">
+        <br />
+        <input class="form-control"
+               type="text"
+               name="moreInfoLink"
+               ng-model="moreInfoLink"
+               placeholder="More Info Link">
+        <br />
         <br />
         
         <fieldset>
           <legend>HQ Image</legend>
-          <input class="form-control" type="text" name="poster" ng-model="poster" placeholder="Image name"><br />
-          <input class="form-control" type="text" name="photoCredit" ng-model="photoCredit" placeholder="Photo Credits"><br />
-          <input class="form-control" type="text" name="photoCreditLink" ng-model="photoCreditLink" placeholder="Photo Credit Link"><br />
+          <input class="form-control"
+                 type="text"
+                 name="poster"
+                 ng-model="poster"
+                 placeholder="Image name">
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="photoCredit"
+                 ng-model="photoCredit"
+                 placeholder="Photo Credits">
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="photoCreditLink"
+                 ng-model="photoCreditLink"
+                 placeholder="Photo Credit Link">
+          <br />
         </fieldset>
         <br />
         
         <fieldset>
           <legend>Artist/Chef corner</legend>
-          <input class="form-control" type="text" name="corner" ng-model="corner" placeholder="Artist / Chef corner" /><br />
-          <input class="form-control" type="text" name="cornerPic" ng-model="cornerPic" placeholder="Corner pic name" /><br />
-          <input class="form-control" type="text" name="cornerText" ng-model="cornerText" placeholder="Corner text" /><br />
+          <input class="form-control"
+                 type="text"
+                 name="corner"
+                 ng-model="corner"
+                 placeholder="Artist / Chef corner" />
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="cornerPic"
+                 ng-model="cornerPic"
+                 placeholder="Corner pic name" />
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="cornerText"
+                 ng-model="cornerText"
+                 placeholder="Corner text" />
+          <br />
         </fieldset>
         
         <fieldset>
           <legend>In Media</legend>
-          <input class="form-control" type="text" name="mediaTitle1" ng-model="mediaTitle1" placeholder="Media Title 1" /><br />
-          <input class="form-control" type="text" name="mediaText1" ng-model="mediaText1" placeholder="Media Text 1" /><br />
-          <input class="form-control" type="text" name="mediaLink1" ng-model="mediaLink1" placeholder="Media Link 1" /><br />
-          <input class="form-control" type="text" name="mediaTitle2" ng-model="mediaTitle2" placeholder="Media Title 2" /><br />
-          <input class="form-control" type="text" name="mediaText2" ng-model="mediaText2" placeholder="Media Text 2" /><br />
-          <input class="form-control" type="text" name="mediaLink2" ng-model="mediaLink2" placeholder="Media Link 2" /><br />
-          <input class="form-control" type="text" name="mediaTitle3" ng-model="mediaTitle3" placeholder="Media Title 3" /><br />
-          <input class="form-control" type="text" name="mediaText3" ng-model="mediaText3" placeholder="Media Text 3" /><br />
-          <input class="form-control" type="text" name="mediaLink3" ng-model="mediaLink3" placeholder="Media Link 3" /><br />
-          <input class="form-control" type="text" name="mediaTitle4" ng-model="mediaTitle4" placeholder="Media Title 4" /><br />
-          <input class="form-control" type="text" name="mediaText4" ng-model="mediaText4" placeholder="Media Text 4" /><br />
-          <input class="form-control" type="text" name="mediaLink4" ng-model="mediaLink4" placeholder="Media Link 4" /><br />
+          <input class="form-control"
+                 type="text"
+                 name="mediaTitle1"
+                 ng-model="mediaTitle1"
+                 placeholder="Media Title 1" />
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="mediaText1"
+                 ng-model="mediaText1"
+                 placeholder="Media Text 1" />
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="mediaLink1"
+                 ng-model="mediaLink1"
+                 placeholder="Media Link 1" />
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="mediaTitle2"
+                 ng-model="mediaTitle2"
+                 placeholder="Media Title 2" />
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="mediaText2"
+                 ng-model="mediaText2"
+                 placeholder="Media Text 2" />
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="mediaLink2"
+                 ng-model="mediaLink2"
+                 placeholder="Media Link 2" />
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="mediaTitle3"
+                 ng-model="mediaTitle3"
+                 placeholder="Media Title 3" />
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="mediaText3"
+                 ng-model="mediaText3"
+                 placeholder="Media Text 3" />
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="mediaLink3"
+                 ng-model="mediaLink3"
+                 placeholder="Media Link 3" />
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="mediaTitle4"
+                 ng-model="mediaTitle4"
+                 placeholder="Media Title 4" />
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="mediaText4"
+                 ng-model="mediaText4"
+                 placeholder="Media Text 4" />
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="mediaLink4"
+                 ng-model="mediaLink4"
+                 placeholder="Media Link 4" />
+          <br />
         </fieldset>
         
         <fieldset>
           <legend>Payment Details</legend>
-          <select style="width:300px" name="currency" ng-model="currency">
+          <select style="width:300px"
+                  name="currency"
+                  ng-model="currency">
             <option value="Rs">INR</option>
             <option value="$">$</option>
-          </select><br /><br />
-          <input class="form-control" type="text" name="price" ng-model="price" placeholder="Price"><br />
-          <input class="form-control" type="text" name="payment" ng-model="payment" placeholder="Link to payment gateway"><br />
-          <input class="form-control" type="text" name="bookRide" ng-model="bookRide" placeholder="Link to ride booking"><br />
+          </select>
+          <br />
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="price"
+                 ng-model="price"
+                 placeholder="Price">
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="payment"
+                 ng-model="payment"
+                 placeholder="Link to payment gateway">
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="bookRide"
+                 ng-model="bookRide"
+                 placeholder="Link to ride booking">
+          <br />
         </fieldset>
         <br />
         
         <fieldset>
           <legend>Social Network Links</legend>
-          <input class="form-control" type="text" name="facebookLink" ng-model="facebookLink" placeholder="Facebook Link"><br />
-          <input class="form-control" type="text" name="zomatoLink" ng-model="zomatoLink" placeholder="Zomato Link"><br />
-          <input class="form-control" type="text" name="twitterLink" ng-model="twitterLink" placeholder="Twitter Link"><br />
+          <input class="form-control"
+                 type="text"
+                 name="facebookLink"
+                 ng-model="facebookLink"
+                 placeholder="Facebook Link">
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="zomatoLink"
+                 ng-model="zomatoLink"
+                 placeholder="Zomato Link">
+          <br />
+          <input class="form-control"
+                 type="text"
+                 name="twitterLink"
+                 ng-model="twitterLink"
+                 placeholder="Twitter Link">
+          <br />
         </fieldset>
         
-        <input type="text" name="addedBy" ng-hide="true" ng-model="addedBy" value="currentUser.email">
+        <input type="text"
+               name="addedBy"
+               ng-hide="true"
+               ng-model="addedBy"
+               value="currentUser.email">
         
-        <button class="btn btn-primary" type="submit">Add</button>
+        <button class="btn btn-primary"
+                type="submit">Add</button>
       </form>
       
     </div>

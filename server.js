@@ -146,7 +146,7 @@ var userSchema = new mongoose.Schema({
     if (err) return next(err);
     bcrypt.hash(user.password, salt, function(err, hash) {
       if (err) return next(err);
-      user.password = hash;
+        user.password = hash;
       next();
     });
   });

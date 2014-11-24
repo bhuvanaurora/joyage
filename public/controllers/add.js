@@ -2,21 +2,63 @@
   .controller('AddCtrl', ['$scope', '$alert', '$routeParams', '$http', '$route', 'Activity', 'editedActivity', 'Profile',
                           function($scope, $alert, $routeParams, $http, $route, Activity, editedActivity, Profile) {
 
-/*    var imagesource = '';
-    $scope.value = true;
-    $scope.value = false;
+          /*function GetLocation(address) {
 
-    $scope.addActivity = function() {
-        if ($scope.title) alert($scope.title);
-        alert($scope.link);
-        alert(imagesource);
+              var geocoder = new google.maps.Geocoder();
 
-    }*/
+              geocoder.geocode({ 'address': address }, function (results, status) {
+                  if (status == google.maps.GeocoderStatus.OK) {
+//                    var latitude = results[0].geometry.location.lat();
+//                    var longitude = results[0].geometry.location.lng();
+//                    alert("Latitude: " + latitude + "\nLongitude: " + longitude);
+                      locationaddr.latitude = results[0].geometry.location.lat();
+                      locationaddr.longitude = results[0].geometry.location.lng();
+                      var mapOptions = {
+                          zoom: 8,
+                          center: new google.maps.LatLng(locationaddr.latitude, locationaddr.longitude),
+                          mapTypeId: google.maps.MapTypeId.TERRAIN
+                      }
 
+                      $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+                      $scope.marker = [];
+                      var infoWindow = new google.maps.InfoWindow();
+
+                      var createMarker = function (info){
+                          var marker = new google.maps.Marker({
+                              map: $scope.map,
+                              animation:google.maps.Animation.BOUNCE,
+                              position: new google.maps.LatLng(info.lat, info.long),
+                              title: info.city
+                          });
+
+                          google.maps.event.addListener(marker, 'click', function(){
+                              infoWindow.setContent('<h2>' + marker.title + '</h2>');
+                              infoWindow.open($scope.map, marker);
+                          });
+
+                          $scope.marker.push(marker);
+
+                      }
+                      createMarker(    {
+                          city : address,
+                          lat : locationaddr.latitude,
+                          long : locationaddr.longitude
+                      });
+                      alert(locationaddr.longitude);
+                      alert(locationaddr.latitude);
+                      //                    google.maps.event.addDomListener(window, 'load', initialize);
+
+                  } else {
+                      alert("Request failed.")
+                  }
+              });
+          };*/
 
     if (!$routeParams.id) {
       // ------------------------------------------------------------- For adding activities ------------------------------------------------------ //
-    
+
+      var imagesource = '';
       $scope.genres = ['Athletic Activities', 'Fitness Classes', 'Hiking & Biking',
                        'Nature Appreciation', 'Bars', 'Breweries & Distilleries',
                         'Featured Cocktails', 'Happy Hours', 'Classes', 'Exhibits & Galleries',
@@ -28,21 +70,45 @@
       $scope.addCategory = function(genre) {
         $scope.categories.push(genre);
         $scope.genres.splice($scope.genres.indexOf(genre), 1);
-      }
+      };
       $scope.removeCategory = function(selectedCategory) {
         $scope.categories.splice($scope.categories.indexOf(selectedCategory), 1);
         $scope.genres.push(selectedCategory);
-      }
+      };
       $scope.city = 'Bangalore';
       $scope.country = 'India';
       $scope.currency = 'Rs';
-      
+
+      $scope.$watch(imagesource, function() {
+          $scope.img = imagesource;
+      });
+      //alert("imagesource is" + $scope.img);
+
+        angular.extend($scope, {
+            onUpload: function(file) {
+                console.log(file[0]);
+            },
+            onSelected: function(file) {
+                console.log('File selected: '+file[0]);
+                alert(file[0]);
+            },
+            onStatechange: function(file) {
+                console.log('File uploaded: '+file[0]);
+            },
+            readMethod:"readAsDataURL",
+            onReaded : function(e, file) {
+                console.log('File read: '+file);
+                $scope.imgData = e.target.result;
+                $scope.file = file;
+            }
+        });
+
       $scope.addActivity = function() {
       
         var id;
         var title = $scope.title.split(" ");
         id = title.join("-");
-        
+
         var mediaVar = [];
         if ($scope.mediaTitle1) {
           mediaVar.push({
@@ -93,7 +159,7 @@
                         country: $scope.country,
                         //mapLocation: $scope.mapLocation,
                         status: "Continuing",
-                        poster: $scope.poster,
+                        poster: imagesource,
                         photoCredit: $scope.photoCredit,
                         photoCreditLink: $scope.photoCreditLink,
                         currency: $scope.currency,

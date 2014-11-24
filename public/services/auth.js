@@ -74,7 +74,7 @@ angular.module('MyApp')
               });
             });
           });
-        }, { scope: 'email, public_profile, user_friends' });
+        }, { scope: 'email, public_profile, user_friends, publish_actions, read_friendlists' });
       },
       /*googleLogin: function() {
         gapi.auth.authorize({
