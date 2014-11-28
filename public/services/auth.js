@@ -74,7 +74,7 @@ angular.module('MyApp')
               });
             });
           });
-        }, { scope: 'email, public_profile, user_friends, publish_actions, read_friendlists' });
+        }, { scope: 'email, public_profile, user_friends, publish_actions' });
       },
       /*googleLogin: function() {
         gapi.auth.authorize({
@@ -155,7 +155,7 @@ angular.module('MyApp')
       logout: function() {
         delete $window.localStorage.token;
         $rootScope.currentUser = null;
-        $location.path("/");
+        $location.path("/invite");
         FB.logout(function(response){});
         $alert({
           content: 'You have been logged out.',

@@ -1,0 +1,14 @@
+{
+  "name": "bower.json",
+  "version": "0.0.0",
+  "authors": [
+    "bhuvanaurora <bhuvan.aurora@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "ng-file-upload": "~1.6.12",
+    "ng-flow": "~2",
+    "angularjs-imageupload-directive": "*"
+  }
+}

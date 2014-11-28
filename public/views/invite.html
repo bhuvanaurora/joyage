@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel">
+            <ul>
+                <li ng-repeat="friend in friend_list.data">
+                    {{friend.name}}
+                    <button class="btn btn-primary"
+                            ng-click="fb_invite(friend.id)">
+                        Invite
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <button class="btn btn-primary btn-danger"
+                ng-click="invite_friends()">
+            This is the button
+        </button>
+    </div>
+</div>

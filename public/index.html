@@ -8,7 +8,9 @@
   <meta charset="utf-8">
   <title>Joyage</title>
   <!--link href="favicon.png" rel="icon" type="image/png"-->
-  <link href='http://fonts.googleapis.com/css?family=Roboto|Montserrat|Courgette:400,700|Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Roboto|Montserrat|Courgette:400,700|Open+Sans:400,300,700'
+        rel='stylesheet'
+        type='text/css'>
   <link href="//cdn.jsdelivr.net/ionicons/1.4.1/css/ionicons.min.css" rel="stylesheet">
   <link href="stylesheets/animate.css" rel="stylesheet">
   <link href="stylesheets/dragon.css" rel="stylesheet">
@@ -49,8 +51,11 @@
   </div>
   
   <div ng-view class="{{pageClass}}"></div>
-  
+
+  <script src="bower_components/ng-file-upload/angular-file-upload-shim.min.js"></script>
   <script src="vendor/angular.js"></script>
+  <!--script src="vendor/angular.min.js"></script-->
+  <script src="bower_components/ng-file-upload/angular-file-upload.min.js"></script>
   <!--script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script-->
   <script src="vendor/angular-strap.js"></script>
   <script src="vendor/angular-strap.tpl.js"></script>
@@ -59,20 +64,26 @@
   <script src="vendor/angular-route.js"></script>
   <script src="vendor/angular-animate.js"></script>
   <script src="vendor/moment.min.js"></script>
-  <script src="vendor/angular-file-upload.min.js"></script>
-  <script src="vendor/jquery.FileReader.js"></script>
-  <script src="vendor/ngFileReader.js"></script>
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script src="vendor/swfobject.js"></script>
   <script src="vendor/jquery.FileReader.js"></script>
   <script src="vendor/ngFileReader.js"></script>
+
+  <script src="bower_components/flow.js/dist/flow.js"></script>
+  <script src="bower_components/flow.js/src/flow.js"></script>
+  <script src="bower_components/ng-flow/dist/ng-flow.js"></script>
+  <script src="bower_components/ng-flow/dist/ng-flow-standalone.js"></script>
+  <script src="bower_components/ng-flow/src/angular-flow.js"></script>
+  <script src="bower_components/angularjs-imageupload-directive/public/javascripts/imageupload.js"></script>
   
   <script src="app.js"></script>
   <script src="filters/fromNow.js"></script>
   <script src="directives/uniqueEmail.js"></script>
   <script src="directives/passwordStrength.js"></script>
   <script src="directives/fileRead.js"></script>
+  <script src="directives/imageupload.js"></script>
+
   <script src="controllers/main.js"></script>
   <script src="controllers/detail.js"></script>
   <script src="controllers/add.js"></script>
@@ -81,6 +92,8 @@
   <script src="controllers/login.js"></script>
   <script src="controllers/signup.js"></script>
   <script src="controllers/profile.js"></script>
+  <script src="controllers/inviteCtrl.js"></script>
+
   <script src="services/auth.js"></script>
   <script src="services/show.js"></script>
   <script src="services/subscription.js"></script>
@@ -162,6 +175,18 @@
     ga('create', 'UA-55160910-1', 'auto');
     ga('send', 'pageview');
   
+  </script>
+
+
+  <!------------------------------------- Image Upload ------------------------------------>
+
+  <script>
+    function upload(pic) {
+      var x = document.getElementById("picture");
+      alert(picture);
+      alert(pic);
+    }
+
   </script>
 
 </body>

@@ -1,64 +1,53 @@
- angular.module('MyApp')
+angular.module('MyApp')
   .controller('AddCtrl', ['$scope', '$alert', '$routeParams', '$http', '$route', 'Activity', 'editedActivity', 'Profile',
                           function($scope, $alert, $routeParams, $http, $route, Activity, editedActivity, Profile) {
 
-          /*function GetLocation(address) {
+          /*$scope.onFileSelect = function($files) {
+              var file = $files;
+              $scope.upload = $upload.upload({
+               url: '/uploads',
+               method: 'POST',
+               data: {myObj: $scope.myModelObj},
+               file: file,
+               fileName: $scope.title
+               }).progress(function(evt) {
+               console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+               }).success(function(data, status, headers, config) {
+               console.log(data);
+               });
 
-              var geocoder = new google.maps.Geocoder();
 
-              geocoder.geocode({ 'address': address }, function (results, status) {
-                  if (status == google.maps.GeocoderStatus.OK) {
-//                    var latitude = results[0].geometry.location.lat();
-//                    var longitude = results[0].geometry.location.lng();
-//                    alert("Latitude: " + latitude + "\nLongitude: " + longitude);
-                      locationaddr.latitude = results[0].geometry.location.lat();
-                      locationaddr.longitude = results[0].geometry.location.lng();
-                      var mapOptions = {
-                          zoom: 8,
-                          center: new google.maps.LatLng(locationaddr.latitude, locationaddr.longitude),
-                          mapTypeId: google.maps.MapTypeId.TERRAIN
-                      }
+              var fileReader = new fileReader();
+              fileReader.readAsArrayBuffer(file);
+              fileReader.onload = function(e) {
+                  $upload.http({
+                      url: 'upload',
+                      headers: {'Content-Type': file.type},
+                      data: e.target.result
+                  }).then(function(response) {
+                      console.log('success');
+                  }, null, function(evt) {
+                      $scope.progress[index] = parseInt(100.0 * evt.loaded / evt.total);
+                  });
+              };
 
-                      $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-                      $scope.marker = [];
-                      var infoWindow = new google.maps.InfoWindow();
-
-                      var createMarker = function (info){
-                          var marker = new google.maps.Marker({
-                              map: $scope.map,
-                              animation:google.maps.Animation.BOUNCE,
-                              position: new google.maps.LatLng(info.lat, info.long),
-                              title: info.city
-                          });
-
-                          google.maps.event.addListener(marker, 'click', function(){
-                              infoWindow.setContent('<h2>' + marker.title + '</h2>');
-                              infoWindow.open($scope.map, marker);
-                          });
-
-                          $scope.marker.push(marker);
-
-                      }
-                      createMarker(    {
-                          city : address,
-                          lat : locationaddr.latitude,
-                          long : locationaddr.longitude
-                      });
-                      alert(locationaddr.longitude);
-                      alert(locationaddr.latitude);
-                      //                    google.maps.event.addDomListener(window, 'load', initialize);
-
-                  } else {
-                      alert("Request failed.")
-                  }
-              });
+              $upload.http({
+               url: 'upload',
+               headers: {'Content-Type': file.type},
+               data: e.target.result
+               }).progress(function(ev) {
+               console.log('in progress');
+               }).success(function(ev) {
+               console.log('success');
+               }).error(function(ev) {
+               console.log('upload fail');
+               })
           };*/
 
     if (!$routeParams.id) {
       // ------------------------------------------------------------- For adding activities ------------------------------------------------------ //
 
-      var imagesource = '';
+      //var imagesource = '';
       $scope.genres = ['Athletic Activities', 'Fitness Classes', 'Hiking & Biking',
                        'Nature Appreciation', 'Bars', 'Breweries & Distilleries',
                         'Featured Cocktails', 'Happy Hours', 'Classes', 'Exhibits & Galleries',
@@ -79,7 +68,7 @@
       $scope.country = 'India';
       $scope.currency = 'Rs';
 
-      $scope.$watch(imagesource, function() {
+      /*$scope.$watch(imagesource, function() {
           $scope.img = imagesource;
       });
       //alert("imagesource is" + $scope.img);
@@ -101,7 +90,9 @@
                 $scope.imgData = e.target.result;
                 $scope.file = file;
             }
-        });
+        });*/
+
+
 
       $scope.addActivity = function() {
       
@@ -138,6 +129,16 @@
             link: $scope.mediaLink4
           })
         }
+
+          /*var formData = new FormData();
+          formData.append('image', image, image.name);
+          $http.post('upload', formData, {
+              headers: { 'Content-Type': false },
+              transformRequest: angular.identity
+          }).success(function(result) {
+              $scope.uploadedImgSrc = result.src;
+              $scope.sizeInBytes = result.size;
+          });*/
         
         Activity.save({ id: id,
                         title: $scope.title,
@@ -157,9 +158,10 @@
                         locationWebsite: $scope.locationWebsite,
                         neighborhood: $scope.neighborhood,
                         country: $scope.country,
-                        //mapLocation: $scope.mapLocation,
+                        mapLat: $scope.mapLat,
+                        mapLon: $scope.mapLon,
                         status: "Continuing",
-                        poster: imagesource,
+                        //poster: $scope.uploadedImgSrc,
                         photoCredit: $scope.photoCredit,
                         photoCreditLink: $scope.photoCreditLink,
                         currency: $scope.currency,
@@ -193,7 +195,8 @@
             $scope.locationWebsite = '';
             $scope.neighborhood = '';
             $scope.country = '';
-            $scope.mapLocation = '';
+            $scope.mapLat = '';
+            $scope.mapLon = '';
             $scope.poster = '';
             $scope.photoCredit = '';
             $scope.photoCreditLink = '';
@@ -294,6 +297,8 @@
         $scope.poster = activity.poster;
         $scope.photoCredit = activity.photoCredit;
         $scope.photoCreditLink = activity.photoCreditLink;
+        $scope.mapLat = activity.mapLat;
+        $scope.mapLon = activity.mapLon;
         $scope.currency = activity.currency;
         $scope.price = activity.price;
         $scope.facebookLink = activity.facebookLink;
@@ -364,6 +369,8 @@
         $scope.activity.neighborhood = $scope.neighborhood;
         $scope.activity.city = $scope.city;
         $scope.activity.country = $scope.country;
+        $scope.activity.mapLat = $scope.mapLat;
+        $scope.activity.mapLon = $scope.mapLon;
         $scope.activity.poster = $scope.poster;
         $scope.activity.photoCredit = $scope.photoCredit;
         $scope.activity.photoCreditLink = $scope.photoCreditLink;
@@ -391,7 +398,7 @@
       
     // ------------------------------------------------------------- For adding activities ------------------------------------------------------ //
     
-      $scope.genres = ['Athletic Activities', 'Fitness Classes', 'Hiking & Biking',
+      /*$scope.genres = ['Athletic Activities', 'Fitness Classes', 'Hiking & Biking',
                        'Nature Appreciation', 'Bars', 'Breweries & Distilleries',
                         'Featured Cocktails', 'Happy Hours', 'Classes', 'Exhibits & Galleries',
                         'Brunch & Breakfast', 'Lunch', 'Dinner', 'Sweet Treats', 'Food Trucks & Pop-Ups',
@@ -533,6 +540,6 @@
               duration: 3
             });
           });
-      };
+      };*/
     }
   }]);

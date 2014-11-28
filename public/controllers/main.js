@@ -17,7 +17,7 @@ angular.module('MyApp')
       });
       
       // Share dialog
-      $scope.fb_share = function() {
+      /*$scope.fb_share = function() {
         FB.ui({
           method: 'share_open_graph',
           action_type: 'og.likes',
@@ -31,14 +31,17 @@ angular.module('MyApp')
             alert('Error while posting');
           }
         });  
-      }
+      }*/
       
       // Send message
       $scope.fb_send_message = function() {
         FB.ui({
           to: '',
           method: 'send',
-          link: 'http://joyage.in'
+          name: 'Joyage',
+          link: 'http://joyage.in',
+          picture: '',
+          description: 'Try out Joyage, it is just awesome.'
         });
       }
       
@@ -75,7 +78,7 @@ angular.module('MyApp')
         sendButton.onclick = sendRequest;
         mfsForm.appendChild(sendButton);
       });*/  
-    }
+    };
     
     
     $scope.facebookInviteFriends = function() {
@@ -92,7 +95,7 @@ angular.module('MyApp')
           alert('Failed to invite');
         }
       });
-    }
+    };
     
     $scope.genres = ['Athletic Activities', 'Fitness Classes', 'Hiking & Biking',
                      'Nature Appreciation', 'Bars', 'Breweries & Distilleries',

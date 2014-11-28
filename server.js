@@ -26,7 +26,10 @@ if (process.env.NODE_ENV === "dev") {
 var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
+var multer = require('multer');
 var logger = require('morgan');
+var multipart = require('connect-multiparty');
+var router = express.Router();
 
 var crypto = require('crypto');
 var bcrypt = require('bcryptjs');
@@ -84,7 +87,8 @@ var activitySchema = new mongoose.Schema({
   operatingDays: [String],
   operatingTime: [String],
   addedBy: String,
-  mapLocation: String,
+  mapLat: { type: Number, default: 12.9667 },
+  mapLon: { type: Number, default: 77.5667 },
   corner: String,
   cornerPic: String,
   cornerText: String,
@@ -168,9 +172,23 @@ var app = express();
 
 app.set('port', process.env.PORT || 3001);
 app.use(logger('dev'));
+app.use(multer({dest: '.public/images'}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(multipart({
+  uploadDir: './public/images'
+}));
+
+/*exports.create = function(req, res, next) {
+  var data = _.pick(req.body, 'type'),
+      uploadPath = path.normalize(cfg.data + '/uploads'),
+      file = req.files.file;
+
+  console.log(file.name);
+  console.log(file.path);
+  console.log(uploadPath);
+};*/
 
 // Robots.txt
 app.use(function (req, res, next) {
@@ -189,6 +207,20 @@ app.use(function (req, res, next) {
     } else {
         next();
     }
+});
+
+app.post('/upload', function(req, res) {
+  var image =  req.files.image;
+  var newImageLocation = path.join(__dirname, 'public/images', image.name);
+
+  fs.readFile(image.path, function(err, data) {
+    fs.writeFile(newImageLocation, data, function(err) {
+      res.json(200, {
+        src: 'images/' + image.name,
+        size: image.size
+      });
+    });
+  });
 });
 
 // ----------------------------------------- Authentication middleware -------------------------------------- //
@@ -410,6 +442,9 @@ app.get('/api/activities/:id', function(req, res, next) {
 });
 
 app.post('/api/activities', function(req, res, next) {
+  //console.log(req.files);
+  //console.log(req.files.image);
+  //console.log(req.files.image.originalname);
   var activity = new Activity({
     _id: req.body.id,
     title: req.body.title,
@@ -427,7 +462,8 @@ app.post('/api/activities', function(req, res, next) {
     locationWebsite: req.body.locationWebsite,
     neighborhood: req.body.neighborhood,
     country: req.body.country,
-    /*mapLocation: req.body.mapLocation,*/
+    mapLat: req.body.mapLat,
+    mapLon: req.body.mapLon,
     status: req.body.status,
     poster: req.body.poster,
     photoCredit: req.body.photoCredit,

@@ -1,7 +1,8 @@
 
 <!----------------------------- Categories -------------------------------------->
 
-<div id="new-home" style="margin-bottom:20px;">
+<div id="new-home"
+     style="margin-bottom:20px;">
     <!--button ng-click="facebookInviteFriends()">Invite</button>
     <button ng-click="friends()">Friends</button>
     <button ng-click="fb_share()">Share</button>
@@ -16,15 +17,28 @@
             
             <section class="container_27 clearfix">
                 <section class="grid_27">                        
-                    I'm looking for <span class="filter-select" data-filter-id="category-filter">
-                        <a id="categories-select" style="text-decoration:none;color:#0095dd;" onclick='displayMenu();' onmouseover='this.style.color="#cd7f32";' onmouseout='this.style.color="#0095dd";'>{{headingTitle}}</a></span>
+                    I'm looking for
+                    <span
+                        class="filter-select"
+                        data-filter-id="category-filter">
+                        <a id="categories-select"
+                           style="text-decoration:none;color:#0095dd;"
+                           onclick='displayMenu();'
+                           onmouseover='this.style.color="#cd7f32";'
+                           onmouseout='this.style.color="#0095dd";'>
+                            {{headingTitle}}
+                        </a>
+                    </span>
                         in Bangalore<!--span id="neighborhoods-select" class="filter-select" data-filter-id="neighborhood-filter">Bangalore</span-->.
                 </section>
             </section>
-            <div id="filter-container" style="margin-top:40px;">
+            <div id="filter-container"
+                 style="margin-top:40px;">
                 <section class="container_27 clearfix">
                     <section class="grid_27">
-                        <div id="category-filter" class="filter-options" data-filter-type="categories">
+                        <div id="category-filter"
+                             class="filter-options"
+                             data-filter-type="categories">
                             <!--div class="show-all-activities-button" data-fid="clear">all activities</div>
                             <div class="clear"></div-->
                             <ul class="genres">

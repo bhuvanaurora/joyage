@@ -76,9 +76,11 @@
         <div class="panel panel-default panel-right"
              class="payment">
 
-                <button class="btn btn-primary btn-block"
-                        ng-click="fb_share()">Share on facebook</button>
-
+            <button class="btn btn-lg btn-block btn-facebook"
+                    ng-click="fb_share()">
+                <span class="ion-social-facebook"></span>
+                Share on Facebook
+            </button>
 
         </div>
         
@@ -125,6 +127,16 @@
       -->
       
       <div id="map-canvas"></div>
+      <form action="http://maps.google.com/maps"
+            method="get"
+            target="_blank">
+        <input type="hidden"
+               name="daddr"
+               value="{{activity.location}} {{activity.address}} {{activity.neighborhood}}" />
+        <input type="submit"
+               class="btn-block"
+               value="Get directions" />
+      </form>
 
       <div class="address-head">{{activity.location}}</div>
       <div class="address">{{activity.address}}</div>

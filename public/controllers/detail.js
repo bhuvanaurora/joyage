@@ -4,61 +4,6 @@ angular.module('MyApp')
   .controller('DetailCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$alert', 'fb_appId', 'Activity', 'Subscription', 'DoneIt', 'Tips', 'Accept', 'Delete',
                              function($scope, $rootScope, $window, $routeParams, $location, $alert, fb_appId, Activity, Subscription, DoneIt, Tips, Accept, Delete) {
 
-         /*function GetLocation(address) {
-
-             var geocoder = new google.maps.Geocoder();
-
-             geocoder.geocode({ 'address': address }, function (results, status) {
-                 if (status == google.maps.GeocoderStatus.OK) {
-//                    var latitude = results[0].geometry.location.lat();
-//                    var longitude = results[0].geometry.location.lng();
-//                    alert("Latitude: " + latitude + "\nLongitude: " + longitude);
-                     locationaddr.latitude = results[0].geometry.location.lat();
-                     locationaddr.longitude = results[0].geometry.location.lng();
-                     var mapOptions = {
-                         zoom: 8,
-                         center: new google.maps.LatLng(locationaddr.latitude, locationaddr.longitude),
-                         mapTypeId: google.maps.MapTypeId.TERRAIN
-                     }
-
-                     $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-                     $scope.marker = [];
-                     var infoWindow = new google.maps.InfoWindow();
-
-                     var createMarker = function (info){
-                         var marker = new google.maps.Marker({
-                             map: $scope.map,
-                             animation:google.maps.Animation.BOUNCE,
-                             position: new google.maps.LatLng(info.lat, info.long),
-                             title: info.city
-                         });
-
-                         google.maps.event.addListener(marker, 'click', function(){
-                             infoWindow.setContent('<h2>' + marker.title + '</h2>');
-                             infoWindow.open($scope.map, marker);
-                         });
-
-                         $scope.marker.push(marker);
-
-                     }
-                     createMarker(    {
-                         city : address,
-                         lat : locationaddr.latitude,
-                         long : locationaddr.longitude
-                     });
-                     alert(locationaddr.longitude);
-                     alert(locationaddr.latitude);
-                     //                    google.maps.event.addDomListener(window, 'load', initialize);
-
-                 } else {
-                     alert("Request failed.")
-                 }
-             });
-         };
-
-         GetLocation($scope.location);*/
-
         $window.fbAsyncInit = function() {
           FB.init({
             appId: fb_appId,
@@ -69,7 +14,6 @@ angular.module('MyApp')
             xfbml: true
           });
         };
-
 
            // Post
           $scope.fb_post = function() {
@@ -89,6 +33,13 @@ angular.module('MyApp')
 
         // Share dialog
         $scope.fb_share = function() {
+            FB.ui({
+                method: 'feed',
+                name: activity.title,
+                link: "http://joyage.in/activities/"+activity._id,
+                //picture: response.image,
+                description: activity.description
+            });
             /*FB.api('me/objects/_joyage_:activity', 'post', {
                     'og:url': 'http://samples.ogp.me/1494352094179892',
                     'og:title': activity.title,
@@ -100,13 +51,6 @@ angular.module('MyApp')
                 // handle the response
             }
           );*/
-            FB.ui({
-                method: 'feed',
-                name: activity.title,
-                link: "http://joyage.in/activities/"+activity._id,
-                //picture: response.image,
-                description: activity.description
-            });
           /*FB.ui({
               method: 'share_open_graph',
               action_type: 'post',
@@ -117,6 +61,42 @@ angular.module('MyApp')
               })
           }, function(response){});*/
         };
+
+          var map;
+
+          (function () {
+              if (activity.mapLat == 12.9667 && activity.mapLon == 77.5667) {
+                  var mapZoom = 10;
+              } else {
+                  var mapZoom = 15;
+              }
+              var mapOptions = {
+                  zoom: mapZoom,
+                  center: new google.maps.LatLng(activity.mapLat, activity.mapLon),
+                  mapTypeControl: false
+              };
+              map = new google.maps.Map(document.getElementById('map-canvas'),
+                  mapOptions);
+
+              var marker = new google.maps.Marker({
+                  position: new google.maps.LatLng(activity.mapLat, activity.mapLon),
+                  map: map,
+                  title: activity.location,
+                  animation: google.maps.Animation.DROP,
+              });
+
+              function toggleBounce() {
+                  if (marker.getAnimation() != null) {
+                      marker.setAnimation(null);
+                  } else {
+                      marker.setAnimation(google.maps.Animation.BOUNCE);
+                  }
+              };
+
+              google.maps.event.addListener(marker, 'click', toggleBounce);
+
+          }());
+          google.maps.event.addDomListener(window, 'load');
 
         $scope.isSubscribed = function() {
             if ($rootScope.currentUser) {

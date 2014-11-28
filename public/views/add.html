@@ -5,11 +5,23 @@
       <p class="pull-right">{{currentUser.facebook.email}}</p>
     </div>
     <div class="panel-body">
+
+        <!--form class="form"
+              method="post"
+              ng-submit="upload1(picture)">
+            <input type="file"
+                   name="picture"
+                   id="picture"
+                    accept="image/*">
+            <button ng-click="upload(picture)">upload</button>
+        </form-->
+
       <form class="form"
             method="post"
             ng-submit="addActivity()"
             name="addForm"
-            ng-controller="AddCtrl">
+            ng-controller="AddCtrl"
+            enctype="multipart/form-data">
         <div class="help-block text-danger"
              ng-messages="">
         <input class="form-control"
@@ -21,14 +33,21 @@
                autofocus>
         <br />
 
-         <input type="file"
-                fileRead
+         <!--input type="file"
+                ng-file-select="onFileSelect($files)"
                 required />
-          <img src="{{img}}" />
+          <img src="{{img}}" /-->
           <!--input type="file" ng-file-reader accept="image/gif, image/jpeg, image/png" on-selected="onSelected( files )" on-readed="onReaded( event, file )" read-method="readMethod" filereader="../vendor/filereader.swf" multiple debug-mode="true">
           <div ng-file-reader accept="image/gif, image/jpeg, image/png" on-selected="onSelected( files )" on-readed="onReaded( event, file )" read-method="readMethod" filereader="../vendor/filereader.swf" multiple debug-mode="true"></div>
 
           <img src="{{imgData}}"-->
+
+        <!--input type="file" accept="image/*" image="image" />{{image}}{{image.url}}{{image.file}}
+        <img ng-show="image" ng-src="{{image.url}}" type="{{image.file.type}}" />
+
+            <img ng-show="uploadedImgSrc"-->
+            <input type="file" accept="image/*" name="image" ng-model="image" />
+
 
 
 
@@ -126,12 +145,18 @@
                  ng-model="locationWebsite"
                  placeholder="Website">
           <br />
-          <!--input class="form-control"
+          <input class="form-control"
                  type="text"
-                 name="mapLocation"
-                 ng-model="mapLocation"
-                 placeholder="Map Location (https://developers.google.com/maps/documentation/embed/start)">
-          <br /-->
+                 name="mapLat"
+                 ng-model="mapLat"
+                 placeholder="Map Latitude">
+          <br />
+          <input class="form-control"
+               type="text"
+               name="mapLon"
+               ng-model="mapLon"
+               placeholder="Map Longitude">
+          <br />
 
         </fieldset>
         <br />
