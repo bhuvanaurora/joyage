@@ -16,10 +16,12 @@
             
           <p class="media-subheading">At {{activity.location}}, {{activity.neighborhood}}</p>
           
-          <!--img id="poster"
-               ng-src="/images/{{activity.poster}}"
-               alt="{{activity.title}}" /-->
           <img id="poster"
+               ng-if="activity.poster"
+               ng-src="/images/{{activity.poster}}"
+               alt="{{activity.title}}" />
+          <img id="poster"
+               ng-if="!activity.poster"
                ng-src="/images/{{activity.title}}.jpg"
                alt="{{activity.title}}" />
             

@@ -26,7 +26,6 @@ if (process.env.NODE_ENV === "dev") {
 var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
-var multer = require('multer');
 var logger = require('morgan');
 var multipart = require('connect-multiparty');
 var router = express.Router();
@@ -172,23 +171,12 @@ var app = express();
 
 app.set('port', process.env.PORT || 3001);
 app.use(logger('dev'));
-app.use(multer({dest: '.public/images'}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(multipart({
-  uploadDir: './public/images'
+  uploadDir: './tmp'
 }));
-
-/*exports.create = function(req, res, next) {
-  var data = _.pick(req.body, 'type'),
-      uploadPath = path.normalize(cfg.data + '/uploads'),
-      file = req.files.file;
-
-  console.log(file.name);
-  console.log(file.path);
-  console.log(uploadPath);
-};*/
 
 // Robots.txt
 app.use(function (req, res, next) {
@@ -207,20 +195,6 @@ app.use(function (req, res, next) {
     } else {
         next();
     }
-});
-
-app.post('/upload', function(req, res) {
-  var image =  req.files.image;
-  var newImageLocation = path.join(__dirname, 'public/images', image.name);
-
-  fs.readFile(image.path, function(err, data) {
-    fs.writeFile(newImageLocation, data, function(err) {
-      res.json(200, {
-        src: 'images/' + image.name,
-        size: image.size
-      });
-    });
-  });
 });
 
 // ----------------------------------------- Authentication middleware -------------------------------------- //
@@ -441,10 +415,23 @@ app.get('/api/activities/:id', function(req, res, next) {
   });
 });
 
+var fs = require('fs');
+
+app.post('/upload', function(req, res, next) {
+  var filePath = path.join(__dirname, req.files.file.path);
+  fs.readFile(filePath, function(err, data) {
+    var writePath = path.join(__dirname, '/public/images', req.files.file.name);
+    fs.writeFile(writePath, data, function(err) {
+      if (err) throw(err);
+      res.status(200).json({
+        data: data,
+        imageurl: req.files.file.name
+      });
+    })
+  })
+});
+
 app.post('/api/activities', function(req, res, next) {
-  //console.log(req.files);
-  //console.log(req.files.image);
-  //console.log(req.files.image.originalname);
   var activity = new Activity({
     _id: req.body.id,
     title: req.body.title,
@@ -490,7 +477,7 @@ app.post('/api/activities', function(req, res, next) {
   
   activity.save(function(err) {
     if (err) return next(err);
-    res.send(200);
+    res.status(200).end();
   });
 });
 
@@ -698,7 +685,7 @@ app.get('*', function(req, res) {
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);
-  res.send(500, { message: err.message });
+  res.status(500).send({ message: err.message });
 });
 
 app.listen(app.get('port'), function() {

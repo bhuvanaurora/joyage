@@ -3,17 +3,354 @@
   <component name="ChangeListManager">
     <list default="true" id="3804124e-3ec4-4c75-81b9-5ff5252e740b" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.gitignore/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-imageupload-directive/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-imageupload-directive/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-imageupload-directive/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-imageupload-directive/public/images/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-imageupload-directive/public/javascripts/angular.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-imageupload-directive/public/javascripts/imageupload.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/angular-cookies.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/angular-cookies.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/angular-loader.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/angular-loader.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/angular-mobile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/angular-mobile.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/angular-mocks.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/angular-resource.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/angular-resource.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/angular-sanitize.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/angular-sanitize.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/angular-scenario.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/angular.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/angular.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_af-na.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_af-za.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_af.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_am-et.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_am.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-001.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-ae.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-bh.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-dz.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-eg.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-iq.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-jo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-kw.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-lb.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-ly.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-ma.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-om.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-qa.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-sa.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-sd.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-sy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-tn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar-ye.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ar.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_bg-bg.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_bg.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_bn-bd.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_bn-in.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_bn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ca-ad.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ca-es.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ca.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_chr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_cs-cz.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_cs.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_cy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_da-dk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_da.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_de-at.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_de-be.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_de-ch.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_de-de.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_de-li.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_de-lu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_de.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_el-cy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_el-gr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_el-polyton.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_el.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-as.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-au.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-bb.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-be.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-bm.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-bw.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-bz.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-ca.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-dsrt-us.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-dsrt.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-fm.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-gb.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-gu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-gy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-hk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-ie.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-in.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-iso.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-jm.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-mh.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-mp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-mt.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-mu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-na.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-nz.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-ph.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-pk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-pr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-pw.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-sg.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-tc.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-tt.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-um.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-us.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-vg.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-vi.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-za.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-zw.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en-zz.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_en.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-419.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-ar.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-bo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-cl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-co.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-cr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-do.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-ea.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-ec.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-es.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-gq.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-gt.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-hn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-ic.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-mx.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-ni.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-pa.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-pe.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-pr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-py.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-sv.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-us.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-uy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es-ve.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_es.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_et-ee.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_et.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_eu-es.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_eu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fa-af.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fa-ir.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fa.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fi-fi.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fi.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fil-ph.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fil.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-be.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-bf.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-bi.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-bj.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-bl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-ca.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-cd.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-cf.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-cg.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-ch.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-ci.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-cm.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-dj.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-fr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-ga.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-gf.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-gn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-gp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-gq.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-km.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-lu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-mc.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-mf.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-mg.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-ml.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-mq.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-ne.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-re.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-rw.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-sn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-td.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-tg.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr-yt.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_fr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_gl-es.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_gl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_gsw-ch.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_gsw.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_gu-in.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_gu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_haw.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_he-il.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_he.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_hi-in.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_hi.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_hr-hr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_hr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_hu-hu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_hu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_id-id.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_id.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_in.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_is-is.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_is.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_it-ch.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_it-it.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_it-sm.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_it.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_iw.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ja-jp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ja.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_kn-in.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_kn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ko-kr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ko.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ln-cd.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ln-cg.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ln.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_lt-lt.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_lt.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_lv-lv.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_lv.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ml-in.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ml.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_mo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_mr-in.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_mr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ms-bn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ms-my.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ms.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_mt-mt.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_mt.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_nl-aw.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_nl-be.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_nl-cw.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_nl-nl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_nl-sx.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_nl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_no.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_or-in.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_or.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_pl-pl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_pl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_pt-ao.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_pt-br.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_pt-gw.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_pt-mz.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_pt-pt.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_pt-st.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_pt.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ro-md.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ro-ro.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ro.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ru-md.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ru-ru.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ru-ua.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ru.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sk-sk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sl-si.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sq-al.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sq.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sr-cyrl-ba.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sr-cyrl-me.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sr-cyrl-rs.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sr-cyrl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sr-latn-ba.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sr-latn-me.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sr-latn-rs.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sr-latn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sr-rs.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sv-fi.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sv-se.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sv.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sw-ke.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sw-tz.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_sw.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ta-in.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ta-lk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ta.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_te-in.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_te.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_th-th.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_th.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_tl-ph.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_tl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_tr-tr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_tr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_uk-ua.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_uk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ur-in.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ur-pk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_ur.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_vi-vn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_vi.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_zh-cn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_zh-hans-cn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_zh-hans-hk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_zh-hans-mo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_zh-hans-sg.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_zh-hans.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_zh-hant-hk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_zh-hant-mo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_zh-hant-tw.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_zh-hant.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_zh-hk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_zh-tw.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_zh.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_zu-za.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/i18n/angular-locale_zu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/version.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/angularjs-unstable/version.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/flow.js/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/flow.js/CHANGELOG.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/flow.js/Gruntfile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/flow.js/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/flow.js/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/flow.js/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/flow.js/dist/flow.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/flow.js/dist/flow.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/flow.js/karma.conf.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/flow.js/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/flow.js/src/flow.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/ng-flow/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/ng-flow/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/ng-flow/dist/ng-flow-standalone.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/ng-flow/dist/ng-flow-standalone.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/ng-flow/dist/ng-flow.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/ng-flow/dist/ng-flow.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/ng-flow/src/angular-flow.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/ng-flow/src/directives/btn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/ng-flow/src/directives/drag-events.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/ng-flow/src/directives/drop.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/ng-flow/src/directives/events.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/ng-flow/src/directives/img.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/ng-flow/src/directives/init.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/ng-flow/src/directives/transfers.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/bower_components/ng-flow/src/provider.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/directives/fileRead.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/directives/imageupload.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/views/add.html" afterPath="$PROJECT_DIR$/public/views/add.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/controllers/add.js" afterPath="$PROJECT_DIR$/public/controllers/add.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/views/admin.html" afterPath="$PROJECT_DIR$/public/views/admin.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app.js" afterPath="$PROJECT_DIR$/public/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/services/auth.js" afterPath="$PROJECT_DIR$/public/services/auth.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/views/detail.html" afterPath="$PROJECT_DIR$/public/views/detail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/controllers/detail.js" afterPath="$PROJECT_DIR$/public/controllers/detail.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/views/home.html" afterPath="$PROJECT_DIR$/public/views/home.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/controllers/main.js" afterPath="$PROJECT_DIR$/public/controllers/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/angular-file-upload/package.json" afterPath="$PROJECT_DIR$/node_modules/angular-file-upload/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -42,19 +379,42 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1411">
-              <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360">
+              <caret line="0" column="113" selection-start-line="0" selection-start-column="113" selection-end-line="0" selection-end-column="113" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.192307" vertical-offset="2558" max-vertical-offset="3366">
-              <caret line="163" column="51" selection-start-line="163" selection-start-column="51" selection-end-line="163" selection-end-column="51" />
+            <state vertical-scroll-proportion="1.8687707" vertical-offset="255" max-vertical-offset="2040">
+              <caret line="92" column="2" selection-start-line="92" selection-start-column="2" selection-end-line="92" selection-end-column="2" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/controllers/add.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8279">
+              <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/views/admin.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.153846" vertical-offset="0" max-vertical-offset="561">
+              <caret line="14" column="50" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
+              <folding>
+                <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -62,8 +422,8 @@
       <file leaf-file-name="add.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/views/add.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.7090907" vertical-offset="2245" max-vertical-offset="6783">
-              <caret line="157" column="41" selection-start-line="157" selection-start-column="41" selection-end-line="157" selection-end-column="41" />
+            <state vertical-scroll-proportion="-13.961538" vertical-offset="79" max-vertical-offset="6375">
+              <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
               <folding>
                 <element signature="n#style#0;n#input#0;n#fieldset#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#1;n#fieldset#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -77,52 +437,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="add.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/controllers/add.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9350">
-              <caret line="140" column="15" selection-start-line="140" selection-start-column="15" selection-end-line="140" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="imageupload.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/directives/imageupload.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2414">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.827586" vertical-offset="1094" max-vertical-offset="11655">
-              <caret line="90" column="42" selection-start-line="90" selection-start-column="42" selection-end-line="90" selection-end-column="42" />
+            <state vertical-scroll-proportion="-10.965517" vertical-offset="6941" max-vertical-offset="12988">
+              <caret line="427" column="37" selection-start-line="427" selection-start-column="37" selection-end-line="427" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="detail.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/controllers/detail.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="915" max-vertical-offset="2640">
-              <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="detail.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="detail.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/views/detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.73125" vertical-offset="1810" max-vertical-offset="9061">
-              <caret line="134" column="54" selection-start-line="134" selection-start-column="54" selection-end-line="134" selection-end-column="54" />
+            <state vertical-scroll-proportion="-13.125" vertical-offset="30" max-vertical-offset="8025">
+              <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
               <folding>
+                <element signature="n#style#0;n#hr#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#div#2;n#div#2;n#!!top" expanded="true" />
               </folding>
             </state>
@@ -149,15 +480,20 @@
         <option value="$PROJECT_DIR$/public/views/invite.html" />
         <option value="$PROJECT_DIR$/public/controllers/inviteCtrl.js" />
         <option value="$PROJECT_DIR$/public/directives/upload.js" />
+        <option value="$PROJECT_DIR$/public/controllers/detail.js" />
         <option value="$PROJECT_DIR$/public/directives/imageupload.js" />
-        <option value="$PROJECT_DIR$/public/app.js" />
         <option value="$PROJECT_DIR$/public/services/auth.js" />
+        <option value="$PROJECT_DIR$/public/views/imageupload.html" />
+        <option value="$PROJECT_DIR$/public/controllers/upload.js" />
+        <option value="$PROJECT_DIR$/public/controllers/navbar.js" />
+        <option value="$PROJECT_DIR$/public/bower_components/angularjs-imageupload-directive/public/javascripts/imageupload.js" />
+        <option value="$PROJECT_DIR$/public/app.js" />
+        <option value="$PROJECT_DIR$/public/controllers/add.js" />
         <option value="$PROJECT_DIR$/public/views/add.html" />
         <option value="$PROJECT_DIR$/server.js" />
-        <option value="$PROJECT_DIR$/public/controllers/add.js" />
-        <option value="$PROJECT_DIR$/public/index.html" />
-        <option value="$PROJECT_DIR$/public/controllers/detail.js" />
         <option value="$PROJECT_DIR$/public/views/detail.html" />
+        <option value="$PROJECT_DIR$/public/views/admin.html" />
+        <option value="$PROJECT_DIR$/public/index.html" />
       </list>
     </option>
   </component>
@@ -273,6 +609,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="filters" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Joyage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="joyage2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="directives" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -292,102 +646,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Joyage" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="joyage2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bower_components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Joyage" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="joyage2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bower_components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="angularjs-imageupload-directive" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Joyage" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="joyage2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bower_components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="angularjs-imageupload-directive" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Joyage" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="joyage2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bower_components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="angularjs-imageupload-directive" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -589,15 +847,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293124" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16043426" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" x="0" y="368" width="1440" height="183" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20627262" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" x="0" y="368" width="1440" height="183" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293124" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2542373" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15254237" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15254237" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39800996" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32984293" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -640,46 +898,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/views/add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2145">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#fieldset#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#1;n#fieldset#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#2;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#fieldset#2;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#1;n#fieldset#2;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#3;n#fieldset#2;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#fieldset#7;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="900">
-          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1140">
-          <caret line="27" column="29" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/directives/fileRead.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="375">
-          <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1020" max-vertical-offset="2550">
@@ -738,14 +956,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="420" max-vertical-offset="1140">
           <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/directives/fileRead.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="375">
-          <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -856,14 +1066,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/directives/fileRead.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="500">
-          <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/views/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-26.153847" vertical-offset="0" max-vertical-offset="2720">
@@ -952,14 +1154,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/services/auth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.045180723" vertical-offset="0" max-vertical-offset="2595">
-          <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/controllers/login.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.27108434" vertical-offset="0" max-vertical-offset="664">
@@ -984,18 +1178,80 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/controllers/detail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4313099" vertical-offset="915" max-vertical-offset="2640">
+          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/services/auth.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.809904" vertical-offset="0" max-vertical-offset="2595">
+          <caret line="159" column="16" selection-start-line="159" selection-start-column="16" selection-end-line="159" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controllers/navbar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="626">
+          <caret line="0" column="22" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1411">
-          <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360">
+          <caret line="0" column="113" selection-start-line="0" selection-start-column="113" selection-end-line="0" selection-end-column="113" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.965517" vertical-offset="6941" max-vertical-offset="12988">
+          <caret line="427" column="37" selection-start-line="427" selection-start-column="37" selection-end-line="427" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controllers/add.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8279">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/views/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.153846" vertical-offset="0" max-vertical-offset="561">
+          <caret line="14" column="50" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/views/detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.125" vertical-offset="30" max-vertical-offset="8025">
+          <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+          <folding>
+            <element signature="n#style#0;n#hr#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#div#2;n#div#2;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/views/add.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.7090907" vertical-offset="2245" max-vertical-offset="6783">
-          <caret line="157" column="41" selection-start-line="157" selection-start-column="41" selection-end-line="157" selection-end-column="41" />
+        <state vertical-scroll-proportion="-13.961538" vertical-offset="79" max-vertical-offset="6375">
+          <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
           <folding>
             <element signature="n#style#0;n#input#0;n#fieldset#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#1;n#fieldset#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -1008,53 +1264,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/directives/imageupload.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2414">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.192307" vertical-offset="2558" max-vertical-offset="3366">
-          <caret line="163" column="51" selection-start-line="163" selection-start-column="51" selection-end-line="163" selection-end-column="51" />
+        <state vertical-scroll-proportion="1.8687707" vertical-offset="255" max-vertical-offset="2040">
+          <caret line="92" column="2" selection-start-line="92" selection-start-column="2" selection-end-line="92" selection-end-column="2" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controllers/add.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9350">
-          <caret line="140" column="15" selection-start-line="140" selection-start-column="15" selection-end-line="140" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.827586" vertical-offset="1094" max-vertical-offset="11655">
-          <caret line="90" column="42" selection-start-line="90" selection-start-column="42" selection-end-line="90" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controllers/detail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="915" max-vertical-offset="2640">
-          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/views/detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73125" vertical-offset="1810" max-vertical-offset="9061">
-          <caret line="134" column="54" selection-start-line="134" selection-start-column="54" selection-end-line="134" selection-end-column="54" />
-          <folding>
-            <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#div#2;n#div#2;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

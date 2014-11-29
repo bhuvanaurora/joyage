@@ -1,53 +1,26 @@
 angular.module('MyApp')
-  .controller('AddCtrl', ['$scope', '$alert', '$routeParams', '$http', '$route', 'Activity', 'editedActivity', 'Profile',
-                          function($scope, $alert, $routeParams, $http, $route, Activity, editedActivity, Profile) {
+  .controller('AddCtrl', ['$scope', '$alert', '$routeParams', '$http', '$route', '$upload', 'Activity', 'editedActivity', 'Profile',
+                          function($scope, $alert, $routeParams, $http, $route, $upload, Activity, editedActivity, Profile) {
 
-          /*$scope.onFileSelect = function($files) {
-              var file = $files;
+      var poster = '';
+      $scope.onFileSelect = function($files) {
+          for (var i = 0; i < $files.length; i++) {
+              var file = $files[i];
               $scope.upload = $upload.upload({
-               url: '/uploads',
-               method: 'POST',
-               data: {myObj: $scope.myModelObj},
-               file: file,
-               fileName: $scope.title
-               }).progress(function(evt) {
-               console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-               }).success(function(data, status, headers, config) {
-               console.log(data);
-               });
-
-
-              var fileReader = new fileReader();
-              fileReader.readAsArrayBuffer(file);
-              fileReader.onload = function(e) {
-                  $upload.http({
-                      url: 'upload',
-                      headers: {'Content-Type': file.type},
-                      data: e.target.result
-                  }).then(function(response) {
-                      console.log('success');
-                  }, null, function(evt) {
-                      $scope.progress[index] = parseInt(100.0 * evt.loaded / evt.total);
-                  });
-              };
-
-              $upload.http({
-               url: 'upload',
-               headers: {'Content-Type': file.type},
-               data: e.target.result
-               }).progress(function(ev) {
-               console.log('in progress');
-               }).success(function(ev) {
-               console.log('success');
-               }).error(function(ev) {
-               console.log('upload fail');
-               })
-          };*/
+                  url: '/upload',
+                  data: {myObj: $scope.myModelObj},
+                  file: file,
+              }).progress(function (evt) {
+                  console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+              }).success(function (data, status, headers, config) {
+                  poster = data.imageurl;
+              });
+          }
+      };
 
     if (!$routeParams.id) {
       // ------------------------------------------------------------- For adding activities ------------------------------------------------------ //
 
-      //var imagesource = '';
       $scope.genres = ['Athletic Activities', 'Fitness Classes', 'Hiking & Biking',
                        'Nature Appreciation', 'Bars', 'Breweries & Distilleries',
                         'Featured Cocktails', 'Happy Hours', 'Classes', 'Exhibits & Galleries',
@@ -68,33 +41,7 @@ angular.module('MyApp')
       $scope.country = 'India';
       $scope.currency = 'Rs';
 
-      /*$scope.$watch(imagesource, function() {
-          $scope.img = imagesource;
-      });
-      //alert("imagesource is" + $scope.img);
-
-        angular.extend($scope, {
-            onUpload: function(file) {
-                console.log(file[0]);
-            },
-            onSelected: function(file) {
-                console.log('File selected: '+file[0]);
-                alert(file[0]);
-            },
-            onStatechange: function(file) {
-                console.log('File uploaded: '+file[0]);
-            },
-            readMethod:"readAsDataURL",
-            onReaded : function(e, file) {
-                console.log('File read: '+file);
-                $scope.imgData = e.target.result;
-                $scope.file = file;
-            }
-        });*/
-
-
-
-      $scope.addActivity = function() {
+      $scope.addActivity = function(image) {
       
         var id;
         var title = $scope.title.split(" ");
@@ -130,16 +77,6 @@ angular.module('MyApp')
           })
         }
 
-          /*var formData = new FormData();
-          formData.append('image', image, image.name);
-          $http.post('upload', formData, {
-              headers: { 'Content-Type': false },
-              transformRequest: angular.identity
-          }).success(function(result) {
-              $scope.uploadedImgSrc = result.src;
-              $scope.sizeInBytes = result.size;
-          });*/
-        
         Activity.save({ id: id,
                         title: $scope.title,
                         description: $scope.description,
@@ -161,7 +98,7 @@ angular.module('MyApp')
                         mapLat: $scope.mapLat,
                         mapLon: $scope.mapLon,
                         status: "Continuing",
-                        //poster: $scope.uploadedImgSrc,
+                        poster: poster,
                         photoCredit: $scope.photoCredit,
                         photoCreditLink: $scope.photoCreditLink,
                         currency: $scope.currency,

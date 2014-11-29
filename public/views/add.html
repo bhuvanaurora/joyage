@@ -6,19 +6,9 @@
     </div>
     <div class="panel-body">
 
-        <!--form class="form"
-              method="post"
-              ng-submit="upload1(picture)">
-            <input type="file"
-                   name="picture"
-                   id="picture"
-                    accept="image/*">
-            <button ng-click="upload(picture)">upload</button>
-        </form-->
-
       <form class="form"
             method="post"
-            ng-submit="addActivity()"
+            ng-submit="addActivity(image)"
             name="addForm"
             ng-controller="AddCtrl"
             enctype="multipart/form-data">
@@ -33,29 +23,15 @@
                autofocus>
         <br />
 
-         <!--input type="file"
-                ng-file-select="onFileSelect($files)"
-                required />
-          <img src="{{img}}" /-->
-          <!--input type="file" ng-file-reader accept="image/gif, image/jpeg, image/png" on-selected="onSelected( files )" on-readed="onReaded( event, file )" read-method="readMethod" filereader="../vendor/filereader.swf" multiple debug-mode="true">
-          <div ng-file-reader accept="image/gif, image/jpeg, image/png" on-selected="onSelected( files )" on-readed="onReaded( event, file )" read-method="readMethod" filereader="../vendor/filereader.swf" multiple debug-mode="true"></div>
-
-          <img src="{{imgData}}"-->
-
-        <!--input type="file" accept="image/*" image="image" />{{image}}{{image.url}}{{image.file}}
-        <img ng-show="image" ng-src="{{image.url}}" type="{{image.file.type}}" />
-
-            <img ng-show="uploadedImgSrc"-->
-            <input type="file" accept="image/*" name="image" ng-model="image" />
-
-
-
+        <input type="file"
+               ng-file-select="onFileSelect($files)">
 
         <textarea class="form-control"
                   type="text"
                   name="description"
                   ng-model="description"
-                  placeholder="Curator's Description"></textarea><br />
+                  placeholder="Curator's Description">
+        </textarea><br />
         
         <fieldset>
           <legend>Categories</legend>
