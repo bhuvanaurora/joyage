@@ -11,6 +11,7 @@
   <link href='http://fonts.googleapis.com/css?family=Roboto|Montserrat|Courgette:400,700|Open+Sans:400,300,700'
         rel='stylesheet'
         type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Condiment' rel='stylesheet' type='text/css'>
   <link href="//cdn.jsdelivr.net/ionicons/1.4.1/css/ionicons.min.css" rel="stylesheet">
   <link href="stylesheets/animate.css" rel="stylesheet">
   <link href="stylesheets/dragon.css" rel="stylesheet">
@@ -18,6 +19,13 @@
   <link href="stylesheets/1080-27-grid.css" rel="stylesheet">
   <link href="stylesheets/custom.css" rel="stylesheet">
   <link href="stylesheets/mapbox.css" rel="stylesheet">
+
+          <!--- Custom stylesheets --->
+  <link href="stylesheets/style2.css" rel="stylesheet">
+  <link href="stylesheets/event.css" rel="stylesheet">
+  <link href="stylesheets/profile.css" rel="stylesheet">
+  <link href="stylesheets/home.css" rel="stylesheet">
+  <link href="stylesheets/vendor/font-awesome.min.css" rel="stylesheet">
   
   <!---------------------- Google Maps API ------------------------->
   <style>
@@ -30,27 +38,119 @@
   </style>
 </head>
 <body>
-  <div ng-controller="NavbarCtrl" class="navbar navbar-default navbar-static-top" role="navigation" bs-navbar>
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">
-        <span style="font-family:'Courgette',sans-serif;"><strong>Joyage</strong></span>
-      </a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li data-match-route="/$"><a href="/">Home</a></li>
-      <li data-match-route="/admin" ng-if="currentUser.curator === true"><a href="/admin/{{currentUser._id}}">Admin</a></li>
-    </ul>
-    <ul class="nav navbar-nav pull-right" ng-if="!currentUser">
-      <li data-match-route="/login"><a href="/login">Sign In</a></li>
-      <!--li data-match-route="/signup"><a href="/signup">Sign up</a></li-->
-    </ul>
-    <ul class="nav navbar-nav pull-right" ng-if="currentUser">
-      <a href="/profile/{{currentUser._id}}"><li class="navbar-text" ng-bind="currentUser.name"></li></a>
-      <li><a href="javascript:void(0)" ng-click="logout()">Logout</a></li>
-    </ul>
-  </div>
+
+  <!----------------------------------------------------- Navbar -------------------------------------------->
+
+  <header ng-controller="NavbarCtrl"><!-- header start -->
+    <div class="wrapper">
+      <div class="col-lg-5 col-sm-6 col-xs-6 col-md-6">
+        <div class="head-brand">
+          <a href="/">Joyage</a>
+        </div>
+        <div class="city-select js-city-select">
+          <div class="city-selected">Bangalore</div>
+          <div class="select-dropdown"></div>
+        </div>
+        <div class="city-select-drawer js-city-select-drawer">
+          <ul>
+            <li class="open-modal modal-city-update">Ahmedabad</li>
+            <li class="selected">Bangalore</li>
+            <li class="open-modal modal-city-update">Delhi</li>
+            <li class="open-modal modal-city-update">Mumbai</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-7 col-sm-6 col-xs-6 col-md-6">
+        <div class="pull-right">
+          <div class="head-search">
+            <!--input type="search" placeholder="Search..." /-->
+            <input class="search"
+                   type="text"
+                   ng-model="query"
+                   style="margin-top:1px;background-color:white;"
+                   placeholder="Search...">
+            <div class="head-search-icon">
+              <i class="batch" data-icon="&#xF097;"></i>
+            </div>
+          </div><!-- search end -->
+
+          <div class="navigation js-navigation"><!-- navigation starts here -->
+            <nav class="nav-drawer js-nav-drawer">
+              <div class="head-user-pic">
+                <!--img src="{{smallProfilePicture}}"-->
+              </div>
+              <div class="head-user-name">
+                <span ng-if="currentUser">{{currentUser.name}}</span>
+                <span ng-if="!currentUser">Jonathan</span>
+              </div>
+              <div class="navToggle">
+                <div class="icon-left"></div>
+                <div class="icon-right"></div>
+              </div>
+              <ul class="nav-list">
+                <li>
+                  <a href="/profile/{{currentUser._id}}"
+                     ng-if="currentUser">
+                    <span class="nav-action-icons">
+                      <i class="batch" data-icon="&#xF170;"></i>
+                    </span>
+                    Profile
+                  </a>
+                  <a href="/login"
+                     ng-if="!currentUser">
+                    Login
+                  </a>
+                </li>
+                <li>
+                  <a href="/profile/{{currentUser._id}}">
+                    <span class="nav-action-icons">
+                      <i class="batch" data-icon="&#xF04D;"></i>
+                    </span>
+                    Edit Settings
+                  </a>
+                </li>
+                <li>
+                  <a href="/profile/{{currentUser._id}}">
+                    <span class="nav-action-icons">
+                      <i class="batch" data-icon="&#xF171;"></i>
+                    </span>
+                    Invite Friends
+                  </a>
+                </li>
+                <li>
+                  <a href="/profile/{{currentUser._id}}">
+                    <span class="nav-action-icons">
+                      <i class="batch" data-icon="&#xF007;"></i>
+                    </span>
+                    Send Feedback
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" ng-click="logout()">
+                    <span class="nav-action-icons">
+                      <i class="batch" data-icon="&#xF069;"></i>
+                    </span>
+                    Log Out
+                  </a>
+                </li>
+                <li>
+                  <a ng-if="currentUser.curator === true" href="/admin/{{currentUser._id}}">
+                    Admin
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div><!-- navigation ends here -->
+
+        </div><!-- pull right end -->
+      </div>
+    </div><!-- wrapper ends -->
+  </header><!-- Header ends -->
   
   <div ng-view class="{{pageClass}}"></div>
+
+  <!---------------------------------------- Scripts ----------------------------------------------------->
 
   <script src="bower_components/ng-file-upload/angular-file-upload-shim.min.js"></script>
   <script src="vendor/angular.js"></script>
@@ -64,8 +164,8 @@
   <script src="vendor/angular-route.js"></script>
   <script src="vendor/angular-animate.js"></script>
   <script src="vendor/moment.min.js"></script>
-  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!--script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script-->
 
   <script src="app.js"></script>
   <script src="filters/fromNow.js"></script>
@@ -95,7 +195,83 @@
   <script src="services/fb_connect.js"></script>
   
   <!--script src="js/mapbox.js"></script-->
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script src="js/widgets.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/select.js"></script>
+
+  <!--------------------------------------------- Custom scripts -------------------------------------------->
+
+  <script type="text/javascript">
+    $(".js-navigation").click (function(){
+      $(this).toggleClass("js-open-nav");
+      $("nav").toggleClass("js-open-nav");
+    });
+
+    $(".js-filter-activity:not(.js-activity-holder)").click(function() {
+      $('.js-activity-holder').slideToggle(200);
+    });
+
+    $('.js-filter-place:not(.js-place-holder)').click(function() {
+      $('.js-place-holder').slideToggle(200);
+    });
+
+    $(document).ready(function() {
+
+      $('.js-city-select').click(function() {
+        $('.js-city-select-drawer').fadeToggle('fast', function() {
+          // Animation complete
+        });
+        return false;
+      });
+
+      // Even when the window is resized, run this code.
+      $(window).resize(function(){
+
+        // Variables
+        var windowHeight = $(window).height();
+
+        // Find the value of 90% of the viewport height
+        var ninetypercent = .085 * windowHeight;
+
+        // When the document is scrolled ninety percent, toggle the classes
+        // Does not work in iOS 7 or below
+        // Hasn't been tested in iOS 8
+        $(document).scroll(function(){
+
+          // Store the document scroll function in a variable
+          var y = $(this).scrollTop();
+
+          // If the document is scrolled 90%
+          if( y > ninetypercent) {
+            $('.js-main-header').addClass('js-sticky-header');
+          } else {
+            $('.js-main-header').removeClass('js-sticky-header');
+          }
+        });
+
+        // Call it on resize.
+      }).resize();
+
+    });
+
+    // -------------- for modal ------------------------
+
+    $('.open-modal').click(function() {
+      var el = $(this)[0],
+              classes = el.className.split(/\s+/);
+      for(var i = 0; i < classes.length; i++) {
+        if(classes[i].match(/modal-/)) {
+          var modalClass = classes[i];
+          $('.modal.' + modalClass).fadeIn('fast');
+        }
+      }
+    });
+
+    $('.close-modal').click(function() {
+      $(this).closest('.modal').fadeOut('fast');
+    });
+  </script>
   
   <script>
     function displayMenu() {
@@ -103,10 +279,10 @@
       var container = document.getElementById("new-home");
       if (elem.style.display == "block") {
         elem.style.display = "none";
-        container.style.marginBottom = "20px";
+        container.style.marginBottom = "0px";
       } else {
         elem.style.display = "block";
-        container.style.marginBottom = "272px";
+        container.style.marginBottom = "285px";
       }
     };
   </script>

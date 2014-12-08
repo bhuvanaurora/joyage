@@ -1,430 +1,534 @@
-<div class="container">
-  
-  <!----------------- Left Panel --------------->
-  
-  <div class="left">
-    <div class=""
-         id="activityDetails">
-      <div class="panel-body"
-           style="margin-right: 20px;">
-        <div class="media">
-          <h2 class="media-heading">
-            {{activity.title}}
-          </h2>
-          
-          <hr style="margin-left:-40px;">
-            
-          <p class="media-subheading">At {{activity.location}}, {{activity.neighborhood}}</p>
-          
-          <img id="poster"
-               ng-if="activity.poster"
-               ng-src="/images/{{activity.poster}}"
-               alt="{{activity.title}}" />
-          <img id="poster"
-               ng-if="!activity.poster"
-               ng-src="/images/{{activity.title}}.jpg"
-               alt="{{activity.title}}" />
-            
-          <!----------------- Joyage description -------------->
-          
-          <div class="description"
-               ng-if="activity.description"
-               style="margin-bottom:20px;">
-            <div style="margin-bottom:8px;"
-                 class="business">
-                <a href="/">
-                    <b>Joyage</b>
-                </a>
+<div class="wrapper"><!-- wrapper start -->
+    <div class="col-lg-8 col-sm-7 col-md-8 col-xs-12">
+        <div class="event-details-block clearfix">
+            <!--div class="rectangle">
+                <h2>ONE-OF-KIND</h2>
             </div>
-            <div style="font-size: 15px;">{{activity.description}}</div>
-          </div>
-          
-          <!----------------- Source description -------------->
-          
-          <div class="description"
-               id="description"
-               onload="function changeFontSize(){
-                  if (activity.description!=="") {
-                    document.getElementById("description").style.font-size="15px"
-                  }
-               }();">
-                
-            <div style="margin-bottom:8px;"
-                 class="business">
-                <a href="{{activity.sourceWebsite}}">
-                    <b>{{activity.sourceName}}</b>
-                </a>
-            </div>
-            <div style="font-size: 13px">{{activity.sourceDescription}}</div>
-          </div>
-          
-          <div class="source-link"
-               ng-if="activity.sourceWebsite">
-              <a href="{{activity.sourceWebsite}}">View Original Source</a>
-          </div>
-        </div>
-        
-        <!---------------- Artist / Chef corner --------------->
-        
-        <div ng-if="activity.corner">
-          <h4>{{activity.corner}}</h4>
-          <img ng-src="/images/{{activity.cornerPic}}"
-               alt="activity.corner" />
-          <p>{{activity.cornerText}}</p>
-        </div>
+            <div class="triangle-l"></div-->
 
-        <!--------------- Share -------------->
+            <h1 class="event-heading">{{activity.title}}</h1>
+            <hr/>
+
+            <div class="event-place-block">
+                <div class="event-place-info">
+                    <p>WHERE</p>
+                    <h5>{{activity.location}}</h5>
+                </div>
+                <div class="event-place-info">
+                    <p>NEIGHBOURHOOD</p>
+                    <h5>{{activity.neighborhood}}</h5>
+                </div>
+                <div class="event-place-info">
+                    <p>WHEN</p>
+                    <h5>{{activity.dateOfActivity | date: shortDate}}</h5>
+                </div>
+            </div>
+
+            <div class="event-img">
+                <img src="img/5.jpeg">
+            </div>
+
+            <div class="event-info-holder" id="description">
+                <a href="/">Joyage</a><br/>
+                {{activity.description}}
+            </div>
+
+            <div class="col-lg-5 col-sm-5 col-md-5 col-xs-12">
+                <div class="tip-block">
+                    <div class="bubble-holder">
+                        <div class="bubble-body" ng-if="activity.corner">
+                            <p>{{activity.cornerText}}</p>
+                        </div>
+                        <div class="bubble-bot" ng-if="activity.corner"><div class="bbl-hook"></div></div>
+                    </div><!-- bubble -end -->
+                    <div class="buble-user-img" ng-if="activity.corner">
+                        <img src="/images/{{activity.cornerPic}}">
+                    </div>
+                </div><!-- tip block end -->
+                <span class="open-modal modal-pro-tip" ng-if="activity.corner">{{activity.corner}}</span>
+            </div>
+            <br />
+            <div class="col-lg-7 col-sm-7 col-md-7 col-xs-12"  onload='function changeFontSize(){if (activity.description!=="") {document.getElementById("description").style.font-size="15px"}();'>
+                <a href="{{activity.sourceWebsite}}">{{activity.sourceName}}</a>
+                <p>{{activity.sourceDescription}}</p>
+            </div>
+            <!-------------------- Media News --------------------->
+
+            <div ng-if="activity.media[0]">
+                <h4>In Media</h4>
+                <ul>
+                    <li ng-repeat="media in activity.media">
+                        <h5>{{media.title}}</h5>
+                        <a href="{{media.link}}">{{media.text}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>	<!-- event-detail block end -->
+    </div>
+
+    <!-- sidebar start -->
+
+    <div class="col-lg-4 col-sm-5 col-md-4 col-xs-12">
+
+        <!-------------- Goodies -------------->
 
         <div class="panel panel-default panel-right"
-             class="payment">
+             ng-if="activity.goodies"
+             style="width:100%;margin-bottom:20px;margin-top:-10px;">
+            <div class="panel-body">
+                <div class="info-title">GOODIES</div>
+                <div class="info-text">{{activity.goodies}}</div>
+            </div>
+        </div>
 
-            <button class="btn btn-lg btn-block btn-facebook"
-                    ng-click="fb_share()">
-                <span class="ion-social-facebook"></span>
-                Share on Facebook
-            </button>
+        <!--------------- Bookmark and share -------------->
 
-        </div>
-        
-        <!-------------------- Media News --------------------->
-        
-        <div ng-if="activity.media[0]">
-          <h4>In Media</h4>
-          <ul>
-            <li ng-repeat="media in activity.media">
-              <h5>{{media.title}}</h5>
-              <a href="{{media.link}}">{{media.text}}</a>
-            </li>
-          </ul>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-    
-  <!-------------------------- Right Panel ------------------------>
-  
-    <!-------------- Goodies -------------->
-    
-  <div class="panel panel-default panel-right"
-       ng-if="activity.goodies"
-       style="width:100%;margin-bottom:20px;margin-top:-10px;">
-    <div class="panel-body">
-      <div class="info-title">GOODIES</div>
-      <div class="info-text">{{activity.goodies}}</div>
-    </div>
-  </div>
-  
-    <!--------------- Address -------------->
+        <div class="panel panel-default panel-right">
+            <div class="event-actions-block" style="margin-left:15px;">
+                <div ng-if="currentUser">
+                    <button class="event-button main-action-button-1 open-modal modal-bookmark-it"
+                            style="font-weight:100;">
+                        <span class="button-icons">
+                            <i class="batch" data-icon="&#xF15D;"></i>
+                        </span>
+                        <span ng-if="!isSubscribed()">
+                            Bookmark
+                        </span>
+                        <span ng-if="isSubscribed()" ng-click="unsubscribe()">
+                            Bookmarked
+                        </span>
+                        <span class="button-counter">
+                            {{subscriptions}}
+                        </span>
+                    </button>
 
-  <div class="right">
-    <div class="panel panel-default panel-right"
-         style="width:100%;margin-bottom:20px;margin-top:-10px;">
-      <!--
-      <iframe width='100%' height='500px' frameBorder='0' src='https://a.tiles.mapbox.com/v4/bhuvanaurora.jgl3d40o/attribution,zoompan,zoomwheel,geocoder,share.html?access_token=pk.eyJ1IjoiYmh1dmFuYXVyb3JhIiwiYSI6ImpXNGx6M2sifQ.MkWqppvNEZKjosqWxOZeog#13/12.935/77.592'>
-      -->
-      
-      <!--iframe width="100%" height="400" frameborder="1" scrolling="yes" style="border:0"
-        src="https://www.google.com/maps/embed/v1/place?q=Windmills+Craftworks,+EPIP+Zone,+Bangalore,+Karnataka,+India&key=AIzaSyCa4YfoBD4-HVbzPH5bh72xxe1Ja-vB-Uk"></iframe>
-      -->
-      
-      <div id="map-canvas"></div>
-      <form action="http://maps.google.com/maps"
-            method="get"
-            target="_blank">
-        <input type="hidden"
-               name="daddr"
-               value="{{activity.location}} {{activity.address}} {{activity.neighborhood}}" />
-        <input type="submit"
-               class="btn-block"
-               value="Get directions" />
-      </form>
+                    <button class="event-button main-action-button-2 open-modal modal-done-it"
+                            style="font-weight:100;">
+                        <span class="button-icons">
+                            <i class="batch" data-icon="&#xF164;"></i>
+                        </span>
+                        <span ng-if="!isDone()">
+                            Done it
+                        </span>
+                        <span ng-if="isDone()" ng-click="markUndone()">
+                            I've done this
+                        </span>
+                        <span class="button-counter">
+                            {{completions}}
+                        </span>
+                    </button>
 
-      <div class="address-head">{{activity.location}}</div>
-      <div class="address">{{activity.address}}</div>
-      <div class="address">{{activity.city}}</div>
-      <div class="address"
-           style="margin-bottom:15px;">
-          {{activity.phone}}
-      </div>
-    </div>
-    
-    <!--------------- Bookmark -------------->
-    
-    <div class="panel panel-default panel-right"
-         ng-show="!isDone()">
-      <div ng-if="currentUser">
-        <div ng-show="!isSubscribed()">
-          <button ng-click="subscribe()"
-                  class="btn btn-block btn-success"
-                  style="font-weight:100;">
-            <span class="ion-plus"></span> Bookmark
-          </button>
-        </div>
-        <div ng-show="isSubscribed()">
-          <button ng-click="unsubscribe()"
-                  class="btn btn-block btn-danger"
-                  style="font-weight:100;">
-            <span class="ion-minus"></span> Bookmarked
-          </button>
-        </div>
-      </div>
-      <div class=""
-           ng-show="!currentUser">
-        <a class="btn btn-block btn-primary"
-           href="#/login"
-           style="color:white;font-weight:100;">
-            Login to Bookmark
-        </a>
-      </div>
-    </div>
-    
-    <!--------------- Done it button -------------->
-    
-    <div class="panel panel-default panel-right">
-      <div ng-if="currentUser">
-        <div ng-show="!isDone()">
-          <button ng-click="markDone()"
-                  class="btn btn-block btn-success"
-                  style="font-weight:100;">
-            <span class="ion-plus"></span> Done it
-          </button>
-        </div>
-        <div ng-show="isDone()">
-          <button ng-click="markUndone()"
-                  class="btn btn-block btn-danger"
-                  style="font-weight:100;">
-            <span class="ion-minus"></span> I've done this
-          </button>
-        </div>
-      </div>
-      <div class="" ng-show="!currentUser">
-        <a class="btn btn-block btn-primary"
-           href="#/login"
-           style="color:white;font-weight:100;">Login to mark done</a>
-      </div>
-    </div>
-    
-    <!--------------- Date and Time -------------->
-    
-    <div class="panel panel-default panel-right"
-         ng-if="activity.timeOfActivity || activity.dateOfActivity">
-      <div class="panel-body">
-        <table style="width:100%">
-          <tr>
-            <td>
-              <div class="text-center">
-                <span ng-if="activity.timeOfActivity"
-                      class="ion-clock">
-                </span>
-                {{activity.timeOfActivity | date: 'shortTime'}}
-                  <br />
-                {{activity.dateOfActivity | date: 'mediumDate'}}
-                <span ng-if="activity.endDateOfActivity">
-                  to {{activity.endDateOfActivity | date: 'mediumDate'}}
-                </span>
-              </div>
-            </td>
-            <td>
-                <div class="info-title text-center"
-                     ng-if="activity.price">
-                    PRICE
-                    <br />
-                    <span class="info-text"
-                          style="font-size:16px;">{{activity.currency}} {{activity.price}}
-                    </span>
+                    <button class="event-button share-button open-modal modal-share">
+                        <i class="batch" data-icon="&#xF159;"></i>
+                    </button>
                 </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    
-    <!--------------- Payment -------------->
-    
-    <div class="panel panel-default panel-right"
-         ng-if="activity.payment"
-         class="payment">
-      <a href="{{activity.payment}}">
-          <button class="btn btn-primary btn-block">Buy tickets</button>
-      </a>
-    </div>
-    
-    <!--------------- Web Links -------------->
 
-    <div class="panel panel-default panel-right"
-         style="height:50px;"
-         ng-if="activity.locationWebsite || activity.zomatoLink || activity.facebookLink || activity.twitterLink">
-      <table class="link-table">
-        <tr>
-          <td>
-            <div class="text-center link-div">
-              <a href="{{activity.locationWebsite}}"
-                 ng-if="activity.locationWebsite">
-                  <div class="text-center">Website</div>
-              </a>
-            </div>
-          </td>
-          <td>
-            <div class="text-center link-div">
-              <a href="{{activity.zomatoLink}}"
-                 ng-if="activity.zomatoLink">
-                  <div class="text text-center">Zomato</div>
-              </a>
-            </div>
-          </td>
-          <td>
-            <div class="text-center link-div">
-              <a href="{{activity.facebookLink}}"
-                 ng-if="activity.facebookLink">
-                  <div class="text text-center">Facebook</div>
-              </a>
-            </div>
-          </td>
-          <td>
-            <div class="text-center link-div">
-              <a href="{{activity.twitterLink}}"
-                 ng-if="activity.twitterLink">
-                  <div class="text text-center">Twitter</div>
-              </a>
-            </div>
-          </td>
-        </tr>
-      </table>
-    </div>
-    
-    <!--------------- Additional Info -------------->
-    
-    <div class="panel panel-default panel-right"
-         ng-if="activity.moreInfo">
-      <div class="panel-body">
-        <div class="info-title">MORE INFO</div>
-        <div class="info-text"
-             ng-if="activity.moreInfoLink">
-            <a href="{{activity.moreInfoLink}}">{{activity.moreInfo}}</a>
-        </div>
-        <div class="info-text"
-             ng-if="!activity.moreInfoLink">{{activity.moreInfo}}
-        </div>
-      </div>
-    </div>
-    
-    <!--------------- Photo Credit -------------->
-    
-    <div class="panel-right"
-         ng-if="activity.photoCredit">
-      <div class="info-title"
-           style="margin-left: 20px;">PHOTO CREDITS</div>
-      <div class="info-text"
-           style="margin-left: 20px;">
-          <a href="{{activity.photoCreditLink}}">{{activity.photoCredit}}</a>
-      </div>
-    </div>
-    
-    <!--------------- Book Ride -------------->
-    
-    <div class="panel panel-default panel-right"
-         ng-if="activity.bookRide"
-         class="payment">
-      <a href="{{activity.bookRide}}">
-          <button class="btn btn-primary btn-block">Book your ride</button>
-      </a>
-    </div>
-    
-    <!--------------- Tips --------------------->
-    
-    <div class="panel panel-default panel-right">
-      <ul class="genres">
-        <li ng-repeat="tip in activity.tips">{{tip.text}}</li>
-      </ul>
-      <form class="form"
-            method="post"
-            ng-submit="addTips(tip)"
-            name="tipsForm"
-            style="margin-top:-10px;">
-        <input class="form-control"
-               type="text"
-               name="tip"
-               ng-model="tip"
-               placeholder="Leave a tip for others .."
-               maxlength=140>
-        <button class="btn btn-primary btn-block"
-                type="submit">
-            Add tip
-        </button>
-      </form>
-    </div>
-    
-    <!---------------- Tags (Not to be removed; for better SEO) ------------------>
-    
-    <div class="panel panel-default panel-right"
-         ng-hide=true>
-      <ul class="genres">
-        <li ng-repeat="tag in activity.genre">{{tag}}</li>
-      </ul>
-    </div>
-    
-    <!----------------------- Activity review ------------------------------------------>
-
-    <div style="background-color:rgba(0,0,0,0.2)"
-         ng-if="activity.preview === false">
-      <div class="text-center">
-        <button class="btn btn-primary"
-                ng-click="acceptActivity(currentUser._id)"
-                ng-if="currentUser.p2p">
-            Accept Activity
-        </button>
-        <a href="/editActivity/{{activity._id}}">Edit</a>
-        <button class="btn btn-danger"
-                ng-click="deleteActivity()">
-            Delete Activity
-        </button>
-      </div>
-    </div>
-    
-  </div>
-</div>
-  
-
-
-<!----------------------- Suggested Activities -------------------------------------->
-
-<section style="background-color:rgba(0,0,0,0.1)">
-  <div class="container">
-    <h4 style="margin-top:30px;"
-        class="text-center">
-        Suggested activities
-    </h4>
-    <div style="margin-top:20px"
-         class="fade-repeat col-xs-4 col-md-4"
-         ng-repeat="act in activities | orderBy:'timeAdded':true">
-        <div class="single-activity-box">
-            <div class="activity-image">
-                <a href="/activities/{{act._id}}">
-                    <!--img style="height:222px;"
-                         ng-src="/images/{{act.poster}}"
-                         width="100%"
-                         alt="{{act.title}}" /-->
-                    <img style="height:222px;"
-                         ng-src="/images/{{act.title}}.jpg"
-                         width="100%"
-                         alt="{{act.title}}" />
-                </a>
-            </div>
-            <div class="activity-info">
-                <a href="/activities/{{act._id}}">
-                    {{act.title}}
-                    <p class="text-muted">{{act.location}} ({{act.neighborhood}})</p>
-                </a>
+                <div class="" ng-show="!currentUser">
+                    <a class="btn btn-block btn-primary"
+                       href="#/login"
+                       style="color:white;font-weight:100;">Login</a>
+                </div>
             </div>
         </div>
-    </div>
-  </div>
-</section>
 
-<!--button ng-click="fb_share()">Share</button>
-<button ng-click="fb_post()">Publish</button-->
-  
+        <!------------------------------- Map ------------------------------------->
+
+        <div class="map-block">
+            <section id="cd-google-map">
+                <div id="google-container"></div>
+                <div id="cd-zoom-in"></div>
+                <div id="cd-zoom-out"></div>
+                <form action="http://maps.google.com/maps"
+                      method="get"
+                      target="_blank">
+                    <input type="hidden"
+                           name="daddr"
+                           value="{{activity.location}} {{activity.address}} {{activity.neighborhood}}" />
+                    <input type="submit"
+                           class="btn-block"
+                           value="Get directions" />
+                </form>
+
+                <div class="panel panel-default panel-right"
+                     style="border-top-right-radius:0px;border-top-left-radius:0px;">
+                    <div class="address-head">{{activity.location}}</div>
+                    <div class="address">{{activity.address}}</div>
+                    <div class="address">{{activity.city}}</div>
+                    <div class="address"
+                         style="margin-bottom:15px;">
+                        {{activity.phone}}
+                    </div>
+                </div>
+            </section>
+
+            <div class="panel panel-default panel-right"
+                 style="height:50px;"
+                 ng-if="activity.locationWebsite || activity.zomatoLink || activity.facebookLink || activity.twitterLink">
+                <table class="link-table">
+                    <tr>
+                        <td>
+                            <div class="text-center link-div">
+                                <a href="{{activity.locationWebsite}}"
+                                   ng-if="activity.locationWebsite">
+                                    <div class="text-center">Website</div>
+                                </a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="text-center link-div">
+                                <a href="{{activity.zomatoLink}}"
+                                   ng-if="activity.zomatoLink">
+                                    <div class="text text-center">Zomato</div>
+                                </a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="text-center link-div">
+                                <a href="{{activity.facebookLink}}"
+                                   ng-if="activity.facebookLink">
+                                    <div class="text text-center">Facebook</div>
+                                </a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="text-center link-div">
+                                <a href="{{activity.twitterLink}}"
+                                   ng-if="activity.twitterLink">
+                                    <div class="text text-center">Twitter</div>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div><!-- map block end here -->
+
+        <!---------------- Tags (Not to be removed; for better SEO) ------------------>
+
+        <div class="panel panel-default panel-right"
+             ng-hide=true>
+            <ul class="genres">
+                <li ng-repeat="tag in activity.genre">{{tag}}</li>
+            </ul>
+        </div>
+
+        <!--------------- Payment -------------->
+
+        <div class="time-block">
+            <ul>
+                <li><h6>PRICE</h6></li>
+                <li>Rs {{activity.price}}</li>
+            </ul>
+        </div>
+
+        <div class="panel panel-default panel-right"
+             style="height:50px;"
+             ng-if="activity.payment || activity.bookRide">
+            <table class="link-table">
+                <tr>
+                    <td>
+                        <div class="text-center link-div">
+                            <a href="{{activity.payment}}"
+                               ng-if="activity.payment">
+                                <div class="text-center">Tickets</div>
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center link-div">
+                            <a href="{{activity.bookRide}}"
+                               ng-if="activity.bookRide">
+                                <div class="text-center">Ride</div>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!--------------- Additional Info -------------->
+
+        <div class="panel panel-default panel-right"
+             ng-if="activity.moreInfo">
+            <div class="panel-body">
+                <div class="info-title">MORE INFO</div>
+                <div class="info-text"
+                     ng-if="activity.moreInfoLink">
+                    <a href="{{activity.moreInfoLink}}">{{activity.moreInfo}}</a>
+                </div>
+                <div class="info-text"
+                     ng-if="!activity.moreInfoLink">{{activity.moreInfo}}
+                </div>
+            </div>
+        </div>
+
+        <!--------------- Tips --------------------->
+
+        <div class="sidebar-footer">
+            <p>TIPS</p>
+            <a href="" class="open-modal modal-pro-tip">Add a pro tip</a>
+            <ul class="genres">
+                <li ng-repeat="tip in activity.tips">{{tip.text}}</li>
+            </ul>
+        </div>
+
+        <div class="sidebar-footer">
+            <p>SPOT A PROBLEM?</p>
+            <a href="" class="open-modal modal-report">Report Here</a>
+
+            <p ng-if="activity.photoCredit">PHOTO CREDITS</p>
+            <a ng-if="activity.photoCredit" href="{{activity.photoCreditLink}}">{{activity.photoCredit}}</a>
+        </div>
+
+        <!----------------------- Activity review ------------------------------------------>
+
+        <div style="background-color:rgba(0,0,0,0.2)"
+             ng-if="activity.preview === false">
+            <div class="text-center">
+                <button class="btn btn-primary"
+                        ng-click="acceptActivity(currentUser._id)"
+                        ng-if="currentUser.p2p">
+                    Accept Activity
+                </button>
+                <a href="/editActivity/{{activity._id}}">Edit</a>
+                <button class="btn btn-danger"
+                        ng-click="deleteActivity()">
+                    Delete Activity
+                </button>
+            </div>
+        </div>
+
+    </div><!-- sidebar end here -->
+
+    <div class="clear-all"></div>
+
+    <!-------------------------------------------- Suggestions ---------------------------------------------->
+
+    <div class="suggestion-block">
+
+        <h2>You may like these</h2>
+
+        <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4"
+             ng-repeat="act in activities | orderBy:'timeAdded':true">
+            <a href="/activities/{{act._id}}">
+                <div class="place-cards">
+                    <!--div class="latest-ribbon"></div-->
+                    <div class="place-img">
+                        <img src="images/{{act.title}}.jpg"
+                             alt="{{act.title}}">
+                        <div class="event-stamp">
+                            Outdoor
+                        </div>
+                    </div>
+                    <div class="place-head">
+                        <h4 class="margin-bottom-none">{{act.title}}</h4>
+                        <p><i class="batch" data-icon="&#xF07D;"></i>{{act.location}}, {{act.neighborhood}}</p>
+                    </div>
+                    <div class="place-footer">
+                        <i class="batch" data-icon="&#xf15D;"></i> {{act.subscriptions}}
+								<span class="time-stamp">
+									Added on {{activity.dateOfActivity | date:'shortTime'}}
+								</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div><!-- suggestion block -->
+
+</div><!-- wrapper end -->
+
+<!----------------------------------------------- Modals ----------------------------------------------->
+
+        <!------------------ Bookmark modal ------------------->
+
+<div class="modal modal-bookmark-it" ng-if="!isSubscribed()">
+    <span class="modal-overlay"></span>
+    <div class="modal-content modal-mini text-center">
+        <div class="modal-head">
+            <div class="close-modal"></div>
+            <h2>Bookmark This Activity</h2>
+        </div><!-- modal head end -->
+        <div class="bookmark-it-head-img">
+            <img src="images/{{activity.title}}.jpg">
+            <address><b>{{activity.location}}</b><br/><i class="batch" data-icon="&#xF07B;"></i> {{activity.neighborhood}}</address>
+        </div><!-- bookmark image end -->
+        <div class="modal-body">
+            Add to Collection:
+            <select id="year">
+                <option value="new">Rocking</option>
+                <option value="popular">Must GO</option>
+                <option value="upcoming">Recommended</option>
+                <option value="bookmarked">My Favourites</option>
+            </select>
+            <textarea placeholder="Add some notes..."></textarea>
+            <button class="button button-facebook" ng-click="fb_share()">
+                Share on facebook
+            </button>
+        </div><!-- modal-body end -->
+        <div class="modal-footer text-right">
+            <button class="button button-primary" ng-click="subscribe()">Bookmark</button>
+        </div>
+    </div><!-- modal-content end -->
+</div><!-- modal end -->
+
+        <!------------------------------- Done modal ------------------------->
+
+<div class="modal modal-done-it" ng-if="!isDone()">
+    <span class="modal-overlay"></span>
+    <div class="modal-content text-left modal-mini">
+        <div class="modal-head">
+            <div class="close-modal"></div>
+            <h2>Activity Done</h2>
+        </div><!-- modal head end -->
+        <div class="bookmark-it-head-img">
+            <img src="images/{{activity.title}}.jpg">
+            <address><b>{{activity.location}}</b><br/><i class="batch" data-icon="&#xF07B;"></i> {{activity.neighborhood}}</address>
+        </div><!-- bookmark image end -->
+        <div class="modal-body">
+            <div class="clearfix">
+                <label style="margin-right: 28px;">Save to: </label>
+                <select>
+                    <option value="new">Rocking</option>
+                    <option value="popular">Must GO</option>
+                    <option value="upcoming">Recommended</option>
+                    <option value="bookmarked">My Favourites</option>
+                </select>
+            </div>
+            <br/>
+            <div class="clearfix">
+                <label>How was it? </label>
+                <select>
+                    <option value="new">Ok Ok</option>
+                    <option value="popular">Chalta he</option>
+                    <option value="upcoming">Maza Aa Gaya</option>
+                    <option value="bookmarked">Aag laga di :)</option>
+                </select>
+            </div>
+            <textarea placeholder="Add some notes..."></textarea>
+            <button class="button button-facebook" ng-click="fb_share()">
+                Share on facebook
+            </button>
+        </div><!-- modal-body end -->
+        <div class="modal-footer text-right">
+            <button class="button button-primary" ng-click="markDone()">Done</button>
+        </div>
+    </div><!-- modal-content end -->
+</div><!-- modal end -->
+
+        <!----------------------------- Tips modal ----------------------------->
+
+<div class="modal modal-pro-tip">
+    <span class="modal-overlay"></span>
+    <div class="modal-content text-left modal-mini">
+        <div class="modal-head">
+            <div class="close-modal"></div>
+            <h2>Share your thoughts</h2>
+        </div><!-- modal head end -->
+        <div class="bookmark-it-head-img">
+            <img src="images/{{activity.title}}.jpg">
+            <address><b>{{activity.location}}</b><br/><i class="batch" data-icon="&#xF07B;"></i> {{activity.neighborhood}}</address>
+        </div><!-- bookmark image end -->
+        <div class="modal-body">
+            <textarea class="margin-top-none" name="tip" ng-model="tip" maxlength="140" placeholder="Add a pro tip..."></textarea>
+            <button class="button button-facebook" ng-click="fb_share()">
+                Share on facebook
+            </button>
+        </div><!-- modal-body end -->
+        <div class="modal-footer text-right" ng-click="addTips(tip)">
+            <button class="button button-primary">Submit</button>
+        </div>
+    </div><!-- modal-content end -->
+</div><!-- modal end -->
+
+        <!---------------------------- Share modal ---------------------------->
+
+<div class="modal modal-share">
+    <span class="modal-overlay"></span>
+    <div class="modal-content text-center modal-mini">
+        <div class="modal-head">
+            <div class="close-modal"></div>
+            <h2>Spread the Word</h2>
+        </div><!-- modal head end -->
+        <a class="share-link" href="">http://www.joyage.in/7Yt560I</a>
+        <div class="facebook-share">
+            <img src="https://www.facebookbrand.com/img/facebook.icon.png" ng-click="fb_share()">
+        </div>
+        <div class="twitter-share">
+            <img src="https://g.twimg.com/Twitter_logo_white.png">
+        </div>
+    </div><!-- modal-content end -->
+</div><!-- modal end -->
+
+        <!-------------------------------- Report modal --------------------------->
+
+<div class="modal modal-report">
+    <span class="modal-overlay"></span>
+    <div class="modal-content text-left">
+        <div class="modal-head">
+            <div class="close-modal"></div>
+            <h2>Report a Problem</h2>
+        </div><!-- modal head end -->
+        <div class="modal-body clearfix">
+            <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4">
+                Error type :
+            </div>
+            <div class="col-lg-8 col-sm-8 col-xs-12 col-md-4">
+                <select>
+                    <option value="new">Venue Closed</option>
+                    <option value="popular">Relocationed</option>
+                    <option value="upcoming">Wrong Address</option>
+                    <option value="bookmarked">Name Changed</option>
+                    <option value="bookmarked">Something went wrong</option>
+                </select>
+            </div>
+
+            <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4" style="padding-top: 20px;">
+                Add a Note
+            </div>
+            <div class="col-lg-8 col-sm-8 col-xs-12 col-md-4">
+                <textarea placeholder="Note about problem"></textarea>
+            </div>
+        </div><!-- modal-body end -->
+        <div class="modal-footer text-right">
+            <button class="button button-primary">Send</button>
+        </div>
+    </div><!-- modal-content end -->
+</div><!-- modal end -->
+
+        <!------------------------------ Feedback modal ---------------------------->
+
+<div class="modal modal-feedback">
+    <span class="modal-overlay"></span>
+    <div class="modal-content text-left">
+        <div class="modal-head">
+            <div class="close-modal"></div>
+            <h2>Give your Feedback</h2>
+        </div><!-- modal head end -->
+        <div class="modal-body clearfix">
+            <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4">
+                Type
+            </div>
+            <div class="col-lg-8 col-sm-8 col-xs-12 col-md-4">
+                <select>
+                    <option value="new">Suggestions</option>
+                    <option value="popular">New feature</option>
+                    <option value="upcoming">Improvements</option>
+                </select>
+            </div>
+
+            <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4" style="padding-top: 20px;">
+                Feedback
+            </div>
+            <div class="col-lg-8 col-sm-8 col-xs-12 col-md-4">
+                <textarea placeholder="Let us know more about it"></textarea>
+            </div>
+        </div><!-- modal-body end -->
+        <div class="modal-footer text-right">
+            <button class="button button-primary">Send</button>
+        </div>
+    </div><!-- modal-content end -->
+</div><!-- modal end -->
+
 <!---------------------------- Footer ---------------------------->
 
 <footer id="footer-1080" style="margin-bottom:-20px;z-index: 1001;clear:both;">

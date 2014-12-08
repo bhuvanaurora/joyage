@@ -46,6 +46,7 @@ var sugar = require('sugar');
 var nodemailer = require('nodemailer');
 var sendgrid = require('sendgrid')(config.sendgrid.id, config.sendgrid.password);
 var _ = require('lodash');
+var cors = require('express-cors');
 
 var tokenSecret = config.tokenSecret;
 
@@ -139,7 +140,9 @@ var userSchema = new mongoose.Schema({
   doneActivities: [{
     type: String
   }],
-  completions: { type: Number, default: 0 }
+  completions: { type: Number, default: 0 },
+  inviteSent: { type: Number, default: 0 },
+  invites: [String]
 });
 
 /*userSchema.pre('save', function(next) {
@@ -287,7 +290,8 @@ app.post('/auth/facebook', function(req, res, next) {
         profileLink: profile.link
       },
       subscribedActivities: [],
-      doneActivities: []
+      doneActivities: [],
+      invites: []
     });
     user.save(function(err) {
       if (err) return next(err);
@@ -416,6 +420,7 @@ app.get('/api/activities/:id', function(req, res, next) {
 });
 
 var fs = require('fs');
+var image = '';
 
 app.post('/upload', function(req, res, next) {
   var filePath = path.join(__dirname, req.files.file.path);
@@ -423,6 +428,8 @@ app.post('/upload', function(req, res, next) {
     var writePath = path.join(__dirname, '/public/images', req.files.file.name);
     fs.writeFile(writePath, data, function(err) {
       if (err) throw(err);
+      image = data;
+      console.log('data:'+ data);
       res.status(200).json({
         data: data,
         imageurl: req.files.file.name
@@ -431,7 +438,7 @@ app.post('/upload', function(req, res, next) {
   })
 });
 
-app.post('/api/activities', function(req, res, next) {
+app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
   var activity = new Activity({
     _id: req.body.id,
     title: req.body.title,
@@ -453,6 +460,7 @@ app.post('/api/activities', function(req, res, next) {
     mapLon: req.body.mapLon,
     status: req.body.status,
     poster: req.body.poster,
+    //poster: image,
     photoCredit: req.body.photoCredit,
     photoCreditLink: req.body.photoCreditLink,
     currency: req.body.currency,
@@ -481,7 +489,7 @@ app.post('/api/activities', function(req, res, next) {
   });
 });
 
-app.put('/api/activities/:id', function(req, res, next) {
+app.put('/api/activities/:id', ensureAuthenticated, function(req, res, next) {
   Activity.findById(req.params.id, function(err, activity) {
     if (err) return next(err);
     console.log(req.body.title);
@@ -523,6 +531,24 @@ app.put('/api/activities/:id', function(req, res, next) {
       if (err) return next(err);
       res.send(200);
     });
+  });
+});
+
+app.post('/sendInvites', ensureAuthenticated, function(req, res, next) {
+  User.findById(req.body.id, function(err, user) {
+    if (err) return next(err);
+    console.log(req.body.id);
+    console.log(req.body.response);
+    console.log(req.body.response.to.length);
+
+    /*user.inviteSent += 1;
+    user.invites.push(req.body.response.to);
+
+    user.save(function(err) {
+      if (err) return next(err);
+      res.status(200).end();
+    })*/
+    res.status(200).end();
   });
 });
 
@@ -679,9 +705,20 @@ app.get('/api/editActivity/:id', ensureAuthenticated, function(req, res, next) {
   });
 });
 
+/*app.all('/*', function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
+  next();
+});*/
+
 app.get('*', function(req, res) {
-  res.redirect('/#' + req.originalUrl);
+  res.redirect('/#/' + req.originalUrl);
 });
+
+/*app.get('*', function(req, res) {
+  res.redirect('/#/development/' + req.originalUrl);
+});*/
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);

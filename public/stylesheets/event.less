@@ -1,0 +1,580 @@
+// This page contains style for event detail page. 
+// Changes here will effect on activity page - @jay
+
+
+@light-color: #fff;
+@gray-color: #d9d9d9;
+@dark-color: #333;
+@secondary-color: #F69B0F;
+@primary-color: #1A8BD9;
+@link-color: @primary-color;
+@font-size: 15px;
+@transition: all 0.3s ease-in-out;
+@space: 20px;
+@available-space: calc(100vw - 10%);
+
+
+header{
+	margin-bottom: @space;
+}
+
+
+// --------------------------------------------- Event left detail
+.event-details-block{
+	width: 100%;
+	min-height: 100px;
+	height: auto;
+	box-shadow: 0px 0px 4px #ccc;
+	background-color: @light-color;
+	padding-top: @space;
+	padding: @space;
+}
+
+.rectangle {
+	background: #7f9db9;
+	height: 40px;
+	width: 380px;
+	position: relative;
+	left:-35px;
+	top: 0px;
+	float: left;
+	z-index: 0;
+	padding-top: 6px;
+	h2{
+		color: @light-color;
+		text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+		text-align: center;
+		margin-top: 0;
+		margin-bottom: 0;
+		font-weight: 300;
+		word-spacing: 1;
+	}
+}
+.triangle-l {
+	border-color: transparent #7d90a3 transparent transparent;
+	border-style:solid;
+	border-width:15px;
+	height:0px;
+	width:0px;
+	position: relative;
+	left: -50px;
+	top: 25px;
+	z-index: -1; /* displayed under bubble */
+}
+
+.event-heading{
+	margin-top: @space + 10;
+}
+
+.event-place-info{
+	display: inline-block;
+	width: 30%;
+	p{
+		color: darken(@gray-color, 20%);
+		font-size: 80%;
+		margin-bottom: 0;
+		margin-top: 0;
+	}
+	h5{
+		font-weight: 300;
+		margin-top: 0;
+	}
+}
+.event-img img{
+	max-height: 350px;
+	width: 100%;
+	margin-bottom: @space;
+}
+.event-info-holder{
+	font-size: 18px;
+	line-height: 25px;
+	a{
+		font-size: 15px;
+		line-height: 20px;
+	}
+}
+
+// --------------------------------------------- Chat bubbles
+.tip-block{
+	margin-top: @space;
+	margin-bottom: @space/2;
+}
+.bubble-holder {
+  text-decoration: none;
+  width: 100%;
+}
+
+.bubble-body {
+  background-color: #7f9db9;
+  height: auto;
+  padding: @space/2;
+  border-radius: 10px 10px 10px 0;
+  color: @light-color;
+  display: block;
+  text-shadow: 1px 1px 1px darken(#7f9db9, 10%);
+}
+.bubble-bot {
+  background-color: #7f9db9;
+}
+.bbl-hook {
+  border-radius: 25px 0 0 0;
+  height: 25px;
+  background-color: @light-color;
+}
+.buble-user-img {
+	img{
+		width: 50px;
+		height: 50px;
+		border: 2px solid @gray-color;
+		border-radius: 50%;
+		margin-right: @space/3;
+		margin-left: 5px;
+		margin-top: -20px;
+		display: inline-block;
+	}
+	h6{
+		margin-top: 0px;
+		vertical-align: middle;
+		display: inline-block;
+	}
+}
+
+
+// --------------------------------------------- Event right details
+.event-actions-block{
+
+}
+.event-button{
+	height: 40px;
+	background-color: @link-color;
+	color: @light-color;
+	border-radius: 6px;
+	transition: @transition;
+	border: 1px solid transparent;
+	cursor: pointer;
+	&:hover{
+		background-color: @light-color;
+		color: @link-color;
+		border: 1px solid @link-color;
+	}
+}
+
+.share-button{
+	width: 40px;
+	border: none;
+	margin-left: 5px;
+}
+.main-action-button-1{
+	width: 40%;
+	position: relative;
+	min-width: 100px;
+	display: inline-block;
+	margin-right: -3px;
+	border-radius: 6px 0px 0px 6px;
+}
+.main-action-button-2{
+	width: 40%;
+	position: relative;
+	display: inline-block;
+	border-radius: 0 6px 6px 0px;
+}
+.button-icons{
+	position: absolute;left: 5px;
+	top: 10px;
+}
+.button-counter{
+	position: absolute;
+	right: 5px;
+	top: 10px;
+}
+
+// ----------------------------------------- Map blocks
+
+#google-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-color: #e7eaf0;
+  margin-top: @space + 5;
+  border-radius: 6px 6px 0px 0px;
+  box-shadow: 0px 0px 3px #aaa;
+}
+
+#cd-google-map {
+  position: relative;
+}
+#cd-google-map address , .bookmark-it-head-img address{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding: 1em 1em;
+  background-color: rgba(127, 157, 185, 0.9);
+  color: @light-color;
+  text-shadow: 1px 1px 1px darken(#7f9db9, 10%);
+}
+
+#cd-zoom-in, #cd-zoom-out {
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  margin-left: 5px;
+  background-color: rgba(127, 157, 185, 0.9);
+  background-repeat: no-repeat;
+  background-size: 32px 64px;
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/cd-icon-controller.svg");
+}
+.no-touch #cd-zoom-in:hover, .no-touch #cd-zoom-out:hover {
+  background-color: #7f9db9;
+}
+
+#cd-zoom-in {
+  background-position: 50% 0;
+  margin-top: 5px;
+  margin-bottom: 1px;
+}
+
+#cd-zoom-out {
+  background-position: 40% -32px;
+}
+
+.connect-buttons{
+	margin-top: 0;
+	ul{
+		padding: 0;
+		margin-top: 0;
+		list-style-type: none;
+		margin-top: -15px;
+		li{
+			display: inline-block;
+				border-right: 1px solid #ddd;
+			a{
+				background-color: @light-color;
+				text-align: center;
+				color: #7f9db9;
+				padding: 10px;
+				display: block;
+				border-bottom: none;
+				&:hover{
+					border-bottom: none;
+					background-color: #f8f8f8;
+				}
+			}
+			&:last-child{
+				border-right: none;
+				& a{
+					border-radius: 0px 0px 6px 0px;
+					border: 1px solid #ddd;
+					border-top: none;
+					border-left:none;
+				}
+			}
+			&:first-child a{
+				border-radius: 0px 0px 0px 6px;
+				border: 1px solid #ddd;
+				border-top: none;
+				border-right:none;
+			}
+			&:nth-child(2){
+				border-bottom: 1px solid #ddd;
+			}
+		}
+	}
+}
+
+// ------------------------------------ Time block
+.time-block, .transit-block{
+	width: 100%;
+	min-height: 50px;
+	height: auto;
+	background-color: @light-color;
+	border-radius: 6px;
+	border: 1px solid #ddd;
+	margin-top: @space * 4;
+	ul{
+		padding-left: 0px;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+	li{
+		display: block;
+		border-bottom: 1px solid #ddd;
+		padding: @space/2;
+		&:first-child,&:last-child{
+			border-bottom: none;
+		}
+		&:first-child{
+			padding-bottom: 0;
+		}
+		h6{
+			color: darken(@gray-color, 20%);
+			font-size: 80%;
+			margin-bottom: 0;
+			margin-top: 0;
+			font-weight: 300;
+		}
+		span{
+			color: @secondary-color;
+		}
+	}
+}
+.transit-block{
+	margin-top: @space + 5;
+}
+
+.categories-block{
+	margin-top: @space + 5;
+	p{
+		color: darken(@gray-color, 20%);
+		font-size: 80%;
+		margin-bottom: 10px;
+		margin-top: 0;
+	}
+}
+.cat-tags{
+	min-width: 50px;
+	width: auto;
+	min-height: 10px;
+	height: auto;
+	padding: 2px;
+	padding-left: @space/2;
+	padding-right: @space/2;
+	display: inline-block;
+	background-color: lighten(@gray-color, 4%);
+	border: 1px solid lighten(@dark-color, 60%);
+	color: #f8f8f8;
+	border-radius: 20px;
+	text-align: center;
+	font-size: 80%;
+	color: lighten(@dark-color, 30%);
+	cursor: pointer;
+	transition: @transition;
+	&:hover{
+		color: @dark-color;
+		border: 1px solid @dark-color;
+	}
+}
+
+.sidebar-footer{
+	p{
+		color: darken(@gray-color, 20%);
+		font-size: 80%;
+		margin-bottom: 0px;
+		margin-top: 20px;
+	}
+	a{
+		color: lighten(@dark-color, 13%);
+		transition: @transition;
+		border-bottom: none;
+		&:hover{
+			color: @link-color;
+			border-bottom: none;
+		}
+	}
+}
+
+// -------------------------------- Cards 
+
+.suggestion-block{
+	margin-top: @space + 10;
+	h2{
+		color: darken(@gray-color, 20%);
+		font-weight: bold;
+		margin-top: 0px;
+		margin-bottom: 0;
+		padding-left: 15px;
+	}
+}
+
+.cards-holder{
+	margin-bottom: @space * 2;
+}
+	.place-cards{
+		border-radius: 6px;
+		box-shadow: 0px 0px 3px lighten(@dark-color, 50%);
+		padding: @space/2;
+		background-color: @light-color;
+		width: 100%;
+		min-height: 150px;
+		height: auto;
+		position: relative;
+		overflow: hidden;
+		transition: @transition;
+		margin-top: @space + 10;
+		&:hover{
+			box-shadow: 0px 0px 3px lighten(@secondary-color, 5%);
+		}
+		&:focus{
+			outline: none;
+		}
+	}
+	.place-img{
+		position: relative;
+		img{
+			width: 100%;
+			height: 200px;
+			overflow: hidden;
+		}
+	}
+	.place-head{
+		border-bottom: 1px solid @gray-color;
+		height: 80px;
+		h4{
+			color: lighten(@dark-color, 10%);
+		}
+		i{
+			margin-right: @space/2;
+		}
+		p{
+			color: darken(@gray-color, 30%);
+			margin-top: 5px;
+		}
+	}
+	.place-footer{
+		padding-top: @space/2;
+		color: @dark-color;
+			&:hover{
+				color: @link-color;
+			}
+
+		i{
+			font-size: 20px;
+			vertical-align: top;
+		}
+	}
+	.time-stamp{
+		float: right;
+		color: darken(@gray-color, 30%);
+		font-size: 85%;
+	}
+	.latest-ribbon{
+		position: absolute;
+		right: 0;top: 0;
+		float: right;
+		width: 0;
+		height: 0;
+		border-top: 4.3em solid @secondary-color;
+		border-left: 4.3em solid transparent;
+		z-index: 1; // zindex included to overcome image
+		&:after{
+			position: absolute;
+			content: "New";
+			top: -52px;
+			transform: rotate(43deg);
+			color: @light-color;
+			left: -36px;
+			font-size: 16px;
+		}
+	}
+	.event-stamp{
+		min-width: 110px;
+		text-align: left;
+		background-color: rgba(127, 157, 185, 0.9);
+		padding: @space/4;
+		padding-left: @space/3;
+		padding-right: @space/3;
+		color: @light-color;
+		text-shadow: 1px 1px 1px darken(#7f9db9, 10%);
+		position: absolute;
+		bottom: 0px;
+		right: 0px;
+		border-radius: 1px;
+		text-align: center;
+		text-transform: uppercase;
+		i{
+			margin-right: @space/4;
+		}
+	}
+
+// ----------------------------------- Bookmark it modal
+.modal-bookmark-it, .modal-done-it{
+	.modal-body{
+		text-align: left;
+	}
+}
+
+.bookmark-it-head-img{
+	position: relative;
+	address{
+		padding: @space/4;
+		padding-left: @space;
+		padding-right: @space;
+		text-align: left;
+	}
+	img{
+		width: 100%;
+		max-height: 200px;
+		overflow: hidden;
+	}
+}
+
+.button-facebook{
+	background-color: transparent;
+	margin-top: @space/2;
+	border: 2px solid rgba(59,89,152, 0.5) !important;
+	border-radius: 6px;
+	color: #3b5998;
+	text-transform: none !important;
+	&:hover{
+		border: 2px solid #3b5998;
+	}
+	&:active, &:focus{
+		outline: none;
+	}
+}
+.button-facebook-fill{
+	background-color: #3b5998;
+	color: @light-color;
+}
+.modal-report, .modal-share{
+	.modal-content{
+		min-width: 450px;
+	}
+}
+.share-link{
+	padding: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	display: block;
+	background-color: lighten(@gray-color, 7%);
+	color: darken(@gray-color, 50%);
+	&:hover{
+		background-color: @gray-color;
+		border-bottom: 1px solid @gray-color;
+	}
+}
+.facebook-share, .twitter-share{
+	width: 50%;
+	height: 100px;
+	position: relative;
+	background-color: rgba(59,89,152, 0.8);
+	cursor: pointer;
+	transition: @transition;
+	display: inline-block;
+	margin-bottom: -5px;
+	border-radius: 0px 0px 0px 6px;
+	img{
+		position: absolute;
+		width: 30px;
+		top: 50%;
+		left: 50%;
+		margin-left: -15px;
+		margin-top: -15px;
+	}
+	&:hover{
+		background-color: #3b5998;
+	}
+}
+.twitter-share{
+	background-color: rgba(64,153,255, 0.8);
+	border-radius: 0px 0px 6px 0px;
+	margin-left: -4px;
+	&:hover{
+		background-color: #4099ff;
+	}
+}
+
+// ------------------------- Common code
+.u-margin-top-px{
+	margin-top: 20px !important;
+}

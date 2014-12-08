@@ -12,8 +12,31 @@
             </ul>
         </div>
         <button class="btn btn-primary btn-danger"
-                ng-click="invite_friends()">
-            This is the button
+                ng-click="invite_friends()"
+                ng-disabled="disabled">
+            Friends
+        </button>
+        <button class="btn btn-facebook"
+                ng-click="fb_invite()"
+                ng-disabled="disabled">
+            <span class="ion-social-facebook"></span>
+            Invite facebook friends via personal message
+        </button>
+        <button class="btn btn-facebook"
+                ng-click="fb_request()"
+                ng-disabled="{{disabled}}">
+            <span class="ion-social-facebook"></span>
+            Invite facebook friends via request
+        </button>
+        <button class="btn btn-facebook"
+                ng-click="invite_users()">
+            <span class="ion-social-facebook"></span>
+            Invite users
+        </button>
+        <button class="btn btn-facebook"
+                ng-click="my_details()">
+            <span class="ion-social-facebook"></span>
+            My details
         </button>
     </div>
 </div>

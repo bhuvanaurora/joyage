@@ -4,6 +4,12 @@ angular.module('MyApp')
     /*$scope.neighborhood = { 'Bangalore': ['Kormangala', 'JP Nagar', 'Indiranagar', 'MG Road'],
                               'Delhi': ['Connaught Place', 'Dwarka', 'Janak Puri', 'Saket', 'Defence Colony', 'Hauz Khas']
                             };*/
+
+      $(function () {
+        $(".js-filter-activity:not(.js-activity-holder)").click(function() {
+          $('.js-activity-holder').slideToggle(200);
+        });
+      });
     
     // Asynchronously initialize FB SDK
     $window.fbAsyncInit = function() {
@@ -79,7 +85,6 @@ angular.module('MyApp')
         mfsForm.appendChild(sendButton);
       });*/  
     };
-    
     
     $scope.facebookInviteFriends = function() {
       FB.ui({
