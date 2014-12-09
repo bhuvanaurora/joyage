@@ -47,6 +47,7 @@ var nodemailer = require('nodemailer');
 var sendgrid = require('sendgrid')(config.sendgrid.id, config.sendgrid.password);
 var _ = require('lodash');
 var cors = require('express-cors');
+var argv = require('optimist').argv;
 
 var tokenSecret = config.tokenSecret;
 
@@ -168,11 +169,13 @@ var userSchema = new mongoose.Schema({
 var User = mongoose.model('User', userSchema);
 var Activity = mongoose.model('Activity', activitySchema);
 
-mongoose.connect(config.db);
+//mongoose.connect(config.db);
+mongoose.connect('mongodb://' + argv.be_ip + ':80/my_database');
 
 var app = express();
 
-app.set('port', process.env.PORT || 3001);
+//app.set('port', process.env.PORT || 3001);
+app.listen(8080, argv.fe_ip);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
