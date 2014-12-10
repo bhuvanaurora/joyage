@@ -20,6 +20,8 @@
     "connect-multiparty": "^1.2.5",
     "consolidate": "^0.10.0",
     "express": "^4.0.0",
+    "http": "0.0.0",
+    "http-proxy": "^1.7.3",
     "jquery": "^2.1.1",
     "jwt-simple": "^0.2.0",
     "lodash": "^2.4.1",
@@ -37,6 +39,7 @@
     "sugar": "^1.4.1",
     "swig": "^1.4.2",
     "universal-analytics": "^0.3.4",
+    "util": "^0.10.3",
     "xml2js": "^0.4.2"
   },
   "devDependencies": {
