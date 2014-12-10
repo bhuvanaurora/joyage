@@ -731,19 +731,19 @@ app.use(function(err, req, res, next) {
   res.status(500).send({ message: err.message });
 });
 
-/*app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 8080);
 
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
-});*/
+});
 
-httpProxy.createServer(8080, '0.0.0.0').listen(80);
+/*httpProxy.createServer(8080, '0.0.0.0').listen(80);
 
 http.createServer(function(req, res) {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
   res.write('request successfully proxied to: ' + req.url + '\n' + JSON.stringify(req.headers, true, 2));
   res.end();
-}).listen(8080);
+}).listen(8080);*/
 
 // -------------------------------------------------- Emails --------------------------------------------------------//
 
