@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // ------------------------------------------- Index -------------------------------------------------- //
 
 /*
@@ -174,7 +176,7 @@ mongoose.connect(config.db);
 
 var app = express();
 
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 8080);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
