@@ -711,20 +711,10 @@ app.get('/api/editActivity/:id', ensureAuthenticated, function(req, res, next) {
   });
 });
 
-/*app.all('/*', function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
-  next();
-});*/
 
 app.get('*', function(req, res) {
   res.redirect('/#/' + req.originalUrl);
 });
-
-/*app.get('*', function(req, res) {
-  res.redirect('/#/development/' + req.originalUrl);
-});*/
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);
@@ -736,14 +726,6 @@ app.set('port', process.env.PORT || 8080);
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
-
-/*httpProxy.createServer(8080, '0.0.0.0').listen(80);
-
-http.createServer(function(req, res) {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.write('request successfully proxied to: ' + req.url + '\n' + JSON.stringify(req.headers, true, 2));
-  res.end();
-}).listen(8080);*/
 
 // -------------------------------------------------- Emails --------------------------------------------------------//
 
