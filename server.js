@@ -22,6 +22,7 @@ if (process.env.NODE_ENV === "dev") {
 } else {
   var config = require('./config.prod.json');
 }
+console.log(process.env.NODE_ENV);
 
 // ---------------------------------- Loading modules ------------------------------------------------- //
 

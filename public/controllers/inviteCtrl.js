@@ -75,6 +75,7 @@ angular.module('MyApp')
               filters: ['app_non_users'],
               redirect_uri: 'http://joyage.in'
             }, function (response) {
+              console.log("Yes it works");
               if (response.to.length) {
                 $http.post('/sendInvites', {id: $routeParams.id, response: response});
                 var recipient_info = "https://graph.facebook.com/" + $scope.profile.facebookId + "/apprequests?fields=id,application,to,from,data,message,action_type,object,created_time&access_token=" + fb_appId;
