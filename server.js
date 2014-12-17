@@ -19,8 +19,10 @@ if (!process.env.NODE_ENV) {
 }
 if (process.env.NODE_ENV === "dev") {
   var config = require('./config.dev.json');
+  process.env.PORT = 3000;
 } else {
   var config = require('./config.prod.json');
+  process.env.PORT = 8080;
 }
 console.log(process.env.NODE_ENV);
 
@@ -134,7 +136,11 @@ var userSchema = new mongoose.Schema({
   facebook: {
     id: String,
     email: String,
-    profileLink: String
+    profileLink: String,
+    requests: [String],
+    invitation_to: [String],
+    invitations_sent: { type: Number, default: 0 },
+    inviteString: String
   },
   google: {
     id: String,
@@ -150,6 +156,11 @@ var userSchema = new mongoose.Schema({
   completions: { type: Number, default: 0 },
   inviteSent: { type: Number, default: 0 },
   invites: [String]
+});
+
+var invitesSchema = new mongoose.Schema({
+  _id: String,
+  invitations_accepted: { type: Number, default: 0 }
 });
 
 /*userSchema.pre('save', function(next) {
@@ -174,9 +185,9 @@ var userSchema = new mongoose.Schema({
 
 var User = mongoose.model('User', userSchema);
 var Activity = mongoose.model('Activity', activitySchema);
+var Invites = mongoose.model('Invites', invitesSchema);
 
 mongoose.connect(config.db);
-//mongoose.connect('mongodb://' + argv.be_ip + ':80/my_database');
 
 var app = express();
 
@@ -279,6 +290,15 @@ app.post('/auth/facebook', function(req, res, next) {
   if (encodedSignature !== expectedSignature) {
     return res.send(400, 'Invalid Request Signature');
   }
+
+  /*var inviteString = req.params.rs;
+  Invites.findOne({ _id: inviteString }, function(err, invite) {
+    console.log(invite);
+    if( invite.invitations_sent < 10 ){
+    } else {
+      res.send("Can't signup");
+    }
+  });*/
   User.findOne({ facebookId: profile.id }, function(err, existingUser) {
     if (existingUser) {
       var token = createJwtToken(existingUser);
@@ -294,7 +314,9 @@ app.post('/auth/facebook', function(req, res, next) {
       facebook: {
         id: profile.id,
         email: profile.email,
-        profileLink: profile.link
+        profileLink: profile.link,
+        requests: [],
+        invitation_to: []
       },
       subscribedActivities: [],
       doneActivities: [],
@@ -353,6 +375,49 @@ app.get('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
     if (err) return next(err);
     res.send(profile);
   });
+});
+
+app.put('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
+  User.findById(req.params.id, function(err, profile) {
+    if (err) return next(err);
+    profile.facebook.requests.push(req.body.facebook.requests);
+    profile.facebook.invitation_to.push(req.body.facebook.invitation_to);
+    profile.facebook.invitations_sent += req.body.facebook.invitations_sent;
+    profile.facebook.inviteString = req.body.facebook.inviteString;
+    profile.save(function(err) {
+      if (err) return next(err);
+      res.send(200);
+    });
+  });
+});
+
+app.post('/api/invites', ensureAuthenticated, function(req, res, next) {
+  var invites = new Invites({
+    _id: req.body.id
+  });
+  invites.save(function(err) {
+    if (err) return next(err);
+    res.status(200).end();
+  });
+});
+
+app.get('/api/invites/:rs', ensureAuthenticated, function(req, res, next) {
+  Invites.findById(req.params.rs, function(err, invites) {
+    if (err) return next(err);
+    res.send(invites);
+  })
+});
+
+app.put('/api/invites', function(req, res, next) {
+  console.log('Put');
+  Invites.findById(req.body._id, function(err, invites) {
+    if (err) next(err);
+    invites.invitations_accepted += 1;
+    invites.save(function(err) {
+      if (err) next(err);
+      res.status(200).end;
+    })
+  })
 });
 
 app.get('/api/activities', function(req, res, next) {
@@ -722,7 +787,7 @@ app.use(function(err, req, res, next) {
   res.status(500).send({ message: err.message });
 });
 
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 3000);
 
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));

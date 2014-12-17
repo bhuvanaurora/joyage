@@ -27,6 +27,10 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
+      .when('/login/:rs', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
+      })
 
       /*.when('/signup', {
         templateUrl: 'views/signup.html',
@@ -36,12 +40,10 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
         templateUrl: 'views/add.html',
         controller: 'AddCtrl'
       })
-
       .when('/admin/:id', {
         templateUrl: 'views/admin.html',
         controller: 'AdminCtrl'
       })
-
       .when('/about', {
         templateUrl: 'views/pages/about.html'
       })
@@ -56,38 +58,6 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
       })
       .when('/profile/:id', {
         templateUrl: 'views/profile.html',
-        controller: 'ProfileCtrl'
-      })
-      .when('/dev', {
-        templateUrl: 'views/dev/home.html',
-        controller: 'MainCtrl'
-      })
-      .when('/dev/invite/:id', {
-        templateUrl: 'views/dev/invite.html',
-        controller: 'InviteCtrl'
-      })
-      .when('/dev/activities/:id', {
-        templateUrl: 'views/dev/detail.html',
-        controller: 'DetailCtrl'
-      })
-      .when('/dev/editActivity/:id', {
-        templateUrl: 'views/dev/add.html',
-        controller: 'AddCtrl'
-      })
-      .when('/dev/login', {
-        templateUrl: 'views/dev/login.html',
-        controller: 'LoginCtrl'
-      })
-      .when('/dev/add', {
-        templateUrl: 'views/dev/add.html',
-        controller: 'AddCtrl'
-      })
-      .when('/dev/admin/:id', {
-        templateUrl: 'views/dev/admin.html',
-        controller: 'AdminCtrl'
-      })
-      .when('/dev/profile/:id', {
-        templateUrl: 'views/dev/profile.html',
         controller: 'ProfileCtrl'
       })
       .otherwise({

@@ -1,21 +1,5 @@
 <div class="container">
     <div class="panel panel-default">
-        <div class="panel">
-            <ul>
-                <li ng-repeat="friend in friend_list.data">
-                    {{friend.name}}
-                    <button class="btn btn-primary"
-                            ng-click="fb_invite(friend.id)">
-                        Invite
-                    </button>
-                </li>
-            </ul>
-        </div>
-        <button class="btn btn-primary btn-danger"
-                ng-click="invite_friends()"
-                ng-disabled="disabled">
-            Friends
-        </button>
         <button class="btn btn-facebook"
                 ng-click="fb_invite()"
                 ng-disabled="disabled">
@@ -23,20 +7,9 @@
             Invite facebook friends via personal message
         </button>
         <button class="btn btn-facebook"
-                ng-click="fb_request()"
-                ng-disabled="{{disabled}}">
+                ng-click="fb_request()">
             <span class="ion-social-facebook"></span>
             Invite facebook friends via request
-        </button>
-        <button class="btn btn-facebook"
-                ng-click="invite_users()">
-            <span class="ion-social-facebook"></span>
-            Invite users
-        </button>
-        <button class="btn btn-facebook"
-                ng-click="my_details()">
-            <span class="ion-social-facebook"></span>
-            My details
         </button>
     </div>
 </div>

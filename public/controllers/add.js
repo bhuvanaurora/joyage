@@ -189,11 +189,11 @@ angular.module('MyApp')
         $scope.addCategory = function(genre) {
           $scope.categories.push(genre);
           $scope.genres.splice($scope.genres.indexOf(genre), 1);
-        }
+        };
         $scope.removeCategory = function(selectedCategory) {
           $scope.categories.splice($scope.categories.indexOf(selectedCategory), 1);
           $scope.genres.push(selectedCategory);
-        }
+        };
 
         $scope.title = activity.title;
         $scope.description = activity.description;
