@@ -86,7 +86,7 @@ angular.module('MyApp')
                   to: response.to,
                   method: 'send',
                   name: 'Joyage | Discover the best activities in town',
-                  link: 'http://joyage.in/login/' + randomString
+                  link: 'http://joyage.co/login/' + randomString
                 });
               }
               $scope.profile.$update(function () {
