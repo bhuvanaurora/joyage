@@ -1,8 +1,8 @@
 // Changes made
 
 angular.module('MyApp')
-  .controller('DetailCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$alert', 'fb_appId', 'Activity', 'Subscription', 'DoneIt', 'Tips', 'Accept', 'Delete',
-                             function($scope, $rootScope, $window, $routeParams, $location, $alert, fb_appId, Activity, Subscription, DoneIt, Tips, Accept, Delete) {
+  .controller('DetailCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$alert', 'fb_appId', 'Activity', 'Profile', 'Subscription', 'DoneIt', 'Tips', 'Accept', 'Delete',
+                             function($scope, $rootScope, $window, $routeParams, $location, $alert, fb_appId, Activity, Profile, Subscription, DoneIt, Tips, Accept, Delete) {
 
         $window.fbAsyncInit = function() {
           FB.init({
@@ -25,10 +25,10 @@ angular.module('MyApp')
                 }
             });
           };
-        
+
       Activity.get({ _id: $routeParams.id }, function(activity) {
         $scope.activity = activity;
-        
+
         $scope.activities = Activity.query({limit: 3, id: activity._id});
 
         // Share dialog
@@ -336,20 +336,20 @@ angular.module('MyApp')
             $scope.subscriptions -= 1;
           });
         };
-        
+
         $scope.isDone = function() {
             if ($rootScope.currentUser) {
                 return $scope.activity.doneIt.indexOf($rootScope.currentUser._id) !== -1;
             }
         };
-        
+
         $scope.markDone = function() {
           DoneIt.markDone(activity).success(function() {
             $scope.activity.doneIt.push($rootScope.currentUser._id);
             $scope.completions += 1;
           });
         };
-        
+
         $scope.markUndone = function() {
           DoneIt.markUndone(activity).success(function() {
             var index = $scope.activity.doneIt.indexOf($rootScope.currentUser._id);
@@ -357,14 +357,14 @@ angular.module('MyApp')
             $scope.completions -= 1;
           });
         };
-        
+
         $scope.addTips = function(tip) {
           $scope.activity.tips.push(tip);
           Tips.addTip(activity).success(function() {
             $scope.tip = '';
           });
         };
-        
+
         $scope.acceptActivity = function(userId) {
             Accept.acceptActivity(activity, userId).success(function() {
                 $alert({
@@ -376,7 +376,7 @@ angular.module('MyApp')
                 $location.path('/admin');
             });
         };
-        
+
         $scope.deleteActivity = function() {
             Delete.deleteActivity(activity).success(function() {
                 $alert({

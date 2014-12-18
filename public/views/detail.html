@@ -37,9 +37,9 @@
                 <div class="navigation js-navigation"><!-- navigation starts here -->
                     <nav class="nav-drawer js-nav-drawer">
                         <div class="head-user-pic">
-                            <!--img src="{{smallProfilePicture}}"-->
+                            <img src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
                         </div>
-                        <div class="head-user-name">
+                        <div class="head-user-name" style="margin-bottom:15px">
                             <span ng-if="currentUser">{{currentUser.name}}</span>
                         </div>
                         <div class="navToggle">
@@ -128,7 +128,7 @@
                     <p>NEIGHBOURHOOD</p>
                     <h5>{{activity.neighborhood}}</h5>
                 </div>
-                <div class="event-place-info">
+                <div class="event-place-info" ng-if="activity.dateOfActivity">
                     <p>WHEN</p>
                     <h5>{{activity.dateOfActivity | date: shortDate}}</h5>
                 </div>
@@ -137,7 +137,6 @@
             <div class="event-img">
                 <img src="images/{{activity.title}}.jpg">
             </div>
-            <img src="www.googleapis.com/download/storage/v1/b/joyage_images/o/022Greco-Toledo.jpg?alt=media">
 
             <div class="event-info-holder" id="description">
                 <a href="/">Joyage</a><br/>
@@ -732,7 +731,11 @@
         
         <div class="grid_6 pull-right">
             <div class="footer-logo">
-                <h3 style="margin-top: 20px;color:#999;">JOYAGE</h3>
+                <h3 style="margin-top: 20px;color:#999;font-family:Montserrat">
+                    <a href="/" style="color:#999;font-family:Montserrat">
+                        JOYAGE
+                    </a>
+                </h3>
             </div>
             <div style="font-size: 10px;margin-top: 20px;color:#999;">
                 COPYRIGHT 2014

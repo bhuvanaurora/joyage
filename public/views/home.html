@@ -37,7 +37,7 @@
                 <div class="navigation js-navigation"><!-- navigation starts here -->
                     <nav class="nav-drawer js-nav-drawer">
                         <div class="head-user-pic">
-                            <!--img src="{{smallProfilePicture}}"-->
+                            <img src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
                         </div>
                         <div class="head-user-name" style="margin-bottom:15px">
                             <span ng-if="currentUser">{{currentUser.name}}</span>
@@ -62,6 +62,7 @@
                             </li>
                             <li>
                                 <a ng-if="currentUser.curator === true" href="/admin/{{currentUser._id}}">
+                                    <span class="nav-action-icons"><i class="batch" data-icon="&#xF04D;"></i></span>
                                     Admin
                                 </a>
                             </li>
