@@ -2,6 +2,8 @@ angular.module('MyApp')
   .controller('InviteCtrl', ['$scope', '$window', '$alert', '$window', '$routeParams', '$http', '$route', '$templateCache', 'fb_appId', 'Profile', 'editedProfile', 'Invites', 'updateInvites',
     function($scope, $window, $alert, $window, $routeParams, $http, $route, $templateCache, fb_appId, Profile, editedProfile, Invites, updateInvites) {
 
+      var randomString;
+
       editedProfile.get({ _id: $routeParams.id }, function(profile) {
         $scope.profile = profile;
 
@@ -63,10 +65,10 @@ angular.module('MyApp')
               'Geller', 'Buffay', 'Tribbiani', 'Green', 'Arryn', 'Baratheon', 'Bolton', 'Frey', 'Greyjoy', 'Lannister', 'Martell', 'Stark',
               'Targaryen', 'Tully', 'Tyrell']);
 
-            var randomString = chance.last() + '-' + chance.last() + chance.cc() + chance.hashtag();
+            randomString = chance.last() + '-' + chance.last() + chance.cc() + chance.hashtag();
             console.log(randomString);
           } else {
-            var randomString = $scope.profile.facebook.inviteString;
+            randomString = $scope.profile.facebook.inviteString;
           }
 
           $scope.fb_request = function () {
