@@ -1,0 +1,268 @@
+// ------------------------------ Login styles
+
+@light-color: #fff;
+@gray-color: #d9d9d9;
+@dark-color: #333;
+@secondary-color: #F69B0F;
+@primary-color: #1A8BD9;
+@link-color: @primary-color;
+@font-size: 15px;
+@transition: all 0.3s ease-in-out;
+@space: 20px;
+
+
+// ------------------------------ Header
+.main-header{
+	z-index: 10;
+	position: fixed;
+	width: 100%;
+}
+.top-header{
+	padding-top: @space/2;
+	padding-bottom: @space/2;
+	background-color: @dark-color;
+	transition: @transition;
+}
+.main-footer{
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+// --------------------------------------------- Main code
+.login-box-block{
+	width: 400px;
+	height: 400px;
+	z-index: 10;
+	a,p{
+		color: darken(@gray-color, 15%);
+	}
+	p{
+		margin-top: 0;
+	}
+}
+.login-box, .forget-box{
+	width: 100%;
+	min-height: 100px;
+	height: auto;
+	background-color: @light-color;
+	border: 1px solid @gray-color;
+	border-radius: 8px;
+	transition: @transition;
+}
+.login-box-head{
+	min-height: 40px;
+	height: auto;
+	line-height: 40px;
+	color: @dark-color;
+	background-color: lighten(@gray-color, 12%);
+	border-radius: 8px 8px 0 0;
+	border-bottom: 1px solid @gray-color;
+}
+.login-body{
+	padding: @space;
+	.button-primary{
+		margin-top: -10px;
+	}
+}
+.with-facebook{
+	width: 100%;
+	height: 40px;
+	color: @light-color;
+	background-color: #3b5998;
+	border-radius: 4.5px;
+	position: relative;
+	font-size: 17px;
+	line-height: 35px;
+	cursor: pointer;
+	transition: @transition;
+	margin-bottom: @space;
+	&:hover{
+		background-color: darken(#3b5998, 10%);
+	}
+	img{
+		position: absolute;
+		left: 10px;
+		top: 8px;
+	}
+}
+.seperator-block{
+	width: 100%;
+	height: 1px;
+	background-color: lighten(@gray-color, 7%);
+	position: relative;
+	text-align: center;
+	margin-bottom: 20px;
+	&:after{
+		content: "OR";
+		background-color: @light-color;
+		padding-left: 5px;
+		padding-right: 5px;
+		color: darken(@gray-color, 10%);
+		margin-top: -11px;
+		margin-left: -15px;
+		position: absolute;
+	}
+}
+.login-input{
+	border: none;
+	border-bottom: 1px solid @gray-color;
+	color: @dark-color;
+	width: 100%;
+	transition: @transition;
+	height: 30px;
+	margin-bottom: 10px;
+	&:hover{
+		border-bottom: 1px solid darken(@gray-color, 20%);
+	}
+	&:focus{
+		border: none;
+		border-bottom: 1px solid @link-color;
+	}
+}
+.forget-box{
+	display: none;
+}
+.js-fogot-pass{
+	.login-box{
+		display: none;
+	}
+	.forget-box{
+		display: block;
+	}
+}
+// ------------------ Remember Checkmark
+@-moz-keyframes dothabottomcheck {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 9px;
+  }
+}
+@-webkit-keyframes dothabottomcheck {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 9px;
+  }
+}
+@keyframes dothabottomcheck {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 9px;
+  }
+}
+@keyframes dothatopcheck {
+  0% {
+    height: 0;
+  }
+  50% {
+    height: 0;
+  }
+  100% {
+    height: 15px;
+  }
+}
+@-webkit-keyframes dothatopcheck {
+  0% {
+    height: 0;
+  }
+  50% {
+    height: 0;
+  }
+  100% {
+    height: 15px;
+  }
+}
+@-moz-keyframes dothatopcheck {
+  0% {
+    height: 0;
+  }
+  50% {
+    height: 0;
+  }
+  100% {
+    height: 15px;
+  }
+}
+input[type=checkbox] {
+  display: none;
+}
+
+.check-box {
+  height: 20px;
+  width: 20px;
+  background-color: transparent;
+  border: 2px solid darken(@gray-color, 10%);
+  border-radius: 5px;
+  position: relative;
+  display: inline-block;
+  transition: @transition;
+  cursor: pointer;
+  margin-top: 2px;
+}
+.check-box::before, .check-box::after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  position: absolute;
+  height: 0;
+  width: 3px;
+  background-color: @link-color;
+  display: inline-block;
+  -moz-transform-origin: left top;
+  -ms-transform-origin: left top;
+  -o-transform-origin: left top;
+  -webkit-transform-origin: left top;
+  transform-origin: left top;
+  border-radius: 1px;
+  content: ' ';
+  -webkit-transition: opacity ease .5;
+  -moz-transition: opacity ease .5;
+  transition: opacity ease .5;
+}
+.check-box::before {
+  top: 14px;
+  left: 10px;
+  box-shadow: 0 0 0 2px @light-color;
+  -moz-transform: rotate(-135deg);
+  -ms-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+.check-box::after {
+  top: 7px;
+  left: 2px;
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+input[type=checkbox]:checked + .check-box,
+.check-box.checked {
+  border-color: @link-color;
+}
+input[type=checkbox]:checked + .check-box::after,
+.check-box.checked::after {
+  height: 9px;
+  -moz-animation: dothabottomcheck 0.2s ease 0s forwards;
+  -o-animation: dothabottomcheck 0.2s ease 0s forwards;
+  -webkit-animation: dothabottomcheck 0.2s ease 0s forwards;
+  animation: dothabottomcheck 0.2s ease 0s forwards;
+}
+input[type=checkbox]:checked + .check-box::before,
+.check-box.checked::before {
+  height: 15px;
+  -moz-animation: dothatopcheck 0.4s ease 0s forwards;
+  -o-animation: dothatopcheck 0.4s ease 0s forwards;
+  -webkit-animation: dothatopcheck 0.4s ease 0s forwards;
+  animation: dothatopcheck 0.4s ease 0s forwards;
+}

@@ -8,10 +8,9 @@
   <meta charset="utf-8">
   <title>Joyage</title>
   <!--link href="favicon.png" rel="icon" type="image/png"-->
-  <link href='http://fonts.googleapis.com/css?family=Roboto|Montserrat|Courgette:400,700|Open+Sans:400,300,700'
+  <link href='http://fonts.googleapis.com/css?family=Roboto|Montserrat|Courgette:400,700|Open+Sans:400,300,700|Bad+Script'
         rel='stylesheet'
         type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Condiment' rel='stylesheet' type='text/css'>
   <link href="//cdn.jsdelivr.net/ionicons/1.4.1/css/ionicons.min.css" rel="stylesheet">
   <link href="stylesheets/animate.css" rel="stylesheet">
   <link href="stylesheets/dragon.css" rel="stylesheet">
@@ -20,11 +19,17 @@
   <link href="stylesheets/custom.css" rel="stylesheet">
   <link href="stylesheets/mapbox.css" rel="stylesheet">
 
+
           <!--- Custom stylesheets --->
-  <link href="stylesheets/style2.css" rel="stylesheet">
+  <!--link href="stylesheets/style2.css" rel="stylesheet"-->
   <link href="stylesheets/event.css" rel="stylesheet">
   <link href="stylesheets/profile.css" rel="stylesheet">
   <link href="stylesheets/home.css" rel="stylesheet">
+  <link href="stylesheets/about.css" rel="stylesheet">
+  <link href="stylesheets/index.css" rel="stylesheet">
+  <!--link href="stylesheets/interest.css" rel="stylesheet"-->
+  <link href="stylesheets/login.css" rel="stylesheet">
+  <link href="stylesheets/signup.css" rel="stylesheet">
   <link href="stylesheets/vendor/font-awesome.min.css" rel="stylesheet">
   
   <!---------------------- Google Maps API ------------------------->
@@ -45,7 +50,7 @@
     <div class="wrapper">
       <div class="col-lg-5 col-sm-6 col-xs-6 col-md-6">
         <div class="head-brand">
-          <a href="/">Joyage</a>
+          <a href="/" style="font-family:Montserrat;color:white">Joyage</a>
         </div>
         <div class="city-select js-city-select">
           <div class="city-selected">Bangalore</div>
@@ -82,7 +87,6 @@
               </div>
               <div class="head-user-name">
                 <span ng-if="currentUser">{{currentUser.name}}</span>
-                <span ng-if="!currentUser">Jonathan</span>
               </div>
               <div class="navToggle">
                 <div class="icon-left"></div>

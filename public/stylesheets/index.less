@@ -1,0 +1,256 @@
+// This page contains index styles.
+// Changes here will effect to index page. - @jay
+
+@light-color: #fff;
+@gray-color: #d9d9d9;
+@dark-color: #333;
+@secondary-color: #F69B0F;
+@primary-color: #1A8BD9;
+@link-color: @primary-color;
+@font-size: 15px;
+@transition: all 0.3s ease-in-out;
+@space: 20px;
+
+// ------------------------------- Main code start
+
+// ------------------------------ Header
+.main-header{
+	z-index: 10;
+	position: fixed;
+	width: 100%;
+}
+.top-header{
+	padding-top: @space * 2;
+	padding-bottom: @space * 2;
+	background-color: transparent;
+	transition: @transition;
+}
+.header-small{
+	padding-top: @space/3;
+	padding-bottom: @space/3;
+	background-color: @dark-color;
+	transition: @transition;
+	button{
+		margin-top: @space/4;
+	}
+}
+
+.top-intro-section{
+	width: 100%;
+	height: 100%;
+	height: 100vh;
+	background: url(../../img/index/2.jpg) no-repeat fixed top center;
+	background-size: cover;
+	position: relative;
+}
+.overlay {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: -webkit-linear-gradient(#2496a6, #30c9de);
+	background: linear-gradient(#2496a6, #30c9de);
+	opacity: .65;
+}
+.intro-appeal-block{
+	max-width: 600px;
+	height: 200px;
+	position: absolute;
+	top: 50%;
+	margin-top: -100px;
+	text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.4);
+	h2{
+		color: @light-color;
+		font-weight: 300;
+		font-size: (@font-size * 5) - 10;
+		line-height: (@font-size * 5) - 5;
+	}
+	p{
+		color: rgba(255, 255, 255, 0.9);
+		font-size: @font-size + 7;
+		line-height: @font-size + 10;
+		font-weight: 400;
+		margin-top: 10px;
+	}
+	button{
+		margin-top: 20px;
+		margin-right: 10px;
+	}
+	a{
+		color: @light-color;
+		text-transform: uppercase;
+		&:hover{
+			color: @light-color;
+			border-bottom: 1px solid @light-color;
+		}
+	}
+}
+.section-head{
+	font-size: (@font-size * 3) - 10;
+	line-height: (@font-size * 3);
+	text-transform: uppercase;
+	color: darken(@dark-color, 20%);
+	margin-bottom: @space * 3;
+	border-bottom: 2px solid @gray-color;
+	width: 50%;
+}
+
+// -------------------------------------- Features Block
+.features-block{
+	padding-top: @space * 4;
+	padding-bottom: @space * 2;
+}
+.features-head{
+	font-size: @font-size * 2;
+	font-weight: 300;
+	color: @dark-color;
+	i{
+		font-size: @font-size + 12;
+		margin-right: @space/2;
+	}
+}
+.feature-holder{
+	margin-bottom: @space * 2;
+}
+.features-descriptions{
+	max-width: 400px;
+	p{
+		color: darken(@gray-color, 30%);
+		font-size: @font-size + 5;
+		line-height: @font-size + 10;
+	}
+}
+
+// -------------------------------- Review Block
+.review-block{
+	background: #fff url("../../img/texture.png");
+	width: 100%;
+	min-height: 100px;
+	height: auto;
+	padding-top: @space * 3;
+	padding-bottom: @space * 3;
+	border-top: 1px solid @gray-color;
+	&:hover .review-holder i{
+		transform: scale(2);
+		opacity: 0.8;
+	}
+}
+.review-holder{
+	max-width: 700px;
+	p{
+		font-size: @font-size + 10;
+		line-height: @font-size + 17;
+		word-spacing: 3px;
+		color: darken(@gray-color, 35%);
+	}
+	h3{
+		font-size: @font-size + 15;
+		line-height: @font-size + 20;
+		word-spacing: : 3px;
+		font-weight: 300;
+		a{
+			color: @dark-color;
+			font-weight: 400;
+			font-size: 100%;
+		}
+	}
+	a{
+		font-size: @font-size + 15px;
+		line-height: @font-size + 20px;
+	}
+	i{
+		margin-left: @space;
+		font-size: @font-size + 10;
+		line-height: @font-size + 10;
+		color: #eb4d5c;
+		transform: scale(1);
+		transition: @transition;
+		opacity: 0.5;
+		cursor: default;
+	}
+}
+
+// -------------------------------- City Block
+.city-block{
+	background-color: @light-color;
+	border-top: 1px solid @gray-color;
+	border-bottom: 1px solid @gray-color;
+	padding-top: @space * 3;
+	padding-bottom: @space * 3;
+}
+.listed-city-holder{
+	max-width: 300px;
+	height: 140px;
+	position: relative;
+	overflow: hidden;
+	border-radius: 8px;
+	margin: @space auto;
+	.overlay{
+		border-radius: 8px;
+	}
+	img{
+		border-radius: 8px;
+		background-position: cover;
+	}
+}
+.city-name{
+	color: @light-color;
+	z-index: 1;
+	text-transform: uppercase;
+	font-size: @font-size + 3;
+	max-width: 150px;
+	text-align: center;
+	height: 20px;
+}
+.coming-soon{
+	position: absolute;
+	right: 0;
+	top: 0;
+	border-radius: 0px 0px 0px 8px;
+	background-color: rgba(255, 255, 255, 0.3);
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	border-top: none;
+	border-right: none;
+	color: @light-color;
+	padding: 3px;
+	padding-left: @space/2;
+	padding-right: @space/2;
+}
+.google-play{
+	text-align: center;
+	margin-bottom: @space;
+	a{
+		border-bottom: none;
+		&:hover{
+			border-bottom: none;
+		}
+	}
+	span{
+		font-size: 25px;
+		margin-right: @space;
+	}
+}
+
+// --------------------------
+.apple-app{
+	position: relative;
+	.coming-soon{
+		background-color: #eb4d5c;
+		border-radius: 4px;
+		height: 20px;
+		min-width: 50px;
+		padding-left: 5px;
+		padding-right: 5px;
+		font-size: 75%;
+		text-transform: uppercase;
+		line-height: 13px;
+		color: @light-color;
+		margin-top: -30px;
+		top: 0;
+		right: 0;
+		border: none;
+	}
+}

@@ -1,0 +1,205 @@
+// This file contains styles related to signup page - @jay
+
+
+// ------------------------------ signup styles
+
+@light-color: #fff;
+@gray-color: #d9d9d9;
+@dark-color: #333;
+@secondary-color: #F69B0F;
+@primary-color: #1A8BD9;
+@link-color: @primary-color;
+@font-size: 15px;
+@transition: all 0.3s ease-in-out;
+@space: 20px;
+
+
+// ------------------------------ Header
+.main-header{
+	width: 100%;
+}
+.top-header{
+	padding-top: @space/2;
+	padding-bottom: @space/2;
+	background-color: @dark-color;
+	transition: @transition;
+}
+
+// ---------------------------------------------------- main-code
+
+.signup-block{
+	width: 100%;
+	min-height: 100px;
+	height: auto;
+	overflow-x: hidden;
+	padding-top: @space * 2;
+	padding-bottom: @space * 2;
+	h4{
+		font-weight: normal;
+		color: lighten(@dark-color, 30%);
+		margin-top: 0;
+		text-align: center;
+	}
+}
+.select-city-block{
+	width: 100%;
+	transform: translate3d(0,0,0);
+}
+.overlay {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: -webkit-linear-gradient(#2496a6, #30c9de);
+	background: linear-gradient(#870000, #190A05);
+	opacity: .65;
+	z-index: 1;
+}
+.listed-city-holder{
+	max-width: 300px;
+	height: 140px;
+	position: relative;
+	overflow: hidden;
+	border-radius: 8px;
+	margin: @space auto;
+	cursor: pointer;
+	.overlay{
+		border-radius: 8px;
+	}
+	&:hover img{
+		transform: scale(1.5);
+	}
+	img{
+		border-radius: 8px;
+		background-position: cover;
+		transform: scale(1);
+		transition: @transition;
+	}
+}
+.city-name{
+	color: @light-color;
+	z-index: 1;
+	text-transform: uppercase;
+	font-size: @font-size + 3;
+	max-width: 150px;
+	text-align: center;
+	height: 20px;
+}
+.coming-soon{
+	position: absolute;
+	right: 0;
+	top: 0;
+	border-radius: 0px 0px 0px 8px;
+	background-color: rgba(255, 255, 255, 0.3);
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	border-top: none;
+	border-right: none;
+	color: @light-color;
+	padding: 3px;
+	padding-left: @space/2;
+	padding-right: @space/2;
+	z-index: 2;
+}
+.js-select-city{
+	.listed-city-holder{
+		opacity: 0.7;
+	}
+	.active{
+		opacity: 1;
+	}
+}
+.signup-box-block{
+	width: 100%;
+	display: none;
+	p{
+		color: darken(@gray-color, 30%);
+		cursor: pointer;
+		transition: @transition;
+		&:hover{
+			color: @dark-color;
+		}
+	}
+}
+
+// ------------------------------
+.signup-actions{
+	max-width: 400px;
+	margin: @space auto;
+}
+.with-facebook{
+	width: 100%;
+	height: 40px;
+	color: @light-color;
+	background-color: #3b5998;
+	border-radius: 4.5px;
+	position: relative;
+	font-size: 17px;
+	line-height: 35px;
+	cursor: pointer;
+	transition: @transition;
+	margin-bottom: @space;
+	&:hover{
+		background-color: darken(#3b5998, 10%);
+	}
+	img{
+		position: absolute;
+		left: 10px;
+		top: 8px;
+	}
+}
+.js-signup-trigger{
+	.signup-box-block{
+		display: block;
+	}
+	.select-city-block{
+		display: none;
+	}
+}
+.seperator-block{
+	width: 100%;
+	height: 1px;
+	background-color: lighten(@gray-color, 7%);
+	position: relative;
+	text-align: center;
+	margin-bottom: 20px;
+	margin-top: 40px;
+	cursor: pointer;
+	&:after{
+		content: "WHY WE USE FACEBOOK?";
+		background-color: lighten(@gray-color, 12%);
+		padding-left: 5px;
+		padding-right: 5px;
+		color: darken(@gray-color, 10%);
+		margin-top: -11px;
+		margin-left: -96px;
+		position: absolute;
+	}
+}
+// ------------------------------ modal
+.modal-body{
+	.seperator-block{
+		cursor: default;
+		margin-top: 5px;
+		&:after{
+			content: "BENIFITS";
+			background-color: @light-color;
+			margin-left: -38px;
+		}
+	}
+}
+
+
+.facebook-features{
+	i{
+		float: left;
+		font-size: @font-size + 10;
+		margin-right: @space/2;
+	}
+	p{
+		text-align: left;
+		color: darken(@gray-color, 30%);
+	}
+}

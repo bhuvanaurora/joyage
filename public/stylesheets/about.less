@@ -1,0 +1,110 @@
+// This page contains styles of about page.
+// Changes will reflect only to about page. - @jay
+
+@light-color: #fff;
+@gray-color: #d9d9d9;
+@dark-color: #333;
+@secondary-color: #F69B0F;
+@primary-color: #1A8BD9;
+@link-color: @primary-color;
+@font-size: 15px;
+@transition: all 0.3s ease-in-out;
+@space: 20px;
+
+// ---------------------------------------- Main code start
+.intro-head{
+	width: 100%;
+	height: 70%;
+	height: 70vh;
+	position: relative;
+	background: @light-color url(../../img/index/2.jpg) no-repeat fixed top center;
+}
+.overlay {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: -webkit-linear-gradient(darken(#7f9db9, 10%), @primary-color);
+	background: linear-gradient(darken(#7f9db9, 10%), @primary-color);
+	opacity: .85;
+}
+.intro-text-block{
+	max-width: 700px;
+	height: 100px;
+	font-size: (@font-size * 2) + 10;
+	line-height: (@font-size * 2) + 15;
+	color: @light-color;
+	font-weight: 300;
+	padding-top: 150px;
+	position: relative;
+}
+.joyage-block, .team-block{
+	min-height: 100px;
+	height: auto;
+	padding-top: @space * 2;
+	padding-bottom: @space * 2;
+	border-bottom: 1px solid @gray-color;
+	background-color: @light-color;
+	h1{
+		font-size: @font-size + 15;
+		line-height: @font-size + 20;
+		color: lighten(@dark-color, 15%);
+		max-width: 700px;
+		font-weight: 400;
+	}
+	p{
+		color: darken(@gray-color, 20%);
+		font-size: @font-size + 5;
+		line-height: @font-size + 8;
+	}
+}
+.team-block{
+	background-color: lighten(@gray-color, 12%);
+	border-bottom: none;
+	h3{
+		font-size: @font-size + 10;
+		line-height: @font-size + 20;
+		color: lighten(@dark-color, 15%);
+		max-width: 700px;
+		font-weight: 400;
+		margin-bottom: @space * 2;
+	}
+}
+.team-person-holder{
+	max-width: 400px;
+	min-height: 100px;
+	height: auto;
+	background-color: @light-color;
+	box-shadow: 0px 0px 3px lighten(@gray-color, 2%);
+	border-radius: 50px;
+	margin-top: @space;
+	img{
+		float: left;
+		border-radius: 50%;
+		height: 100px;
+		margin-right: 10px;
+		padding: 4px;
+	}
+	a{
+		font-weight: normal;
+		margin-top: 10px;
+		font-size: 20px;
+		margin-bottom: 0px;
+		color: @dark-color;
+		display: inline-block;
+		border-bottom: none;
+		&:hover{
+			color: @link-color;
+			border-bottom: none;
+		}
+	}
+	p{
+		color: darken(@gray-color, 30%);
+		margin-top: 10;
+		font-size: @font-size;
+		line-height: @font-size + 5;
+	}
+}
