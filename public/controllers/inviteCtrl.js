@@ -72,6 +72,12 @@ angular.module('MyApp')
           }
 
           $scope.fb_request = function () {
+            $alert({
+              content: 'Inviting friends',
+              placement: 'top-right',
+              type: 'material',
+              duration: 3
+            });
             FB.ui({
               method: 'apprequests',
               message: 'Invite your facebook friends to Joyage',
