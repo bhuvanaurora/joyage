@@ -235,6 +235,7 @@ function ensureAuthenticated(req, res, next) {
       return res.status(500).send('Error parsing token');
     }
   } else {
+    res.set('Content-Type', 'application/json');
     return res.send(401);
   }
 }
