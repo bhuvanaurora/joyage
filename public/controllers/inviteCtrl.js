@@ -65,7 +65,6 @@ angular.module('MyApp')
 
             var randomString = chance.last() + '-' + chance.last() + chance.cc() + chance.hashtag();
             console.log(randomString);
-            Invites.save({ id: randomString });
           } else {
             var randomString = $scope.profile.facebook.inviteString;
           }
@@ -89,6 +88,7 @@ angular.module('MyApp')
                   link: 'http://joyage.co/login/' + randomString
                 });
               }
+              Invites.save({ id: randomString });
               $scope.profile.$update(function () {
                 $route.reload();
               });
