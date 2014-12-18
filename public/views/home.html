@@ -39,7 +39,7 @@
                         <div class="head-user-pic">
                             <!--img src="{{smallProfilePicture}}"-->
                         </div>
-                        <div class="head-user-name">
+                        <div class="head-user-name" style="margin-bottom:15px">
                             <span ng-if="currentUser">{{currentUser.name}}</span>
                         </div>
                         <div class="navToggle">
@@ -61,11 +61,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/profile/{{currentUser._id}}">
-                    <span class="nav-action-icons">
-                      <i class="batch" data-icon="&#xF04D;"></i>
-                    </span>
-                                    Edit Settings
+                                <a ng-if="currentUser.curator === true" href="/admin/{{currentUser._id}}">
+                                    Admin
                                 </a>
                             </li>
                             <li>
