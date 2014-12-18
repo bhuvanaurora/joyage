@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <title>Joyage</title>
   <!--link href="favicon.png" rel="icon" type="image/png"-->
-  <link href='http://fonts.googleapis.com/css?family=Roboto|Montserrat|Courgette:400,700|Open+Sans:400,300,700|Bad+Script'
+  <link href='http://fonts.googleapis.com/css?family=Roboto|Montserrat|Courgette:400,700|Open+Sans:400,300,700'
         rel='stylesheet'
         type='text/css'>
   <link href="//cdn.jsdelivr.net/ionicons/1.4.1/css/ionicons.min.css" rel="stylesheet">
@@ -43,114 +43,6 @@
   </style>
 </head>
 <body>
-
-  <!----------------------------------------------------- Navbar -------------------------------------------->
-
-  <header ng-controller="NavbarCtrl"><!-- header start -->
-    <div class="wrapper">
-      <div class="col-lg-5 col-sm-6 col-xs-6 col-md-6">
-        <div class="head-brand">
-          <a href="/" style="font-family:Montserrat;color:white">Joyage</a>
-        </div>
-        <div class="city-select js-city-select">
-          <div class="city-selected">Bangalore</div>
-          <div class="select-dropdown"></div>
-        </div>
-        <div class="city-select-drawer js-city-select-drawer">
-          <ul>
-            <li class="open-modal modal-city-update">Ahmedabad</li>
-            <li class="selected">Bangalore</li>
-            <li class="open-modal modal-city-update">Delhi</li>
-            <li class="open-modal modal-city-update">Mumbai</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="col-lg-7 col-sm-6 col-xs-6 col-md-6">
-        <div class="pull-right">
-          <div class="head-search">
-            <!--input type="search" placeholder="Search..." /-->
-            <input class="search"
-                   type="text"
-                   ng-model="query"
-                   style="margin-top:1px;background-color:white;"
-                   placeholder="Search...">
-            <div class="head-search-icon">
-              <i class="batch" data-icon="&#xF097;"></i>
-            </div>
-          </div><!-- search end -->
-
-          <div class="navigation js-navigation"><!-- navigation starts here -->
-            <nav class="nav-drawer js-nav-drawer">
-              <div class="head-user-pic">
-                <!--img src="{{smallProfilePicture}}"-->
-              </div>
-              <div class="head-user-name">
-                <span ng-if="currentUser">{{currentUser.name}}</span>
-              </div>
-              <div class="navToggle">
-                <div class="icon-left"></div>
-                <div class="icon-right"></div>
-              </div>
-              <ul class="nav-list">
-                <li>
-                  <a href="/profile/{{currentUser._id}}"
-                     ng-if="currentUser">
-                    <span class="nav-action-icons">
-                      <i class="batch" data-icon="&#xF170;"></i>
-                    </span>
-                    Profile
-                  </a>
-                  <a href="/login"
-                     ng-if="!currentUser">
-                    Login
-                  </a>
-                </li>
-                <li>
-                  <a href="/profile/{{currentUser._id}}">
-                    <span class="nav-action-icons">
-                      <i class="batch" data-icon="&#xF04D;"></i>
-                    </span>
-                    Edit Settings
-                  </a>
-                </li>
-                <li>
-                  <a href="/profile/{{currentUser._id}}">
-                    <span class="nav-action-icons">
-                      <i class="batch" data-icon="&#xF171;"></i>
-                    </span>
-                    Invite Friends
-                  </a>
-                </li>
-                <li>
-                  <a href="/profile/{{currentUser._id}}">
-                    <span class="nav-action-icons">
-                      <i class="batch" data-icon="&#xF007;"></i>
-                    </span>
-                    Send Feedback
-                  </a>
-                </li>
-                <li>
-                  <a href="javascript:void(0)" ng-click="logout()">
-                    <span class="nav-action-icons">
-                      <i class="batch" data-icon="&#xF069;"></i>
-                    </span>
-                    Log Out
-                  </a>
-                </li>
-                <li>
-                  <a ng-if="currentUser.curator === true" href="/admin/{{currentUser._id}}">
-                    Admin
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div><!-- navigation ends here -->
-
-        </div><!-- pull right end -->
-      </div>
-    </div><!-- wrapper ends -->
-  </header><!-- Header ends -->
   
   <div ng-view class="{{pageClass}}"></div>
 

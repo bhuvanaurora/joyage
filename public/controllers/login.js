@@ -10,4 +10,22 @@ angular.module('MyApp')
       Auth.facebookLogin();
     };
     $scope.pageClass = 'fadeZoom';
+
+      $('.open-modal').click(function() {
+        $('.login-box-block').hide();
+        var el = $(this)[0],
+            classes = el.className.split(/\s+/);
+        for(var i = 0; i < classes.length; i++) {
+          if(classes[i].match(/modal-/)) {
+            var modalClass = classes[i];
+            $('.modal.' + modalClass).fadeIn('fast');
+          }
+        }
+      });
+
+      $('.close-modal').click(function() {
+        $('.login-box-block').show();
+        $(this).closest('.modal').fadeOut('fast');
+      });
+
   }]);

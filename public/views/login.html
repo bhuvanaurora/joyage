@@ -1,4 +1,58 @@
-<div class="container">
+<div class="main-header top-header">
+  <div class="wrapper">
+    <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 text-center">
+      <div class="head-brand" style="float: none;">
+        <a href="/" style="font-family:Montserrat;color:white">Joyage</a>
+      </div>
+    </div>
+  </div><!-- wrapper end -->
+</div><!-- main header end -->
+
+<div class="login-box-block absolute-center clearfix">
+  <div class="login-box">
+    <div class="login-box-head text-center">
+      LOG IN
+    </div>
+    <div class="login-body clearfix">
+      <div class="with-facebook text-center" ng-click="facebookLogin()">
+        <img src="https://www.facebookbrand.com/img/facebook.icon.png">
+        Log in with facebook
+      </div>
+      <div class="seperator-block open-modal modal-facebook"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal modal-facebook">
+  <span class="modal-overlay"></span>
+  <div class="modal-content modal-mini text-center">
+    <div class="modal-head">
+      <div class="close-modal"></div>
+      <h2>Why we use facebook?</h2>
+    </div><!-- modal head end -->
+    <div class="modal-body clearfix">
+      <p class="margin-bottom-none margin-top-none">Privacy is the top most priority for us here at Joyage. And we are not joking here.</p>
+      <p>We will not post on your timeline without your permission.</p>
+      <div class="seperator-block"></div>
+      <div class="facebook-features">
+        <i class="batch" data-icon="&#xF0DD;"></i>
+        <p>Best recommendations based on your interests.</p>
+      </div>
+      <div class="facebook-features">
+        <i class="batch" data-icon="&#xF045;"></i>
+        <p>Connect with friends and have fun.</p>
+      </div>
+      <div class="facebook-features">
+        <i class="batch" data-icon="&#xF0C2;"></i>
+        <p>One less password to remember.</p>
+      </div>
+    </div>
+  </div><!-- modal-content end -->
+</div><!-- modal end -->
+
+
+
+<!--div class="container">
   <div class="row">
     <div class="center-form panel">
         <div class="panel-body">
@@ -33,9 +87,9 @@
           
           </form-->
 
-          <button class="btn btn-lg btn-block btn-facebook" ng-click="facebookLogin()"><span class="ion-social-facebook"></span>Sign in with Facebook</button>
+          <!--button class="btn btn-lg btn-block btn-facebook" ng-click="facebookLogin()"><span class="ion-social-facebook"></span>Sign in with Facebook</button>
           <!--button class="btn btn-lg btn-block btn-google-plus" ng-click="googleLogin()"><span class="ion-social-googleplus"></span>Sign in with Google</button-->
-        </div>
+        <!--/div>
     </div>
   </div>
 </div>
