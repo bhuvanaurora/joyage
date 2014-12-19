@@ -318,7 +318,8 @@ app.post('/auth/facebook', function(req, res, next) {
         email: profile.email,
         profileLink: profile.link,
         requests: [],
-        invitation_to: []
+        invitation_to: [],
+        invitations_sent: 0
       },
       subscribedActivities: [],
       doneActivities: [],
