@@ -50,9 +50,9 @@
                             <li>
                                 <a href="/profile/{{currentUser._id}}"
                                    ng-if="currentUser">
-                    <span class="nav-action-icons">
-                      <i class="batch" data-icon="&#xF170;"></i>
-                    </span>
+                                    <span class="nav-action-icons">
+                                      <i class="batch" data-icon="&#xF170;"></i>
+                                    </span>
                                     Profile
                                 </a>
                                 <a href="/login"
@@ -61,40 +61,36 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/profile/{{currentUser._id}}">
-                    <span class="nav-action-icons">
-                      <i class="batch" data-icon="&#xF04D;"></i>
-                    </span>
-                                    Edit Settings
+                                <a ng-if="currentUser.curator === true"
+                                   href="/admin/{{currentUser._id}}">
+                                    <span class="nav-action-icons">
+                                        <i class="batch" data-icon="&#xF04D;"></i>
+                                    </span>
+                                    Admin
                                 </a>
                             </li>
                             <li>
                                 <a href="/profile/{{currentUser._id}}">
-                    <span class="nav-action-icons">
-                      <i class="batch" data-icon="&#xF171;"></i>
-                    </span>
+                                    <span class="nav-action-icons">
+                                      <i class="batch" data-icon="&#xF171;"></i>
+                                    </span>
                                     Invite Friends
                                 </a>
                             </li>
                             <li>
                                 <a href="/profile/{{currentUser._id}}">
-                    <span class="nav-action-icons">
-                      <i class="batch" data-icon="&#xF007;"></i>
-                    </span>
+                                    <span class="nav-action-icons">
+                                      <i class="batch" data-icon="&#xF007;"></i>
+                                    </span>
                                     Send Feedback
                                 </a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)" ng-click="logout()">
-                    <span class="nav-action-icons">
-                      <i class="batch" data-icon="&#xF069;"></i>
-                    </span>
+                                    <span class="nav-action-icons">
+                                      <i class="batch" data-icon="&#xF069;"></i>
+                                    </span>
                                     Log Out
-                                </a>
-                            </li>
-                            <li>
-                                <a ng-if="currentUser.curator === true" href="/admin/{{currentUser._id}}">
-                                    Admin
                                 </a>
                             </li>
                         </ul>
@@ -324,7 +320,8 @@
 
         <!--------------- Payment -------------->
 
-        <div class="time-block">
+        <div class="time-block"
+             ng-if="activity.price">
             <ul>
                 <li><h6>PRICE</h6></li>
                 <li>Rs {{activity.price}}</li>
