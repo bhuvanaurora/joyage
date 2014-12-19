@@ -202,7 +202,7 @@ app.use(multipart({
 // Robots.txt
 app.use(function (req, res, next) {
     if ('/robots.txt' == req.url) {
-        res.type('text/plain')
+        res.type('text/plain');
         res.send("User-agent: *\nDisallow: /images/");
     } else {
         next();
