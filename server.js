@@ -136,11 +136,7 @@ var userSchema = new mongoose.Schema({
   facebook: {
     id: String,
     email: String,
-    profileLink: String,
-    requests: [String],
-    invitation_to: [String],
-    invitations_sent: { type: Number, default: 0 },
-    inviteString: String
+    profileLink: String
   },
   google: {
     id: String,
@@ -153,9 +149,11 @@ var userSchema = new mongoose.Schema({
   doneActivities: [{
     type: String
   }],
-  completions: { type: Number, default: 0 },
-  inviteSent: { type: Number, default: 0 },
-  invites: [String]
+  requests: [String],
+  invitation_to: [String],
+  invitations_sent: { type: Number, default: 0 },
+  inviteString: String,
+  completions: { type: Number, default: 0 }
 });
 
 var invitesSchema = new mongoose.Schema({
