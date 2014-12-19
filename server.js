@@ -188,6 +188,7 @@ var Activity = mongoose.model('Activity', activitySchema);
 var Invites = mongoose.model('Invites', invitesSchema);
 
 mongoose.connect(config.db);
+//mongoose.connect("mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database");
 
 var app = express();
 
@@ -387,7 +388,7 @@ app.put('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
     profile.facebook.inviteString = req.body.facebook.inviteString;
     profile.save(function(err) {
       if (err) return next(err);
-      res.send(200);
+      res.status(200).end();
     });
   });
 });
