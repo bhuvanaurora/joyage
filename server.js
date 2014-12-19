@@ -316,14 +316,14 @@ app.post('/auth/facebook', function(req, res, next) {
       facebook: {
         id: profile.id,
         email: profile.email,
-        profileLink: profile.link,
-        requests: [],
-        invitation_to: [],
-        invitations_sent: 0
+        profileLink: profile.link
       },
       subscribedActivities: [],
       doneActivities: [],
-      invites: []
+      requests: [],
+      invitation_to: [],
+      invitations_sent: 0,
+      inviteString: ""
     });
     user.save(function(err) {
       if (err) return next(err);

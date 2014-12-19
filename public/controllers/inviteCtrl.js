@@ -12,7 +12,7 @@ angular.module('MyApp')
           }
         }*/
 
-        if (!$scope.profile.facebook.inviteString) {
+        if (!$scope.profile.inviteString) {
 
           chance.set('lastNames', ['Underwood', 'Stamper', 'Meechum', 'Vasquez', 'Gallagher', 'Danton', 'Posner', 'Barnes', 'Russo', 'Bing',
             'Geller', 'Buffay', 'Tribbiani', 'Green', 'Arryn', 'Baratheon', 'Bolton', 'Frey', 'Greyjoy', 'Lannister', 'Martell', 'Stark',
@@ -21,7 +21,7 @@ angular.module('MyApp')
           randomString = chance.last() + '-' + chance.last() + chance.cc() + chance.hashtag();
           var newString = true;
         } else {
-          randomString = $scope.profile.facebook.inviteString;
+          randomString = $scope.profile.inviteString;
         }
 
         $window.fbAsyncInit = function() {
@@ -50,8 +50,8 @@ angular.module('MyApp')
             console.log("Im ready to invite");
           };
 
-        if(!$scope.profile.facebook.invitations_sent) {
-          $scope.profile.facebook.invitations_sent = 0;
+        if(!$scope.profile.invitations_sent) {
+          $scope.profile.invitations_sent = 0;
         }
 
           $scope.fb_request = function () {
@@ -64,14 +64,14 @@ angular.module('MyApp')
             FB.ui({
               method: 'apprequests',
               message: 'Invite your facebook friends to Joyage',
-              max_recipients: (10 - $scope.profile.facebook.invitations_sent)
+              max_recipients: (10 - $scope.profile.invitations_sent)
               //filters: ['app_non_users']
             }, function (response) {
               if (response) {
-                $scope.profile.facebook.requests = response.request;
-                $scope.profile.facebook.invitation_to = response.to;
-                $scope.profile.facebook.invitations_sent = response.to.length;
-                $scope.profile.facebook.inviteString = randomString;
+                $scope.profile.requests = response.request;
+                $scope.profile.invitation_to = response.to;
+                $scope.profile.invitations_sent = response.to.length;
+                $scope.profile.inviteString = randomString;
                 FB.ui({
                   to: response.to,
                   method: 'send',
