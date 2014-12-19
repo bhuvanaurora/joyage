@@ -75,9 +75,9 @@ angular.module('MyApp')
                   link: 'http://joyage.co/login/' + randomString
                 });
               }
-              //if(newString) {
+              if(newString) {
                 Invites.save({id: randomString});
-              //}
+              }
               $scope.profile.$update(function () {
                 $route.reload();
               });
