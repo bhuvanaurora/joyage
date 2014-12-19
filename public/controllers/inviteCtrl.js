@@ -50,6 +50,10 @@ angular.module('MyApp')
             console.log("Im ready to invite");
           };
 
+        if(!$scope.profile.facebook.invitations_sent) {
+          $scope.profile.facebook.invitations_sent = 0;
+        }
+
           $scope.fb_request = function () {
             $alert({
               content: 'Inviting friends',
