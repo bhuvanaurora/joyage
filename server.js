@@ -185,8 +185,9 @@ var User = mongoose.model('User', userSchema);
 var Activity = mongoose.model('Activity', activitySchema);
 var Invites = mongoose.model('Invites', invitesSchema);
 
-mongoose.connect(config.db);
+//mongoose.connect(config.db);
 //mongoose.connect("mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database");
+mongoose.connect("mongodb://bhuvan:joyage_database_password@ds051630.mongolab.com:51630/joyage_test_database");
 
 var app = express();
 
@@ -291,14 +292,6 @@ app.post('/auth/facebook', function(req, res, next) {
     return res.send(400, 'Invalid Request Signature');
   }
 
-  /*var inviteString = req.params.rs;
-  Invites.findOne({ _id: inviteString }, function(err, invite) {
-    console.log(invite);
-    if( invite.invitations_sent < 10 ){
-    } else {
-      res.send("Can't signup");
-    }
-  });*/
   User.findOne({ facebookId: profile.id }, function(err, existingUser) {
     if (existingUser) {
       var token = createJwtToken(existingUser);
@@ -381,10 +374,10 @@ app.get('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
 app.put('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
   User.findById(req.params.id, function(err, profile) {
     if (err) return next(err);
-    profile.facebook.requests.push(req.body.facebook.requests);
-    profile.facebook.invitation_to.push(req.body.facebook.invitation_to);
-    profile.facebook.invitations_sent += req.body.facebook.invitations_sent;
-    profile.facebook.inviteString = req.body.facebook.inviteString;
+    profile.requests.push(req.body.requests);
+    profile.invitation_to.push(req.body.invitation_to);
+    profile.invitations_sent += req.body.invitations_sent;
+    profile.inviteString = req.body.inviteString;
     profile.save(function(err) {
       if (err) return next(err);
       res.status(200).end();
