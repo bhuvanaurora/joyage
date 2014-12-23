@@ -23,11 +23,11 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
         controller: 'AddCtrl'
       })
 
-      .when('/login', {
+      /*.when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
-      })
-      .when('/login/:rs', {
+      })*/
+      .when('/login/:id', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
