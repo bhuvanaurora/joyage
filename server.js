@@ -395,8 +395,8 @@ app.post('/api/invites', ensureAuthenticated, function(req, res, next) {
   });
 });
 
-app.get('/api/invites/:rs', ensureAuthenticated, function(req, res, next) {
-  Invites.findById(req.params.rs, function(err, invites) {
+app.get('/api/invites/:id', ensureAuthenticated, function(req, res, next) {
+  Invites.findById(req.params.id, function(err, invites) {
     if (err) return next(err);
     res.send(invites);
   })

@@ -45,6 +45,7 @@ angular.module('MyApp')
       facebookLogin: function () {
         if ($routeParams.id) {
           updateInvites.get({_id: $routeParams.id}, function (invites) {
+              console.log($routeParams.id);
               console.log(invites);
             if (invites) {
                 console.log(invites.invitations_accepted);
