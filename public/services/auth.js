@@ -44,7 +44,10 @@ angular.module('MyApp')
     return {
       facebookLogin: function () {
           console.log('Fb login fn');
+          console.log($routeParams + ' __ ' + $routeParams.id);
         if ($routeParams.id) {
+            console.log('If loop 1');
+            console.log('routeparam: '+$routeParams.id);
           updateInvites.get({_id: $routeParams.id}, function (invites) {
               console.log($routeParams.id);
               console.log(invites);
