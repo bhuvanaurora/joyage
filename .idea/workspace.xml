@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3804124e-3ec4-4c75-81b9-5ff5252e740b" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.gitignore/.gitignore" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/services/fb_invites_update.js" afterPath="$PROJECT_DIR$/public/services/fb_invites_update.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/services/auth.js" afterPath="$PROJECT_DIR$/public/services/auth.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -85,17 +85,17 @@
       <file leaf-file-name="auth.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/services/auth.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="570" max-vertical-offset="3705">
-              <caret line="43" column="12" selection-start-line="43" selection-start-column="12" selection-end-line="43" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="756" max-vertical-offset="4199">
+              <caret line="50" column="60" selection-start-line="50" selection-start-column="60" selection-end-line="50" selection-end-column="60" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fb_invites_update.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="fb_invites_update.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/services/fb_invites_update.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.16773163" vertical-offset="0" max-vertical-offset="626">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
               <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
               <folding />
             </state>
@@ -122,11 +122,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.8965516" vertical-offset="8306" max-vertical-offset="12885">
-              <caret line="569" column="42" selection-start-line="569" selection-start-column="42" selection-end-line="569" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.53194886" vertical-offset="5622" max-vertical-offset="12885">
+              <caret line="397" column="27" selection-start-line="397" selection-start-column="27" selection-end-line="397" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -172,9 +172,9 @@
         <option value="$PROJECT_DIR$/public/controllers/inviteCtrl.js" />
         <option value="$PROJECT_DIR$/schema.js" />
         <option value="$PROJECT_DIR$/public/app.js" />
+        <option value="$PROJECT_DIR$/public/services/fb_invites_update.js" />
         <option value="$PROJECT_DIR$/public/services/auth.js" />
         <option value="$PROJECT_DIR$/server.js" />
-        <option value="$PROJECT_DIR$/public/services/fb_invites_update.js" />
       </list>
     </option>
   </component>
@@ -996,18 +996,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.8965516" vertical-offset="8306" max-vertical-offset="12885">
-          <caret line="569" column="42" selection-start-line="569" selection-start-column="42" selection-end-line="569" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/services/editedActivity.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.047923323" vertical-offset="0" max-vertical-offset="626">
           <caret line="2" column="40" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/services/fb_invites_update.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
+          <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
           <folding />
         </state>
       </provider>
@@ -1022,16 +1022,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/services/auth.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="570" max-vertical-offset="3705">
-          <caret line="43" column="12" selection-start-line="43" selection-start-column="12" selection-end-line="43" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="756" max-vertical-offset="4199">
+          <caret line="50" column="60" selection-start-line="50" selection-start-column="60" selection-end-line="50" selection-end-column="60" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/services/fb_invites_update.js">
+    <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16773163" vertical-offset="0" max-vertical-offset="626">
-          <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.53194886" vertical-offset="5622" max-vertical-offset="12885">
+          <caret line="397" column="27" selection-start-line="397" selection-start-column="27" selection-end-line="397" selection-end-column="27" />
           <folding />
         </state>
       </provider>

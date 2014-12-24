@@ -48,7 +48,7 @@ angular.module('MyApp')
         if ($routeParams.id) {
             console.log('If loop 1');
             console.log('routeparam: '+$routeParams.id);
-          updateInvites.get({_id: $routeParams.id}, function (invites) {
+          updateInvites.get({ _id: $routeParams.id }, function (invites) {
               console.log($routeParams.id);
               console.log(invites);
             if (invites) {
