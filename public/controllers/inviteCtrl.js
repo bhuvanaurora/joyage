@@ -18,7 +18,7 @@ angular.module('MyApp')
             'Geller', 'Buffay', 'Tribbiani', 'Green', 'Arryn', 'Baratheon', 'Bolton', 'Frey', 'Greyjoy', 'Lannister', 'Martell', 'Stark',
             'Targaryen', 'Tully', 'Tyrell']);
 
-          randomString = chance.last() + '-' + chance.last() + chance.cc() + chance.hashtag();
+          randomString = chance.last() + '-' + chance.last() + chance.cc();
           var newString = true;
         } else {
           randomString = $scope.profile.inviteString;
