@@ -402,9 +402,9 @@ app.get('/api/invites/:id', function(req, res, next) {
   })
 });
 
-app.put('/api/invites', function(req, res, next) {
+app.put('/api/invites/:id', function(req, res, next) {
   console.log('Put');
-  Invites.findById(req.body._id, function(err, invites) {
+  Invites.findById(req.params.id, function(err, invites) {
     if (err) next(err);
     invites.invitations_accepted += 1;
     invites.save(function(err) {
