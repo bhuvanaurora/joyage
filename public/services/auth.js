@@ -112,7 +112,7 @@ angular.module('MyApp')
               $location.path('/');
             }
           });
-        } /*else {
+        } else {
           FB.login(function (response) {
             FB.api('/me', function (profile) {
               var data = {
@@ -146,7 +146,7 @@ angular.module('MyApp')
                   });
             });
           }, {scope: 'email, public_profile, user_friends, publish_actions'});
-        }*/
+        }
         }
         ,
         /*googleLogin: function() {
