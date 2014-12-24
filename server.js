@@ -388,7 +388,7 @@ app.put('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
 app.post('/api/invites', ensureAuthenticated, function(req, res, next) {
   var invites = new Invites({
     _id: req.body.id
-  });
+  })
   invites.save(function(err) {
     if (err) return next(err);
     res.status(200).end();
