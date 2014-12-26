@@ -53,37 +53,65 @@ angular.module('MyApp')
                       signedRequest: response.authResponse.signedRequest,
                       profile: profile
                     };
+                    AuthProfile.get({_id: profile.id}, function (prof) {
+                        if (prof) {
+                            $http.post('/auth/facebook', data)
+                                .success(function (token) {
+                                    console.log('Data: ' + data);
+                                    var payload = JSON.parse($window.atob(token.split('.')[1]));
+                                    $window.localStorage.token = token;
+                                    $rootScope.currentUser = payload.user;
+                                    $location.path('/');
+                                    $alert({
+                                        title: 'Cheers!',
+                                        content: 'You have successfully signed-in with Facebook.',
+                                        animation: 'fadeZoomFadeDown',
+                                        type: 'material',
+                                        duration: 3
+                                    });
+                                })
+                                .error(function () {
+                                    delete $window.localStorage.token;
+                                    $alert({
+                                        title: 'Error!',
+                                        content: 'Could not sign-in',
+                                        animation: 'fadeZoomFadeDown',
+                                        type: 'material',
+                                        duration: 3
+                                    });
+                                });
+                        }
+                    });
                     $http.post('/auth/facebook', data)
                         .success(function (token) {
-                          console.log('Data: ' + data);
-                          var payload = JSON.parse($window.atob(token.split('.')[1]));
-                          $window.localStorage.token = token;
-                          $rootScope.currentUser = payload.user;
-                          $location.path('/');
-                          $alert({
-                            title: 'Cheers!',
-                            content: 'You have successfully signed-in with Facebook.',
-                            animation: 'fadeZoomFadeDown',
-                            type: 'material',
-                            duration: 3
-                          });
+                            console.log('Data: ' + data);
+                            var payload = JSON.parse($window.atob(token.split('.')[1]));
+                            $window.localStorage.token = token;
+                            $rootScope.currentUser = payload.user;
+                            invites.$update(function () {
+
+                            });
+                            $location.path('/');
+                            $alert({
+                                title: 'Cheers!',
+                                content: 'You have successfully signed-in with Facebook.',
+                                animation: 'fadeZoomFadeDown',
+                                type: 'material',
+                                duration: 3
+                            });
                         })
                         .error(function () {
-                          delete $window.localStorage.token;
-                          $alert({
-                            title: 'Error!',
-                            content: 'Could not sign-in',
-                            animation: 'fadeZoomFadeDown',
-                            type: 'material',
-                            duration: 3
-                          });
+                            delete $window.localStorage.token;
+                            $alert({
+                                title: 'Error!',
+                                content: 'Could not sign-in',
+                                animation: 'fadeZoomFadeDown',
+                                type: 'material',
+                                duration: 3
+                            });
                         });
                   });
                 }, {scope: 'email, public_profile, user_friends, publish_actions'});
-                invites.$update(function () {
-                  console.log('Invites updated');
-                  $location.path('/');
-                });
               } else {
                 $alert({
                   title: 'Maximum number of invites reached for the invitation',
