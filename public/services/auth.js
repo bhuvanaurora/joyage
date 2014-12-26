@@ -1,6 +1,6 @@
 angular.module('MyApp')
-  .factory('Auth', ['$http', '$location', '$rootScope', '$routeParams', '$alert', '$window', 'fb_appId', 'fb_connect', 'Invites', 'updateInvites',
-           function($http, $location, $rootScope, $routeParams, $alert, $window, fb_appId, fb_connect, Invites, updateInvites) {
+  .factory('Auth', ['$http', '$location', '$rootScope', '$routeParams', '$alert', '$window', 'fb_appId', 'fb_connect', 'Invites', 'updateInvites', 'AuthProfile',
+           function($http, $location, $rootScope, $routeParams, $alert, $window, fb_appId, fb_connect, Invites, updateInvites, AuthProfile) {
     
     var token = $window.localStorage.token;
     if (token) {
@@ -43,16 +43,9 @@ angular.module('MyApp')
 
     return {
       facebookLogin: function () {
-          console.log('Fb login fn');
-          console.log($routeParams + ' __ ' + $routeParams.id);
         if ($routeParams.id) {
-            console.log('If loop 1');
-            console.log('routeparam: '+$routeParams.id);
           updateInvites.get({ _id: $routeParams.id }, function (invites) {
-              console.log($routeParams.id);
-              console.log(invites);
             if (invites) {
-                console.log(invites.invitations_accepted);
               if (invites.invitations_accepted < 10) {
                 FB.login(function (response) {
                   FB.api('/me', function (profile) {
@@ -114,38 +107,49 @@ angular.module('MyApp')
           });
         } else {
           FB.login(function (response) {
-            FB.api('/me', function (profile) {
-              var data = {
-                signedRequest: response.authResponse.signedRequest,
-                profile: profile
-              };
-              $http.post('/auth/facebook', data)
-                  .success(function (token) {
-                    console.log('Data: ' + data);
-                    var payload = JSON.parse($window.atob(token.split('.')[1]));
-                    $window.localStorage.token = token;
-                    $rootScope.currentUser = payload.user;
-                    $location.path('/');
-                    $alert({
-                      title: 'Cheers!',
-                      content: 'You have successfully signed-in with Facebook.',
-                      animation: 'fadeZoomFadeDown',
-                      type: 'material',
-                      duration: 3
-                    });
-                  })
-                  .error(function () {
-                    delete $window.localStorage.token;
-                    $alert({
-                      title: 'Error!',
-                      content: 'Could not sign-in',
-                      animation: 'fadeZoomFadeDown',
-                      type: 'material',
-                      duration: 3
-                    });
+              FB.api('/me', function (profile) {
+                  var data = {
+                      signedRequest: response.authResponse.signedRequest,
+                      profile: profile
+                  };
+                  AuthProfile.get({_id: profile.id}, function (prof) {
+                      if(prof) {
+                          $http.post('/auth/facebook', data)
+                              .success(function (token) {
+                                  var payload = JSON.parse($window.atob(token.split('.')[1]));
+                                  $window.localStorage.token = token;
+                                  $rootScope.currentUser = payload.user;
+                                  $location.path('/');
+                                  $alert({
+                                      title: 'Cheers!',
+                                      content: 'You have successfully signed-in with Facebook.',
+                                      animation: 'fadeZoomFadeDown',
+                                      type: 'material',
+                                      duration: 3
+                                  });
+                              })
+                              .error(function () {
+                                  delete $window.localStorage.token;
+                                  $alert({
+                                      title: 'Error!',
+                                      content: 'Could not sign-in',
+                                      animation: 'fadeZoomFadeDown',
+                                      type: 'material',
+                                      duration: 3
+                                  });
+                              });
+                      } else {
+                          $alert({
+                              title: 'Invitation error!',
+                              content: 'You do not have an invitation',
+                              animation: 'fadeZoomFadeDown',
+                              type: 'material',
+                              duration: 3
+                          });
+                      }
                   });
-            });
-          }, {scope: 'email, public_profile, user_friends, publish_actions'});
+              });
+              }, {scope: 'email, public_profile, user_friends, publish_actions'});
         }
         }
         ,

@@ -371,6 +371,14 @@ app.get('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
   });
 });
 
+app.get('/api/authprofile/:id', function(req, res, next) {
+  var query = User.findOne({ 'facebookId': req.params.id });
+  query.exec(function(err, profile) {
+    if (err) next(err);
+    res.send(profile);
+  });
+});
+
 app.put('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
   User.findById(req.params.id, function(err, profile) {
     if (err) return next(err);
