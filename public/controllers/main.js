@@ -135,7 +135,10 @@ angular.module('MyApp')
     $scope.pageClick = function(value) {
       console.log($scope.headingTitle);
       if ($scope.headingTitle !== "all activities") {
+        console.log($scope.activities);
         $scope.activities.push(Activity.query({ genre: $scope.headingTitle, page: value, sortOrder: $scope.sortOrder }));
+        console.log(Activity.query({ genre: $scope.headingTitle, page: value, sortOrder: $scope.sortOrder }));
+        console.log($scope.activities);
       } else {
         $scope.activities.push(Activity.query({ page: value, sortOrder: $scope.sortOrder }));
       }
