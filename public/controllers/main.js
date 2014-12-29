@@ -6,6 +6,7 @@ angular.module('MyApp')
                             };*/
 
       $scope.activities = [];
+      $scope.pagenumber = 1;
 
       $(function () {
         $(".js-filter-activity:not(.js-activity-holder)").click(function() {
@@ -132,11 +133,13 @@ angular.module('MyApp')
       displayMenu();
     };
 
-    $scope.pageClick = function(value) {
+    $scope.pageClick = function() {
       if ($scope.headingTitle !== "all activities") {
-        $scope.activ = Activity.query({ genre: $scope.headingTitle, page: value, sortOrder: $scope.sortOrder });
+        $scope.pagenumber += 1;
+        $scope.activ = Activity.query({ genre: $scope.headingTitle, page: $scope.pagenumber, sortOrder: $scope.sortOrder });
       } else {
-        $scope.activ = Activity.query({ page: value, sortOrder: $scope.sortOrder });
+        $scope.pagenumber += 1;
+        $scope.activ = Activity.query({ page: $scope.pagenumber, sortOrder: $scope.sortOrder });
       }
     };
     

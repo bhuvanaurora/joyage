@@ -267,23 +267,6 @@
         </div>
         <div class="col-lg-6 col-sm-6 col-xs-12 col-md-6">
             <div class="pull-right">
-                <ul style="list-style:none;display:inline;">
-                    Page
-                    <li style="display:inline;"><a href=""><span ng-click="pageClick(1)">1</span></a></li>
-                    <li style="display:inline;"><a href=""><span ng-click="pageClick(2)">2</span></a></li>
-                    <li style="display:inline;"><a href=""><span ng-click="pageClick(3)">3</span></a></li>
-                    <li style="display:inline;"><a href=""><span ng-click="pageClick(4)">4</span></a></li>
-                    <li style="display:inline;"><a href=""><span ng-click="pageClick(5)">5</span></a></li>
-                    <li style="display:inline;"><a href=""><span ng-click="pageClick(6)">6</span></a></li>
-                    <li style="display:inline;"><a href=""><span ng-click="pageClick(7)">7</span></a></li>
-                    <li style="display:inline;"><a href=""><span ng-click="pageClick(8)">8</span></a></li>
-                    <li style="display:inline;"><a href=""><span ng-click="pageClick(9)">9</span></a></li>
-                    <li style="display:inline;"><a href=""><span ng-click="pageClick(10)">10</span></a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-lg-6 col-sm-6 col-xs-12 col-md-6">
-            <div class="pull-right">
                 Sort by :
                 <select id="year" name="sortOrder" ng-model="sortOrder">
                     <option value="timeAdded" ng-click="sort(1)">New on Joyage</option>
@@ -347,6 +330,12 @@
                         </div>
                     </div>
                 </a>
+            </div>
+        </div>
+        <div class="clear-all"></div>
+        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+            <div class="text-center">
+                <button class="button button-primary" ng-click="pageClick()">Show more</button>
             </div>
         </div>
     </div>
