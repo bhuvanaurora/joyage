@@ -453,7 +453,7 @@ app.get('/api/activities', function(req, res, next) {
     } else if (req.query.sortOrder === 'popularity') {                                                                                  // Popularity sort
       query.sort('-subscriptions').where({ preview: {$ne: false} }).limit(15 * req.query.page);
     } else {
-      query.skip(15 * (req.query.page-1)).where({ preview: {$ne: false} }).limit(15 * req.query.page);
+      query.where({ preview: {$ne: false} }).limit(15 * req.query.page);
     }
   }
   
