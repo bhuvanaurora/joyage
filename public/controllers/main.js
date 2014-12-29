@@ -140,11 +140,13 @@ angular.module('MyApp')
         //$scope.activities.push(Activity.query({ page: value, sortOrder: $scope.sortOrder }));
         $scope.act = Activity.query({ page: value, sortOrder: $scope.sortOrder });
         for (var i=0; i<$scope.act.length; i++) {
+          console.log(i + ': ' + $scope.act[i]);
           $scope.activities.push($scope.act[i]);
         }
         $scope.activities.length = $scope.activities.length + $scope.act.length;
-        console.log(Activity.query({ page: value, sortOrder: $scope.sortOrder }));
-        console.log(Activity.query({ page: value, sortOrder: $scope.sortOrder }).length);
+        console.log($scope.act);
+        console.log($scope.act[0]);
+        console.log($scope.act.length);
         console.log($scope.activities);
       }
     };
