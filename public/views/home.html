@@ -307,31 +307,35 @@
                 </a>
             </div>
         </div>
-        <div ng-repeat="act in activ" ng-if="activ">
-            <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4">
-                <a href="/activities/{{act._id}}">
-                    <div class="place-cards">
-                        <div class="place-img">
-                            <img ng-src="images/{{act.title}}.jpg" alt="{{act.title}}">
-                            <div class="event-stamp" ng-if="act.dateOfActivity">
-                                <i class="batch" data-icon="&#xF090;"></i>
-                                {{act.dateOfActivity | date: mediumDate}}
+
+        <div ng-repeat="acti in activ" ng-if="acti">
+            <div ng-repeat="act in acti" ng-if="act">
+                <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4">
+                    <a href="/activities/{{act._id}}">
+                        <div class="place-cards">
+                            <div class="place-img">
+                                <img ng-src="images/{{act.title}}.jpg" alt="{{act.title}}">
+                                <div class="event-stamp" ng-if="act.dateOfActivity">
+                                    <i class="batch" data-icon="&#xF090;"></i>
+                                    {{act.dateOfActivity | date: mediumDate}}
+                                </div>
                             </div>
-                        </div>
-                        <div class="place-head">
-                            <h4 class="margin-bottom-none">{{act.title}}</h4>
-                            <p><i class="batch" data-icon="&#xF07D;"></i>{{act.location}}, {{act.neighborhood}}</p>
-                        </div>
-                        <div class="place-footer">
-                            <i class="batch" data-icon="&#xf15D;"></i> {{act.subscriptions}}
+                            <div class="place-head">
+                                <h4 class="margin-bottom-none">{{act.title}}</h4>
+                                <p><i class="batch" data-icon="&#xF07D;"></i>{{act.location}}, {{act.neighborhood}}</p>
+                            </div>
+                            <div class="place-footer">
+                                <i class="batch" data-icon="&#xf15D;"></i> {{act.subscriptions}}
                                 <span class="time-stamp">
                                     Added on {{act.timeAdded | date: shortTime}}
                                 </span>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         </div>
+
         <div class="clear-all"></div>
         <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
             <div class="text-center">
