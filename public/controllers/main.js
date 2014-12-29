@@ -134,20 +134,9 @@ angular.module('MyApp')
 
     $scope.pageClick = function(value) {
       if ($scope.headingTitle !== "all activities") {
-        $scope.activities.push(Activity.query({ genre: $scope.headingTitle, page: value, sortOrder: $scope.sortOrder }));
+        $scope.activ = Activity.query({ genre: $scope.headingTitle, page: value, sortOrder: $scope.sortOrder });
       } else {
-        console.log($scope.activities);
-        //$scope.activities.push(Activity.query({ page: value, sortOrder: $scope.sortOrder }));
-        $scope.act = Activity.query({ page: value, sortOrder: $scope.sortOrder });
-        for (var i=0; i<$scope.act.length; i++) {
-          console.log(i + ': ' + $scope.act[i]);
-          $scope.activities.push($scope.act[i]);
-        }
-        $scope.activities.length = $scope.activities.length + $scope.act.length;
-        console.log($scope.act);
-        console.log($scope.act.$promise[0]);
-        console.log($scope.act.$promise.length);
-        console.log($scope.activities);
+        $scope.activ = Activity.query({ page: value, sortOrder: $scope.sortOrder });
       }
     };
     

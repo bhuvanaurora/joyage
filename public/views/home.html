@@ -297,30 +297,57 @@
 </div><!-- result bar end -->
 
 <div class="cards-holder">
-    <div class="wrapper" ng-repeat="activity in activities | filter:query | orderBy:sortOrder:true">
-        <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4">
-            <a href="/activities/{{activity._id}}">
-                <div class="place-cards">
-                    <!--div class="latest-ribbon"></div-->
-                    <div class="place-img">
-                        <img ng-src="images/{{activity.title}}.jpg" alt="{{activity.title}}">
-                        <div class="event-stamp">
-                            <i class="batch" data-icon="&#xF090;"></i>
-                            {{activity.dateOfActivity | date: mediumDate}}
+    <div class="wrapper">
+        <div ng-repeat="activity in activities | filter:query | orderBy:sortOrder:true">
+            <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4">
+                <a href="/activities/{{activity._id}}">
+                    <div class="place-cards">
+                        <!--div class="latest-ribbon"></div-->
+                        <div class="place-img">
+                            <img ng-src="images/{{activity.title}}.jpg" alt="{{activity.title}}">
+                            <div class="event-stamp" ng-if="activity.dateOfActivity">
+                                <i class="batch" data-icon="&#xF090;"></i>
+                                {{activity.dateOfActivity | date: mediumDate}}
+                            </div>
+                        </div>
+                        <div class="place-head">
+                            <h4 class="margin-bottom-none">{{activity.title}}</h4>
+                            <p><i class="batch" data-icon="&#xF07D;"></i>{{activity.location}}, {{activity.neighborhood}}</p>
+                        </div>
+                        <div class="place-footer">
+                            <i class="batch" data-icon="&#xf15D;"></i> {{activity.subscriptions}}
+                                <span class="time-stamp">
+                                    Added on {{activity.timeAdded | date: shortTime}}
+                                </span>
                         </div>
                     </div>
-                    <div class="place-head">
-                        <h4 class="margin-bottom-none">{{activity.title}}</h4>
-                        <p><i class="batch" data-icon="&#xF07D;"></i>{{activity.location}}, {{activity.neighborhood}}</p>
+                </a>
+            </div>
+        </div>
+        <div ng-repeat="act in activ" ng-if="activ">
+            <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4">
+                <a href="/activities/{{act._id}}">
+                    <div class="place-cards">
+                        <div class="place-img">
+                            <img ng-src="images/{{act.title}}.jpg" alt="{{act.title}}">
+                            <div class="event-stamp" ng-if="act.dateOfActivity">
+                                <i class="batch" data-icon="&#xF090;"></i>
+                                {{act.dateOfActivity | date: mediumDate}}
+                            </div>
+                        </div>
+                        <div class="place-head">
+                            <h4 class="margin-bottom-none">{{act.title}}</h4>
+                            <p><i class="batch" data-icon="&#xF07D;"></i>{{act.location}}, {{act.neighborhood}}</p>
+                        </div>
+                        <div class="place-footer">
+                            <i class="batch" data-icon="&#xf15D;"></i> {{act.subscriptions}}
+                                <span class="time-stamp">
+                                    Added on {{act.timeAdded | date: shortTime}}
+                                </span>
+                        </div>
                     </div>
-                    <div class="place-footer">
-                        <i class="batch" data-icon="&#xf15D;"></i> {{activity.subscriptions}}
-								<span class="time-stamp">
-									Added on {{activity.timeAdded | date: shortTime}}
-								</span>
-                    </div>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
     </div>
 </div>
