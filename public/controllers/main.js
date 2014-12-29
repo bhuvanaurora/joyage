@@ -137,7 +137,7 @@ angular.module('MyApp')
       } else {
         $scope.activities = Activity.query({ page: value, sortOrder: $scope.sortOrder });
       }
-    }
+    };
     
     $scope.sort = function(sortType) {
       if (sortType === 1) {
@@ -152,7 +152,7 @@ angular.module('MyApp')
       } else {
         $scope.activities = Activity.query({ page: 1, sortOrder: $scope.sortOrder });
       }
-    }
+    };
 
       // ----------------------------------------------- For Navbar --------------------------------------------- //
 
