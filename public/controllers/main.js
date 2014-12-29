@@ -145,8 +145,8 @@ angular.module('MyApp')
         }
         $scope.activities.length = $scope.activities.length + $scope.act.length;
         console.log($scope.act);
-        console.log($scope.act[0]);
-        console.log($scope.act.length);
+        console.log($scope.act.$promise[0]);
+        console.log($scope.act.$promise.length);
         console.log($scope.activities);
       }
     };
