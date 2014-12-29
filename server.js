@@ -434,26 +434,26 @@ app.get('/api/activities', function(req, res, next) {
     query.where({genre: req.query.genre}).limit(req.query.limit);
   } else if (req.query.genre) {
     if (req.query.sortOrder === 'timeAdded') {                                                                                          // Default category sort
-      query.where({ genre: req.query.genre }).where({ preview: {$ne: false} }).sort('timeAdded').limit(15 * req.query.page);
+      query.where({ genre: req.query.genre }).where({ preview: {$ne: false} }).sort('timeAdded').skip(15 * (req.query.page-1)).limit(15);
     } else if (req.query.sortOrder === 'popularity') {                                                                                  // Popularity category sort
-      query.where({ genre: req.query.genre }).where({ preview: {$ne: false} }).sort('-subscriptions').limit(15 * req.query.page);
+      query.where({ genre: req.query.genre }).where({ preview: {$ne: false} }).sort('-subscriptions').skip(15 * (req.query.page-1)).limit(15);
     } else if (req.query.sortOrder === 'dateOfActivity') {                                                                              // Upcoming category sort
       //query.where({ genre: req.query.genre }).where('dateOfActivity').gte(new Date().valueOf()).sort('-dateOfActivity').skip(9 * (req.query.page-1)).limit(9);
-      query.where({ 'dateOfActivity': {'$exists': false} }).where({ preview: {$ne: false} }).where({ genre: req.query.genre }).sort({ 'dateOfActivity': -1 }).limit(15 * req.query.page);
+      query.where({ 'dateOfActivity': {'$exists': false} }).where({ preview: {$ne: false} }).where({ genre: req.query.genre }).sort({ 'dateOfActivity': -1 }).skip(15 * (req.query.page-1)).limit(15);
     } else {
-      query.where({ genre: req.query.genre }).where({ preview: {$ne: false} }).limit(15 * req.query.page);
+      query.where({ genre: req.query.genre }).where({ preview: {$ne: false} }).skip(15 * (req.query.page-1)).limit(15);
     }
   } else if (req.query.limit) {                                                                                                         // Suggested activities
     query.where({ preview: {$ne: false} }).where({ 'dateOfActivity': {'$exists': false} }).limit(req.query.limit);
   } else {
     if (req.query.sortOrder === 'dateOfActivity') {                                                                                     // Upcoming sort
-      query.where('dateOfActivity').where({ preview: {$ne: false} }).gte(new Date().valueOf()).sort('-dateOfActivity').limit(15 * req.query.page);
+      query.where('dateOfActivity').where({ preview: {$ne: false} }).gte(new Date().valueOf()).sort('-dateOfActivity').skip(15 * (req.query.page-1)).limit(15);
     } else if (req.query.sortOrder === 'timeAdded') {                                                                                   // Default sort order
-      query.sort('timeAdded').where({ preview: {$ne: false} }).limit(15 * req.query.page);
+      query.sort('timeAdded').where({ preview: {$ne: false} }).skip(15 * (req.query.page-1)).limit(15);
     } else if (req.query.sortOrder === 'popularity') {                                                                                  // Popularity sort
-      query.sort('-subscriptions').where({ preview: {$ne: false} }).limit(15 * req.query.page);
+      query.sort('-subscriptions').where({ preview: {$ne: false} }).skip(15 * (req.query.page-1)).limit(15);
     } else {
-      query.where({ preview: {$ne: false} }).limit(15 * req.query.page);
+      query.skip(15 * (req.query.page-1)).where({ preview: {$ne: false} }).limit(15);
     }
   }
   

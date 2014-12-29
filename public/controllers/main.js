@@ -5,6 +5,8 @@ angular.module('MyApp')
                               'Delhi': ['Connaught Place', 'Dwarka', 'Janak Puri', 'Saket', 'Defence Colony', 'Hauz Khas']
                             };*/
 
+      $scope.activities = [];
+
       $(function () {
         $(".js-filter-activity:not(.js-activity-holder)").click(function() {
           $('.js-activity-holder').slideToggle(200);
@@ -129,13 +131,13 @@ angular.module('MyApp')
       $scope.headingTitle = "all activities";
       displayMenu();
     };
-    
+
     $scope.pageClick = function(value) {
       console.log($scope.headingTitle);
       if ($scope.headingTitle !== "all activities") {
-        $scope.activities = Activity.query({ genre: $scope.headingTitle, page: value, sortOrder: $scope.sortOrder });
+        $scope.activities.push(Activity.query({ genre: $scope.headingTitle, page: value, sortOrder: $scope.sortOrder }));
       } else {
-        $scope.activities = Activity.query({ page: value, sortOrder: $scope.sortOrder });
+        $scope.activities.push(Activity.query({ page: value, sortOrder: $scope.sortOrder }));
       }
     };
     
