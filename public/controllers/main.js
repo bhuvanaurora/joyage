@@ -134,14 +134,17 @@ angular.module('MyApp')
 
     $scope.pageClick = function(value) {
       if ($scope.headingTitle !== "all activities") {
-        console.log($scope.activities);
         $scope.activities.push(Activity.query({ genre: $scope.headingTitle, page: value, sortOrder: $scope.sortOrder }));
-        console.log(Activity.query({ genre: $scope.headingTitle, page: value, sortOrder: $scope.sortOrder }));
-        console.log($scope.activities);
       } else {
         console.log($scope.activities);
-        $scope.activities.push(Activity.query({ page: value, sortOrder: $scope.sortOrder }));
+        //$scope.activities.push(Activity.query({ page: value, sortOrder: $scope.sortOrder }));
+        $scope.act = Activity.query({ page: value, sortOrder: $scope.sortOrder });
+        for (var i=0; i<$scope.act.length; i++) {
+          $scope.activities.push($scope.act[i]);
+        }
+        $scope.activities.length = $scope.activities.length + $scope.act.length;
         console.log(Activity.query({ page: value, sortOrder: $scope.sortOrder }));
+        console.log(Activity.query({ page: value, sortOrder: $scope.sortOrder }).length);
         console.log($scope.activities);
       }
     };
