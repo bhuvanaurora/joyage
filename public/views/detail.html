@@ -375,7 +375,7 @@
             <p>TIPS</p>
             <a href="" class="open-modal modal-pro-tip">Add a pro tip</a>
             <ul class="genres">
-                <li ng-repeat="tip in activity.tips">{{tip.text}}</li>
+                <li ng-repeat="tip in activity.tips"><img src="https://graph.facebook.com/v2.2/{{tip.tipperfbId}}/picture"> {{tip.text}}</li>
             </ul>
         </div>
 

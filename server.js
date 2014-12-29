@@ -104,7 +104,8 @@ var activitySchema = new mongoose.Schema({
   preview: Boolean,
   tips: [{
     text: String,
-    tipper: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+    tipper: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    tipperfbId: String
   }],
   subscribers: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
@@ -730,7 +731,8 @@ app.post('/api/tips', ensureAuthenticated, function(req, res, next) {
     if (err) return next(err);
     activity.tips.push({
       text: req.body.tips.splice(-1),
-      tipper: req.user._id
+      tipper: req.user._id,
+      tipperfbId: req.user.facebookId
     });
     activity.save(function(err) {
       if (err) return next(err);

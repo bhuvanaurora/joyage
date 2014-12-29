@@ -62,6 +62,85 @@ angular.module('MyApp')
           }, function(response){});*/
         };
 
+
+
+          $scope.subscriptions = activity.subscriptions;
+          $scope.completions = activity.completions;
+
+        $scope.isSubscribed = function() {
+            if ($rootScope.currentUser) {
+              return $scope.activity.subscribers.indexOf($rootScope.currentUser._id) !== -1;
+            }
+        };
+
+        $scope.subscribe = function() {
+          Subscription.subscribe(activity).success(function() {
+            $scope.activity.subscribers.push($rootScope.currentUser._id);
+            $scope.subscriptions += 1;
+          });
+        };
+
+        $scope.unsubscribe = function() {
+          Subscription.unsubscribe(activity).success(function() {
+            var index = $scope.activity.subscribers.indexOf($rootScope.currentUser._id);
+            $scope.activity.subscribers.splice(index, 1);
+            $scope.subscriptions -= 1;
+          });
+        };
+
+        $scope.isDone = function() {
+            if ($rootScope.currentUser) {
+                return $scope.activity.doneIt.indexOf($rootScope.currentUser._id) !== -1;
+            }
+        };
+
+        $scope.markDone = function() {
+          DoneIt.markDone(activity).success(function() {
+            $scope.activity.doneIt.push($rootScope.currentUser._id);
+            $scope.completions += 1;
+          });
+        };
+
+        $scope.markUndone = function() {
+          DoneIt.markUndone(activity).success(function() {
+            var index = $scope.activity.doneIt.indexOf($rootScope.currentUser._id);
+            $scope.activity.doneIt.splice(index, 1);
+            $scope.completions -= 1;
+          });
+        };
+
+        $scope.addTips = function(tip) {
+            $scope.activity.tips.push(tip);
+            Tips.addTip(activity).success(function () {
+                $scope.tip = '';
+            });
+            $window.location.reload();
+        };
+
+        $scope.acceptActivity = function(userId) {
+            Accept.acceptActivity(activity, userId).success(function() {
+                $alert({
+                    content: 'Activity has been added.',
+                    placement: 'top-right',
+                    type: 'success',
+                    duration: 3
+                  });
+                $location.path('/admin');
+            });
+        };
+
+        $scope.deleteActivity = function() {
+            Delete.deleteActivity(activity).success(function() {
+                $alert({
+                    content: 'Activity deleted',
+                    placement: 'top-right',
+                    type: 'material',
+                    duration: 3
+                });
+                $location.path('/admin');
+            });
+        };
+
           // ----------------------------------------------------- Google Maps ---------------------------------------------------------- //
 
           var map;
@@ -312,82 +391,6 @@ angular.module('MyApp')
           google.maps.event.addDomListener(window, 'load');
 
           // ---------------------------------------------- Google Maps end -------------------------------------- //
-
-          $scope.subscriptions = activity.subscriptions;
-          $scope.completions = activity.completions;
-
-        $scope.isSubscribed = function() {
-            if ($rootScope.currentUser) {
-              return $scope.activity.subscribers.indexOf($rootScope.currentUser._id) !== -1;
-            }
-        };
-
-        $scope.subscribe = function() {
-          Subscription.subscribe(activity).success(function() {
-            $scope.activity.subscribers.push($rootScope.currentUser._id);
-            $scope.subscriptions += 1;
-          });
-        };
-
-        $scope.unsubscribe = function() {
-          Subscription.unsubscribe(activity).success(function() {
-            var index = $scope.activity.subscribers.indexOf($rootScope.currentUser._id);
-            $scope.activity.subscribers.splice(index, 1);
-            $scope.subscriptions -= 1;
-          });
-        };
-
-        $scope.isDone = function() {
-            if ($rootScope.currentUser) {
-                return $scope.activity.doneIt.indexOf($rootScope.currentUser._id) !== -1;
-            }
-        };
-
-        $scope.markDone = function() {
-          DoneIt.markDone(activity).success(function() {
-            $scope.activity.doneIt.push($rootScope.currentUser._id);
-            $scope.completions += 1;
-          });
-        };
-
-        $scope.markUndone = function() {
-          DoneIt.markUndone(activity).success(function() {
-            var index = $scope.activity.doneIt.indexOf($rootScope.currentUser._id);
-            $scope.activity.doneIt.splice(index, 1);
-            $scope.completions -= 1;
-          });
-        };
-
-        $scope.addTips = function(tip) {
-          $scope.activity.tips.push(tip);
-          Tips.addTip(activity).success(function() {
-            $scope.tip = '';
-          });
-        };
-
-        $scope.acceptActivity = function(userId) {
-            Accept.acceptActivity(activity, userId).success(function() {
-                $alert({
-                    content: 'Activity has been added.',
-                    placement: 'top-right',
-                    type: 'success',
-                    duration: 3
-                  });
-                $location.path('/admin');
-            });
-        };
-
-        $scope.deleteActivity = function() {
-            Delete.deleteActivity(activity).success(function() {
-                $alert({
-                    content: 'Activity deleted',
-                    placement: 'top-right',
-                    type: 'material',
-                    duration: 3
-                });
-                $location.path('/admin');
-            });
-        };
 
       $(function (){
           /*$(".js-navigation").click (function(){
