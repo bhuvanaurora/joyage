@@ -109,12 +109,18 @@ angular.module('MyApp')
           });
         };
 
+        if ($scope.activity.tipper.indexOf($rootScope.currentUser._id) == -1) {
+            $scope.editTips = true;
+        }
+
         $scope.addTips = function(tip) {
-            $scope.activity.tips.push(tip);
-            Tips.addTip(activity).success(function () {
-                $scope.tip = '';
-            });
-            $window.location.reload();
+            if ($scope.activity.tipper.indexOf($rootScope.currentUser._id) == -1) {
+                $scope.activity.tips.push(tip);
+                Tips.addTip(activity).success(function () {
+                    $scope.tip = '';
+                });
+                $window.location.reload();
+            }
         };
 
         $scope.acceptActivity = function(userId) {
