@@ -4,6 +4,24 @@ angular.module('MyApp')
   .controller('DetailCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$alert', 'fb_appId', 'Activity', 'Profile', 'Subscription', 'DoneIt', 'Tips', 'Accept', 'Delete',
                              function($scope, $rootScope, $window, $routeParams, $location, $alert, fb_appId, Activity, Profile, Subscription, DoneIt, Tips, Accept, Delete) {
 
+         // -------------- for modal
+
+         $('.open-modal').click(function() {
+             console.log("Modal");
+             var el = $(this)[0],
+                 classes = el.className.split(/\s+/);
+             for(var i = 0; i < classes.length; i++) {
+                 if(classes[i].match(/modal-/)) {
+                     var modalClass = classes[i];
+                     $('.modal.' + modalClass).fadeIn('fast');
+                 }
+             }
+         });
+
+         $('.close-modal').click(function() {
+             $(this).closest('.modal').fadeOut('fast');
+         });
+
         $window.fbAsyncInit = function() {
           FB.init({
             appId: fb_appId,
@@ -496,21 +514,6 @@ angular.module('MyApp')
 
      });
 
-     // -------------- for modal
 
-     $('.open-modal').click(function() {
-         var el = $(this)[0],
-             classes = el.className.split(/\s+/);
-         for(var i = 0; i < classes.length; i++) {
-             if(classes[i].match(/modal-/)) {
-                 var modalClass = classes[i];
-                 $('.modal.' + modalClass).fadeIn('fast');
-             }
-         }
-     });
-
-     $('.close-modal').click(function() {
-         $(this).closest('.modal').fadeOut('fast');
-     });
 
     }]);

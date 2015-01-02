@@ -373,7 +373,7 @@
 
         <div class="sidebar-footer">
             <p>TIPS</p>
-            <a href="" class="open-modal modal-pro-tip" ng-if="editTips">Add a pro tip</a>
+            <a href="" class="open-modal modal-pro-tip"><span ng-if="editTips">Add a pro tip</span></a>
             <ul class="genres">
                 <li ng-repeat="tip in activity.tips">
                     <span ng-if="currentUser._id == tipper">
