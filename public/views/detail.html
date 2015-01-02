@@ -376,14 +376,14 @@
             <a href="" class="open-modal modal-pro-tip" ng-if="editTips">Add a pro tip</a>
             <ul class="genres">
                 <li ng-repeat="tip in activity.tips">
-                    <span ng-if="currentUser._id == tip.tipper">
+                    <span ng-if="currentUser._id == tipper">
                         <img src="https://graph.facebook.com/v2.2/{{tip.tipperfbId}}/picture"> {{tip.text}}
                     </span>
                 </li>
             </ul>
             <ul class="genres">
                 <li ng-repeat="tip in activity.tips">
-                    <span ng-if="currentUser._id != tip.tipper">
+                    <span ng-if="currentUser._id != tipper">
                         <img src="https://graph.facebook.com/v2.2/{{tip.tipperfbId}}/picture"> {{tip.text}}
                     </span>
                 </li>

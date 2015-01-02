@@ -156,7 +156,8 @@ var userSchema = new mongoose.Schema({
   invitation_to: [String],
   invitations_sent: { type: Number, default: 0 },
   inviteString: String,
-  completions: { type: Number, default: 0 }
+  completions: { type: Number, default: 0 },
+  tipsCount: { type: Number, default: 0 }
 });
 
 var invitesSchema = new mongoose.Schema({
@@ -214,7 +215,7 @@ app.use(function (req, res, next) {
 // Humans.txt
 app.use(function (req, res, next) {
     if ('/humans.txt' == req.url) {
-        res.type('text/plain')
+        res.type('text/plain');
         res.send("<b>Developers</b>\nBhuvan Arora\nbhuvan.aurora@gmail.com");
     } else {
         next();
@@ -287,7 +288,7 @@ app.post('/auth/facebook', function(req, res, next) {
   var encodedSignature = signedRequest.split('.')[0];
   var payload = signedRequest.split('.')[1];
   var appSecret = config.facebook.appSecret;
-  
+
   var expectedSignature = crypto.createHmac('sha256', appSecret).update(payload).digest('base64');
   expectedSignature = expectedSignature.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 
@@ -317,7 +318,8 @@ app.post('/auth/facebook', function(req, res, next) {
       requests: [],
       invitation_to: [],
       invitations_sent: 0,
-      inviteString: ""
+      inviteString: "",
+      tipsCount: 0
     });
     user.save(function(err) {
       if (err) return next(err);
@@ -431,7 +433,7 @@ app.get('/api/activities', function(req, res, next) {
     var inspect = require('util').inspect;
     console.log(inspect(output, { depth: null }));
   });*/
-  
+
   if (req.query.genre && req.query.limit) {
     query.where({genre: req.query.genre}).limit(req.query.limit);
   } else if (req.query.genre) {
@@ -458,11 +460,11 @@ app.get('/api/activities', function(req, res, next) {
       query.skip(15 * (req.query.page-1)).where({ preview: {$ne: false} }).limit(15);
     }
   }
-  
+
   if (req.query.preview) {                                                                                                              // Admin console preview
     query.where({ preview: req.query.preview });
   }
-  
+
   var date = new Date().getTime();
   act = [];
   var j = 0;
@@ -479,7 +481,7 @@ app.get('/api/activities', function(req, res, next) {
         } else if (activities[i].dateOfActivity === "") {
           act[j] = activities[i];
           ++j;
-        } 
+        }
       }
       res.send(act);
     } else {
@@ -558,7 +560,7 @@ app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
     media: req.body.media,
     preview: false
   });
-  
+
   activity.save(function(err) {
     if (err) return next(err);
     res.status(200).end();
@@ -602,7 +604,7 @@ app.put('/api/activities/:id', ensureAuthenticated, function(req, res, next) {
     activity.cornerPic = req.body.cornerPic;
     activity.cornerText = req.body.cornerText;
     activity.media = req.body.media;
-    
+
     activity.save(function(err) {
       if (err) return next(err);
       res.send(200);
@@ -729,6 +731,17 @@ app.post('/api/markUndone', ensureAuthenticated, function(req, res, next) {
 });
 
 app.post('/api/tips', ensureAuthenticated, function(req, res, next) {
+  User.findById(req.user._id, function(err, user) {
+    if (err) return next(err);
+    if (user.tipsCount) {
+      user.tipsCount += 1;
+    } else {
+      user.tipsCount = 1;
+    }
+    user.save(function(err) {
+      if (err) return next(err);
+    });
+  });
   Activity.findById(req.body.activityId, function(err, activity) {
     if (err) return next(err);
     activity.tips.push({
@@ -761,7 +774,7 @@ app.post('/api/acceptActivity', ensureAuthenticated, function(req, res, next) {
       res.send(400);
     }
   });
-  
+
 });
 
 app.post('/api/deleteActivity', ensureAuthenticated, function(req, res, next) {
