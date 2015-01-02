@@ -240,7 +240,7 @@ function ensureAuthenticated(req, res, next) {
     }
   } else {
     res.set('Content-Type', 'application/json');
-    return res.send(401);
+    return res.staus(401).end();
   }
 }
 
@@ -607,7 +607,7 @@ app.put('/api/activities/:id', ensureAuthenticated, function(req, res, next) {
 
     activity.save(function(err) {
       if (err) return next(err);
-      res.send(200);
+      res.status(200).end();
     });
   });
 });
@@ -653,7 +653,7 @@ app.post('/api/subscribe', ensureAuthenticated, function(req, res, next) {
     }
     activity.save(function(err) {
       if (err) return next(err);
-      res.send(200);
+      res.status(200).end();
     });
   });
 });
@@ -675,7 +675,7 @@ app.post('/api/unsubscribe', ensureAuthenticated, function(req, res, next) {
     activity.subscriptions -= 1;
     activity.save(function(err) {
       if (err) return next(err);
-      res.send(200);
+      res.status(200).end();
     });
   });
 });
@@ -703,7 +703,7 @@ app.post('/api/markDone', ensureAuthenticated, function(req, res, next) {
     }
     activity.save(function(err) {
       if (err) return next(err);
-      res.send(200);
+      res.status(200).end();
     });
   });
 });
@@ -725,7 +725,7 @@ app.post('/api/markUndone', ensureAuthenticated, function(req, res, next) {
     activity.completions -= 1;
     activity.save(function(err) {
       if (err) return next(err);
-      res.send(200);
+      res.status(200).end();
     });
   });
 });
@@ -751,7 +751,7 @@ app.post('/api/tips', ensureAuthenticated, function(req, res, next) {
     activity.tipper.push(req.user._id);
     activity.save(function(err) {
       if (err) return next(err);
-      res.send(200);
+      res.status(200).end();
     });
   });
 });
@@ -766,12 +766,12 @@ app.post('/api/acceptActivity', ensureAuthenticated, function(req, res, next) {
         activity.save(function(err) {
           if (err) return next(err);
           console.log("Activity pushed into production");
-          res.send(200);
+          res.status(200).end();
         });
       });
     } else {
       console.log('Permission denied');
-      res.send(400);
+      res.status(400).end();
     }
   });
 
