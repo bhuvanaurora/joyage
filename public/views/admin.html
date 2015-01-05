@@ -1,23 +1,23 @@
-<div class="container" ng-if="currentUser.curator === true">
+<div class="container" ng-if="profile.curator === true"
+     style="width:1112px;margin-left:auto;margin-right:auto;margin-top:5%;margin-bottom:5%;padding:30px;min-height:600px;background-color:white;">
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading" style="font-size:20px;">
             Admin Console
-            <p class="pull-right">{{currentUser.name}}</p>
-            <!--p class="pull-right">{{currentUser.facebook.email}}</p-->
+            <p class="pull-right" style="font-size:16px;">{{profile.name}}</p>
         </div>
-        <div class="panel-body">
-            <a href="/add">Add activity</a>
+        <div class="panel-body" style="margin-top:20px;">
+            <a href="/add/{{profile._id}}">Add activity</a>
         </div>
-        <div style="margin-top:20px" class="fade-repeat col-xs-4 col-md-4" ng-repeat="act in activities | orderBy:'timeAdded':true">
+        <div style="margin-top:40px" class="fade-repeat col-xs-4 col-md-4" ng-repeat="act in activities | orderBy:'timeAdded':true">
             <div class="single-activity-box">
                 <div class="activity-image">
                     <a href="/activities/{{act._id}}">
                         <!--img style="height:222px;" ng-src="/images/{{act.poster}}" width="100%" alt="{{act.title}}" /-->
-                        <img style="height:222px;" ng-src="{{act.poster}}">
+                        <img style="height:222px;width:334px;" ng-src="{{act.poster}}">
                     </a>
                 </div>
-                <div class="activity-info" style="height: 120px;">
-                    <a href="/activities/{{act._id}}">
+                <div class="activity-info" style="height:120px;background-color: #606c88;">
+                    <a href="/activities/{{act._id}}" style="color:white;">
                         {{act.title}}
                         <p class="text-muted">{{act.location}} ({{act.neighborhood}})</p>
                     </a>
@@ -27,3 +27,18 @@
         </div>
     </div>
 </div>
+<!---------------------------- Footer ---------------------------->
+
+<footer id="footer-1080" style="margin-bottom:-20px;z-index: 1001;clear:both;">
+    <div class="container_27 clearfix">
+        <div class="grid_6 pull-right">
+            <div class="footer-logo">
+                <h3 style="margin-top: 20px;color:#999;font-family:Roboto">
+                    <a href="/" style="color:#999;font-family:Roboto">
+                        Joyage
+                    </a>
+                </h3>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,8 +1,11 @@
-<div class="container" ng-if="currentUser.curator === true">
+<div class="container" ng-if="profile.curator === true"
+        style="width:700px;margin-left:auto;margin-right:auto;margin-top:5%;margin-bottom:5%;padding:30px;background-color:white;">
   <div class="panel panel-default">
     <div class="panel-heading">
-      Add Activity
-      <p class="pull-right">{{currentUser.facebook.email}}</p>
+      <p class="pull-left"
+         style="font-size:20px;"><b>Add Activity</b></p>
+      <p class="pull-right"
+         style="font-size:14px;">{{profile.name}}</p>
     </div>
     <div class="panel-body">
 
@@ -14,36 +17,44 @@
             enctype="multipart/form-data">
         <div class="help-block text-danger"
              ng-messages="">
+        </div>
         <input class="form-control"
                type="text"
                name="title"
                ng-model="title"
                placeholder="Activity Title"
+               style="font-size:14px;padding:10px;"
                required
                autofocus>
         <br />
 
         <input type="file"
                ng-file-select="onFileSelect($files)"
+               style="margin-top:20px;font-size:14px;padding:10px;"
                required />
 
         <textarea class="form-control"
                   type="text"
                   name="description"
                   ng-model="description"
-                  placeholder="Curator's Description">
+                  placeholder="Curator's Description"
+                  style="margin-top:20px;font-size:14px;padding:10px;">
         </textarea><br />
         
-        <fieldset>
-          <legend>Categories</legend>
-          <ul class="genres">
-            <li ng-repeat="genre in genres">
+        <fieldset style="margin-top: 10px;">
+          <legend style="font-size:18px;">Categories</legend>
+          <ul class="genres" style="margin-top:10px;margin-bottom:10px;">
+            <li class="text-center"
+                ng-repeat="genre in genres"
+                style="display:inline;background-color:rgba(0,0,0,0.15);padding:1px;margin-right:10px;border-radius:5px;cursor:pointer;">
               <span ng-click="addCategory(genre)">{{genre}}</span>
             </li>
           </ul>
-          <h4 ng-if="categories[0]">Selected Categories</h4>
-          <ul class="genres">
-            <li ng-repeat="selectedCategory in categories">
+          <span ng-if="categories[0]"
+                style="font-size:18px;">Selected Categories</span>
+          <ul class="genres" style="margin-top:10px;margin-bottom:10px;">
+            <li ng-repeat="selectedCategory in categories"
+                style="display:inline;background-color:rgba(0,0,0,0.2);padding:1px;margin-right:5px;border-radius:5px;cursor:pointer;">
               <span ng-click="removeCategory(selectedCategory)">
                 {{selectedCategory}}
               </span>
@@ -51,57 +62,62 @@
           </ul>
         </fieldset>
         
-        <fieldset>
-          <legend>Activity Time</legend>
-          <h6>Start Date</h6>
+        <fieldset style="margin-top:20px;margin-bottom:20px;">
+          <span style="font-size:18px;">Start Date</span>
           <input class="form-control"
                  type="date" name="dateOfActivity"
                  ng-model="dateOfActivity"
-                 style="width:300px">
-          <h6>End Date</h6>
+                 style="width:300px;font-size:14px;">
+            <br /><br />
+          <span style="font-size:18px;">End Date</span>
           <input class="form-control"
                  type="date"
                  name="endDateOfActivity"
                  ng-model="endDateOfActivity"
-                 style="width:300px">
+                 style="width:300px;font-size:14px;">
           <br />
         </fieldset>
         
-        <label class="control-label">Time of Activity</label>
+        <span style="font-size:18px;">Time of Activity</span>
         <input class="form-control"
                type="time"
                name="timeOfActivity"
                ng-model="timeOfActivity"
-               style="width:300px"><br />
+               style="width:300px;font-size:14px;"><br />
         <br />
         
         <fieldset>
-          <legend>Location Details</legend>
+          <legend style="font-size:18px;">Location Details</legend>
           <input class="form-control"
                  type="text"
                  name="location"
                  ng-model="location"
                  placeholder="Location"
+                 style="font-size:14px;margin-top:5px;"
                  required>
           <br />
           <input class="form-control"
                  type="text"
                  name="address"
                  ng-model="address"
-                 placeholder="Address"><br />
+                 placeholder="Address"
+                 style="font-size:14px;margin-top:5px;">
+            <br />
           <input class="form-control"
                  type="text"
                  name="neighborhood"
                  ng-model="neighborhood"
                  placeholder="Neighborhood"
-                 required><br />
+                 style="font-size:14px;margin-top:5px;"
+                 required>
+                 <br />
           
-          <select style="width:300px;"
+          <select style="width:300px;font-size:14px;margin-top:5px;"
                   name="city"
                   ng-model="city">
             <option value="Bangalore">Bangalore</option>
           </select>
-          <select style="width:300px;"
+          <select style="width:300px;font-size:14px;margin-top:5px;"
                   name="country"
                   ng-model="country">
             <option value="India">India</option>
@@ -112,200 +128,231 @@
           <input class="form-control"
                  type="text"
                  name="phone"
-                 style="width:300px;"
                  maxlength="13"
                  ng-model="phone"
-                 placeholder="Phone number"><br />
+                 placeholder="Phone number"
+                 style="width:300px;font-size:14px;margin-top:5px;">
+            <br />
           <input class="form-control"
                  type="text"
                  name="locationWebsite"
                  ng-model="locationWebsite"
-                 placeholder="Website">
+                 placeholder="Website"
+                 style="font-size:14px;margin-top:5px;">
           <br />
           <input class="form-control"
                  type="text"
                  name="mapLat"
                  ng-model="mapLat"
-                 placeholder="Map Latitude">
+                 placeholder="Map Latitude"
+                 style="width:300px;font-size:14px;margin-top:5px;">
           <br />
           <input class="form-control"
                type="text"
                name="mapLon"
                ng-model="mapLon"
-               placeholder="Map Longitude">
+               placeholder="Map Longitude"
+               style="width:300px;font-size:14px;margin-top:5px;">
           <br />
 
         </fieldset>
         <br />
         
         <fieldset>
-          <legend>Source Details</legend>
+          <legend style="font-size:18px;">Source Details</legend>
           <input class="form-control"
                  type="text"
                  name="sourceName"
                  ng-model="sourceName"
-                 placeholder="Source">
+                 placeholder="Source"
+                 style="font-size:14px;margin-top:5px;">
           <br />
           <input class="form-control"
                  type="text"
                  name="sourceWebsite"
                  ng-model="sourceWebsite"
-                 placeholder="Link to the source">
+                 placeholder="Link to the source"
+                 style="font-size:14px;margin-top:5px;">
           <br />
           <textarea class="form-control"
                     type="text"
                     name="sourceDescription"
                     ng-model="sourceDescription"
-                    placeholder="Description from source">
+                    placeholder="Description from source"
+                    style="font-size:14px;margin-top:5px;">
 
                     </textarea>
           <br />
         </fieldset>
+          <br />
         
         <input class="form-control"
                type="text"
                name="goodies"
                ng-model="goodies"
-               placeholder="Goodies">
+               placeholder="Goodies"
+               style="font-size:14px;margin-top:5px;">
         <br />
         <input class="form-control"
                type="text"
                name="moreInfo"
                ng-model="moreInfo"
-               placeholder="More Info">
+               placeholder="More Info"
+               style="font-size:14px;margin-top:5px;">
         <br />
         <input class="form-control"
                type="text"
                name="moreInfoLink"
                ng-model="moreInfoLink"
-               placeholder="More Info Link">
+               placeholder="More Info Link"
+               style="font-size:14px;margin-top:5px;">
         <br />
         <br />
         
         <fieldset>
-          <legend>HQ Image</legend>
+          <legend style="font-size:18px;">HQ Image</legend>
           <input class="form-control"
                  type="text"
                  name="poster"
                  ng-model="poster"
-                 placeholder="Image name">
+                 placeholder="Image name"
+                 style="font-size:14px;margin-top:5px;">
           <br />
           <input class="form-control"
                  type="text"
                  name="photoCredit"
                  ng-model="photoCredit"
-                 placeholder="Photo Credits">
+                 placeholder="Photo Credits"
+                 style="font-size:14px;margin-top:5px;">
           <br />
           <input class="form-control"
                  type="text"
                  name="photoCreditLink"
                  ng-model="photoCreditLink"
-                 placeholder="Photo Credit Link">
+                 placeholder="Photo Credit Link"
+                 style="font-size:14px;margin-top:5px;">
           <br />
         </fieldset>
         <br />
         
         <fieldset>
-          <legend>Artist/Chef corner</legend>
+          <legend style="font-size:18px;">Artist/Chef corner</legend>
           <input class="form-control"
                  type="text"
                  name="corner"
                  ng-model="corner"
-                 placeholder="Artist / Chef corner" />
+                 placeholder="Artist / Chef corner"
+                 style="font-size:14px;margin-top:5px;"/>
           <br />
           <input class="form-control"
                  type="text"
                  name="cornerPic"
                  ng-model="cornerPic"
-                 placeholder="Corner pic name" />
+                 placeholder="Corner pic name"
+                 style="font-size:14px;margin-top:5px;"/>
           <br />
           <input class="form-control"
                  type="text"
                  name="cornerText"
                  ng-model="cornerText"
-                 placeholder="Corner text" />
+                 placeholder="Corner text"
+                 style="font-size:14px;margin-top:5px;"/>
           <br />
         </fieldset>
-        
+        <br />
+
         <fieldset>
-          <legend>In Media</legend>
+          <legend style="font-size:18px;">In Media</legend>
           <input class="form-control"
                  type="text"
                  name="mediaTitle1"
                  ng-model="mediaTitle1"
-                 placeholder="Media Title 1" />
+                 placeholder="Media Title 1"
+                 style="font-size:14px;margin-top:5px;"/>
           <br />
           <input class="form-control"
                  type="text"
                  name="mediaText1"
                  ng-model="mediaText1"
-                 placeholder="Media Text 1" />
+                 placeholder="Media Text 1"
+                 style="font-size:14px;margin-top:5px;"/>
           <br />
           <input class="form-control"
                  type="text"
                  name="mediaLink1"
                  ng-model="mediaLink1"
-                 placeholder="Media Link 1" />
+                 placeholder="Media Link 1"
+                 style="font-size:14px;margin-top:5px;"/>
           <br />
           <input class="form-control"
                  type="text"
                  name="mediaTitle2"
                  ng-model="mediaTitle2"
-                 placeholder="Media Title 2" />
+                 placeholder="Media Title 2"
+                 style="font-size:14px;margin-top:5px;"/>
           <br />
           <input class="form-control"
                  type="text"
                  name="mediaText2"
                  ng-model="mediaText2"
-                 placeholder="Media Text 2" />
+                 placeholder="Media Text 2"
+                 style="font-size:14px;margin-top:5px;"/>
           <br />
           <input class="form-control"
                  type="text"
                  name="mediaLink2"
                  ng-model="mediaLink2"
-                 placeholder="Media Link 2" />
+                 placeholder="Media Link 2"
+                 style="font-size:14px;margin-top:5px;"/>
           <br />
           <input class="form-control"
                  type="text"
                  name="mediaTitle3"
                  ng-model="mediaTitle3"
-                 placeholder="Media Title 3" />
+                 placeholder="Media Title 3"
+                 style="font-size:14px;margin-top:5px;"/>
           <br />
           <input class="form-control"
                  type="text"
                  name="mediaText3"
                  ng-model="mediaText3"
-                 placeholder="Media Text 3" />
+                 placeholder="Media Text 3"
+                 style="font-size:14px;margin-top:5px;"/>
           <br />
           <input class="form-control"
                  type="text"
                  name="mediaLink3"
                  ng-model="mediaLink3"
-                 placeholder="Media Link 3" />
+                 placeholder="Media Link 3"
+                 style="font-size:14px;margin-top:5px;"/>
           <br />
           <input class="form-control"
                  type="text"
                  name="mediaTitle4"
                  ng-model="mediaTitle4"
-                 placeholder="Media Title 4" />
+                 placeholder="Media Title 4"
+                 style="font-size:14px;margin-top:5px;"/>
           <br />
           <input class="form-control"
                  type="text"
                  name="mediaText4"
                  ng-model="mediaText4"
-                 placeholder="Media Text 4" />
+                 placeholder="Media Text 4"
+                 style="font-size:14px;margin-top:5px;"/>
           <br />
           <input class="form-control"
                  type="text"
                  name="mediaLink4"
                  ng-model="mediaLink4"
-                 placeholder="Media Link 4" />
+                 placeholder="Media Link 4"
+                 style="font-size:14px;margin-top:5px;"/>
           <br />
         </fieldset>
+          <br />
         
         <fieldset>
-          <legend>Payment Details</legend>
-          <select style="width:300px"
+          <legend style="font-size:18px;">Payment Details</legend>
+          <select style="width:300px;font-size:14px;margin-top:5px;"
                   name="currency"
                   ng-model="currency">
             <option value="Rs">INR</option>
@@ -317,42 +364,48 @@
                  type="text"
                  name="price"
                  ng-model="price"
-                 placeholder="Price">
+                 placeholder="Price"
+                 style="font-size:14px;margin-top:5px;">
           <br />
           <input class="form-control"
                  type="text"
                  name="payment"
                  ng-model="payment"
-                 placeholder="Link to payment gateway">
+                 placeholder="Link to payment gateway"
+                 style="font-size:14px;margin-top:5px;">
           <br />
           <input class="form-control"
                  type="text"
                  name="bookRide"
                  ng-model="bookRide"
-                 placeholder="Link to ride booking">
+                 placeholder="Link to ride booking"
+                 style="font-size:14px;margin-top:5px;">
           <br />
         </fieldset>
         <br />
         
         <fieldset>
-          <legend>Social Network Links</legend>
+          <legend style="font-size:18px;">Social Network Links</legend>
           <input class="form-control"
                  type="text"
                  name="facebookLink"
                  ng-model="facebookLink"
-                 placeholder="Facebook Link">
+                 placeholder="Facebook Link"
+                 style="font-size:14px;margin-top:5px;">
           <br />
           <input class="form-control"
                  type="text"
                  name="zomatoLink"
                  ng-model="zomatoLink"
-                 placeholder="Zomato Link">
+                 placeholder="Zomato Link"
+                 style="font-size:14px;margin-top:5px;">
           <br />
           <input class="form-control"
                  type="text"
                  name="twitterLink"
                  ng-model="twitterLink"
-                 placeholder="Twitter Link">
+                 placeholder="Twitter Link"
+                 style="font-size:14px;margin-top:5px;">
           <br />
         </fieldset>
         
@@ -362,10 +415,28 @@
                ng-model="addedBy"
                value="currentUser.email">
         
-        <button class="btn btn-primary"
-                type="submit">Add</button>
+        <button type="submit"
+                style="font-size:16px;padding:5px;margin-top:25px;;width:100%;cursor:pointer;background-color:#3A6073;border-radius:5px;">
+            Add
+        </button>
       </form>
-      
+
     </div>
   </div>
 </div>
+
+<!---------------------------- Footer ---------------------------->
+
+<footer id="footer-1080" style="margin-bottom:-20px;z-index: 1001;clear:both;">
+    <div class="container_27 clearfix">
+        <div class="grid_6 pull-right">
+            <div class="footer-logo">
+                <h3 style="margin-top: 20px;color:#999;font-family:Roboto">
+                    <a href="/" style="color:#999;font-family:Roboto">
+                        Joyage
+                    </a>
+                </h3>
+            </div>
+        </div>
+    </div>
+</footer>

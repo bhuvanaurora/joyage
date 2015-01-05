@@ -18,7 +18,7 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
         controller: 'DetailCtrl'
       })
 
-      .when('/editActivity/:id', {
+      .when('/editActivity/:rs/:id', {
         templateUrl: 'views/add.html',
         controller: 'AddCtrl'
       })
@@ -36,7 +36,7 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
         templateUrl: 'views/signup.html',
         controller: 'SignupCtrl'
       })*/
-      .when('/add', {
+      .when('/add/:id', {
         templateUrl: 'views/add.html',
         controller: 'AddCtrl'
       })
