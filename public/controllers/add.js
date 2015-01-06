@@ -81,6 +81,11 @@ angular.module('MyApp')
                           })
                       }
 
+                      if(!$scope.mapLat && !$scope.mapLon) {
+                          $scope.mapLat = 12.9667;
+                          $scope.mapLon = 77.5667;
+                      }
+
                       Activity.save({
                               id: id,
                               title: $scope.title,

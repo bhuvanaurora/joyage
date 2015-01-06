@@ -570,7 +570,6 @@ app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
 app.put('/api/activities/:id', ensureAuthenticated, function(req, res, next) {
   Activity.findById(req.params.id, function(err, activity) {
     if (err) return next(err);
-    console.log(req.body.title);
     activity.title = req.body.title;
     activity.description = req.body.description;
     activity.genre = req.body.genre;
