@@ -131,7 +131,8 @@
             </div>
 
             <div class="event-img">
-                <img src="images/{{activity.title}}.jpg">
+                <img ng-if="!activity.poster" src="/images/{{activity.title}}.jpg">
+                <img ng-if="activity.poster" ng-src="/images/{{activity.poster}}">
             </div>
 
             <div class="event-info-holder" id="description">

@@ -32,10 +32,11 @@
         <input type="file"
                ng-file-select="onFileSelect($files)"
                style="margin-top:20px;font-size:14px;padding:10px;"
-               ng-if="!activity.title"
+               ng-if="!activity.poster"
                required />
           <br />
-          <img src="/images/{{activity.title}}.jpg" />
+          <img ng-if="!activity.poster" ng-src="/images/{{activity.title}}.jpg" alt="{{activity.title}}" />
+          <img ng-if="activity.poster" ng-src="/images/{{activity.poster}}" alt="{{activity.title}}"/>
 
         <textarea class="form-control"
                   type="text"

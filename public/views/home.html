@@ -286,7 +286,8 @@
                     <div class="place-cards">
                         <!--div class="latest-ribbon"></div-->
                         <div class="place-img">
-                            <img ng-src="images/{{activity.title}}.jpg" alt="{{activity.title}}">
+                            <img ng-if="!activity.poster" ng-src="images/{{activity.title}}.jpg" alt="{{activity.title}}">
+                            <img ng-if="activity.poster" ng-src="images/{{activity.poster}}" alt="{{activity.title}}">
                             <div class="event-stamp" ng-if="activity.dateOfActivity">
                                 <i class="batch" data-icon="&#xF090;"></i>
                                 {{activity.dateOfActivity | date: mediumDate}}
