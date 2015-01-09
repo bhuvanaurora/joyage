@@ -29,6 +29,7 @@ console.log(process.env.NODE_ENV);
 // ---------------------------------- Loading modules ------------------------------------------------- //
 
 var path = require('path');
+var gm = require('gm');
 var util = require('util');
 var http = require('http');
 var httpProxy = require('http-proxy');
@@ -502,7 +503,20 @@ var image = '';
 
 app.post('/upload', function(req, res, next) {
   var filePath = path.join(__dirname, req.files.file.path);
-  fs.readFile(filePath, function(err, data) {
+
+  var writePath = path.join(__dirname, '/public/images', req.files.file.name);
+  gm(filePath)
+      .resize(600, 400)
+      .autoOrient()
+      .write(writePath, function(err) {
+        if (err) throw(err);
+        //image = data;
+        res.status(200).json({
+          imageurl: req.files.file.name
+        });
+      }
+  );
+  /*fs.readFile(filePath, function(err, data) {
     var writePath = path.join(__dirname, '/public/images', req.files.file.name);
     fs.writeFile(writePath, data, function(err) {
       if (err) throw(err);
@@ -513,7 +527,7 @@ app.post('/upload', function(req, res, next) {
         imageurl: req.files.file.name
       });
     })
-  })
+  })*/
 });
 
 app.post('/api/activities', ensureAuthenticated, function(req, res, next) {

@@ -20,6 +20,7 @@
     "connect-multiparty": "^1.2.5",
     "consolidate": "^0.10.0",
     "express": "^4.0.0",
+    "gm": "^1.17.0",
     "http": "0.0.0",
     "http-proxy": "^1.7.3",
     "jquery": "^2.1.1",
