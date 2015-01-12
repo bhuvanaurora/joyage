@@ -175,8 +175,9 @@ angular.module('MyApp')
           }
       };
 
-      if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {
           $scope.addS = true;
+      if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {
+          $scope.addS = false;
       }
 
       $scope.addSelfies = function() {

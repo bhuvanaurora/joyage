@@ -7,6 +7,25 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/4329-61jvjh.jpg" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/50572-56bwav.jpg" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/50698-j1oh5b.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/60831-1n3plq2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/61223-7q9upv.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/61299-1jlsc0f.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/61840-1kcv7tb.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/61840-u32jcn.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/62102-1hla62r.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/62156-h1u8ri.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/62339-16ddwti.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/62450-4rj1d7.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/62518-u013ht.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/62568-16pjti.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/62653-sfc3fv.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/62703-nrubi1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/62789-1lmna3k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/62860-1cge0v4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/63399-13i3d4z.JPG" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/63876-1nokpif.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/63876-1qnmv9w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/64358-lbxh3t.jpg" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/67273-wiuoe2.jpeg" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/67764-z6aic2.jpeg" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/67881-n3yeqc.jpeg" afterPath="" />
@@ -20,6 +39,8 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/96798-1klsdoo.jpg" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/97105-1fxrem5.jpg" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/97255-1o6cf00.jpg" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/controllers/detail.js" afterPath="$PROJECT_DIR$/public/controllers/detail.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Joyage.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -186,10 +207,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="detail.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="detail.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/views/detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2026578" vertical-offset="5563" max-vertical-offset="11580">
+            <state vertical-scroll-proportion="-5.0833335" vertical-offset="5563" max-vertical-offset="11580">
               <caret line="379" column="17" selection-start-line="379" selection-start-column="17" selection-end-line="379" selection-end-column="17" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
@@ -203,11 +224,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="detail.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="detail.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/controllers/detail.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.5172415" vertical-offset="2306" max-vertical-offset="8580">
-              <caret line="176" column="0" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.5845896" vertical-offset="2306" max-vertical-offset="8595">
+              <caret line="177" column="29" selection-start-line="177" selection-start-column="29" selection-end-line="177" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -258,8 +279,8 @@
         <option value="$PROJECT_DIR$/public/services/selfies.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/server.js" />
-        <option value="$PROJECT_DIR$/public/controllers/detail.js" />
         <option value="$PROJECT_DIR$/public/views/detail.html" />
+        <option value="$PROJECT_DIR$/public/controllers/detail.js" />
       </list>
     </option>
   </component>
@@ -585,10 +606,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293124" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20627262" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" x="0" y="368" width="1440" height="183" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20627262" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" x="0" y="368" width="1440" height="183" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293124" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2542373" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1108,17 +1129,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/controllers/detail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.5172415" vertical-offset="2306" max-vertical-offset="8580">
-          <caret line="176" column="0" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/views/detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2026578" vertical-offset="5563" max-vertical-offset="11580">
+        <state vertical-scroll-proportion="-5.0833335" vertical-offset="5563" max-vertical-offset="11580">
           <caret line="379" column="17" selection-start-line="379" selection-start-column="17" selection-end-line="379" selection-end-column="17" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
@@ -1128,6 +1141,14 @@
             <element signature="n#style#0;n#input#0;n#div#9;n#div#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#10;n#div#1;n#div#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controllers/detail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5845896" vertical-offset="2306" max-vertical-offset="8595">
+          <caret line="177" column="29" selection-start-line="177" selection-start-column="29" selection-end-line="177" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
