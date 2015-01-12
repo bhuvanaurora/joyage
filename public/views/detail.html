@@ -377,17 +377,8 @@
             <a href="" class="open-modal modal-pro-tip"><span ng-if="editTips">Add a pro tip</span></a>
             <ul class="genres">
                 <li ng-repeat="tip in activity.tips">
-                    <span ng-if="currentUser._id == tipper">
-                        <img src="https://graph.facebook.com/v2.2/{{tip.tipperfbId}}/picture"> {{tip.text}}
-                    </span>
-                </li>
-            </ul>
-            <ul class="genres">
-                <li ng-repeat="tip in activity.tips">
-                    <span ng-if="currentUser._id != tipper">
-                        <img src="https://graph.facebook.com/v2.2/{{tip.tipperfbId}}/picture"> {{tip.text}}
-                    </span>
-                </li>
+                    <img src="https://graph.facebook.com/v2.2/{{tip.tipperfbId}}/picture"> {{tip.text}}
+                 </li>
             </ul>
         </div>
 
@@ -397,6 +388,25 @@
 
             <p ng-if="activity.photoCredit">PHOTO CREDITS</p>
             <a ng-if="activity.photoCredit" href="{{activity.photoCreditLink}}">{{activity.photoCredit}}</a>
+        </div>
+
+        <!-------------------------------- Selfies --------------------------------------->
+
+        <div class="sidebar-footer">
+            <p>SELFIE STAND</p>
+            <input type="file"
+                   ng-if="addS"
+                   ng-file-select="onSelfieSelect($files)"
+                   style="margin-top:20px;font-size:14px;padding:10px;"
+                   required />
+            <button ng-if="addS"
+                    ng-click="addSelfies()">Upload Selfie</button>
+            <ul>
+                <li ng-repeat="selfie in activity.selfies">
+                    <img src="https://graph.facebook.com/v2.2/{{selfie.fbId}}/picture" />
+                    <img ng-src="/images/selfies/{{selfie.url}}" />
+                </li>
+            </ul>
         </div>
 
         <!----------------------- Activity review ------------------------------------------>

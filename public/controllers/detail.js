@@ -1,8 +1,8 @@
 // Changes made
 
 angular.module('MyApp')
-  .controller('DetailCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$alert', 'fb_appId', 'Activity', 'Profile', 'Subscription', 'DoneIt', 'Tips', 'Accept', 'Delete',
-                             function($scope, $rootScope, $window, $routeParams, $location, $alert, fb_appId, Activity, Profile, Subscription, DoneIt, Tips, Accept, Delete) {
+  .controller('DetailCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$alert', '$upload', 'fb_appId', 'Activity', 'Profile', 'Subscription', 'DoneIt', 'Tips', 'Selfies', 'Accept', 'Delete',
+                             function($scope, $rootScope, $window, $routeParams, $location, $alert, $upload, fb_appId, Activity, Profile, Subscription, DoneIt, Tips, Selfies, Accept, Delete) {
 
          // -------------- for modal
 
@@ -140,6 +140,54 @@ angular.module('MyApp')
                 $window.location.reload();
             }
         };
+
+      var selfie = '';
+      $scope.onSelfieSelect = function ($files) {
+          if ($files.length === 1) {
+              if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {
+                  for (var i = 0; i < $files.length; i++) {
+                      var file = $files[i];
+                      $scope.upload = $upload.upload({
+                          url: '/uploadSelfie',
+                          data: {myObj: $scope.myModelObj},
+                          file: file,
+                      }).progress(function (evt) {
+                          console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                      }).success(function (data, status, headers, config) {
+                          selfie = data.imageurl;
+                      });
+                  }
+              } else {
+                  $alert({
+                      content: 'You can upload only one selfie per activity',
+                      placement: 'top-right',
+                      type: 'material',
+                      duration: 3
+                  });
+              }
+          } else {
+              $alert({
+                  content: 'You can upload only one selfie per activity',
+                  placement: 'top-right',
+                  type: 'material',
+                  duration: 3
+              });
+          }
+      };
+
+      if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {
+          $scope.addS = true;
+      }
+
+      $scope.addSelfies = function() {
+          if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {
+              $scope.activity.selfies = selfie;
+              Selfies.addSelfie($scope.activity).success(function () {
+                  $scope.selfies = '';
+              });
+              $window.location.reload();
+          }
+      };
 
         $scope.acceptActivity = function(userId) {
             Accept.acceptActivity(activity, userId).success(function() {

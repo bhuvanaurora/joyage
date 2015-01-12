@@ -110,6 +110,13 @@ var activitySchema = new mongoose.Schema({
   tipper: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }],
+  selfies: [{
+    url: String,
+    fbId: String
+  }],
+  selfie_sub: [{
+    type: mongoose.Schema.Types.ObjectId, ref: 'User'
+  }],
   subscribers: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }],
@@ -158,7 +165,8 @@ var userSchema = new mongoose.Schema({
   invitations_sent: { type: Number, default: 0 },
   inviteString: String,
   completions: { type: Number, default: 0 },
-  tipsCount: { type: Number, default: 0 }
+  tipsCount: { type: Number, default: 0 },
+  selfies: [String]
 });
 
 var invitesSchema = new mongoose.Schema({
@@ -320,7 +328,8 @@ app.post('/auth/facebook', function(req, res, next) {
       invitation_to: [],
       invitations_sent: 0,
       inviteString: "",
-      tipsCount: 0
+      tipsCount: 0,
+      selfies: []
     });
     user.save(function(err) {
       if (err) return next(err);
@@ -503,7 +512,6 @@ var image = '';
 
 app.post('/upload', function(req, res, next) {
   var filePath = path.join(__dirname, req.files.file.path);
-
   var writePath = path.join(__dirname, '/public/images', req.files.file.name);
   gm(filePath)
       .resize(600, 400)
@@ -528,6 +536,21 @@ app.post('/upload', function(req, res, next) {
       });
     })
   })*/
+});
+
+app.post('/uploadSelfie', function(req, res, next) {
+  var filePath = path.join(__dirname, req.files.file.path);
+  var writePath = path.join(__dirname, '/public/images/selfies', req.files.file.name);
+  gm(filePath)
+      .resize(200, 200)
+      .autoOrient()
+      .write(writePath, function(err) {
+        if (err) throw(err);
+        res.status(200).json({
+          imageurl: req.files.file.name
+        });
+      }
+  );
 });
 
 app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
@@ -572,6 +595,8 @@ app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
     cornerPic: req.body.cornerPic,
     cornerText: req.body.cornerText,
     media: req.body.media,
+    selfie: [],
+    selfie_sub: [],
     preview: false
   });
 
@@ -737,6 +762,28 @@ app.post('/api/markUndone', ensureAuthenticated, function(req, res, next) {
     activity.doneIt.splice(index, 1);
     activity.completions -= 1;
     activity.save(function(err) {
+      if (err) return next(err);
+      res.status(200).end();
+    });
+  });
+});
+
+app.post('/api/selfies', ensureAuthenticated, function(req, res, next) {
+  User.findById(req.user._id, function(err, user) {
+    if (err) next(err);
+    user.selfies.push(req.body.selfies);
+    user.save(function(err) {
+      if (err) next(err);
+    })
+  });
+  Activity.findById(req.body.activityId, function(err, activity) {
+    if (err) return next(err);
+    activity.selfies.push({
+      url: req.body.selfies,
+      fbId: req.user.facebookId
+    });
+    activity.selfie_sub.push(req.user._id);
+    activity.save(function (err) {
       if (err) return next(err);
       res.status(200).end();
     });
