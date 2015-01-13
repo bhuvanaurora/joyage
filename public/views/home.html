@@ -281,13 +281,22 @@
 
 <div class="cards-holder">
     <div class="wrapper">
-        <input ng-model="query"
-                placeholder="Search"
-                style="margin-top: 20px;font-size: 14px;">
-
+        <div class="col-lg-9 col-md-9 col-xs-18 col-sm-9">
+            <input ng-model="query"
+                    placeholder="Search"
+                    style="margin-top: 20px;font-size: 14px;">
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-6 col-sm-3">
+            <div class="text-center">
+                <button ng-click="search()"
+                        style="width:240px;height:40px;margin-top:20px;font-size:14px;background-color:rgba(100,100,240,0.4);box-shadow:none;text-shadow:none;border-radius:5px;">
+                    Start the magic
+                </button>
+            </div>
+        </div>
         <div ng-repeat="acti in activ | orderBy:sortOrder:true">
             <div ng-repeat="act in acti | filter:query">
-                <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4">
+                <div class="col-lg-4 col-sm-4 col-xs-8 col-md-4">
                     <a href="/activities/{{act._id}}">
                         <div class="place-cards">
                             <!--div class="latest-ribbon"></div-->

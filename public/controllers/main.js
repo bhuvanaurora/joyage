@@ -70,14 +70,17 @@ angular.module('MyApp')
       }
 
       if ($scope.headingTitle !== "all activities") {
-        $scope.activities = Activity.query({ genre: $scope.headingTitle, page: 1, sortOrder: $scope.sortOrder });
         $scope.activ = [];
-        $scope.activ.push($scope.activities);
+        $scope.activ.push(Activity.query({ genre: $scope.headingTitle, page: 1, sortOrder: $scope.sortOrder }));
       } else {
-        $scope.activities = Activity.query({ page: 1, sortOrder: $scope.sortOrder });
         $scope.activ = [];
-        $scope.activ.push($scope.activities);
+        $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder }));
       }
+    };
+
+    $scope.search = function() {                                  // Will not be required with infinite scroll
+      $scope.pageClick();
+      $scope.pageClick();
     };
 
       // ----------------------------------------------- For Navbar --------------------------------------------- //
