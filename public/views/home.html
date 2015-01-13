@@ -24,14 +24,14 @@
             <div class="pull-right">
                 <div class="head-search">
                     <!--input type="search" placeholder="Search..." /-->
-                    <input class="search"
+                    <!--input class="search"
                            type="text"
-                           ng-model="query"
+                           ng-model="query.$"
                            style="margin-top:1px;background-color:white;"
-                           placeholder="Search...">
-                    <div class="head-search-icon">
+                           placeholder="Search..."-->
+                    <!--div class="head-search-icon">
                         <i class="batch" data-icon="&#xF097;"></i>
-                    </div>
+                    </div-->
                 </div><!-- search end -->
 
                 <div class="navigation js-navigation"><!-- navigation starts here -->
@@ -260,19 +260,20 @@
 </div>
 
 <div class="result-bar">
-    <div class="wrapper">
-        <div class="col-lg-6 col-sm-6 col-xs-12 col-md-6">
-
+    <div class="wrapper" style="margin-top: 20px;">
+        <div class="col-lg-4 col-sm-4 col-xs-8 col-md-4">
+            <div class="text-center">
+                <span ng-click="sort(1)" style="cursor:pointer">New on Joyage</span>
+            </div>
         </div>
-        <div class="col-lg-6 col-sm-6 col-xs-12 col-md-6">
-            <div class="pull-right">
-                Sort by :
-                <select id="year" name="sortOrder" ng-model="sortOrder">
-                    <option value="timeAdded" ng-click="sort(1)">New on Joyage</option>
-                    <option value="popularity" ng-click="sort(2)">Popularity</option>
-                    <option value="dateOfActivity" ng-click="sort(3)">Upcoming</option>
-                    <option value="trending">Trending</option>>
-                </select>
+        <div class="col-lg-4 col-sm-4 col-xs-8 col-md-4">
+            <div class="text-center">
+                <span ng-click="sort(2)" style="cursor:pointer">Popularity</span>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-4 col-xs-8 col-md-4">
+            <div class="text-center">
+                <span ng-click="sort(3)" style="cursor:pointer">Upcoming</span>
             </div>
         </div>
     </div>
@@ -280,41 +281,19 @@
 
 <div class="cards-holder">
     <div class="wrapper">
-        <div ng-repeat="activity in activities | filter:query | orderBy:sortOrder:true">
-            <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4">
-                <a href="/activities/{{activity._id}}">
-                    <div class="place-cards">
-                        <!--div class="latest-ribbon"></div-->
-                        <div class="place-img">
-                            <img ng-if="!activity.poster" ng-src="images/{{activity.title}}.jpg" alt="{{activity.title}}">
-                            <img ng-if="activity.poster" ng-src="images/{{activity.poster}}" alt="{{activity.title}}">
-                            <div class="event-stamp" ng-if="activity.dateOfActivity">
-                                <i class="batch" data-icon="&#xF090;"></i>
-                                {{activity.dateOfActivity | date: mediumDate}}
-                            </div>
-                        </div>
-                        <div class="place-head">
-                            <h4 class="margin-bottom-none">{{activity.title}}</h4>
-                            <p><i class="batch" data-icon="&#xF07D;"></i>{{activity.location}}, {{activity.neighborhood}}</p>
-                        </div>
-                        <div class="place-footer">
-                            <i class="batch" data-icon="&#xf15D;"></i> {{activity.subscriptions}}
-                                <span class="time-stamp">
-                                    Added on {{activity.timeAdded | date: shortTime}}
-                                </span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
+        <input ng-model="query"
+                placeholder="Search"
+                style="margin-top: 20px;font-size: 14px;">
 
-        <div ng-repeat="acti in activ" ng-if="acti">
-            <div ng-repeat="act in acti" ng-if="act">
+        <div ng-repeat="acti in activ | orderBy:sortOrder:true">
+            <div ng-repeat="act in acti | filter:query">
                 <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4">
                     <a href="/activities/{{act._id}}">
                         <div class="place-cards">
+                            <!--div class="latest-ribbon"></div-->
                             <div class="place-img">
-                                <img ng-src="images/{{act.title}}.jpg" alt="{{act.title}}">
+                                <img ng-src="images/{{act.title}}.jpg" alt="{{act.title}}" ng-if="!act.poster">
+                                <img ng-src="images/{{act.poster}}" alt="{{at.title}}" ng-if="act.poster">
                                 <div class="event-stamp" ng-if="act.dateOfActivity">
                                     <i class="batch" data-icon="&#xF090;"></i>
                                     {{act.dateOfActivity | date: mediumDate}}

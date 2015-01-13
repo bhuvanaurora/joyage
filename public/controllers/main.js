@@ -25,6 +25,7 @@ angular.module('MyApp')
     
     $scope.sortOrder = 'timeAdded';
     $scope.activities = Activity.query({ page: 1,  sortOrder: $scope.sortOrder });
+    $scope.activ.push($scope.activities);
 
     /*$scope.filterByCity = function(genre) {
       $scope.activities = Activity.query({ city: city });
@@ -32,12 +33,16 @@ angular.module('MyApp')
     };*/
     
     $scope.filterByGenre = function(genre) {
-      $scope.activities = Activity.query({ genre: genre, page: 1, sortOrder: $scope.sortOrder });
+      //$scope.activities = Activity.query({ genre: genre, page: 1, sortOrder: $scope.sortOrder });
+      $scope.activ = [];
+      $scope.activ.push(Activity.query({ genre: genre, page: 1, sortOrder: $scope.sortOrder }));
       $scope.headingTitle = genre;
     };
     
     $scope.allActivities = function(){
-      $scope.activities = Activity.query({ page: 1, sortOrder: $scope.sortOrder });
+      //$scope.activities = Activity.query({ page: 1, sortOrder: $scope.sortOrder });
+      $scope.activ = [];
+      $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder }));
       $scope.headingTitle = "all activities";
       displayMenu();
     };
@@ -54,16 +59,24 @@ angular.module('MyApp')
     
     $scope.sort = function(sortType) {
       if (sortType === 1) {
+        console.log(sortType);
         $scope.sortOrder = 'timeAdded';
       } else if (sortType === 2) {
-        $scope.sortOrder = 'dateOfActivity';
+        console.log(sortType);
+        $scope.sortOrder = 'popularity';
       } else if (sortType === 3) {
-        $scope.sortOrder === 'popularity';
+        console.log(sortType);
+        $scope.sortOrder = 'dateOfActivity';
       }
+
       if ($scope.headingTitle !== "all activities") {
         $scope.activities = Activity.query({ genre: $scope.headingTitle, page: 1, sortOrder: $scope.sortOrder });
+        $scope.activ = [];
+        $scope.activ.push($scope.activities);
       } else {
         $scope.activities = Activity.query({ page: 1, sortOrder: $scope.sortOrder });
+        $scope.activ = [];
+        $scope.activ.push($scope.activities);
       }
     };
 
