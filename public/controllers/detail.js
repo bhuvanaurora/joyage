@@ -175,9 +175,12 @@ angular.module('MyApp')
           }
       };
 
-          $scope.addS = true;
-      if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {
-          $scope.addS = false;
+          //$scope.addS = true;
+      if ($scope.activity.selfie_sub) {
+          if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {
+              //$scope.addS = false;
+              $scope.addS = true;
+          }
       }
 
       $scope.addSelfies = function() {
