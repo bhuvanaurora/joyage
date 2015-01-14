@@ -142,6 +142,9 @@ angular.module('MyApp')
         };
 
       var selfie = '';
+      if (!$scope.activity.selfie_sub) {
+          $scope.activity.selfie_sub = [];
+      }
       $scope.onSelfieSelect = function ($files) {
           if ($files.length === 1) {
               if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {
