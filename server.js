@@ -609,6 +609,14 @@ app.post('/uploadSelfie', function(req, res, next) {
   );
 });
 
+/*app.post('/uploadSelfie', function(req, res, next) {
+  var filePath = path.join(__dirname, req.files.file.path);
+  request.post(
+      'https://www.googleapis.com/upload/storage/v1/b/joyage_images/?ouploadType=media&name='+req.files.file.name
+  );
+
+});*/
+
 app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
   var activity = new Activity({
     _id: req.body.id,

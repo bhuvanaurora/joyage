@@ -8,6 +8,10 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
         controller: 'MainCtrl'
       })
 
+      .when('/blog', {
+          templateUrl: 'views/pages/blog.html'
+      })
+
       .when('/invite/:id', {
         templateUrl: 'views/invite.html',
         controller: 'InviteCtrl'
@@ -36,30 +40,38 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
         templateUrl: 'views/signup.html',
         controller: 'SignupCtrl'
       })*/
+
       .when('/add/:id', {
         templateUrl: 'views/add.html',
         controller: 'AddCtrl'
       })
+
       .when('/admin/:id', {
         templateUrl: 'views/admin.html',
         controller: 'AdminCtrl'
       })
+
       .when('/about', {
         templateUrl: 'views/pages/about.html'
       })
+
       .when('/jobs', {
         templateUrl: 'views/pages/jobs.html'
       })
+
       .when('/privacy', {
         templateUrl: 'views/pages/privacy.html'
       })
+
       .when('/tos', {
         templateUrl: 'views/pages/tos.html'
       })
+
       .when('/profile/:id', {
         templateUrl: 'views/profile.html',
         controller: 'ProfileCtrl'
       })
+
       .otherwise({
         redirectTo: '/'
       });
