@@ -178,12 +178,11 @@ angular.module('MyApp')
           }
       };
 
-      //$scope.addS = true;
+          //$scope.addS = true;
      if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {
           //$scope.addS = false;
           $scope.addS = true;
       }
-
 
       $scope.addSelfies = function() {
           if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {

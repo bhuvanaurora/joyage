@@ -36,6 +36,7 @@
     "multer": "^0.1.6",
     "nodemailer": "^0.6.3",
     "optimist": "^0.6.1",
+    "querystring": "^0.2.0",
     "request": "^2.34.0",
     "sendgrid": "^1.2.1",
     "sugar": "^1.4.1",

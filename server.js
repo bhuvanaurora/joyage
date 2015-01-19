@@ -565,23 +565,47 @@ app.get('/api/activities/:id', function(req, res, next) {
 
 var fs = require('fs');
 var image = '';
+var AWS = require('aws-sdk');
+var s3 = new AWS.S3();
+var buf = new Buffer('');
 
 app.post('/upload', function(req, res, next) {
   var filePath = path.join(__dirname, req.files.file.path);
-  var writePath = path.join(__dirname, '/public/images', req.files.file.name);
-  gm(filePath)
+  //var writePath = path.join(__dirname, '/public/images', req.files.file.name);
+  /*gm(filePath)
       .resize(600, 400)
       .autoOrient()
-      .write(writePath, function(err) {
+      .stream(function(err, stdout, stderr) {
+        var data = {
+          Bucket: 'joyage-images',
+          Key: req.files.file.name,
+          Body: stdout,
+          ContentType: 'image/jpeg'
+        };
+        console.log(req.files.file);
+        stdout.length = req.files.file.size;
+        s3.putObject(data, function(err, res) {
+          if (err) {
+            console.log(err);
+            res.status(500).send();
+          } else {
+            res.status(200).json({
+              imageurl: req.files.file.name
+            });
+            console.log('Image uploaded');
+          }
+        });
+      });*/
+      /*.write(writePath, function(err) {
         if (err) throw(err);
         //image = data;
         res.status(200).json({
           imageurl: req.files.file.name
         });
-      }
-  );
-  /*fs.readFile(filePath, function(err, data) {
-    var writePath = path.join(__dirname, '/public/images', req.files.file.name);
+      }*/
+  //);
+  fs.readFile(filePath, function(err, data) {
+    /*var writePath = path.join(__dirname, '/public/images', req.files.file.name);
     fs.writeFile(writePath, data, function(err) {
       if (err) throw(err);
       image = data;
@@ -590,13 +614,25 @@ app.post('/upload', function(req, res, next) {
         data: data,
         imageurl: req.files.file.name
       });
+    })*/
+    var imageName = Date.now() + req.files.file.name;
+    var params = { Bucket: 'joyage-images', Key: imagename, Body: data };
+    s3.putObject(params, function(err, data) {
+      if(err) console.log(err);
+      else {
+        console.log('Image uploaded');
+        res.status(200).json({
+          data: data,
+          imageurl: imageName
+        });
+      };
     })
-  })*/
+  });
 });
 
 app.post('/uploadSelfie', function(req, res, next) {
   var filePath = path.join(__dirname, req.files.file.path);
-  var writePath = path.join(__dirname, '/public/images/selfies', req.files.file.name);
+  /*var writePath = path.join(__dirname, '/public/images/selfies', req.files.file.name);
   gm(filePath)
       .resize(200, 200)
       .autoOrient()
@@ -606,16 +642,22 @@ app.post('/uploadSelfie', function(req, res, next) {
           imageurl: req.files.file.name
         });
       }
-  );
+  );*/
+  fs.readFile(filePath, function(err, data) {
+    var imageName = 'selfie_' + Date.now() + req.files.file.name;
+    var params = { Bucket: 'joyage-images', Key: imageName, Body: data };
+    s3.putObject(params, function (err, data) {
+      if (err) console.log(err);
+      else {
+        console.log('Selfie uploaded');
+        res.status(200).json({
+          data: data,
+          imageurl: imageName
+        });
+      };
+    })
+  });
 });
-
-/*app.post('/uploadSelfie', function(req, res, next) {
-  var filePath = path.join(__dirname, req.files.file.path);
-  request.post(
-      'https://www.googleapis.com/upload/storage/v1/b/joyage_images/?ouploadType=media&name='+req.files.file.name
-  );
-
-});*/
 
 app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
   var activity = new Activity({
