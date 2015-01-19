@@ -631,6 +631,7 @@ app.post('/upload', function(req, res, next) {
 });
 
 app.post('/uploadSelfie', function(req, res, next) {
+  console.log("Here");
   var filePath = path.join(__dirname, req.files.file.path);
   /*var writePath = path.join(__dirname, '/public/images/selfies', req.files.file.name);
   gm(filePath)
@@ -643,9 +644,13 @@ app.post('/uploadSelfie', function(req, res, next) {
         });
       }
   );*/
+  console.log(filePath);
   fs.readFile(filePath, function(err, data) {
+    console.log('In here now');
     var imageName = 'selfie_' + Date.now() + req.files.file.name;
+    console.log(imageName);
     var params = { Bucket: 'joyage-images', Key: imageName, Body: data };
+    console.log(params);
     s3.putObject(params, function (err, data) {
       if (err) console.log(err);
       else {
