@@ -146,10 +146,12 @@ angular.module('MyApp')
           $scope.activity.selfie_sub = [];
       }
       $scope.onSelfieSelect = function ($files) {
+          console.log($files);
           if ($files.length === 1) {
               if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {
                   for (var i = 0; i < $files.length; i++) {
                       var file = $files[i];
+                      console.log('File: '+file);
                       $scope.upload = $upload.upload({
                           url: '/uploadSelfie',
                           data: {myObj: $scope.myModelObj},
@@ -158,6 +160,7 @@ angular.module('MyApp')
                           console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
                       }).success(function (data, status, headers, config) {
                           selfie = data.imageurl;
+                          console.log('Selfie: '+selfie);
                       });
                   }
               } else {
