@@ -20,9 +20,15 @@ if (!process.env.NODE_ENV) {
 if (process.env.NODE_ENV === "dev") {
   var config = require('./config.dev.json');
   process.env.PORT = 3000;
+  app.use(multipart({
+    uploadDir: './tmp/'
+  }));
 } else {
   var config = require('./config.prod.json');
   process.env.PORT = 8080;
+  app.use(multipart({
+    uploadDir: '/tmp/'
+  }));
 }
 console.log(process.env.NODE_ENV);
 
@@ -58,6 +64,12 @@ var sendgrid = require('sendgrid')(config.sendgrid.id, config.sendgrid.password)
 var _ = require('lodash');
 var cors = require('express-cors');
 var argv = require('optimist').argv;
+
+var fs = require('fs');
+var AWS = require('aws-sdk');
+//AWS.config.loadFromPath('./s3_config.json');
+var s3 = new AWS.S3();
+var buf = new Buffer('');
 
 var tokenSecret = config.tokenSecret;
 
@@ -209,9 +221,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(multipart({
-  uploadDir: '/tmp'
-}));
+
 
 // Robots.txt
 app.use(function (req, res, next) {
@@ -564,12 +574,7 @@ app.get('/api/activities/:id', function(req, res, next) {
   });
 });
 
-var fs = require('fs');
 var image = '';
-var AWS = require('aws-sdk');
-AWS.config.loadFromPath('./s3_config.json');
-var s3 = new AWS.S3();
-var buf = new Buffer('');
 
 app.post('/upload', function(req, res, next) {
   var filePath = path.join(__dirname, req.files.file.path);
@@ -967,8 +972,6 @@ app.get('/api/editActivity/:id', ensureAuthenticated, function(req, res, next) {
     res.send(activity);
   });
 });
-
-
 
 app.get('*', function(req, res) {
   res.redirect('/#/' + req.originalUrl);
