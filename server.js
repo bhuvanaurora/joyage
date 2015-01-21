@@ -38,9 +38,6 @@ var timeout = require('connect-timeout');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var multipart = require('connect-multiparty');
-app.use(multipart({
-  uploadDir: '/tmp/'
-}));
 var router = express.Router();
 
 var crypto = require('crypto');
@@ -218,7 +215,9 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(multipart({
+  uploadDir: '/tmp/'
+}));
 
 // Robots.txt
 app.use(function (req, res, next) {
