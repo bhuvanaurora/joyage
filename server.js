@@ -1002,12 +1002,12 @@ var server = app.listen(app.get('port'), function() {
 
 //server.timeout = 1000;
 
-app.use(timeout(2 * 60 * 1000));
+/*.use(timeout(2 * 60 * 1000));
 app.use(haltOnTimedout);
 
 function haltOnTimedout(req, res, next){
   if (!req.timedout) next();
-}
+}*/
 
 // -------------------------------------------------- Emails --------------------------------------------------------//
 
