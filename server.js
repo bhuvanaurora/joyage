@@ -20,15 +20,9 @@ if (!process.env.NODE_ENV) {
 if (process.env.NODE_ENV === "dev") {
   var config = require('./config.dev.json');
   process.env.PORT = 3000;
-  app.use(multipart({
-    uploadDir: './tmp/'
-  }));
 } else {
   var config = require('./config.prod.json');
   process.env.PORT = 8080;
-  app.use(multipart({
-    uploadDir: '/tmp/'
-  }));
 }
 console.log(process.env.NODE_ENV);
 
@@ -44,6 +38,9 @@ var timeout = require('connect-timeout');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var multipart = require('connect-multiparty');
+app.use(multipart({
+  uploadDir: '/tmp/'
+}));
 var router = express.Router();
 
 var crypto = require('crypto');
