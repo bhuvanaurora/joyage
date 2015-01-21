@@ -637,7 +637,7 @@ app.post('/uploadSelfie', function(req, res, next) {
   console.log("Here");
   var filePath = path.join(__dirname, req.files.file.path);
   var writePath = path.join(__dirname, '/public/images/selfies', req.files.file.name);
-  gm(filePath)
+  /*gm(filePath)
       .resize(200, 200)
       .autoOrient()
       .write(writePath, function(err) {
@@ -646,7 +646,15 @@ app.post('/uploadSelfie', function(req, res, next) {
           imageurl: req.files.file.name
         });
       }
-  );
+  );*/
+  fs.writeFile(writePath, data, function(err) {
+    if (err) throw(err);
+    image = data;
+    console.log('data:'+ data);
+    res.status(200).json({
+      data: data,
+      imageurl: req.files.file.name
+    });
   /*console.log(filePath);
   fs.readFile(filePath, function(err, data) {
     console.log('In here now');
