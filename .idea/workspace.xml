@@ -137,9 +137,11 @@
       <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.78434503" vertical-offset="14644" max-vertical-offset="16215">
-              <caret line="1009" column="3" selection-start-line="1009" selection-start-column="3" selection-end-line="1009" selection-end-column="3" />
-              <folding />
+            <state vertical-scroll-proportion="0.1373802" vertical-offset="14644" max-vertical-offset="16215">
+              <caret line="982" column="0" selection-start-line="982" selection-start-column="0" selection-end-line="982" selection-end-column="0" />
+              <folding>
+                <marker date="1421828795000" expanded="true" signature="29518:30074" placeholder="/*...*/" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1081,9 +1083,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78434503" vertical-offset="14644" max-vertical-offset="16215">
-          <caret line="1009" column="3" selection-start-line="1009" selection-start-column="3" selection-end-line="1009" selection-end-column="3" />
-          <folding />
+        <state vertical-scroll-proportion="0.1373802" vertical-offset="14644" max-vertical-offset="16215">
+          <caret line="982" column="0" selection-start-line="982" selection-start-column="0" selection-end-line="982" selection-end-column="0" />
+          <folding>
+            <marker date="1421828795000" expanded="true" signature="29518:30074" placeholder="/*...*/" />
+          </folding>
         </state>
       </provider>
     </entry>
