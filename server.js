@@ -980,7 +980,7 @@ app.use(function(err, req, res, next) {
 
 app.set('port', process.env.PORT || 3000);
 
-var cluster = require('cluster');
+/*var cluster = require('cluster');
 var numCPUs = require('os').cpus().length;
 
 if (cluster.isMaster) {
@@ -994,7 +994,11 @@ if (cluster.isMaster) {
   var server = app.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
   });
-}
+}*/
+
+var server = app.listen(app.get('port'), function() {
+  console.log('Express server listening on port ' + app.get('port'));
+});
 
 //server.timeout = 1000;
 
