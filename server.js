@@ -650,11 +650,12 @@ app.post('/uploadSelfie', function(req, res, next) {
   fs.writeFile(writePath, data, function(err) {
     if (err) throw(err);
     image = data;
-    console.log('data:'+ data);
+    console.log('data:' + data);
     res.status(200).json({
       data: data,
       imageurl: req.files.file.name
     });
+  });
   /*console.log(filePath);
   fs.readFile(filePath, function(err, data) {
     console.log('In here now');
