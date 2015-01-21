@@ -636,7 +636,7 @@ app.post('/upload', function(req, res, next) {
 app.post('/uploadSelfie', function(req, res, next) {
   console.log("Here");
   var filePath = path.join(__dirname, req.files.file.path);
-  /*var writePath = path.join(__dirname, '/public/images/selfies', req.files.file.name);
+  var writePath = path.join(__dirname, '/public/images/selfies', req.files.file.name);
   gm(filePath)
       .resize(200, 200)
       .autoOrient()
@@ -646,8 +646,8 @@ app.post('/uploadSelfie', function(req, res, next) {
           imageurl: req.files.file.name
         });
       }
-  );*/
-  console.log(filePath);
+  );
+  /*console.log(filePath);
   fs.readFile(filePath, function(err, data) {
     console.log('In here now');
     var imageName = 'selfie_' + Date.now() + req.files.file.name;
@@ -664,7 +664,7 @@ app.post('/uploadSelfie', function(req, res, next) {
         });
       };
     })
-  });
+  });*/
 });
 
 app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
