@@ -567,6 +567,7 @@ app.get('/api/activities/:id', function(req, res, next) {
 var fs = require('fs');
 var image = '';
 var AWS = require('aws-sdk');
+AWS.config.loadFromPath('./s3_config.json');
 var s3 = new AWS.S3();
 var buf = new Buffer('');
 
