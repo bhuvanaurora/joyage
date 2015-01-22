@@ -572,6 +572,11 @@ app.get('/api/activities/:id', function(req, res, next) {
   });
 });
 
+AWS.config.update({
+  "accessKeyId": "AKIAJNXFUYGFE5CWMNRQ",
+  "secretAccessKey": "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"
+});
+
 app.post('/upload', function(req, res, next) {
   var filePath = path.join(__dirname, req.files.file.path);
   gm(filePath)
@@ -595,7 +600,7 @@ app.post('/upload', function(req, res, next) {
           res.status(200).json({
             imageurl: imageName
           });
-          console.log('Image uplaoded');
+          console.log('Image uploaded');
         });
       });
 });
@@ -623,7 +628,7 @@ app.post('/uploadSelfie', function(req, res, next) {
           res.status(200).json({
             imageurl: imageName
           });
-          console.log('Selfie uplaoded');
+          console.log('Selfie uploaded');
         });
       });
 });
