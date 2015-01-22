@@ -572,11 +572,8 @@ app.get('/api/activities/:id', function(req, res, next) {
   });
 });
 
-var image = '';
-
 app.post('/upload', function(req, res, next) {
   var filePath = path.join(__dirname, req.files.file.path);
-  //var writePath = path.join(__dirname, '/public/images', req.files.file.name);
   gm(filePath)
       .resize(600, 400)
       .stream(function(err, stdout, stderr) {
@@ -601,70 +598,10 @@ app.post('/upload', function(req, res, next) {
           console.log('Image uplaoded');
         });
       });
-
-  /*gm(filePath)
-      .resize(600, 400)
-      .autoOrient()
-      .stream(function(err, stdout, stderr) {
-        var data = {
-          Bucket: 'joyage-images',
-          Key: req.files.file.name,
-          Body: stdout,
-          ContentType: 'image/jpeg'
-        };
-        console.log('File:' + req.files.file);
-        console.log(stdout);
-        stdout.length = req.files.file.size;
-        s3.putObject(data, function(err, res) {
-          if (err) {
-            console.log(err);
-            res.status(500).send();
-          } else {
-            res.status(200).json({
-              imageurl: req.files.file.name
-            });
-            console.log('Image uploaded');
-          }
-        });
-      });*/
-      /*.write(writePath, function(err) {
-        if (err) throw(err);
-        //image = data;
-        res.status(200).json({
-          imageurl: req.files.file.name
-        });
-      }*/
-  //);
-
-  //fs.readFile(filePath, function(err, data) {
-    /*var writePath = path.join(__dirname, '/public/images', req.files.file.name);
-    fs.writeFile(writePath, data, function(err) {
-      if (err) throw(err);
-      image = data;
-      console.log('data:'+ data);
-      res.status(200).json({
-        data: data,
-        imageurl: req.files.file.name
-      });
-    })*/
-    /*var imageName = Date.now() + req.files.file.name;
-    var params = { Bucket: 'joyage-images', Key: imageName, Body: data };
-    s3.putObject(params, function(err, data) {
-      if(err) console.log(err);
-      else {
-        console.log('Image uploaded');
-        res.status(200).json({
-          data: data,
-          imageurl: imageName
-        });
-      };
-    })*/
-  //});
 });
 
 app.post('/uploadSelfie', function(req, res, next) {
   var filePath = path.join(__dirname, req.files.file.path);
-  //var writePath = path.join(__dirname, '/public/images/selfies', req.files.file.name);
   gm(filePath)
       .resize(200, 200)
       .stream(function(err, stdout, stderr) {
@@ -689,22 +626,6 @@ app.post('/uploadSelfie', function(req, res, next) {
           console.log('Selfie uplaoded');
         });
       });
-  //);
-  /*fs.readFile(filePath, function(err, data) {
-    var imageName = 'selfie_' + Date.now() + req.files.file.name;
-    var params = { Bucket: 'joyage-images', Key: imageName, Body: data };
-    console.log(params);
-    s3.putObject(params, function (err, data) {
-      if (err) console.log(err);
-      else {
-        console.log('Selfie uploaded');
-        res.status(200).json({
-          data: data,
-          imageurl: imageName
-        });
-      };
-    })
-  });*/
 });
 
 app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
