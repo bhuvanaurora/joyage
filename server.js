@@ -216,7 +216,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(multipart({
-  uploadDir: '/tmp/'
+  uploadDir: './tmp'
 }));
 
 // Robots.txt
@@ -647,7 +647,7 @@ app.post('/uploadSelfie', function(req, res, next) {
         });
       }
   );*/
-  fs.readFile(filePath, function(err, data) {
+  /*fs.readFile(filePath, function(err, data) {
     fs.writeFile(writePath, data, function(err) {
       if (err) throw(err);
       image = data;
@@ -657,8 +657,8 @@ app.post('/uploadSelfie', function(req, res, next) {
         imageurl: req.files.file.name
       });
     });
-  });
-  /*console.log(filePath);
+  });*/
+  console.log(filePath);
   fs.readFile(filePath, function(err, data) {
     console.log('In here now');
     var imageName = 'selfie_' + Date.now() + req.files.file.name;
@@ -675,7 +675,7 @@ app.post('/uploadSelfie', function(req, res, next) {
         });
       };
     })
-  });*/
+  });
 });
 
 app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
