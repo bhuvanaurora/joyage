@@ -619,7 +619,7 @@ app.post('/upload', function(req, res, next) {
       });
     })*/
     var imageName = Date.now() + req.files.file.name;
-    var params = { Bucket: 'joyage-images', Key: imagename, Body: data };
+    var params = { Bucket: 'joyage-images', Key: imageName, Body: data };
     s3.putObject(params, function(err, data) {
       if(err) console.log(err);
       else {
@@ -632,11 +632,6 @@ app.post('/upload', function(req, res, next) {
     })
   });
 });
-
-/*AWS.config.update({
-  accessKeyId: "AKIAJNXFUYGFE5CWMNRQ",
-  secretAccessKey: "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"
-});*/
 
 app.post('/uploadSelfie', function(req, res, next) {
   console.log("Here");
@@ -652,22 +647,8 @@ app.post('/uploadSelfie', function(req, res, next) {
         });
       }
   );*/
-  /*fs.readFile(filePath, function(err, data) {
-    fs.writeFile(writePath, data, function(err) {
-      if (err) throw(err);
-      image = data;
-      console.log('data:' + data);
-      res.status(200).json({
-        data: data,
-        imageurl: req.files.file.name
-      });
-    });
-  });*/
-  console.log(filePath);
   fs.readFile(filePath, function(err, data) {
-    console.log('In here now');
     var imageName = 'selfie_' + Date.now() + req.files.file.name;
-    console.log(imageName);
     var params = { Bucket: 'joyage-images', Key: imageName, Body: data };
     console.log(params);
     s3.putObject(params, function (err, data) {
