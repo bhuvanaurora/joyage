@@ -61,7 +61,7 @@ var argv = require('optimist').argv;
 
 var fs = require('fs');
 var AWS = require('aws-sdk');
-//AWS.config.loadFromPath('./s3_config.json');
+AWS.config.loadFromPath('./s3_config.json');
 var s3 = new AWS.S3();
 var buf = new Buffer('');
 
@@ -633,10 +633,10 @@ app.post('/upload', function(req, res, next) {
   });
 });
 
-AWS.config.update({
+/*AWS.config.update({
   accessKeyId: "AKIAJNXFUYGFE5CWMNRQ",
   secretAccessKey: "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"
-});
+});*/
 
 app.post('/uploadSelfie', function(req, res, next) {
   console.log("Here");
