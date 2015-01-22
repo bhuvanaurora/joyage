@@ -61,8 +61,8 @@ var argv = require('optimist').argv;
 
 var fs = require('fs');
 var AWS = require('aws-sdk');
-var s3 = new AWS.S3();
 AWS.config.loadFromPath('./s3_config.json');
+var s3 = new AWS.S3();
 var buf = new Buffer('');
 
 var tokenSecret = config.tokenSecret;
@@ -572,11 +572,6 @@ app.get('/api/activities/:id', function(req, res, next) {
   });
 });
 
-AWS.config.update({
-  "accessKeyId": "AKIAJNXFUYGFE5CWMNRQ",
-  "secretAccessKey": "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"
-});
-
 app.post('/upload', function(req, res, next) {
   var filePath = path.join(__dirname, req.files.file.path);
   gm(filePath)
@@ -607,11 +602,14 @@ app.post('/upload', function(req, res, next) {
 
 app.post('/uploadSelfie', function(req, res, next) {
   var filePath = path.join(__dirname, req.files.file.path);
+  console.log(__dirname);
+  console.log(filePath);
   gm(filePath)
       .resize(200, 200)
       .stream(function(err, stdout, stderr) {
         var buf = new Buffer('');
         var imageName = 'selfie_' + Date.now() + req.files.file.name;
+        console.log(imageName);
         stdout.on('data', function(data) {
           buf = Buffer.concat([buf, data]);
         });
@@ -622,13 +620,15 @@ app.post('/uploadSelfie', function(req, res, next) {
             Body: buf,
             ContentType: mime.lookup(req.files.file.name)
           };
+          console.log(data);
           s3.putObject(data, function(err, res) {
             if (err) throw(err);
-          });
-          res.status(200).json({
-            imageurl: imageName
+            else console.log('Selfie uploaded successfully');
           });
           console.log('Selfie uploaded');
+          res.status(200).json({
+            imageurl: imageName
+          }).end();
         });
       });
 });
