@@ -633,6 +633,11 @@ app.post('/upload', function(req, res, next) {
   });
 });
 
+AWS.config.update({
+  accessKeyId: "AKIAJNXFUYGFE5CWMNRQ",
+  secretAccessKey: "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"
+});
+
 app.post('/uploadSelfie', function(req, res, next) {
   console.log("Here");
   var filePath = path.join(__dirname, req.files.file.path);
