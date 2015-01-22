@@ -61,8 +61,8 @@ var argv = require('optimist').argv;
 
 var fs = require('fs');
 var AWS = require('aws-sdk');
-//AWS.config.loadFromPath('./s3_config.json');
 var s3 = new AWS.S3();
+AWS.config.loadFromPath('./s3_config.json');
 var buf = new Buffer('');
 
 var tokenSecret = config.tokenSecret;
