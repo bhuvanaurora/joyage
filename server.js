@@ -563,6 +563,8 @@ app.get('/api/activities', function(req, res, next) {
   });
 });
 
+var mime = require('mime');
+
 app.get('/api/activities/:id', function(req, res, next) {
   Activity.findById(req.params.id, function(err, activity) {
     if (err) return next(err);
@@ -575,6 +577,31 @@ var image = '';
 app.post('/upload', function(req, res, next) {
   var filePath = path.join(__dirname, req.files.file.path);
   //var writePath = path.join(__dirname, '/public/images', req.files.file.name);
+  gm(filePath)
+      .resize(600, 400)
+      .stream(function(err, stdout, stderr) {
+        var buf = new Buffer('');
+        var imageName = Date.now() + req.files.file.name;
+        stdout.on('data', function(data) {
+          buf = Buffer.concat([buf, data]);
+        });
+        stdout.on('end', function(data) {
+          var data = {
+            Bucket: "joyage-images",
+            Key: imageName,
+            Body: buf,
+            ContentType: mime.lookup(req.files.file.name)
+          };
+          s3.putObject(data, function(err, res) {
+            if (err) throw(err);
+          });
+          res.status(200).json({
+            imageurl: imageName
+          });
+          console.log('Image uplaoded');
+        });
+      });
+
   /*gm(filePath)
       .resize(600, 400)
       .autoOrient()
@@ -585,7 +612,8 @@ app.post('/upload', function(req, res, next) {
           Body: stdout,
           ContentType: 'image/jpeg'
         };
-        console.log(req.files.file);
+        console.log('File:' + req.files.file);
+        console.log(stdout);
         stdout.length = req.files.file.size;
         s3.putObject(data, function(err, res) {
           if (err) {
@@ -607,7 +635,8 @@ app.post('/upload', function(req, res, next) {
         });
       }*/
   //);
-  fs.readFile(filePath, function(err, data) {
+
+  //fs.readFile(filePath, function(err, data) {
     /*var writePath = path.join(__dirname, '/public/images', req.files.file.name);
     fs.writeFile(writePath, data, function(err) {
       if (err) throw(err);
@@ -618,7 +647,7 @@ app.post('/upload', function(req, res, next) {
         imageurl: req.files.file.name
       });
     })*/
-    var imageName = Date.now() + req.files.file.name;
+    /*var imageName = Date.now() + req.files.file.name;
     var params = { Bucket: 'joyage-images', Key: imageName, Body: data };
     s3.putObject(params, function(err, data) {
       if(err) console.log(err);
@@ -629,25 +658,39 @@ app.post('/upload', function(req, res, next) {
           imageurl: imageName
         });
       };
-    })
-  });
+    })*/
+  //});
 });
 
 app.post('/uploadSelfie', function(req, res, next) {
-  console.log("Here");
   var filePath = path.join(__dirname, req.files.file.path);
-  var writePath = path.join(__dirname, '/public/images/selfies', req.files.file.name);
-  /*gm(filePath)
+  //var writePath = path.join(__dirname, '/public/images/selfies', req.files.file.name);
+  gm(filePath)
       .resize(200, 200)
-      .autoOrient()
-      .write(writePath, function(err) {
-        if (err) throw(err);
-        res.status(200).json({
-          imageurl: req.files.file.name
+      .stream(function(err, stdout, stderr) {
+        var buf = new Buffer('');
+        var imageName = 'selfie_' + Date.now() + req.files.file.name;
+        stdout.on('data', function(data) {
+          buf = Buffer.concat([buf, data]);
         });
-      }
-  );*/
-  fs.readFile(filePath, function(err, data) {
+        stdout.on('end', function(data) {
+          var data = {
+            Bucket: "joyage-images",
+            Key: imageName,
+            Body: buf,
+            ContentType: mime.lookup(req.files.file.name)
+          };
+          s3.putObject(data, function(err, res) {
+            if (err) throw(err);
+          });
+          res.status(200).json({
+            imageurl: imageName
+          });
+          console.log('Selfie uplaoded');
+        });
+      });
+  //);
+  /*fs.readFile(filePath, function(err, data) {
     var imageName = 'selfie_' + Date.now() + req.files.file.name;
     var params = { Bucket: 'joyage-images', Key: imageName, Body: data };
     console.log(params);
@@ -661,7 +704,7 @@ app.post('/uploadSelfie', function(req, res, next) {
         });
       };
     })
-  });
+  });*/
 });
 
 app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
