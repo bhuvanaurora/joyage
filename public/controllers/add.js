@@ -33,19 +33,25 @@ angular.module('MyApp')
                       'Theater & Shows', 'Activites for Two', 'Food & Dining', 'Bars & Drinking'];
 
                   $scope.categories = [];
+
                   $scope.addCategory = function (genre) {
                       $scope.categories.push(genre);
                       $scope.genres.splice($scope.genres.indexOf(genre), 1);
                   };
+
                   $scope.removeCategory = function (selectedCategory) {
                       $scope.categories.splice($scope.categories.indexOf(selectedCategory), 1);
                       $scope.genres.push(selectedCategory);
                   };
+
                   $scope.city = 'Bangalore';
                   $scope.country = 'India';
                   $scope.currency = 'Rs';
 
                   $scope.addActivity = function (image) {
+
+                      $scope.categories.push($scope.moods);
+                      $scope.categories.push($scope.times);
 
                       var id;
                       var title = $scope.title.split(" ");
@@ -185,12 +191,14 @@ angular.module('MyApp')
                       $scope.activity = activity;
 
                       $scope.categories = activity.genre;
+
                       $scope.genres = ['Athletic Activities', 'Fitness Classes', 'Hiking & Biking',
                           'Nature Appreciation', 'Bars', 'Breweries & Distilleries',
                           'Featured Cocktails', 'Happy Hours', 'Classes', 'Exhibits & Galleries',
                           'Brunch & Breakfast', 'Lunch', 'Dinner', 'Sweet Treats', 'Food Trucks & Pop-Ups',
                           'Tea & Coffeeshops', 'Concerts', 'Fun & Games', 'Nightlife & Parties',
                           'Theater & Shows', 'Activites for Two', 'Food & Dining', 'Bars & Drinking'];
+
                       if (activity.genre) {
                           for (var i = 0; i < $scope.categories.length; i++) {
                               $scope.genres.splice($scope.genres.indexOf($scope.categories[i]), 1);
@@ -213,6 +221,7 @@ angular.module('MyApp')
                       $scope.location = activity.location;
                       $scope.city = activity.city;
                       $scope.address = activity.address;
+
                       if (activity.media[0]) {
                           $scope.mediaTitle1 = activity.media[0].title;
                           $scope.mediaText1 = activity.media[0].text;
@@ -263,6 +272,9 @@ angular.module('MyApp')
                   });
 
                   $scope.addActivity = function () {
+
+                      $scope.categories.push($scope.moods);
+                      $scope.categories.push($scope.times);
 
                       var id;
                       var title = $scope.title.split(" ");

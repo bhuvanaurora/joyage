@@ -1,10 +1,55 @@
 <!----------------------------------------------------- Navbar -------------------------------------------->
 
-<header ng-controller="NavbarCtrl"><!-- header start -->
+<header style="background-color:white;position:fixed;" ng-controller="NavbarCtrl">
+    <div class="wrapper">
+        <div class="col-lg-4 col-sm-4 col-xs-6 col-md-4 padd-left-none">
+            <div class="head-brand" ng-click="go('/')" style="cursor:pointer">
+                Joyage
+            </div>
+        </div>
+
+        <div class="col-lg-8 col-sm-8 col-xs-6 col-md-8 padd-right-none">
+            <div class="pull-right">
+                <div class="user-menu js-user-menu" ng-click="userMenu()">
+                    <img ng-if="currentUser" src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
+                    <span ng-if="currentUser" class="user-name">{{currentUser.name}}</span>
+                    <span ng-if="!currentUser" class="user-name" ng-click="go('/login')">Login</span>
+                </div>
+                <div ng-if="currentUser" class="user-menu-drawer js-user-menu-drawer" id="user-menu-drawer" hide ng-click="userMenu()">
+                    <ul>
+                        <li class="selected"><span class="batch" data-icon="&#xF162;"></span>  Home</li>
+                        <a ng-href="/profile/{{currentUser._id}}">
+                            <li>
+                                <span class="batch" data-icon="&#xF043;"></span>  Profile
+                            </li>
+                        </a>
+                        <a ng-if="currentUser.curator === true" ng-href="/admin/{{currentUser._id}}">
+                            <li>
+                                <span class="batch" data-icon="&#xF04C;"></span>  Admin
+                            </li>
+                        </a>
+                        <a ng-href="/invite/{{currentUser._id}}">
+                            <li>
+                                <span class="batch" data-icon="&#xF0DB;"></span>  Invite friends
+                            </li>
+                        </a>
+                        <a ng-href="javascript:void(0)" ng-click="logout()">
+                            <li>
+                                <span class="batch" data-icon="&#xF069;"></span>  Logout
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!--header ng-controller="NavbarCtrl">
     <div class="wrapper">
         <div class="col-lg-5 col-sm-6 col-xs-6 col-md-6">
             <div class="head-brand">
-                <a href="/" style="font-family:Montserrat;color:white">Joyage</a>
+                Joyage
             </div>
             <div class="city-select js-city-select">
                 <div class="city-selected">Bangalore</div>
@@ -19,247 +64,169 @@
                 </ul>
             </div>
         </div>
-
-        <div class="col-lg-7 col-sm-6 col-xs-6 col-md-6">
-            <div class="pull-right">
-                <div class="head-search">
-                    <!--input type="search" placeholder="Search..." /-->
-                    <!--input class="search"
-                           type="text"
-                           ng-model="query.$"
-                           style="margin-top:1px;background-color:white;"
-                           placeholder="Search..."-->
-                    <!--div class="head-search-icon">
-                        <i class="batch" data-icon="&#xF097;"></i>
-                    </div-->
-                </div><!-- search end -->
-
-                <div class="navigation js-navigation"><!-- navigation starts here -->
-                    <nav class="nav-drawer js-nav-drawer">
-                        <div class="head-user-pic">
-                            <img src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
-                        </div>
-                        <div class="head-user-name" style="margin-bottom:15px">
-                            <span ng-if="currentUser">{{currentUser.name}}</span>
-                        </div>
-                        <div class="navToggle">
-                            <div class="icon-left"></div>
-                            <div class="icon-right"></div>
-                        </div>
-                        <ul class="nav-list">
-                            <li>
-                                <a href="/profile/{{currentUser._id}}"
-                                   ng-if="currentUser">
-                    <span class="nav-action-icons">
-                      <i class="batch" data-icon="&#xF170;"></i>
-                    </span>
-                                    Profile
-                                </a>
-                                <a href="/login"
-                                   ng-if="!currentUser">
-                                    Login
-                                </a>
-                            </li>
-                            <li>
-                                <a ng-if="currentUser.curator === true" href="/admin/{{currentUser._id}}">
-                                    <span class="nav-action-icons"><i class="batch" data-icon="&#xF04D;"></i></span>
-                                    Admin
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/profile/{{currentUser._id}}">
-                    <span class="nav-action-icons">
-                      <i class="batch" data-icon="&#xF171;"></i>
-                    </span>
-                                    Invite Friends
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/profile/{{currentUser._id}}">
-                    <span class="nav-action-icons">
-                      <i class="batch" data-icon="&#xF007;"></i>
-                    </span>
-                                    Send Feedback
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" ng-click="logout()">
-                    <span class="nav-action-icons">
-                      <i class="batch" data-icon="&#xF069;"></i>
-                    </span>
-                                    Log Out
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div><!-- navigation ends here -->
-
-            </div><!-- pull right end -->
-        </div>
-    </div><!-- wrapper ends -->
+    </div>
 </header><!-- Header ends -->
+<div class="mood-head-holde">
+    <img src="img/2.jpg" style="width:100%;height:800px;">
+    <div class="overlay" style="position:absolute;margin-top:-800px;"></div>
+    <div class="mood-showup-block absolute-center">
+        <h2>A perfect day to do this</h2>
+        <p>Here is the detailed information about this adventure. Join the rush to make this memorable or sleep well.<br /> Choices is yours.</p>
+    </div><!-- mood-showup-block -->
+</div><!-- mood head holder -->
 
 <!----------------------------- Categories -------------------------------------->
 
-<div id="new-home" style="margin-top:-20px">
-    <div id="filter-and-sort-bars">
-        <div id="activity-filter">
-            
-            <section class="container_27 clearfix" style="font-family:Courgette">
-                <section class="grid_27">                        
-                    I'm looking for
-                    <span
-                        class="filter-select"
-                        data-filter-id="category-filter">
-                        <a id="categories-select"
-                           style="text-decoration:none;color:#0095dd;"
-                           onclick='displayMenu();'
-                           onmouseover='this.style.color="#cd7f32";'
-                           onmouseout='this.style.color="#0095dd";'>
-                            {{headingTitle}}
-                        </a>
-                    </span>
-                        in <span id="neighborhoods-select" class="filter-select" data-filter-id="neighborhood-filter">Bangalore</span>.
-                </section>
-            </section>
+<div class="sorting-head-holder">
+    <div class="sort-select-brick">
+        <div class="wrapper">
+            <div class="pick-mood-action js-filter-mood" ng-click="displayMenu()">
+                Pick Your Mood
+            </div><!-- pick mood action -->
 
-            <div id="filter-container">
-                <section class="container_27 clearfix">
-                    <section class="grid_27">
-                        <div id="category-filter"
-                             class="filter-options"
-                             data-filter-type="categories">
-                            <div>
-                                <div class="filter-column">
-                                    <h2 class="batch" data-icon="&#xF160;"></h2>
-                                    <div class="filter-heading">Active &amp; Outdoor</div>    
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[0])" class="filter-sub" data-fid="79">{{genres[0]}}</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[1])" class="filter-sub" data-fid="80">{{genres[1]}}</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[2])" class="filter-sub" data-fid="81">{{genres[2]}}</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[3])" class="filter-sub" data-fid="82">{{genres[3]}}</div>
-                                </div>        
-                                <div class="filter-column">
-                                    <h2 class="batch" data-icon="&#xF057;"></h2>
-                                    <div class="filter-heading">Bars &amp; Drinking</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[4])" class="filter-sub" data-fid="83">{{genres[4]}}</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[5])" class="filter-sub" data-fid="84">{{genres[5]}}</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[6])" class="filter-sub" data-fid="85">{{genres[6]}}</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[7])" class="filter-sub" data-fid="86">{{genres[7]}}</div>
-                                </div>
-                                <div class="filter-column">
-                                    <h2 class="batch" data-icon="&#xF0D1;"></h2>
-                                    <div class="filter-heading">Classes &amp; Exhibits</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[8])" class="filter-sub" data-fid="87">{{genres[8]}}</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[9])" class="filter-sub" data-fid="88">{{genres[9]}}</div>
-                                </div>
-                                <div class="filter-column">
-                                    <h2 class="batch" data-icon="&#xF070;"></h2>
-                                    <div class="filter-heading">Food &amp; Dining</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[10])" class="filter-sub" data-fid="90">{{genres[10]}}</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[11])" class="filter-sub" data-fid="94">{{genres[11]}}</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[12])" class="filter-sub" data-fid="92">{{genres[12]}}</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[13])" class="filter-sub" data-fid="91">{{genres[13]}}</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[14])" class="filter-sub" data-fid="93">{{genres[14]}}</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[15])" class="filter-sub" data-fid="102">{{genres[15]}}</div>
-                                </div>
-                                <div class="filter-column">
-                                    <h2 class="batch" data-icon="&#xF075;"></h2>
-                                    <div class="filter-heading">Shows &amp; Entertainment</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[16])" class="filter-sub" data-fid="95">{{genres[16]}}</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[17])" class="filter-sub" data-fid="101">{{genres[17]}}</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[18])" class="filter-sub" data-fid="96">{{genres[18]}}</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[19])" class="filter-sub" data-fid="97">{{genres[19]}}</div>
-                                </div>
-                                <div class="filter-column">
-                                    <h2 class="batch" data-icon="&#xF049;"></h2>
-                                    <div class="filter-heading">Date Spots</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[20])" class="filter-sub" data-fid="103">{{genres[20]}}</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[21])" class="filter-sub" data-fid="105">{{genres[21]}}</div>
-                                    <div onclick="displayMenu()" ng-click="filterByGenre(genres[22])" class="filter-sub" data-fid="107">{{genres[22]}}</div>
-                                </div>
-                            </div>
-                            <div class="clear-all"></div>
-                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-                                <div class="pull-right">
-                                    <button class="button button-primary" ng-click="allActivities()">Show all activities</button>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </section>
+            <div class="pull-right" style="display: inline-block;">
+                <div class="js-user-menu-drawer">
+                    <ul>
+                        <li ng-click="sort(1)" style="cursor:pointer">
+                            New on Joyage
+                        </li>
+                        <li ng-click="sort(2)" style="cursor:pointer">
+                            Popularity
+                        </li>
+                        <li ng-click="sort(3)" style="cursor:pointer">
+                            Upcoming
+                        </li>
+                    </ul>
+                </div>
             </div>
+            <div class="pull-right" style="display: inline-block;">
+                <div class="js-user-menu-drawer">
+                    <ul>
+                        <li ng-click="filterByCity('Bangalore')" style="cursor:pointer">
+                            Bangalore
+                        </li>
+                        <li ng-click="filterByCity('Delhi')" style="cursor:pointer">
+                            Delhi
+                        </li>
+                        <li ng-click="filterByCity('Mumbai')" style="cursor:pointer">
+                            Mumbai
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- wrapper end -->
+
+        <div class="mood-holder js-mood-holder hide" id="filter-container">
+            <div class="wrapper">
+                <div class="col-lg-2 col-sm-2 col-xs-6 col-md-2" ng-click="filterByGenre(genres[0])">
+                    <div class="emotions-holder">
+                        <div class="emotion icon-emo-saint"></div>
+                        <p class="filter-heading">{{genres[0]}}</p>
+
+                    </div><!-- emotions holder end -->
+                </div>
+
+                <div class="col-lg-2 col-sm-2 col-xs-6 col-md-2" ng-click="filterByGenre(genres[1])">
+                    <div class="emotions-holder">
+                        <div class="emotion icon-emo-sunglasses"></div>
+                        <p class="filter-heading">{{genres[1]}}</p>
+                    </div><!-- emotions holder end -->
+                </div>
+
+                <div class="col-lg-2 col-sm-2 col-xs-6 col-md-2" ng-click="filterByGenre(genres[2])">
+                    <div class="emotions-holder">
+                        <div class="emotion icon-emo-happy"></div>
+                        <p class="filter-heading">{{genres[2]}}</p>
+                    </div><!-- emotions holder end -->
+                </div>
+
+                <div class="col-lg-2 col-sm-2 col-xs-6 col-md-2" ng-click="filterByGenre(genres[3])">
+                    <div class="emotions-holder">
+                        <div class="emotion icon-emo-thumbsup"></div>
+                        <p class="filter-heading">{{genres[3]}}</p>
+                    </div><!-- emotions holder end -->
+                </div>
+
+                <div class="col-lg-2 col-sm-2 col-xs-6 col-md-2" ng-click="filterByGenre(genres[4])">
+                    <div class="emotions-holder">
+                        <div class="emotion icon-emo-grin"></div>
+                        <p class="filter-heading">{{genres[4]}}</p>
+                    </div><!-- emotions holder end -->
+                </div>
+
+                <div class="col-lg-2 col-sm-2 col-xs-6 col-md-2" ng-click="filterByGenre(genres[5])">
+                    <div class="emotions-holder">
+                        <div class="emotion icon-emo-beer"></div>
+                        <p class="filter-heading">{{genres[5]}}</p>
+                    </div><!-- emotions holder end -->
+                </div>
+            </div><!-- wrapper end -->
+            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                <div class="pull-right">
+                    <button class="button button-primary" ng-click="allActivities()">Show all activities</button>
+                </div>
+            </div>
+        </div><!-- mood holder end -->
+    </div><!-- sort select bricke end -->
+    <div class="sorted-mood text-center" id="mood-def">
+        <h3>{{headingTitle}}</h3>
+        <p>{{gDesc}}</p>
+    </div><!-- sorted mood end -->
+</div><!-- sorting head holder -->
+
+<!------------------------------------------ Activities ----------------------------------->
+
+<div class="events-list-holder">
+    <div class="wrapper">
+        <div class="col-lg-9 col-md-9 col-xs-18 col-sm-9">
+            <input ng-model="query"
+                   placeholder="Search"
+                   style="margin-top: 20px;font-size: 14px;">
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-6 col-sm-3">
+            <div class="text-center">
+                <button ng-click="search()"
+                        style="width:240px;height:40px;margin-top:20px;font-size:14px;background-color:rgba(100,100,240,0.4);box-shadow:none;text-shadow:none;border-radius:5px;">
+                    Start the magic
+                </button>
+            </div>
+        </div>
+        <ul>
+            <li ng-repeat="acti in activ | orderBy:sortOrder:true">
+                <ul>
+                    <li ng-repeat="act in acti | filter:query">
+                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
+                            <h3>{{act.title}}</h3>
+                            <p data-sr="enter left please, and hustle 20px">{{act.description}}</p>
+                            <div class="clear-all"></div>
+
+                            <div class="pull-left">
+                                <div class="star-holder">
+                                    <span class="batch" data-icon="&#xF15D;"></span>
+                                </div>
+                            </div>
+                            <p class="event-location">{{act.location}}</p>
+                            <p>{{act.neighborhood}}</p>
+                            <a ng-href="/activities/{{act._id}}">Learn More &rarr;</a>
+                        </div>
+                        <a ng-href="/activities/{{act._id}}">
+                            <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
+                                <img src="images/{{act.title}}.jpg">
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+        <div class="text-center">
+            <button class="button button-primary" ng-click="pageClick()">Show more</button>
         </div>
     </div>
 </div>
 
-<!------------------------------------------ Activities ----------------------------------->
-
-<div class="slider-holder">
-    <i class="batch js-control-left" data-icon="&#xF14A;"></i>
-    <ul class="slider clearfix">
-        <li class="slide js-active">
-            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 padd-both-none">
-                <a href=""><img src="img/1.jpeg"></a>
-            </div>
-            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-                <div class="u-slider-padd">
-                    <h2 class="margin-top-none">Hit Sky Diving</h2>
-                    <h4><i class="batch" data-icon="&#xF07D;"></i>Great Falls Park</h4>
-                    <h4><i class="batch" data-icon="&#xF090;"></i>24-9-2014</h4>
-                    <p>Are you an adventuarist? Want to spend your day above 1000ft high. This is the time for you to come in. High sky diving training and competitions. Nothing can be better than this for whom who love kick.</p>
-                    <a href="">Learn More &#8594;</a>
-                </div>
-            </div>
-        </li>
-        <li class="slide js-active">
-            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 padd-both-none">
-                <a href=""><img src="img/2.jpeg"></a>
-            </div>
-            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-                <div class="u-slider-padd">
-                    <h2 class="margin-top-none">Hey Sky Diving</h2>
-                    <h4><i class="batch" data-icon="&#xF07D;"></i>Great Falls Park</h4>
-                    <h4><i class="batch" data-icon="&#xF090;"></i>24-9-2014</h4>
-                    <p>Are you an adventuarist? Want to spend your day above 1000ft high. This is the time for you to come in. High sky diving training and competitions. Nothing can be better than this for whom who love kick.</p>
-                    <a href="">Learn More &#8594;</a>
-                </div>
-            </div>
-        </li>
-
-        <li class="slide js-active">
-            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 padd-both-none">
-                <a href=""><img src="img/1.jpeg"></a>
-            </div>
-            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-                <div class="u-slider-padd">
-                    <h2 class="margin-top-none">Height Sky Diving</h2>
-                    <h4><i class="batch" data-icon="&#xF07D;"></i>Great Falls Park</h4>
-                    <h4><i class="batch" data-icon="&#xF090;"></i>24-9-2014</h4>
-                    <p>Are you an adventuarist? Want to spend your day above 1000ft high. This is the time for you to come in. High sky diving training and competitions. Nothing can be better than this for whom who love kick.</p>
-                    <a href="">Learn More &#8594;</a>
-                </div>
-            </div>
-        </li>
-
-        <li class="slide js-active">
-            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 padd-both-none">
-                <img src="img/4.jpeg">
-            </div>
-            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-                <div class="u-slider-padd">
-                    <h2 class="margin-top-none">High Sky Diving</h2>
-                    <h4><i class="batch" data-icon="&#xF07D;"></i>Great Falls Park</h4>
-                    <h4><i class="batch" data-icon="&#xF090;"></i>24-9-2014</h4>
-                    <p>Are you an adventuarist? Want to spend your day above 1000ft high. This is the time for you to come in. High sky diving training and competitions. Nothing can be better than this for whom who love kick.</p>
-                    <a href="">Learn More &#8594;</a>
-                </div>
-            </div>
-        </li>
-    </ul>
-    <i class="batch js-control-right" data-icon="&#xF14B;"></i>
-</div>
-
-<div class="result-bar">
+<!--div class="result-bar">
     <div class="wrapper" style="margin-top: 20px;">
         <div class="col-lg-4 col-sm-4 col-xs-8 col-md-4">
             <div class="text-center">
@@ -277,7 +244,7 @@
             </div>
         </div>
     </div>
-</div><!-- result bar end -->
+</div>
 
 <div class="cards-holder">
     <div class="wrapper">
@@ -297,9 +264,8 @@
         <div ng-repeat="acti in activ | orderBy:sortOrder:true">
             <div ng-repeat="act in acti | filter:query">
                 <div class="col-lg-4 col-sm-4 col-xs-8 col-md-4">
-                    <a href="/activities/{{act._id}}">
+                    <a ng-href="/activities/{{act._id}}">
                         <div class="place-cards">
-                            <!--div class="latest-ribbon"></div-->
                             <div class="place-img">
                                 <img ng-src="images/{{act.title}}.jpg" alt="{{act.title}}" ng-if="!act.poster">
                                 <img ng-src="images/{{act.poster}}" alt="{{at.title}}" ng-if="act.poster">
@@ -331,4 +297,4 @@
             </div>
         </div>
     </div>
-</div>
+</div-->

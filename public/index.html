@@ -12,25 +12,27 @@
         rel='stylesheet'
         type='text/css'>
   <link href="//cdn.jsdelivr.net/ionicons/1.4.1/css/ionicons.min.css" rel="stylesheet">
-  <link href="stylesheets/animate.css" rel="stylesheet">
+  <!--link href="stylesheets/animate.css" rel="stylesheet">
   <link href="stylesheets/dragon.css" rel="stylesheet">
   <link href="stylesheets/style.css" rel="stylesheet">
   <link href="stylesheets/1080-27-grid.css" rel="stylesheet">
   <link href="stylesheets/custom.css" rel="stylesheet">
-  <link href="stylesheets/mapbox.css" rel="stylesheet">
+  <link href="stylesheets/mapbox.css" rel="stylesheet"-->
 
 
           <!--- Custom stylesheets --->
-  <!--link href="stylesheets/style2.css" rel="stylesheet"-->
-  <link href="stylesheets/event.css" rel="stylesheet">
+  <!--link href="stylesheets/event.css" rel="stylesheet">
   <link href="stylesheets/profile.css" rel="stylesheet">
   <link href="stylesheets/home.css" rel="stylesheet">
   <link href="stylesheets/about.css" rel="stylesheet">
-  <link href="stylesheets/index.css" rel="stylesheet">
-  <!--link href="stylesheets/interest.css" rel="stylesheet"-->
+  <link href="stylesheets/index.css" rel="stylesheet"-->
   <link href="stylesheets/login.css" rel="stylesheet">
   <link href="stylesheets/signup.css" rel="stylesheet">
   <link href="stylesheets/vendor/font-awesome.min.css" rel="stylesheet">
+
+  <link href="stylesheets/newStyle/home.css" rel="stylesheet">
+  <link href="stylesheets/newStyle/style.css" rel="stylesheet">
+  <link href="stylesheets/vendor/emotions.css" rel="stylesheet">
   
   <!---------------------- Google Maps API ------------------------->
   <style>
@@ -99,76 +101,6 @@
   <script src="js/widgets.js"></script>
   <script src="js/map.js"></script>
   <script src="js/select.js"></script>
-
-  <!--------------------------------------------- Custom scripts -------------------------------------------->
-
-  <script type="text/javascript">
-    $(".js-navigation").click (function(){
-      $(this).toggleClass("js-open-nav");
-      $("nav").toggleClass("js-open-nav");
-    });
-
-    $(".js-filter-activity:not(.js-activity-holder)").click(function() {
-      $('.js-activity-holder').slideToggle(200);
-    });
-
-    $('.js-filter-place:not(.js-place-holder)').click(function() {
-      $('.js-place-holder').slideToggle(200);
-    });
-
-    $(document).ready(function() {
-
-      $('.js-city-select').click(function() {
-        $('.js-city-select-drawer').fadeToggle('fast', function() {
-          // Animation complete
-        });
-        return false;
-      });
-
-      // Even when the window is resized, run this code.
-      $(window).resize(function(){
-
-        // Variables
-        var windowHeight = $(window).height();
-
-        // Find the value of 90% of the viewport height
-        var ninetypercent = .085 * windowHeight;
-
-        // When the document is scrolled ninety percent, toggle the classes
-        // Does not work in iOS 7 or below
-        // Hasn't been tested in iOS 8
-        $(document).scroll(function(){
-
-          // Store the document scroll function in a variable
-          var y = $(this).scrollTop();
-
-          // If the document is scrolled 90%
-          if( y > ninetypercent) {
-            $('.js-main-header').addClass('js-sticky-header');
-          } else {
-            $('.js-main-header').removeClass('js-sticky-header');
-          }
-        });
-
-        // Call it on resize.
-      }).resize();
-
-    });
-  </script>
-  
-  <script>
-    function displayMenu() {
-      var elem = document.getElementById("filter-container");
-      var container = document.getElementById("new-home");
-      if (elem.style.display == "block") {
-        elem.style.display = "none";
-        container.style.marginBottom = "0px";
-      } else {
-        elem.style.display = "block";
-        container.style.marginBottom = "285px";
-      }
-    };
-  </script>
 
   <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDTSoOhOTjnkR7K7yOEZhln2PTFNFU15TA&sensor=false"></script>
 

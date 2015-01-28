@@ -8,6 +8,10 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
         controller: 'MainCtrl'
       })
 
+        .when('/newHome', {
+          templateUrl: 'views/pages/newHome.html'
+        })
+
       .when('/blog', {
           templateUrl: 'views/pages/blog.html'
       })

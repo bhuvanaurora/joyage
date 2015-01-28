@@ -47,6 +47,7 @@
         </textarea><br />
         
         <fieldset style="margin-top: 10px;">
+
           <legend style="font-size:18px;">Categories</legend>
           <ul class="genres" style="margin-top:10px;margin-bottom:10px;">
             <li class="text-center"
@@ -55,6 +56,25 @@
               <span ng-click="addCategory(genre)">{{genre}}</span>
             </li>
           </ul>
+
+          <legend style="font-size:18px;">Moods</legend>
+            <select ng-model="moods">
+                <option value="Active">Active</option>
+                <option value="Posh">Posh</option>
+                <option value="Calm">Calm</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Fun">Fun</option>
+                <option value="Dark">Dark</option>
+            </select>
+
+          <legend style="font-size:18px;">Time of the day</legend>
+            <select ng-model="times">
+                <option value="Morning">Morning</option>
+                <option value="Afternoon">Afternoon</option>
+                <option value="Evening">Evening</option>
+                <option value="Afterdark">Afterdark</option>
+            </select>
+
           <span ng-if="categories[0]"
                 style="font-size:18px;">Selected Categories</span>
           <ul class="genres" style="margin-top:10px;margin-bottom:10px;">
@@ -121,6 +141,8 @@
                   name="city"
                   ng-model="city">
             <option value="Bangalore">Bangalore</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Mumbai">Mumbai</option>
           </select>
           <select style="width:300px;font-size:14px;margin-top:5px;"
                   name="country"

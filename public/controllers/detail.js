@@ -33,17 +33,6 @@ angular.module('MyApp')
           });
         };
 
-           // Post
-          $scope.fb_post = function() {
-            FB.api('/me/feed', 'post', {message: 'Whooppiieee!'}, function(response){
-                if (!response || response.error) {
-                    alert('Error occured');
-                } else {
-                    alert('Post ID: ' + response.id);
-                }
-            });
-          };
-
       Activity.get({ _id: $routeParams.id }, function(activity) {
         $scope.activity = activity;
 
@@ -55,7 +44,7 @@ angular.module('MyApp')
                 method: 'feed',
                 name: activity.title,
                 link: "http://joyage.in/activities/"+activity._id,
-                //picture: response.image,
+                //picture: 'https://s3-ap-southeast-1.amazonaws.com/joyage-images/1422006228358mCxtRgP.jpg',
                 description: activity.description
             });
             /*FB.api('me/objects/_joyage_:activity', 'post', {
