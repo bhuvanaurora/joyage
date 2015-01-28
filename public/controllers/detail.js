@@ -4,6 +4,8 @@ angular.module('MyApp')
   .controller('DetailCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$alert', '$upload', 'fb_appId', 'Activity', 'Profile', 'Subscription', 'DoneIt', 'Tips', 'Selfies', 'Accept', 'Delete',
                              function($scope, $rootScope, $window, $routeParams, $location, $alert, $upload, fb_appId, Activity, Profile, Subscription, DoneIt, Tips, Selfies, Accept, Delete) {
 
+         $window.scrollTo(0,0);                                 // To scroll to the top of the page
+
          // -------------- for modal
 
          $('.open-modal').click(function() {
