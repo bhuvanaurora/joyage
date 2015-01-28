@@ -507,6 +507,21 @@ angular.module('MyApp')
 
      // ----------------------------------------------- For Navbar --------------------------------------------- //
 
+     $scope.go = function (path) {
+         $location.path(path);
+     };
+
+     $scope.userMenu = function() {
+         var elem = document.getElementById("user-menu-drawer");
+         if (elem.style) {
+             if (elem.style.display == 'block') {
+                 elem.style.display = 'none';
+             } else {
+                 elem.style.display = 'block';
+             }
+         }
+     };
+
      $(".js-navigation").click (function(){
          $(this).toggleClass("js-open-nav");
          $("nav").toggleClass("js-open-nav");

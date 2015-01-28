@@ -1,181 +1,115 @@
 <!----------------------------------------------------- Navbar -------------------------------------------->
 
-<header ng-controller="NavbarCtrl"><!-- header start -->
+<header style="background-color:white;position:fixed;" ng-controller="NavbarCtrl">
     <div class="wrapper">
-        <div class="col-lg-5 col-sm-6 col-xs-6 col-md-6">
-            <div class="head-brand">
-                <a href="/" style="font-family:Montserrat;color:white">Joyage</a>
-            </div>
-            <div class="city-select js-city-select">
-                <div class="city-selected">Bangalore</div>
-                <div class="select-dropdown"></div>
-            </div>
-            <div class="city-select-drawer js-city-select-drawer">
-                <ul>
-                    <li class="open-modal modal-city-update">Ahmedabad</li>
-                    <li class="selected">Bangalore</li>
-                    <li class="open-modal modal-city-update">Delhi</li>
-                    <li class="open-modal modal-city-update">Mumbai</li>
-                </ul>
+        <div class="col-lg-4 col-sm-4 col-xs-6 col-md-4 padd-left-none">
+            <div class="head-brand" ng-click="go('/')" style="cursor:pointer">
+                Joyage
             </div>
         </div>
 
-        <div class="col-lg-7 col-sm-6 col-xs-6 col-md-6">
+        <div class="col-lg-8 col-sm-8 col-xs-6 col-md-8 padd-right-none">
             <div class="pull-right">
-                <div class="head-search">
-                    <!--input type="search" placeholder="Search..." /-->
-                    <input class="search"
-                           type="text"
-                           ng-model="query"
-                           style="margin-top:1px;background-color:white;"
-                           placeholder="Search...">
-                    <div class="head-search-icon">
-                        <i class="batch" data-icon="&#xF097;"></i>
-                    </div>
-                </div><!-- search end -->
-
-                <div class="navigation js-navigation"><!-- navigation starts here -->
-                    <nav class="nav-drawer js-nav-drawer">
-                        <div class="head-user-pic">
-                            <img src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
-                        </div>
-                        <div class="head-user-name" style="margin-bottom:15px">
-                            <span ng-if="currentUser">{{currentUser.name}}</span>
-                        </div>
-                        <div class="navToggle">
-                            <div class="icon-left"></div>
-                            <div class="icon-right"></div>
-                        </div>
-                        <ul class="nav-list">
+                <div class="user-menu js-user-menu" ng-click="userMenu()">
+                    <img ng-if="currentUser" src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
+                    <span ng-if="currentUser" class="user-name">{{currentUser.name}}</span>
+                    <span ng-if="!currentUser" class="user-name" ng-click="go('/login')">Login</span>
+                </div>
+                <div ng-if="currentUser" class="user-menu-drawer js-user-menu-drawer" id="user-menu-drawer" hide ng-click="userMenu()">
+                    <ul>
+                        <li class="selected"><span class="batch" data-icon="&#xF162;"></span>  Home</li>
+                        <a ng-href="/profile/{{currentUser._id}}">
                             <li>
-                                <a href="/profile/{{currentUser._id}}"
-                                   ng-if="currentUser">
-                                    <span class="nav-action-icons">
-                                      <i class="batch" data-icon="&#xF170;"></i>
-                                    </span>
-                                    Profile
-                                </a>
-                                <a href="/login"
-                                   ng-if="!currentUser">
-                                    Login
-                                </a>
+                                <span class="batch" data-icon="&#xF043;"></span>  Profile
                             </li>
+                        </a>
+                        <a ng-if="currentUser.curator === true" ng-href="/admin/{{currentUser._id}}">
                             <li>
-                                <a ng-if="currentUser.curator === true"
-                                   href="/admin/{{currentUser._id}}">
-                                    <span class="nav-action-icons">
-                                        <i class="batch" data-icon="&#xF04D;"></i>
-                                    </span>
-                                    Admin
-                                </a>
+                                <span class="batch" data-icon="&#xF04C;"></span>  Admin
                             </li>
+                        </a>
+                        <a ng-href="/invite/{{currentUser._id}}">
                             <li>
-                                <a href="/profile/{{currentUser._id}}">
-                                    <span class="nav-action-icons">
-                                      <i class="batch" data-icon="&#xF171;"></i>
-                                    </span>
-                                    Invite Friends
-                                </a>
+                                <span class="batch" data-icon="&#xF0DB;"></span>  Invite friends
                             </li>
+                        </a>
+                        <a ng-href="javascript:void(0)" ng-click="logout()">
                             <li>
-                                <a href="/profile/{{currentUser._id}}">
-                                    <span class="nav-action-icons">
-                                      <i class="batch" data-icon="&#xF007;"></i>
-                                    </span>
-                                    Send Feedback
-                                </a>
+                                <span class="batch" data-icon="&#xF069;"></span>  Logout
                             </li>
-                            <li>
-                                <a href="javascript:void(0)" ng-click="logout()">
-                                    <span class="nav-action-icons">
-                                      <i class="batch" data-icon="&#xF069;"></i>
-                                    </span>
-                                    Log Out
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div><!-- navigation ends here -->
-
-            </div><!-- pull right end -->
+                        </a>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div><!-- wrapper ends -->
-</header><!-- Header ends -->
+    </div>
+</header>
 
 <!---------------------------------------------------- Activity Details ------------------------------------------------>
 
-<div class="wrapper"><!-- wrapper start -->
-    <div class="col-lg-8 col-sm-7 col-md-8 col-xs-12">
-        <div class="event-details-block clearfix">
-            <!--div class="rectangle">
-                <h2>ONE-OF-KIND</h2>
-            </div>
-            <div class="triangle-l"></div-->
+<div class="wrapper text-center">
+    <div class="event-head">
+        <h1>{{activity.title}}</h1>
+        <ul>
+            <li>
+                <span class="batch" data-icon="&#xF07C;"></span> {{activity.location}}
+            </li>
+            <li ng-if="activity.dateOfActivity">
+                <span class="batch" data-icon="&#xF05C;"></span> {{activity.dateOfActivity | date: shortDate}}
+            </li>
+        </ul>
 
-            <h1 class="event-heading">{{activity.title}}</h1>
-            <hr/>
+        <img ng-if="!activity.poster" src="/images/{{activity.title}}.jpg">
+        <img ng-if="activity.poster" ng-src="/images/{{activity.poster}}">
 
-            <div class="event-place-block">
-                <div class="event-place-info">
-                    <p>WHERE</p>
-                    <h5>{{activity.location}}</h5>
-                </div>
-                <div class="event-place-info">
-                    <p>NEIGHBOURHOOD</p>
-                    <h5>{{activity.neighborhood}}</h5>
-                </div>
-                <div class="event-place-info" ng-if="activity.dateOfActivity">
-                    <p>WHEN</p>
-                    <h5>{{activity.dateOfActivity | date: shortDate}}</h5>
-                </div>
-            </div>
+        <div class="event-action" ng-if="currentUser">
+            <button class="open-modal modal-bookmark-it">
 
-            <div class="event-img">
-                <img ng-if="!activity.poster" src="/images/{{activity.title}}.jpg">
-                <img ng-if="activity.poster" ng-src="/images/{{activity.poster}}">
-            </div>
+                    <span ng-if="!isSubscribed()">
+                        <i class="batch" data-icon="&#xF049;"></i>
+                        Bookmark ({{subscriptions}})
+                    </span>
 
-            <div class="event-info-holder" id="description">
-                <a href="/">Joyage</a><br/>
-                {{activity.description}}
-            </div>
+                    <span ng-if="isSubscribed()" ng-click="unsubscribe()">
+                        <i class="batch" data-icon="&#xF049;"></i>
+                        Bookmarked ({{subscriptions}})
+                    </span>
 
-            <div class="col-lg-5 col-sm-5 col-md-5 col-xs-12">
-                <div class="tip-block">
-                    <div class="bubble-holder">
-                        <div class="bubble-body" ng-if="activity.corner">
-                            <p>{{activity.cornerText}}</p>
-                        </div>
-                        <div class="bubble-bot" ng-if="activity.corner"><div class="bbl-hook"></div></div>
-                    </div><!-- bubble -end -->
-                    <div class="buble-user-img" ng-if="activity.corner">
-                        <img src="/images/{{activity.cornerPic}}">
-                    </div>
-                </div><!-- tip block end -->
-                <span class="open-modal modal-pro-tip" ng-if="activity.corner">{{activity.corner}}</span>
-            </div>
-            <br />
-            <div class="col-lg-7 col-sm-7 col-md-7 col-xs-12"  onload='function changeFontSize(){if (activity.description!=="") {document.getElementById("description").style.font-size="15px"}();'>
-                <a href="{{activity.sourceWebsite}}">{{activity.sourceName}}</a>
-                <p>{{activity.sourceDescription}}</p>
-            </div>
-            <!-------------------- Media News --------------------->
+            </button>
+            <button class="open-modal modal-done-it">
 
-            <div ng-if="activity.media[0]">
-                <h4>In Media</h4>
-                <ul>
-                    <li ng-repeat="media in activity.media">
-                        <h5>{{media.title}}</h5>
-                        <a href="{{media.link}}">{{media.text}}</a>
-                    </li>
-                </ul>
-            </div>
-        </div>	<!-- event-detail block end -->
-    </div>
+                    <span ng-if="!isDone()">
+                        <i class="batch" data-icon="&#xF164;"></i>
+                        Done it ({{completions}})
+                    </span>
 
-    <!-- sidebar start -->
+                    <span ng-if="isDone()" ng-click="markUndone()">
+                        <i class="batch" data-icon="&#xF164;"></i>
+                        I've done this ({{completions}}})
+                    </span>
 
-    <div class="col-lg-4 col-sm-5 col-md-4 col-xs-12">
+            </button>
+            <button class="open-modal modal-share">
+
+                    <span>
+                        <i class="batch" data-icon="&#xF159;"></i> Share
+                    </span>
+
+            </button>
+        </div>
+
+        <div class="" ng-show="!currentUser">
+            <a class="btn btn-block btn-primary"
+               href="#/login"
+               style="color:white;font-weight:100;">Login</a>
+        </div><!-- event action end -->
+
+        <p>{{activity.description}}</p>
+
+        <div onload='function changeFontSize(){if (activity.description!=="") {document.getElementById("description").style.font-size="15px"}();'>
+            <a href="{{activity.sourceWebsite}}">{{activity.sourceName}}</a>
+            <p>{{activity.sourceDescription}}</p>
+        </div>
 
         <!-------------- Goodies -------------->
 
@@ -188,134 +122,32 @@
             </div>
         </div>
 
-        <!--------------- Bookmark and share -------------->
+        <!--------------- Corner --------------->
 
-        <div class="panel panel-default panel-right">
-            <div class="event-actions-block" style="margin-left:15px;">
-                <div ng-if="currentUser">
-                    <button class="event-button main-action-button-1 open-modal modal-bookmark-it"
-                            style="font-weight:100;">
-                        <span class="button-icons">
-                            <i class="batch" data-icon="&#xF15D;"></i>
-                        </span>
-                        <span ng-if="!isSubscribed()">
-                            Bookmark
-                        </span>
-                        <span ng-if="isSubscribed()" ng-click="unsubscribe()">
-                            Bookmarked
-                        </span>
-                        <span class="button-counter">
-                            {{subscriptions}}
-                        </span>
-                    </button>
-
-                    <button class="event-button main-action-button-2 open-modal modal-done-it"
-                            style="font-weight:100;">
-                        <span class="button-icons">
-                            <i class="batch" data-icon="&#xF164;"></i>
-                        </span>
-                        <span ng-if="!isDone()">
-                            Done it
-                        </span>
-                        <span ng-if="isDone()" ng-click="markUndone()">
-                            I've done this
-                        </span>
-                        <span class="button-counter">
-                            {{completions}}
-                        </span>
-                    </button>
-
-                    <button class="event-button share-button open-modal modal-share">
-                        <i class="batch" data-icon="&#xF159;"></i>
-                    </button>
-                </div>
-
-                <div class="" ng-show="!currentUser">
-                    <a class="btn btn-block btn-primary"
-                       href="#/login"
-                       style="color:white;font-weight:100;">Login</a>
+        <div class="col-lg-5 col-sm-5 col-md-5 col-xs-12">
+            <div class="tip-block">
+                <div class="bubble-holder">
+                    <div class="bubble-body" ng-if="activity.corner">
+                        <p>{{activity.cornerText}}</p>
+                    </div>
+                    <div class="bubble-bot" ng-if="activity.corner"><div class="bbl-hook"></div></div>
+                </div><!-- bubble -end -->
+                <div class="buble-user-img" ng-if="activity.corner">
+                    <img src="/images/{{activity.cornerPic}}">
                 </div>
             </div>
+            <span class="open-modal modal-pro-tip" ng-if="activity.corner">{{activity.corner}}</span>
         </div>
 
-        <!------------------------------- Map ------------------------------------->
+        <!--------------- Media ---------------->
 
-        <div class="map-block">
-            <section id="cd-google-map">
-                <div id="google-container"></div>
-                <div id="cd-zoom-in"></div>
-                <div id="cd-zoom-out"></div>
-                <form action="http://maps.google.com/maps"
-                      method="get"
-                      target="_blank">
-                    <input type="hidden"
-                           name="daddr"
-                           value="{{activity.location}} {{activity.address}} {{activity.neighborhood}}" />
-                    <input type="submit"
-                           class="btn-block"
-                           value="Get directions" />
-                </form>
-
-                <div class="panel panel-default panel-right"
-                     style="border-top-right-radius:0px;border-top-left-radius:0px;">
-                    <div class="address-head">{{activity.location}}</div>
-                    <div class="address">{{activity.address}}</div>
-                    <div class="address">{{activity.city}}</div>
-                    <div class="address"
-                         style="margin-bottom:15px;">
-                        {{activity.phone}}
-                    </div>
-                </div>
-            </section>
-
-            <div class="panel panel-default panel-right"
-                 style="height:50px;"
-                 ng-if="activity.locationWebsite || activity.zomatoLink || activity.facebookLink || activity.twitterLink">
-                <table class="link-table">
-                    <tr>
-                        <td>
-                            <div class="text-center link-div">
-                                <a href="{{activity.locationWebsite}}"
-                                   ng-if="activity.locationWebsite">
-                                    <div class="text-center">Website</div>
-                                </a>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="text-center link-div">
-                                <a href="{{activity.zomatoLink}}"
-                                   ng-if="activity.zomatoLink">
-                                    <div class="text text-center">Zomato</div>
-                                </a>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="text-center link-div">
-                                <a href="{{activity.facebookLink}}"
-                                   ng-if="activity.facebookLink">
-                                    <div class="text text-center">Facebook</div>
-                                </a>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="text-center link-div">
-                                <a href="{{activity.twitterLink}}"
-                                   ng-if="activity.twitterLink">
-                                    <div class="text text-center">Twitter</div>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div><!-- map block end here -->
-
-        <!---------------- Tags (Not to be removed; for better SEO) ------------------>
-
-        <div class="panel panel-default panel-right"
-             ng-hide=true>
-            <ul class="genres">
-                <li ng-repeat="tag in activity.genre">{{tag}}</li>
+        <div ng-if="activity.media[0]">
+            <h4>In Media</h4>
+            <ul>
+                <li ng-repeat="media in activity.media">
+                    <h5>{{media.title}}</h5>
+                    <a href="{{media.link}}">{{media.text}}</a>
+                </li>
             </ul>
         </div>
 
@@ -354,22 +186,6 @@
             </table>
         </div>
 
-        <!--------------- Additional Info -------------->
-
-        <div class="panel panel-default panel-right"
-             ng-if="activity.moreInfo">
-            <div class="panel-body">
-                <div class="info-title">MORE INFO</div>
-                <div class="info-text"
-                     ng-if="activity.moreInfoLink">
-                    <a href="{{activity.moreInfoLink}}">{{activity.moreInfo}}</a>
-                </div>
-                <div class="info-text"
-                     ng-if="!activity.moreInfoLink">{{activity.moreInfo}}
-                </div>
-            </div>
-        </div>
-
         <!--------------- Tips --------------------->
 
         <div class="sidebar-footer">
@@ -377,17 +193,10 @@
             <a href="" class="open-modal modal-pro-tip"><span ng-if="editTips">Add a pro tip</span></a>
             <ul class="genres">
                 <li ng-repeat="tip in activity.tips">
-                    <img src="https://graph.facebook.com/v2.2/{{tip.tipperfbId}}/picture"> {{tip.text}}
-                 </li>
+                    <img src="https://graph.facebook.com/v2.2/{{tip.tipperfbId}}/picture"
+                         style="width:50px;height:50px;border-radius:50%" > {{tip.text}}
+                </li>
             </ul>
-        </div>
-
-        <div class="sidebar-footer">
-            <p>SPOT A PROBLEM?</p>
-            <a href="" class="open-modal modal-report">Report Here</a>
-
-            <p ng-if="activity.photoCredit">PHOTO CREDITS</p>
-            <a ng-if="activity.photoCredit" href="{{activity.photoCreditLink}}">{{activity.photoCredit}}</a>
         </div>
 
         <!-------------------------------- Selfies --------------------------------------->
@@ -397,16 +206,112 @@
             <input type="file"
                    ng-if="addS"
                    ng-file-select="onSelfieSelect($files)"
-                   style="margin-top:20px;font-size:14px;padding:10px;"
+                   style="margin-top:20px;font-size:14px;padding:10px;width:240px;"
                    required />
             <button ng-if="addS"
                     ng-click="addSelfies()">Upload Selfie</button>
             <ul>
                 <li ng-repeat="selfie in activity.selfies">
-                    <img src="https://graph.facebook.com/v2.2/{{selfie.fbId}}/picture" />
-                    <img ng-src="/images/selfies/{{selfie.url}}" />
+                    <img src="https://graph.facebook.com/v2.2/{{selfie.fbId}}/picture"
+                            style="width:50px;height:50px;border-radius:50%" />
+                    <img ng-src="/images/selfies/{{selfie.url}}"
+                         style="width:50px;height:50px;" />
                 </li>
             </ul>
+        </div>
+
+        <!----------------- Map -------------------->
+
+        <div class="event-extra-info">
+            <div class="wrapper">
+                <div class="map-block">
+
+                    <section id="cd-google-map">
+                        <div id="google-container"></div>
+                        <div id="cd-zoom-in"></div>
+                        <div id="cd-zoom-out"></div>
+                        <address>
+                            <b>{{activity.location}}</b>
+                            <br/>{{activity.address}}
+                            <br/>{{activity.neighborhood}}, {{activity.city}}
+                            <br/>{{activity.phone}}
+                        </address>
+                    </section>
+
+                    <form action="http://maps.google.com/maps"
+                          method="get"
+                          target="_blank">
+                        <input type="hidden"
+                               name="daddr"
+                               value="{{activity.location}} {{activity.address}} {{activity.neighborhood}}" />
+                        <input type="submit"
+                               class="btn-block"
+                               value="Get directions"
+                                style="cursor:pointer"/>
+                    </form>
+
+                    <div class="connect-buttons"
+                         ng-if="activity.locationWebsite || activity.zomatoLink || activity.facebookLink || activity.twitterLink">
+                        <ul>
+
+                            <li class="col-lg-3 col-sm-3 col-xs-3 col-md-3 padd-both-none">
+                                <a href="{{activity.locationWebsite}}"
+                                   ng-if="activity.locationWebsite">
+                                    Website
+                                </a>
+                            </li>
+
+                            <li class="col-lg-3 col-sm-3 col-xs-3 col-md-3 padd-both-none">
+                                <a href="{{activity.zomatoLink}}"
+                                   ng-if="activity.zomatoLink">
+                                    Zomato
+                                </a>
+                            </li>
+
+                            <li class="col-lg-3 col-sm-3 col-xs-3 col-md-3 padd-both-none">
+                                <a href="{{activity.facebookLink}}"
+                                   ng-if="activity.facebookLink">
+                                    Facebook
+                                </a>
+                            </li>
+
+                            <li class="col-lg-3 col-sm-3 col-xs-3 col-md-3 padd-both-none">
+                                <a href="{{activity.twitterLink}}"
+                                   ng-if="activity.twitterLink">
+                                    Twitter
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div><!-- map block end here -->
+            </div>
+
+            <!--------------- Additional Info -------------->
+
+            <div class="panel panel-default panel-right"
+                 ng-if="activity.moreInfo">
+                <div class="panel-body">
+                    <div class="info-title">MORE INFO</div>
+                    <div class="info-text"
+                         ng-if="activity.moreInfoLink">
+                        <a href="{{activity.moreInfoLink}}">{{activity.moreInfo}}</a>
+                    </div>
+                    <div class="info-text"
+                         ng-if="!activity.moreInfoLink">{{activity.moreInfo}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <p>SPOT A PROBLEM?</p>
+                <a href="" class="open-modal modal-report">Report Here</a>
+
+                <p ng-if="activity.photoCredit">PHOTO CREDITS</p>
+                <a ng-if="activity.photoCredit" href="{{activity.photoCreditLink}}">{{activity.photoCredit}}</a>
+            </div>
+
         </div>
 
         <!----------------------- Activity review ------------------------------------------>
@@ -427,11 +332,21 @@
             </div>
         </div>
 
-    </div><!-- sidebar end here -->
+        <!---------------- Tags (Not to be removed; for better SEO) ------------------>
 
-    <div class="clear-all"></div>
+        <div class="panel panel-default panel-right"
+             ng-hide=true>
+            <ul class="genres">
+                <li ng-repeat="tag in activity.genre">{{tag}}</li>
+            </ul>
+        </div>
 
-    <!-------------------------------------------- Suggestions ---------------------------------------------->
+    </div><!-- event head end -->
+</div>
+
+<div class="wrapper"><!-- wrapper start -->
+
+    <!-------------------------------------------- Suggestions ----------------------------------------------
 
     <div class="suggestion-block">
 
@@ -441,7 +356,6 @@
              ng-repeat="act in activities | orderBy:'timeAdded':true">
             <a href="/activities/{{act._id}}">
                 <div class="place-cards">
-                    <!--div class="latest-ribbon"></div-->
                     <div class="place-img">
                         <img src="images/{{act.title}}.jpg"
                              alt="{{act.title}}">
