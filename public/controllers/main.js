@@ -1,9 +1,13 @@
 angular.module('MyApp')
-  .controller('MainCtrl', ['$scope', 'fb_appId', '$window', '$location', 'Activity', function($scope, fb_appId, $window, $location, Activity) {
+  .controller('MainCtrl', ['$scope', '$rootScope', 'fb_appId', '$window', '$location', 'Activity', function($scope, $rootScope, fb_appId, $window, $location, Activity) {
     $scope.cities = ['Bangalore', 'Delhi', 'Mumbai'];
     /*$scope.neighborhood = { 'Bangalore': ['Kormangala', 'JP Nagar', 'Indiranagar', 'MG Road'],
                               'Delhi': ['Connaught Place', 'Dwarka', 'Janak Puri', 'Saket', 'Defence Colony', 'Hauz Khas']
                             };*/
+
+      /*if (!$rootScope.currentUser) {
+        $location.path('/login');
+      }*/
 
       $scope.activ = [];
       $scope.pagenumber = 1;
@@ -89,7 +93,7 @@ angular.module('MyApp')
       $scope.pageClick();
     };
 
-      // ----------------------------------------------- For Navbar --------------------------------------------- //
+      // ----------------------------------------------- For dynamic page elements --------------------------------------------- //
 
       $scope.go = function (path) {
         $location.path(path);
@@ -117,96 +121,5 @@ angular.module('MyApp')
           }
         }
       };
-
-      $(".js-navigation").click (function(){
-        $(this).toggleClass("js-open-nav");
-        $("nav").toggleClass("js-open-nav");
-      });
-
-      $(".js-filter-activity:not(.js-activity-holder)").click(function() {
-        $('.js-activity-holder').slideToggle(200);
-      });
-
-      $('.js-filter-place:not(.js-place-holder)').click(function() {
-        $('.js-place-holder').slideToggle(200);
-      });
-
-      $(document).ready(function() {
-
-        $('.js-city-select').click(function() {
-          $('.js-city-select-drawer').fadeToggle('fast', function() {
-            // Animation complete
-          });
-          return false;
-        });
-
-        // Even when the window is resized, run this code.
-        $(window).resize(function(){
-
-          // Variables
-          var windowHeight = $(window).height();
-
-          // Find the value of 90% of the viewport height
-          var ninetypercent = .085 * windowHeight;
-
-          // When the document is scrolled ninety percent, toggle the classes
-          // Does not work in iOS 7 or below
-          // Hasn't been tested in iOS 8
-          $(document).scroll(function(){
-
-            // Store the document scroll function in a variable
-            var y = $(this).scrollTop();
-
-            // If the document is scrolled 90%
-            if( y > ninetypercent) {
-              $('.js-main-header').addClass('js-sticky-header');
-            } else {
-              $('.js-main-header').removeClass('js-sticky-header');
-            }
-          });
-
-          // Call it on resize.
-        }).resize();
-
-      });
-
-      // -------------- for modal
-
-      $('.open-modal').click(function() {
-        var el = $(this)[0],
-            classes = el.className.split(/\s+/);
-        for(var i = 0; i < classes.length; i++) {
-          if(classes[i].match(/modal-/)) {
-            var modalClass = classes[i];
-            $('.modal.' + modalClass).fadeIn('fast');
-          }
-        }
-      });
-
-      $('.close-modal').click(function() {
-        $(this).closest('.modal').fadeOut('fast');
-      });
-
-      // -------------- for slider
-
-      var $firstSlide = $('.slide:first-child');
-      var $lastSlide = $('.slide:last-child');
-      $('.slide:not(".js-active")').hide();
-      $('.js-control-left').click(function() {
-        if ($('li.js-active').index() == 0) {
-          $('.js-active').fadeOut(500).removeClass('js-active');
-          $lastSlide.toggleClass('js-active').fadeIn(500);
-        } else {
-          $('.js-active').fadeOut(500).removeClass('js-active').prev('li').toggleClass('js-active').fadeIn(500);
-        }
-      });
-      $('.js-control-right').click(function() {
-        if ($('li.js-active').index() == 3) {
-          $('.js-active').fadeOut(500).removeClass('js-active');
-          $firstSlide.toggleClass('js-active').fadeIn(500);
-        } else {
-          $('.js-active').removeClass('js-active').fadeOut(500).next('li').toggleClass('js-active').fadeIn(500);
-        }
-      });
 
   }]);

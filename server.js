@@ -19,9 +19,11 @@ if (!process.env.NODE_ENV) {
 }
 if (process.env.NODE_ENV === "dev") {
   var config = require('./config.dev.json');
+  var s3_config = require('./s3_config.json');
   process.env.PORT = 3000;
 } else {
   var config = require('./config.prod.json');
+  var s3_config = require('./s3_config.json');
   process.env.PORT = 8080;
 }
 console.log(process.env.NODE_ENV);
@@ -61,7 +63,7 @@ var argv = require('optimist').argv;
 
 var fs = require('fs');
 var AWS = require('aws-sdk');
-AWS.config.loadFromPath('./s3_config.json');
+AWS.config = s3_config;
 var s3 = new AWS.S3();
 var buf = new Buffer('');
 
