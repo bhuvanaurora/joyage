@@ -22,6 +22,22 @@ angular.module('MyApp')
                   }
               };
 
+              var cornerPic = '';
+              $scope.onPicSelect = function ($files) {
+                  for (var i = 0; i < $files.length; i++) {
+                      var file = $files[i];
+                      $scope.upload = $upload.upload({
+                          url: '/uploadCornerPic',
+                          data: {myObj: $scope.myModelObj},
+                          file: file,
+                      }).progress(function (evt) {
+                          console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                      }).success(function (data, status, headers, config) {
+                          cornerPic = data.imageurl;
+                      });
+                  }
+              };
+
               if (!$routeParams.rs) {
                   // ------------------------------------------------------------- For adding activities ------------------------------------------------------ //
 
@@ -48,7 +64,7 @@ angular.module('MyApp')
                   $scope.country = 'India';
                   $scope.currency = 'Rs';
 
-                  $scope.addActivity = function (image) {
+                  $scope.addActivity = function () {
 
                       $scope.categories.push($scope.moods);
                       $scope.categories.push($scope.times);
@@ -129,7 +145,7 @@ angular.module('MyApp')
                               moreInfoLink: $scope.moreInfoLink,
                               addedBy: $scope.addedBy,
                               corner: $scope.corner,
-                              cornerPic: $scope.cornerPic,
+                              cornerPic: cornerPic,
                               cornerText: $scope.cornerText
                           },
                           function () {

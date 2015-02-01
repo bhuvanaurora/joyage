@@ -602,6 +602,34 @@ app.post('/upload', function(req, res, next) {
       });
 });
 
+app.post('/uploadCornerPic', function(req, res, next) {
+  var filePath = path.join(__dirname, req.files.file.path);
+  gm(filePath)
+      .resize(200, 200)
+      .stream(function(err, stdout, stderr) {
+        var buf = new Buffer('');
+        var imageName = 'corner_' + Date.now() + req.files.file.name;
+        stdout.on('data', function(data) {
+          buf = Buffer.concat([buf, data]);
+        });
+        stdout.on('end', function(data) {
+          var data = {
+            Bucket: "joyage-images",
+            Key: imageName,
+            Body: buf,
+            ContentType: mime.lookup(req.files.file.name)
+          };
+          s3.putObject(data, function(err, res) {
+            if (err) throw(err);
+          });
+          res.status(200).json({
+            imageurl: imageName
+          });
+          console.log('Corner Pic uploaded');
+        });
+      });
+});
+
 app.post('/uploadSelfie', function(req, res, next) {
   var filePath = path.join(__dirname, req.files.file.path);
   console.log(__dirname);
@@ -752,6 +780,9 @@ app.post('/sendInvites', ensureAuthenticated, function(req, res, next) {
 
 app.post('/api/subscribe', ensureAuthenticated, function(req, res, next) {
   User.findById(req.user._id, function(err, user) {
+    console.log(req);
+    console.log(req.user);
+    console.log(req.body);
     if (err) return next(err);
     user.subscribedActivities.push(req.body.activityId);
     if (user.subscriptions) {
