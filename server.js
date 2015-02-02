@@ -778,107 +778,290 @@ app.post('/sendInvites', ensureAuthenticated, function(req, res, next) {
   });
 });
 
+
 app.post('/api/subscribe', ensureAuthenticated, function(req, res, next) {
+
   User.findById(req.user._id, function(err, user) {
-    console.log(req);
-    console.log(req.user);
-    console.log(req.body);
+
     if (err) return next(err);
+
     user.subscribedActivities.push(req.body.activityId);
+
     if (user.subscriptions) {
       user.subscriptions += 1;
     } else {
       user.subscriptions = 1;
     }
+
     user.save(function(err) {
       if (err) return next(err);
     });
   });
+
   Activity.findById(req.body.activityId, function(err, activity) {
+
     if (err) return next(err);
+
     activity.subscribers.push(req.user._id);
+
     if (activity.subscriptions) {
       activity.subscriptions += 1;
     } else {
       activity.subscriptions = 1;
     }
+
     activity.save(function(err) {
       if (err) return next(err);
       res.status(200).end();
     });
   });
+
 });
 
+
 app.post('/api/unsubscribe', ensureAuthenticated, function(req, res, next) {
+
   User.findById(req.user._id, function(err, user) {
+
     if (err) return next(err);
+
     var index = user.subscribedActivities.indexOf(req.body.activityId);
     user.subscribedActivities.splice(index, 1);
     user.subscriptions -= 1;
+
     user.save(function(err) {
       if (err) return next(err);
     });
   });
+
   Activity.findById(req.body.activityId, function(err, activity) {
+
     if (err) return next(err);
+
     var index = activity.subscribers.indexOf(req.user._id);
     activity.subscribers.splice(index, 1);
     activity.subscriptions -= 1;
+
     activity.save(function(err) {
       if (err) return next(err);
       res.status(200).end();
     });
   });
+
 });
 
+
 app.post('/api/markDone', ensureAuthenticated, function(req, res, next) {
+
   User.findById(req.user._id, function(err, user) {
+
     if (err) return next(err);
+
     user.doneActivities.push(req.body.activityId);
+
     if (user.completions) {
       user.completions += 1;
     } else {
       user.completions = 1;
     }
+
     user.save(function(err) {
     if (err) return next(err);
     });
   });
+
   Activity.findById(req.body.activityId, function(err, activity) {
+
     if (err) return next(err);
+
     activity.doneIt.push(req.user._id);
+
     if (activity.completions) {
       activity.completions += 1;
     } else {
       activity.completions = 1;
     }
+
     activity.save(function(err) {
       if (err) return next(err);
       res.status(200).end();
     });
   });
+
 });
 
+
 app.post('/api/markUndone', ensureAuthenticated, function(req, res, next) {
+
   User.findById(req.user._id, function(err, user) {
+
     if (err) return next(err);
+
     var index = user.doneActivities.indexOf(req.body.activityId);
     user.doneActivities.splice(index, 1);
     user.completions -= 1;
+
     user.save(function(err) {
       if (err) return next(err);
     });
   });
+
   Activity.findById(req.body.activityId, function(err, activity) {
+
     if (err) return next(err);
+
     var index = activity.doneIt.indexOf(req.user._id);
     activity.doneIt.splice(index, 1);
     activity.completions -= 1;
+
     activity.save(function(err) {
       if (err) return next(err);
       res.status(200).end();
     });
   });
+
+});
+
+
+app.post('/mob_api/subscribe', function(req, res, next) {
+
+  User.findById(req.body.userId, function(err, user) {
+
+    if (err) return next(err);
+
+    user.subscribedActivities.push(req.body.activityId);
+
+    if (user.subscriptions) {
+      user.subscriptions += 1;
+    } else {
+      user.subscriptions = 1;
+    }
+
+    user.save(function(err) {
+      if (err) return next(err);
+    });
+  });
+
+  Activity.findById(req.body.activityId, function(err, activity) {
+
+    if (err) return next(err);
+
+    activity.subscribers.push(req.body.userId);
+
+    if (activity.subscriptions) {
+      activity.subscriptions += 1;
+    } else {
+      activity.subscriptions = 1;
+    }
+
+    activity.save(function(err) {
+      if (err) return next(err);
+      res.status(200).end();
+    })
+  });
+
+});
+
+app.post('/mob_api/unsubscribe', function(req, res, next) {
+
+  User.findById(req.body.userId, function(err, user) {
+
+    if (err) return next(err);
+
+    var index = user.subscribedActivities.indexOf(req.body.activityId);
+    user.subscribedActivities.splice(index, 1);
+    user.subscriptions -= 1;
+
+    user.save(function(err) {
+      if (err) return next(err);
+    });
+  });
+
+  Activity.findById(req.body.activityId, function(err, activity) {
+
+    if (err) return next(err);
+
+    var index = activity.subscribers.indexOf(req.body.userId);
+    activity.subscribers.splice(index, 1);
+    activity.subscriptions -= 1;
+
+    activity.save(function(err) {
+      if (err) return next(err);
+      res.status(200).end();
+    });
+  });
+
+});
+
+
+app.post('/mob_api/markDone', function(req, res, next) {
+
+  User.findById(req.body.userId, function(err, user) {
+
+    if (err) return next(err);
+    user.doneActivities.push(req.body.activityId);
+
+    if (user.completions) {
+      user.completions += 1;
+    } else {
+      user.completions = 1;
+    }
+
+    user.save(function(err) {
+      if (err) return next(err);
+    });
+  });
+
+  Activity.findById(req.body.activityId, function(err, activity) {
+
+    if (err) return next(err);
+
+    activity.doneIt.push(req.body.userId);
+
+    if (activity.completions) {
+      activity.completions += 1;
+    } else {
+      activity.completions = 1;
+    }
+
+    activity.save(function(err) {
+      if (err) return next(err);
+      res.status(200).end();
+    });
+  });
+
+});
+
+
+app.post('/mob_api/markUndone', ensureAuthenticated, function(req, res, next) {
+
+  User.findById(req.body.userId, function(err, user) {
+
+    if (err) return next(err);
+
+    var index = user.doneActivities.indexOf(req.body.activityId);
+    user.doneActivities.splice(index, 1);
+    user.completions -= 1;
+
+    user.save(function(err) {
+      if (err) return next(err);
+    });
+  });
+
+  Activity.findById(req.body.activityId, function(err, activity) {
+
+    if (err) return next(err);
+
+    var index = activity.doneIt.indexOf(req.body.userId);
+    activity.doneIt.splice(index, 1);
+    activity.completions -= 1;
+
+    activity.save(function(err) {
+      if (err) return next(err);
+      res.status(200).end();
+    });
+  });
+
 });
 
 app.post('/api/selfies', ensureAuthenticated, function(req, res, next) {
