@@ -243,6 +243,7 @@ app.use(function (req, res, next) {
 // ----------------------------------------- Authentication middleware -------------------------------------- //
 
 function ensureAuthenticated(req, res, next) {
+
   if (req.headers.authorization) {
     var token = req.headers.authorization.split(' ')[1];
     try {
@@ -260,7 +261,9 @@ function ensureAuthenticated(req, res, next) {
     res.set('Content-Type', 'application/json');
     return res.staus(401).end();
   }
+
 }
+
 
 function createJwtToken(user) {
   var payload = {
@@ -299,6 +302,7 @@ app.post('/auth/login', function(req, res, next) {
     });
   });
 });*/
+
 
 app.post('/auth/facebook', function(req, res, next) {
   var profile = req.body.profile;
@@ -349,6 +353,7 @@ app.post('/auth/facebook', function(req, res, next) {
   });
 });
 
+
 /*app.post('/auth/google', function(req, res, next) {
   var profile = req.body.profile;
   User.findOne({ google: profile.id }, function(err, existingUser) {
@@ -378,6 +383,7 @@ app.post('/auth/facebook', function(req, res, next) {
 // ------------------------------------------------------ APIs -----------------------------------------------------//
 
 app.get('/api/users', function(req, res, next) {
+  
   if (!req.query.email) {
     return res.send(400, { message: 'Email parameter is required.' });
   }
@@ -386,26 +392,37 @@ app.get('/api/users', function(req, res, next) {
     if (err) return next(err);
     res.send({ available: !user });
   });
+
 });
 
+
 app.get('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
+  
   User.findById(req.params.id, function(err, profile) {
     if (err) return next(err);
     res.send(profile);
   });
+
 });
 
+
 app.get('/api/authprofile/:id', function(req, res, next) {
+  
   var query = User.findOne({ 'facebookId': req.params.id });
+  
   query.exec(function(err, profile) {
     if (err) next(err);
     res.send(profile);
   });
+
 });
 
 app.put('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
+  
   User.findById(req.params.id, function(err, profile) {
+  
     if (err) return next(err);
+  
     profile.requests.push(req.body.requests);
     profile.invitation_to.push(req.body.invitation_to);
     profile.invitations_sent += req.body.invitations_sent;
@@ -414,35 +431,49 @@ app.put('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
       if (err) return next(err);
       res.status(200).end();
     });
+
   });
+
 });
 
 app.post('/api/invites', ensureAuthenticated, function(req, res, next) {
+  
   var invites = new Invites({
     _id: req.body.id
   });
+  
   invites.save(function(err) {
     if (err) return next(err);
     res.status(200).end();
   });
+
 });
 
 app.get('/api/invites/:id', function(req, res, next) {
+  
   Invites.findById(req.params.id, function(err, invites) {
     if (err) return next(err);
     res.send(invites);
   })
+
 });
 
+
 app.put('/api/invites/:id', function(req, res, next) {
+
   Invites.findById(req.params.id, function(err, invites) {
+
     if (err) next(err);
+
     invites.invitations_accepted += 1;
+
     invites.save(function(err) {
       if (err) next(err);
       res.status(200).end;
-    })
-  })
+    });
+
+  });
+
 });
 
 var converter = require('json-2-csv');
@@ -471,16 +502,22 @@ app.get('/api/ios_activities', function(req, res, next) {
   });
 });
 
+
 app.get('/api/and_activities', function(req, res, next) {
+
   var query = Activity.find();
   query.sort('timeAdded');
+  
   query.exec(function(err, activities) {
     if (err) next(err);
     res.send(activities);
-  })
+  });
+
 });
 
+
 app.get('/api/activities', function(req, res, next) {
+  
   var query = Activity.find();
   /*Activity.textSearch('Bars', function (err, output) {
     //if (err) return next(err);
@@ -563,19 +600,27 @@ app.get('/api/activities', function(req, res, next) {
       res.send(activities);
     }
   });
+
 });
+
 
 var mime = require('mime');
 
+
 app.get('/api/activities/:id', function(req, res, next) {
+  
   Activity.findById(req.params.id, function(err, activity) {
     if (err) return next(err);
     res.send(activity);
   });
+
 });
 
+
 app.post('/upload', function(req, res, next) {
+  
   var filePath = path.join(__dirname, req.files.file.path);
+  
   gm(filePath)
       .resize(600, 400)
       .stream(function(err, stdout, stderr) {
@@ -600,10 +645,14 @@ app.post('/upload', function(req, res, next) {
           console.log('Image uploaded');
         });
       });
+
 });
 
+
 app.post('/uploadCornerPic', function(req, res, next) {
+  
   var filePath = path.join(__dirname, req.files.file.path);
+  
   gm(filePath)
       .resize(200, 200)
       .stream(function(err, stdout, stderr) {
@@ -628,12 +677,14 @@ app.post('/uploadCornerPic', function(req, res, next) {
           console.log('Corner Pic uploaded');
         });
       });
+
 });
 
+
 app.post('/uploadSelfie', function(req, res, next) {
+  
   var filePath = path.join(__dirname, req.files.file.path);
-  console.log(__dirname);
-  console.log(filePath);
+  
   gm(filePath)
       .resize(200, 200)
       .stream(function(err, stdout, stderr) {
@@ -661,9 +712,12 @@ app.post('/uploadSelfie', function(req, res, next) {
           }).end();
         });
       });
+
 });
 
+
 app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
+  
   var activity = new Activity({
     _id: req.body.id,
     title: req.body.title,
@@ -714,11 +768,15 @@ app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
     if (err) return next(err);
     res.status(200).end();
   });
+  
 });
 
 app.put('/api/activities/:id', ensureAuthenticated, function(req, res, next) {
+
   Activity.findById(req.params.id, function(err, activity) {
+
     if (err) return next(err);
+
     activity.title = req.body.title;
     activity.description = req.body.description;
     activity.genre = req.body.genre;
@@ -757,12 +815,17 @@ app.put('/api/activities/:id', ensureAuthenticated, function(req, res, next) {
       if (err) return next(err);
       res.status(200).end();
     });
+
   });
+
 });
 
 app.post('/sendInvites', ensureAuthenticated, function(req, res, next) {
+
   User.findById(req.body.id, function(err, user) {
+
     if (err) return next(err);
+
     console.log(req.body.id);
     console.log(req.body.response);
     console.log(req.body.response.to.length);
@@ -1065,65 +1128,133 @@ app.post('/mob_api/markUndone', ensureAuthenticated, function(req, res, next) {
 });
 
 app.post('/api/selfies', ensureAuthenticated, function(req, res, next) {
+
   User.findById(req.user._id, function(err, user) {
+
     if (err) next(err);
+
     user.selfies.push(req.body.selfies);
     user.save(function(err) {
       if (err) next(err);
     })
+
   });
+
   Activity.findById(req.body.activityId, function(err, activity) {
+
     if (err) return next(err);
+
     activity.selfies.push({
       url: req.body.selfies,
       fbId: req.user.facebookId
     });
+
     activity.selfie_sub.push(req.user._id);
+
     activity.save(function (err) {
       if (err) return next(err);
       res.status(200).end();
     });
+
   });
+
 });
 
+
 app.post('/api/tips', ensureAuthenticated, function(req, res, next) {
+
   User.findById(req.user._id, function(err, user) {
+
     if (err) return next(err);
+
     if (user.tipsCount) {
       user.tipsCount += 1;
     } else {
       user.tipsCount = 1;
     }
+
     user.save(function(err) {
       if (err) return next(err);
     });
   });
+
   Activity.findById(req.body.activityId, function(err, activity) {
+
     if (err) return next(err);
+
     activity.tips.push({
       text: req.body.tips.splice(-1),
       tipperfbId: req.user.facebookId
     });
+
     activity.tipper.push(req.user._id);
+
     activity.save(function(err) {
       if (err) return next(err);
       res.status(200).end();
     });
+
   });
+
+});
+
+
+app.post('/mob_api/tips', function(req, res, next) {
+
+  User.findById(req.body.userId, function(err, user) {
+
+    if (err) return next(err);
+
+    if (user.tipsCount) {
+      user.tipsCount += 1;
+    } else {
+      user.tipsCount = 1;
+    }
+
+    user.save(function(err) {
+      if (err) return next(err);
+    });
+  });
+
+  Activity.findById(req.body.activityId, function(err, activity) {
+
+    if (err) return next(err);
+
+    activity.tips.push({
+      text: req.body.tips.splice(-1),
+      tipperfbId: req.user.facebookId
+    });
+
+    activity.tipper.push(req.body.userId);
+
+    activity.save(function(err) {
+      if (err) return next(err);
+      res.status(200).end();
+    });
+
+  });
+
 });
 
 app.post('/api/acceptActivity', ensureAuthenticated, function(req, res, next) {
+
   User.findById(req.body.userId, function(err, user) {
+
     if (err) return next(err);
+
     if (user.p2p === true) {
       Activity.findById(req.body.activityId, function(err, activity) {
+
         if (err) return next(err);
+
         activity.preview = true;
+
         activity.save(function(err) {
           if (err) return next(err);
           console.log("Activity pushed into production");
           res.status(200).end();
         });
+
       });
     } else {
       console.log('Permission denied');
@@ -1134,35 +1265,54 @@ app.post('/api/acceptActivity', ensureAuthenticated, function(req, res, next) {
 });
 
 app.post('/api/deleteActivity', ensureAuthenticated, function(req, res, next) {
+
   Activity.findById(req.body.activityId, function(err, activity) {
+
     if (err) return next(err);
+
     activity.remove(function(err) {
       if (err) return next(err);
       console.log("Activity deleted");
       res.send(200);
     });
+
   });
 });
 
+
 app.get('/api/editActivity/:id', ensureAuthenticated, function(req, res, next) {
+
   Activity.findById(req.params.id, function(err, activity) {
+
     if (err) return next(err);
+
     res.send(activity);
+
   });
+
 });
+
 
 app.get('*', function(req, res) {
   res.redirect('/#/' + req.originalUrl);
 });
+
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send({ message: err.message });
 });
 
+
 app.set('port', process.env.PORT || 3000);
 
-var cluster = require('cluster');
+
+var server = app.listen(app.get('port'), function() {
+  console.log('Express server listening on port ' + app.get('port'));
+});
+
+
+/*var cluster = require('cluster');
 var numCPUs = require('os').cpus().length;
 
 if (cluster.isMaster) {
@@ -1176,7 +1326,8 @@ if (cluster.isMaster) {
   var server = app.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
   });
-}
+}*/
+
 
 /*var server = app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
