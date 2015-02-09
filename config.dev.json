@@ -3,7 +3,7 @@
                     "id": "bhuvanaurora",
                     "password": "joyage_sendGrid_password"
                 },
-    "db": "localhost",
+    "db": "mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database",
     "tokenSecret": "UnI@!#$_TOken_@#$%^%",
     "facebook": {
                     "appSecret": "d25d97e73bc4b7fb33715d33f0f55df2"    

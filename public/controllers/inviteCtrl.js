@@ -16,7 +16,7 @@ angular.module('MyApp')
 
           chance.set('lastNames', ['Underwood', 'Stamper', 'Meechum', 'Vasquez', 'Gallagher', 'Danton', 'Posner', 'Barnes', 'Russo', 'Bing',
             'Geller', 'Buffay', 'Tribbiani', 'Green', 'Arryn', 'Baratheon', 'Bolton', 'Frey', 'Greyjoy', 'Lannister', 'Martell', 'Stark',
-            'Targaryen', 'Tully', 'Tyrell']);
+            'Targaryen', 'Tully', 'Tyrell', 'Tyrion', 'Danaerys', 'Aarya']);
 
           randomString = chance.last() + '-' + chance.last() + chance.cc();
           var newString = true;
@@ -63,7 +63,7 @@ angular.module('MyApp')
             });
             FB.ui({
               method: 'apprequests',
-              message: 'Invite your facebook friends to Joyage',
+              message: 'Select the 10 most beautiful friends to join you on Joyage',
               max_recipients: (10 - $scope.profile.invitations_sent)
               //filters: ['app_non_users']
             }, function (response) {
@@ -76,7 +76,7 @@ angular.module('MyApp')
                   to: response.to,
                   method: 'send',
                   name: 'Joyage | Discover the best activities in town',
-                  link: 'http://joyage.in/login' + randomString
+                  link: 'http://joyage.in/login/' + randomString
                 });
               }
               if(newString) {

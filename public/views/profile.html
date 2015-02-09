@@ -1,4 +1,51 @@
-<div class="wrapper">
+<!----------------------------------------------------- Navbar -------------------------------------------->
+
+<header style="background-color:rgba(255,255,255,0.5);border:none;position:fixed;" ng-controller="NavbarCtrl">
+    <div class="wrapper">
+        <div class="col-lg-4 col-sm-4 col-xs-6 col-md-4 padd-left-none">
+            <div class="head-brand" ng-click="go('/')" style="cursor:pointer">
+                Joyage
+            </div>
+        </div>
+
+        <div class="col-lg-8 col-sm-8 col-xs-6 col-md-8 padd-right-none">
+            <div class="pull-right">
+                <div class="user-menu js-user-menu" ng-click="userMenu()">
+                    <img ng-if="currentUser" src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
+                    <span ng-if="currentUser" class="user-name">{{currentUser.name}}</span>
+                    <span ng-if="!currentUser" class="user-name" ng-click="go('/login')">Login</span>
+                </div>
+                <div ng-if="currentUser" class="user-menu-drawer js-user-menu-drawer" id="user-menu-drawer" hide ng-click="userMenu()">
+                    <ul>
+                        <li class="selected"><span class="batch" data-icon="&#xF162;"></span>  Home</li>
+                        <a ng-href="/profile/{{currentUser._id}}">
+                            <li>
+                                <span class="batch" data-icon="&#xF043;"></span>  Profile
+                            </li>
+                        </a>
+                        <a ng-if="currentUser.curator === true" ng-href="/admin/{{currentUser._id}}">
+                            <li>
+                                <span class="batch" data-icon="&#xF04C;"></span>  Admin
+                            </li>
+                        </a>
+                        <a ng-href="/invite/{{currentUser._id}}">
+                            <li>
+                                <span class="batch" data-icon="&#xF0DB;"></span>  Invite friends
+                            </li>
+                        </a>
+                        <a ng-href="javascript:void(0)" ng-click="logout()">
+                            <li>
+                                <span class="batch" data-icon="&#xF069;"></span>  Logout
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="wrapper" style="margin-top:40px;">
     <div class="profile-head clearfix">
         <div class="col-lg-8 col-sm-7 col-md-8 col-xs-12">
             <div class="profile-pic">
@@ -9,15 +56,6 @@
                 <!--h6><i class="batch" data-icon="&#xF07B;"></i> Yorkshire</h6-->
                 <a href=""><i class="batch" data-icon="&#xf150;"></i></a>
                 <a href=""><i class="batch" data-icon="&#xf151;"></i></a>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-5 col-md-4 col-xs-12">
-            <div class="pull-right">
-                <a href="/invite/{{profile._id}}">Invite friends</a>
-                <!--div class="followed-section text-right">
-                    <a href="#"><p><b>29</b> <small>FOLLOWED</small></p></a>
-                    <a href=""><p><b>129</b> <small>FOLLOWERS</small></p></a>
-                </div-->
             </div>
         </div>
     </div><!-- profile end here -->
@@ -79,38 +117,44 @@
 
 <!---------------------------- Footer ---------------------------->
 
-<footer id="footer-1080" style="margin-bottom:-20px;z-index: 1001;clear:both;">
+<footer style="height:160px;clear:both;background-color:rgba(0,0,0,0.1);margin-top:30px;">
     <div class="container_27 clearfix">
-        <div class="grid_4 pull-left">
-            <div class="headings">JOYAGE</div>
-            <hr>
-            <div class="footer-links">
-                <a data-log-area="Footer" data-log-message="About Us" href="/about/" target="_blank">About Us</a>
-                <a data-log-area="Footer" data-log-message="Jobs" href="/jobs/" target="_blank">Jobs</a>
-                <a data-log-area="Footer" data-log-message="Privacy Policy" href="/privacy/" target="_blank">Privacy Policy</a>
-                <a data-log-area="Footer" data-log-message="Terms Of Service" href="/tos/" target="_blank">Terms of Service</a>
-            </div>
+        <div class="grid_4 pull-left" style="margin-left:100px;">
+
+            <ul>
+                <li>
+                    JOYAGE
+                </li>
+                <li>
+                    <a href="/about/">
+                        About Us
+                    </a>
+                </li>
+                <li>
+                    <a href="/jobs/">
+                        Jobs
+                    </a>
+                </li>
+                <li>
+                    <a href="/privacy/">
+                        Privacy Policy
+                    </a>
+                </li>
+                <li>
+                    <a href="/tos/">
+                        Terms of Service
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:admin@joyage.in?Subject=Problem%20detected%20on%20the%20website">
+                        Report a problem
+                    </a>
+                </li>
+            </ul>
+
         </div>
-        <div class="grid_4">
-            <div class="headings">CONTRIBUTE</div>
-            <hr>
-            <div class="footer-links">
-                <a data-log-area="Footer" data-log-message="Send Feedback" onclick="" href="#" target="_blank">Send Feedback</a>
-                <a data-log-area="Footer" data-log-message="Submit an Activity" href="#" target="_blank">Suggest an Activity</a>
-                <a data-log-area="Footer" data-log-message="Local Business" href="#" target="_blank">Own a Local Business?</a>
-            </div>
-        </div>
-        <div class="grid_4">
-            <div class="headings">KEEP IN TOUCH</div>
-            <hr>
-            <div class="footer-links">
-                <a data-log-area="Footer" data-log-message="Blog" href="http://joyage.com/blog/" target="_blank">Blog</a>
-                <a data-log-area="Footer" data-log-message="Facebook" href="https://facebook.com/joyage" target="_blank">Facebook</a>
-                <a data-log-area="Footer" data-log-message="Twitter" href="http://twitter.com/joyage" target="_blank">Twitter</a>
-            </div>
-        </div>
-        
-        <div class="grid_6 pull-right">
+
+        <div class="grid_6 pull-right" style="margin-right:100px;">
             <div class="footer-logo">
                 <h3 style="margin-top: 20px;color:#999;font-family:Montserrat">
                     <a href="/" style="color:#999;font-family:Montserrat">
@@ -118,8 +162,12 @@
                     </a>
                 </h3>
             </div>
-            <div style="font-size: 10px;margin-top: 20px;color:#999;">COPYRIGHT 2014</div>
-            <div style="font-size: 10px;color:#999">JOYAGE</div>
+            <div style="font-size: 10px;margin-top: 20px;color:#999;">
+                COPYRIGHT 2014
+            </div>
+            <div style="font-size: 10px;color:#999">
+                JOYAGE INC.
+            </div>
         </div>
     </div>
 </footer>

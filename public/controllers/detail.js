@@ -133,6 +133,7 @@ angular.module('MyApp')
                           console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
                       }).success(function (data, status, headers, config) {
                           selfie = data.imageurl;
+                          $scope.selfieImg = selfie;
                           console.log('Selfie: '+selfie);
                       });
                   }

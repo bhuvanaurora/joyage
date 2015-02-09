@@ -63,9 +63,9 @@
         <img ng-if="activity.poster" ng-src="/images/{{activity.poster}}">
 
         <div class="event-action" ng-if="currentUser">
-            <button class="open-modal modal-bookmark-it">
+            <button class="open-modal">
 
-                    <span ng-if="!isSubscribed()">
+                    <span ng-if="!isSubscribed()" ng-click="subscribe()">
                         <i class="batch" data-icon="&#xF049;"></i>
                         Bookmark ({{subscriptions}})
                     </span>
@@ -76,16 +76,16 @@
                     </span>
 
             </button>
-            <button class="open-modal modal-done-it">
+            <button class="open-modal">
 
-                    <span ng-if="!isDone()">
+                    <span ng-if="!isDone()" ng-click="markDone()">
                         <i class="batch" data-icon="&#xF164;"></i>
-                        Done it ({{completions}})
+                        Mark as Done ({{completions}})
                     </span>
 
                     <span ng-if="isDone()" ng-click="markUndone()">
                         <i class="batch" data-icon="&#xF164;"></i>
-                        I've done this ({{completions}}})
+                        I've done this ({{completions}})
                     </span>
 
             </button>
@@ -106,41 +106,36 @@
 
         <p>{{activity.description}}</p>
 
-        <div onload='function changeFontSize(){if (activity.description!=="") {document.getElementById("description").style.font-size="15px"}();'>
+        <div onload='function changeFontSize(){if (activity.description!=="") {document.getElementById("description").style.font-size="15px"}();}'>
             <a href="{{activity.sourceWebsite}}">{{activity.sourceName}}</a>
             <p>{{activity.sourceDescription}}</p>
         </div>
 
-        <!-------------- Goodies -------------->
+    </div>
 
-        <div class="panel panel-default panel-right"
-             ng-if="activity.goodies"
-             style="width:100%;margin-bottom:20px;margin-top:-10px;">
-            <div class="panel-body">
-                <div class="info-title">GOODIES</div>
-                <div class="info-text">{{activity.goodies}}</div>
-            </div>
-        </div>
+</div>
 
-        <!--------------- Corner --------------->
+<div class="wrapper text-center event-extras">
 
-        <div class="col-lg-5 col-sm-5 col-md-5 col-xs-12">
-            <div class="tip-block">
-                <div class="bubble-holder">
-                    <div class="bubble-body" ng-if="activity.corner">
-                        <p>{{activity.cornerText}}</p>
-                    </div>
-                    <div class="bubble-bot" ng-if="activity.corner"><div class="bbl-hook"></div></div>
-                </div><!-- bubble -end -->
-                <div class="buble-user-img" ng-if="activity.corner">
-                    <img src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.cornerPic}}">
+    <!--------------- Corner --------------->
+
+    <div class="col-lg-5 col-sm-5 col-md-5 col-xs-12" style="float:left">
+        <div class="tip-block" style="margin-bottom:40px;">
+            <div class="bubble-holder">
+                <div class="bubble-body" ng-if="activity.corner">
+                    <p>{{activity.cornerText}}</p>
                 </div>
+            </div><!-- bubble -end -->
+            <div class="bubble-user-img" ng-if="activity.corner">
+                <img src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.cornerPic}}">
+                <div class="corner-name pull-left" ng-if="activity.corner">{{activity.corner}}</div>
             </div>
-            <span class="open-modal modal-pro-tip" ng-if="activity.corner">{{activity.corner}}</span>
         </div>
+    </div>
 
-        <!--------------- Media ---------------->
+    <!--------------- Media ---------------->
 
+    <div class="col-lg-7 col-sm-7 col-md-7 col-xs-12" style="float:right;">
         <div ng-if="activity.media[0]">
             <h4>In Media</h4>
             <ul>
@@ -150,198 +145,191 @@
                 </li>
             </ul>
         </div>
+    </div>
 
-        <!--------------- Payment -------------->
+    <div class="info-section">
 
-        <div class="time-block"
-             ng-if="activity.price">
-            <ul>
-                <li><h6>PRICE</h6></li>
-                <li>Rs {{activity.price}}</li>
-            </ul>
-        </div>
+        <ul class="justified padd-left-none">
 
-        <div class="panel panel-default panel-right"
-             style="height:50px;"
-             ng-if="activity.payment || activity.bookRide">
-            <table class="link-table">
-                <tr>
-                    <td>
-                        <div class="text-center link-div">
-                            <a href="{{activity.payment}}"
-                               ng-if="activity.payment">
-                                <div class="text-center">Tickets</div>
-                            </a>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="text-center link-div">
-                            <a href="{{activity.bookRide}}"
-                               ng-if="activity.bookRide">
-                                <div class="text-center">Ride</div>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
+            <!-------------- Goodies -------------->
+            <li ng-if="activity.goodies">
+                <h2>GOODIES</h2>
+                <p>{{activity.goodies}}</p>
+            </li>
 
-        <!--------------- Tips --------------------->
+            <!--------------- Payment -------------->
+            <li ng-if="activity.price">
+                <h2>PRICE</h2>
+                <p>{{activity.currency}} {{activity.price}}</p>
 
-        <div class="sidebar-footer">
-            <p>TIPS</p>
-            <a href="" class="open-modal modal-pro-tip"><span ng-if="editTips">Add a pro tip</span></a>
-            <ul class="genres">
-                <li ng-repeat="tip in activity.tips">
-                    <img src="https://graph.facebook.com/v2.2/{{tip.tipperfbId}}/picture"
-                         style="width:50px;height:50px;border-radius:50%" > {{tip.text}}
-                </li>
-            </ul>
-        </div>
-
-        <!-------------------------------- Selfies --------------------------------------->
-
-        <div class="sidebar-footer">
-            <p>SELFIE STAND</p>
-            <input type="file"
-                   ng-if="addS"
-                   ng-file-select="onSelfieSelect($files)"
-                   style="margin-top:20px;font-size:14px;padding:10px;width:240px;"
-                   required />
-            <button ng-if="addS"
-                    ng-click="addSelfies()">Upload Selfie</button>
-            <ul>
-                <li ng-repeat="selfie in activity.selfies">
-                    <img src="https://graph.facebook.com/v2.2/{{selfie.fbId}}/picture"
-                            style="width:50px;height:50px;border-radius:50%" />
-                    <img ng-src="/images/selfies/{{selfie.url}}"
-                         style="width:50px;height:50px;" />
-                </li>
-            </ul>
-        </div>
-
-        <!----------------- Map -------------------->
-
-        <div class="event-extra-info">
-            <div class="wrapper">
-                <div class="map-block">
-
-                    <section id="cd-google-map">
-                        <div id="google-container"></div>
-                        <div id="cd-zoom-in"></div>
-                        <div id="cd-zoom-out"></div>
-                        <address>
-                            <b>{{activity.location}}</b>
-                            <br/>{{activity.address}}
-                            <br/>{{activity.neighborhood}}, {{activity.city}}
-                            <br/>{{activity.phone}}
-                        </address>
-                    </section>
-
-                    <form action="http://maps.google.com/maps"
-                          method="get"
-                          target="_blank">
-                        <input type="hidden"
-                               name="daddr"
-                               value="{{activity.location}} {{activity.address}} {{activity.neighborhood}}" />
-                        <input type="submit"
-                               class="btn-block"
-                               value="Get directions"
-                                style="cursor:pointer"/>
-                    </form>
-
-                    <div class="connect-buttons"
-                         ng-if="activity.locationWebsite || activity.zomatoLink || activity.facebookLink || activity.twitterLink">
-                        <ul>
-
-                            <li class="col-lg-3 col-sm-3 col-xs-3 col-md-3 padd-both-none">
-                                <a href="{{activity.locationWebsite}}"
-                                   ng-if="activity.locationWebsite">
-                                    Website
-                                </a>
-                            </li>
-
-                            <li class="col-lg-3 col-sm-3 col-xs-3 col-md-3 padd-both-none">
-                                <a href="{{activity.zomatoLink}}"
-                                   ng-if="activity.zomatoLink">
-                                    Zomato
-                                </a>
-                            </li>
-
-                            <li class="col-lg-3 col-sm-3 col-xs-3 col-md-3 padd-both-none">
-                                <a href="{{activity.facebookLink}}"
-                                   ng-if="activity.facebookLink">
-                                    Facebook
-                                </a>
-                            </li>
-
-                            <li class="col-lg-3 col-sm-3 col-xs-3 col-md-3 padd-both-none">
-                                <a href="{{activity.twitterLink}}"
-                                   ng-if="activity.twitterLink">
-                                    Twitter
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
-
-                </div><!-- map block end here -->
-            </div>
+                <div class="panel panel-default panel-right"
+                     style="height:50px;"
+                     ng-if="activity.payment || activity.bookRide">
+                    <table class="link-table">
+                        <tr>
+                            <td>
+                                <div class="text-center link-div">
+                                    <a href="{{activity.payment}}"
+                                       ng-if="activity.payment">
+                                        <div class="text-center">Tickets</div>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-center link-div">
+                                    <a href="{{activity.bookRide}}"
+                                       ng-if="activity.bookRide">
+                                        <div class="text-center">Ride</div>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </li>
 
             <!--------------- Additional Info -------------->
-
-            <div class="panel panel-default panel-right"
-                 ng-if="activity.moreInfo">
-                <div class="panel-body">
-                    <div class="info-title">MORE INFO</div>
-                    <div class="info-text"
-                         ng-if="activity.moreInfoLink">
-                        <a href="{{activity.moreInfoLink}}">{{activity.moreInfo}}</a>
-                    </div>
-                    <div class="info-text"
-                         ng-if="!activity.moreInfoLink">{{activity.moreInfo}}
-                    </div>
-                </div>
-            </div>
-
-            <div class="sidebar-footer">
-                <p>SPOT A PROBLEM?</p>
-                <a href="" class="open-modal modal-report">Report Here</a>
+            <li ng-if="activity.moreInfo || activity.photoCredit">
+                <h2>MORE INFO</h2>
+                <p ng-if="activity.moreInfoLink">
+                    <a href="{{activity.moreInfoLink}}">{{activity.moreInfo}}</a>
+                </p>
+                <p ng-if="!activity.moreInfoLink">{{activity.moreInfo}}</p>
 
                 <p ng-if="activity.photoCredit">PHOTO CREDITS</p>
                 <a ng-if="activity.photoCredit" href="{{activity.photoCreditLink}}">{{activity.photoCredit}}</a>
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+<!--------------- Tips --------------------->
+
+<div class="tips-holder">
+    <div class="tip-header text-center" ng-if="activity.tips!=''">
+        TIPS
+    </div>
+    <div class="tips-brick" ng-if="activity.tips!=''">
+        <ul class="genres">
+            <li ng-repeat="tip in activity.tips">
+                <img src="https://graph.facebook.com/v2.2/{{tip.tipperfbId}}/picture"
+                     style="width:50px;height:50px;" > {{tip.text}}
+            </li>
+        </ul>
+    </div>
+    <a href="" class="open-modal modal-pro-tip"><button class="tips-button" ng-if="editTips">Leave a tip</button></a>
+</div>
+
+<!-------------------------------- Selfies --------------------------------------->
+
+<div class="text-center">
+    <h3>
+        SELFIES
+    </h3>
+    <a href="" class="open-modal modal-selfie" style="font-size:16px;cursor:pointer">
+        <span ng-if="addS">Selfie button</span>
+    </a>
+    <ul>
+        <li style="display:inline" ng-repeat="selfie in activity.selfies">
+            <!--img src="https://graph.facebook.com/v2.2/{{selfie.fbId}}/picture"
+                    style="width:50px;height:50px;border-radius:50%" /-->
+            <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{selfie.url}}"
+                 style="width:50px;height:50px;" />
+        </li>
+    </ul>
+</div>
+
+<!----------------- Map -------------------->
+
+<div class="event-extra-info">
+    <div class="wrapper">
+        <div class="map-block">
+
+            <section id="cd-google-map">
+                <div id="google-container"></div>
+                <div id="cd-zoom-in"></div>
+                <div id="cd-zoom-out"></div>
+                <address>
+                    <b>{{activity.location}}</b>
+                    <br/>{{activity.address}}
+                    <br/>{{activity.neighborhood}}, {{activity.city}}
+                    <br/>{{activity.phone}}
+                </address>
+            </section>
+
+            <form action="http://maps.google.com/maps"
+                  method="get"
+                  target="_blank">
+                <input type="hidden"
+                       name="daddr"
+                       value="{{activity.location}} {{activity.address}} {{activity.neighborhood}}" />
+                <input type="submit"
+                       class="btn-block"
+                       value="Get directions"
+                        style="cursor:pointer"/>
+            </form>
+
+            <div class="info-section"
+                 ng-if="activity.locationWebsite || activity.zomatoLink || activity.facebookLink || activity.twitterLink">
+                <ul class="justified padd-left-none">
+                    <li class="text-center" ng-if="activity.locationWebsite">
+                        <a href="{{activity.locationWebsite}}"
+                           ng-if="activity.locationWebsite">
+                            Website
+                        </a>
+                    </li>
+                    <li class="text-center" ng-if="activity.zomatoLink">
+                        <a href="{{activity.zomatoLink}}"
+                           ng-if="activity.zomatoLink">
+                            Zomato
+                        </a>
+                    </li>
+                    <li class="text-center" ng-if="activity.facebookLink">
+                        <a href="{{activity.facebookLink}}"
+                           ng-if="activity.facebookLink">
+                            Facebook
+                        </a>
+                    </li>
+                    <li class="text-center" ng-if="activity.twitterLink">
+                        <a href="{{activity.twitterLink}}"
+                           ng-if="activity.twitterLink">
+                            Twitter
+                        </a>
+                    </li>
+                </ul>
             </div>
 
-        </div>
+        </div><!-- map block end here -->
+    </div>
 
-        <!----------------------- Activity review ------------------------------------------>
+</div>
 
-        <div style="background-color:rgba(0,0,0,0.2)"
-             ng-if="activity.preview === false">
-            <div class="text-center">
-                <button class="btn btn-primary"
-                        ng-click="acceptActivity(currentUser._id)"
-                        ng-if="currentUser.p2p">
-                    Accept Activity
-                </button>
-                <a href="/editActivity/{{activity._id}}/{{currentUser._id}}">Edit</a>
-                <button class="btn btn-danger"
-                        ng-click="deleteActivity()">
-                    Delete Activity
-                </button>
-            </div>
-        </div>
+<!----------------------- Activity review ------------------------------------------>
 
-        <!---------------- Tags (Not to be removed; for better SEO) ------------------>
+<div style="background-color:rgba(0,0,0,0.2)"
+     ng-if="activity.preview === false">
+    <div class="text-center">
+        <button class="btn btn-primary"
+                ng-click="acceptActivity(currentUser._id)"
+                ng-if="currentUser.p2p">
+            Accept Activity
+        </button>
+        <a href="/editActivity/{{activity._id}}/{{currentUser._id}}">Edit</a>
+        <button class="btn btn-danger"
+                ng-click="deleteActivity()">
+            Delete Activity
+        </button>
+    </div>
+</div>
 
-        <div class="panel panel-default panel-right"
-             ng-hide=true>
-            <ul class="genres">
-                <li ng-repeat="tag in activity.genre">{{tag}}</li>
-            </ul>
-        </div>
+<!---------------- Tags (Not to be removed; for better SEO) ------------------>
 
-    </div><!-- event head end -->
+<div class="panel panel-default panel-right"
+     ng-hide=true>
+    <ul class="genres">
+        <li ng-repeat="tag in activity.genre">{{tag}}</li>
+    </ul>
 </div>
 
 <div class="wrapper"><!-- wrapper start -->
@@ -382,106 +370,70 @@
 
 <!----------------------------------------------- Modals ----------------------------------------------->
 
-        <!------------------ Bookmark modal ------------------->
+        <!------------------------------- Selfie modal ------------------------->
 
-<div class="modal modal-bookmark-it" ng-if="!isSubscribed()">
+<div class="modal modal-selfie">
+
     <span class="modal-overlay"></span>
-    <div class="modal-content modal-mini text-center">
-        <div class="modal-head">
-            <div class="close-modal"></div>
-            <h2>Bookmark This Activity</h2>
-        </div><!-- modal head end -->
-        <div class="bookmark-it-head-img">
-            <img src="images/{{activity.title}}.jpg">
-            <!--address><b>{{activity.location}}</b><br/><i class="batch" data-icon="&#xF07B;"></i> {{activity.neighborhood}}</address-->
-        </div><!-- bookmark image end -->
-        <div class="modal-body">
-            Add to Collection:
-            <select id="year">
-                <option value="new">Rocking</option>
-                <option value="popular">Must GO</option>
-                <option value="upcoming">Recommended</option>
-                <option value="bookmarked">My Favourites</option>
-            </select>
-            <textarea placeholder="Add some notes..."></textarea>
-            <button class="button button-facebook" ng-click="fb_share()">
-                Share on facebook
-            </button>
-        </div><!-- modal-body end -->
-        <div class="modal-footer text-right">
-            <button class="button button-primary" ng-click="subscribe()">Bookmark</button>
-        </div>
-    </div><!-- modal-content end -->
-</div><!-- modal end -->
 
-        <!------------------------------- Done modal ------------------------->
-
-<div class="modal modal-done-it" ng-if="!isDone()">
-    <span class="modal-overlay"></span>
     <div class="modal-content text-left modal-mini">
+
         <div class="modal-head">
             <div class="close-modal"></div>
-            <h2>Activity Done</h2>
+            <h2>Upload Selfie</h2>
         </div><!-- modal head end -->
-        <div class="bookmark-it-head-img">
-            <img src="images/{{activity.title}}.jpg">
-            <address><b>{{activity.location}}</b><br/><i class="batch" data-icon="&#xF07B;"></i> {{activity.neighborhood}}</address>
-        </div><!-- bookmark image end -->
-        <div class="modal-body">
-            <div class="clearfix">
-                <label style="margin-right: 28px;">Save to: </label>
-                <select>
-                    <option value="new">Rocking</option>
-                    <option value="popular">Must GO</option>
-                    <option value="upcoming">Recommended</option>
-                    <option value="bookmarked">My Favourites</option>
-                </select>
-            </div>
-            <br/>
-            <div class="clearfix">
-                <label>How was it? </label>
-                <select>
-                    <option value="new">Ok Ok</option>
-                    <option value="popular">Chalta he</option>
-                    <option value="upcoming">Maza Aa Gaya</option>
-                    <option value="bookmarked">Aag laga di :)</option>
-                </select>
-            </div>
-            <textarea placeholder="Add some notes..."></textarea>
-            <button class="button button-facebook" ng-click="fb_share()">
-                Share on facebook
-            </button>
-        </div><!-- modal-body end -->
-        <div class="modal-footer text-right">
-            <button class="button button-primary" ng-click="markDone()">Done</button>
+
+        <div class="text-center">
+            <input type="file"
+                   ng-if="addS"
+                   ng-file-select="onSelfieSelect($files)"
+                   style="margin-top:20px;font-size:14px;padding:10px;width:240px;"
+                   required />
+            <button ng-if="addS"
+                    ng-click="addSelfies()">Upload Selfie</button>
         </div>
-    </div><!-- modal-content end -->
-</div><!-- modal end -->
+
+        <div class="bookmark-it-head-img text-center">
+            <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{selfieImg}}"/>
+        </div>
+
+        <div class="modal-footer text-right">
+            <button class="button button-primary" ng-if="addS" ng-click="addSelfies()">Let 'er rip</button>
+        </div>
+
+    </div>
+</div>
 
         <!----------------------------- Tips modal ----------------------------->
 
 <div class="modal modal-pro-tip">
+
     <span class="modal-overlay"></span>
+
     <div class="modal-content text-left modal-mini">
+
         <div class="modal-head">
             <div class="close-modal"></div>
             <h2>Share your thoughts</h2>
-        </div><!-- modal head end -->
+        </div>
+
         <div class="bookmark-it-head-img">
-            <img src="images/{{activity.title}}.jpg">
-            <address><b>{{activity.location}}</b><br/><i class="batch" data-icon="&#xF07B;"></i> {{activity.neighborhood}}</address>
-        </div><!-- bookmark image end -->
+            <img src="images/{{activity.title}}.jpg" style="width:600px;height:400px;">
+        </div>
+
         <div class="modal-body">
             <textarea class="margin-top-none" name="tip" ng-model="tip" maxlength="140" placeholder="Add a pro tip..."></textarea>
             <button class="button button-facebook" ng-click="fb_share()">
                 Share on facebook
             </button>
-        </div><!-- modal-body end -->
+        </div>
+
         <div class="modal-footer text-right" ng-click="addTips(tip)">
             <button class="button button-primary">Submit</button>
         </div>
-    </div><!-- modal-content end -->
-</div><!-- modal end -->
+
+    </div>
+</div>
 
         <!---------------------------- Share modal ---------------------------->
 
@@ -492,82 +444,11 @@
             <div class="close-modal"></div>
             <h2>Spread the Word</h2>
         </div><!-- modal head end -->
-        <a class="share-link" href="">http://www.joyage.in/7Yt560I</a>
         <div class="facebook-share">
             <img src="https://www.facebookbrand.com/img/facebook.icon.png" ng-click="fb_share()">
         </div>
         <div class="twitter-share">
             <img src="https://g.twimg.com/Twitter_logo_white.png">
-        </div>
-    </div><!-- modal-content end -->
-</div><!-- modal end -->
-
-        <!-------------------------------- Report modal --------------------------->
-
-<div class="modal modal-report">
-    <span class="modal-overlay"></span>
-    <div class="modal-content text-left">
-        <div class="modal-head">
-            <div class="close-modal"></div>
-            <h2>Report a Problem</h2>
-        </div><!-- modal head end -->
-        <div class="modal-body clearfix">
-            <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4">
-                Error type :
-            </div>
-            <div class="col-lg-8 col-sm-8 col-xs-12 col-md-4">
-                <select>
-                    <option value="new">Venue Closed</option>
-                    <option value="popular">Relocationed</option>
-                    <option value="upcoming">Wrong Address</option>
-                    <option value="bookmarked">Name Changed</option>
-                    <option value="bookmarked">Something went wrong</option>
-                </select>
-            </div>
-
-            <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4" style="padding-top: 20px;">
-                Add a Note
-            </div>
-            <div class="col-lg-8 col-sm-8 col-xs-12 col-md-4">
-                <textarea placeholder="Note about problem"></textarea>
-            </div>
-        </div><!-- modal-body end -->
-        <div class="modal-footer text-right">
-            <button class="button button-primary">Send</button>
-        </div>
-    </div><!-- modal-content end -->
-</div><!-- modal end -->
-
-        <!------------------------------ Feedback modal ---------------------------->
-
-<div class="modal modal-feedback">
-    <span class="modal-overlay"></span>
-    <div class="modal-content text-left">
-        <div class="modal-head">
-            <div class="close-modal"></div>
-            <h2>Give your Feedback</h2>
-        </div><!-- modal head end -->
-        <div class="modal-body clearfix">
-            <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4">
-                Type
-            </div>
-            <div class="col-lg-8 col-sm-8 col-xs-12 col-md-4">
-                <select>
-                    <option value="new">Suggestions</option>
-                    <option value="popular">New feature</option>
-                    <option value="upcoming">Improvements</option>
-                </select>
-            </div>
-
-            <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4" style="padding-top: 20px;">
-                Feedback
-            </div>
-            <div class="col-lg-8 col-sm-8 col-xs-12 col-md-4">
-                <textarea placeholder="Let us know more about it"></textarea>
-            </div>
-        </div><!-- modal-body end -->
-        <div class="modal-footer text-right">
-            <button class="button button-primary">Send</button>
         </div>
     </div><!-- modal-content end -->
 </div><!-- modal end -->
@@ -602,57 +483,14 @@
                         Terms of Service
                     </a>
                 </li>
-            </ul>
-
-        </div>
-        <!--div class="grid_4">
-
-            <ul>
                 <li>
-                    CONTRIBUTE
-                </li>
-                <li>
-                    <a href="#">
-                        Send Feedback
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        Suggest an activity
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        Own a local business?
+                    <a href="mailto:admin@joyage.in?Subject=Problem%20detected%20on%20the%20website">
+                        Report a problem
                     </a>
                 </li>
             </ul>
 
         </div>
-        <div class="grid_4">
-
-            <ul>
-                <li>
-                    KEEP IN TOUCH
-                </li>
-                <li>
-                    <a href="/blog/">
-                        Blog
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        Facebook
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        Twitter
-                    </a>
-                </li>
-            </ul>
-
-        </div-->
         
         <div class="grid_6 pull-right" style="margin-right:100px;">
             <div class="footer-logo">
