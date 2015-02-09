@@ -114,7 +114,10 @@ var activitySchema = new mongoose.Schema({
   preview: Boolean,
   tips: [{
     text: String,
-    tipperfbId: String
+    tipperfbId: String,
+    tipper: {
+      type: mongoose.Schema.Types.ObjectId, ref: 'User'
+    }
   }],
   tipper: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
@@ -622,7 +625,7 @@ app.post('/upload', function(req, res, next) {
   var filePath = path.join(__dirname, req.files.file.path);
   
   gm(filePath)
-      .resize(600, 400)
+      .resize(900, 500)
       .stream(function(err, stdout, stderr) {
         var buf = new Buffer('');
         var imageName = Date.now() + req.files.file.name;
@@ -1184,7 +1187,8 @@ app.post('/api/tips', ensureAuthenticated, function(req, res, next) {
 
     activity.tips.push({
       text: req.body.tips.splice(-1),
-      tipperfbId: req.user.facebookId
+      tipperfbId: req.user.facebookId,
+      tipper: req.user._id
     });
 
     activity.tipper.push(req.user._id);
@@ -1222,7 +1226,8 @@ app.post('/mob_api/tips', function(req, res, next) {
 
     activity.tips.push({
       text: req.body.tips.splice(-1),
-      tipperfbId: req.user.facebookId
+      tipperfbId: req.user.facebookId,
+      tipper: req.body.userId
     });
 
     activity.tipper.push(req.body.userId);

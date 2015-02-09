@@ -53,9 +53,8 @@
             </div>
             <div class="profile-detail">
                 <h1>{{profile.name}}</h1>
-                <!--h6><i class="batch" data-icon="&#xF07B;"></i> Yorkshire</h6-->
-                <a href=""><i class="batch" data-icon="&#xf150;"></i></a>
-                <a href=""><i class="batch" data-icon="&#xf151;"></i></a>
+                <!--a href=""><i class="batch" data-icon="&#xf150;"></i></a>
+                <a href=""><i class="batch" data-icon="&#xf151;"></i></a-->
             </div>
         </div>
     </div><!-- profile end here -->
@@ -65,10 +64,13 @@
             <a href="#" class="open-modal modal-favorites">35 <small>FAVORITES</small></a>
         </div-->
         <div class="joyage-activity">
-            <a href="#" class="open-modal modal-bookmarked">{{subscribeCount}} <small>BOOKMARKED</small></a>
+            <a href="" class="open-modal modal-bookmarked">{{subscribeCount}} <small>BOOKMARKED</small></a>
         </div>
         <div class="joyage-activity">
-            <a href="#" class="open-modal modal-activities">{{doneCount}} <small>ACTIVITIES DONE</small></a>
+            <a href="" class="open-modal modal-activities">{{doneCount}} <small>ACTIVITIES DONE</small></a>
+        </div>
+        <div class="joyage-activity">
+            <a href="" class="open-modal modal-activities">{{profile.tipsCount}} <small>TIPS</small></a>
         </div>
     </div>
 
@@ -76,11 +78,11 @@
     <div class="wrapped-tab">
         <ul class="js-schedule-tabs schedule-tabs">
             <li class="tab-link current" data-tab="tab-1">
-                <div>My Collections<div>
-            </li><!--
-					--><li class="tab-link" data-tab="tab-2">
-            <div>Recent Activity</div>
-        </li>
+                <div>My Collections</div>
+            </li>
+            <!--li class="tab-link" data-tab="tab-2">
+                <div>Recent Activity</div>
+            </li-->
         </ul>
     </div>
 
@@ -89,7 +91,10 @@
             <a href="" class="collections-holder">
                 <h4>Things I want to do ({{subscribeCount}})</h4>
                 <div class="collection-pic-block">
-                    <img ng-repeat="act in subscribedActivities | orderBy:'timeAdded':true" src="images/{{act.title}}.jpg">
+                    <div ng-repeat="act in subscribedActivities | orderBy:'timeAdded':true">
+                        <a href="/activities/{{act._id}}"><img ng-src="images/{{act.title}}.jpg"></a>
+                    </div>
+                    <!--img ng-repeat="act in subscribedActivities | orderBy:'timeAdded':true" src="images/{{act.title}}.jpg"-->
                 </div>
             </a>
         </div>
@@ -102,14 +107,14 @@
                 </div>
             </a>
         </div>
-        <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4">
+        <!--div class="col-lg-4 col-sm-6 col-xs-12 col-md-4">
             <a href="" class="new-collections">
                 <h4>CREATE NEW COLLECTION</h4>
                 <div class="new-collection-holder">
                     <i class="batch" data-icon="&#xF0D8;"></i>
                 </div>
             </a>
-        </div>
+        </div-->
 
     </div><!-- tab 1 content end here -->
 

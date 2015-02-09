@@ -89,10 +89,10 @@
                     </span>
 
             </button>
-            <button class="open-modal modal-share">
+            <button class="open-modal">
 
-                    <span>
-                        <i class="batch" data-icon="&#xF159;"></i> Share
+                    <span ng-click="fb_share()">
+                        <i class="batch" data-icon="&#xF159;"></i> Share on facebook
                     </span>
 
             </button>
@@ -418,14 +418,11 @@
         </div>
 
         <div class="bookmark-it-head-img">
-            <img src="images/{{activity.title}}.jpg" style="width:600px;height:400px;">
+            <img src="images/{{activity.title}}.jpg" style="width:600px;height:300px;">
         </div>
 
         <div class="modal-body">
             <textarea class="margin-top-none" name="tip" ng-model="tip" maxlength="140" placeholder="Add a pro tip..."></textarea>
-            <button class="button button-facebook" ng-click="fb_share()">
-                Share on facebook
-            </button>
         </div>
 
         <div class="modal-footer text-right" ng-click="addTips(tip)">
@@ -434,24 +431,6 @@
 
     </div>
 </div>
-
-        <!---------------------------- Share modal ---------------------------->
-
-<div class="modal modal-share">
-    <span class="modal-overlay"></span>
-    <div class="modal-content text-center modal-mini">
-        <div class="modal-head">
-            <div class="close-modal"></div>
-            <h2>Spread the Word</h2>
-        </div><!-- modal head end -->
-        <div class="facebook-share">
-            <img src="https://www.facebookbrand.com/img/facebook.icon.png" ng-click="fb_share()">
-        </div>
-        <div class="twitter-share">
-            <img src="https://g.twimg.com/Twitter_logo_white.png">
-        </div>
-    </div><!-- modal-content end -->
-</div><!-- modal end -->
 
 <!---------------------------- Footer ---------------------------->
 

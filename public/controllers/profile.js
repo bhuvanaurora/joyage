@@ -1,7 +1,9 @@
 angular.module('MyApp')
-  .controller('ProfileCtrl', ['$scope', '$routeParams', '$rootScope', '$window', 'Profile', 'Activity', 'fb_appId',
-                              function($scope, $routeParams, $rootScope, $window, Profile, Activity, fb_appId) {
-    
+  .controller('ProfileCtrl', ['$scope', '$routeParams', '$rootScope', '$location', '$window', 'Profile', 'Activity', 'fb_appId',
+                              function($scope, $routeParams, $rootScope, $location, $window, Profile, Activity, fb_appId) {
+
+    $window.scrollTo(0,0);
+
     Profile.get({ _id: $routeParams.id }, function(profile) {
       $scope.profile = profile;
 

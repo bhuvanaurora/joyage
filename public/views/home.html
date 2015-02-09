@@ -118,6 +118,7 @@
 
         <div class="mood-holder js-mood-holder hide" id="filter-container">
             <div class="wrapper">
+
                 <div class="col-lg-2 col-sm-2 col-xs-6 col-md-2" ng-click="filterByGenre(genres[0])">
                     <div class="emotions-holder">
                         <div class="emotion icon-emo-saint"></div>
@@ -167,11 +168,13 @@
                 </div>
             </div>
         </div><!-- mood holder end -->
-    </div><!-- sort select bricke end -->
+    </div><!-- sort select brick end -->
+
     <div class="sorted-mood text-center" id="mood-def">
         <h3>{{headingTitle}}</h3>
         <p>{{gDesc}}</p>
     </div><!-- sorted mood end -->
+
 </div><!-- sorting head holder -->
 
 <!------------------------------------------ Activities ----------------------------------->
@@ -193,7 +196,7 @@
         </div>
         <ul>
             <li ng-repeat="acti in activ | orderBy:sortOrder:true">
-                <ul>
+                <ul style="margin-bottom:-80px;margin-top:-80px;">
                     <li ng-repeat="act in acti | filter:query">
                         <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
                             <h3 style="word-spacing:4px">{{act.title}}</h3>

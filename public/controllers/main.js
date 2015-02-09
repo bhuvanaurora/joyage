@@ -100,8 +100,10 @@ angular.module('MyApp')
       };
 
       $scope.displayMenu = function () {
+
         var elem = document.getElementById("filter-container");
         var container = document.getElementById("mood-def");
+
         if (elem.style.display == "block") {
           elem.style.display = "none";
           container.style.marginTop = "0px";

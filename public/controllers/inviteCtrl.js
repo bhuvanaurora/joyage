@@ -16,7 +16,9 @@ angular.module('MyApp')
 
           chance.set('lastNames', ['Underwood', 'Stamper', 'Meechum', 'Vasquez', 'Gallagher', 'Danton', 'Posner', 'Barnes', 'Russo', 'Bing',
             'Geller', 'Buffay', 'Tribbiani', 'Green', 'Arryn', 'Baratheon', 'Bolton', 'Frey', 'Greyjoy', 'Lannister', 'Martell', 'Stark',
-            'Targaryen', 'Tully', 'Tyrell', 'Tyrion', 'Danaerys', 'Aarya']);
+            'Targaryen', 'Tully', 'Tyrell', 'Tyrion', 'Danaerys', 'Aarya', 'Rachel', 'Joey', 'Ross', 'Monica', 'Chandler', 'Khaleesi', 'Ned',
+            'Jamie', 'Frank', 'Chloe', 'Seinfeld', 'Jerry', 'Kramer', 'Fez', 'Hyde', 'Kelso', 'Forman', 'Burkhart', 'Pinciotti', 'Feynman',
+            'Ritchie', 'Nikola', 'Tesla', 'Simon', 'Garfunkel', 'Eddie', 'Vedder', 'Lennon', 'Cash']);
 
           randomString = chance.last() + '-' + chance.last() + chance.cc();
           var newString = true;
