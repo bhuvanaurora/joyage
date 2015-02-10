@@ -1,6 +1,28 @@
 angular.module('MyApp')
-  .controller('InviteCtrl', ['$scope', '$window', '$alert', '$window', '$routeParams', '$http', '$route', 'fb_appId', 'fb_connect', 'Profile', 'editedProfile', 'Invites', 'updateInvites',
-    function($scope, $window, $alert, $window, $routeParams, $http, $route, fb_appId, fb_connect, Profile, editedProfile, Invites, updateInvites) {
+  .controller('InviteCtrl', ['$scope', '$window', '$alert', '$routeParams', '$http', '$route', 'fb_appId', 'fb_connect', 'Profile', 'editedProfile', 'Invites', 'updateInvites', 'Session', 'Auth',
+    function($scope, $window, $alert, $routeParams, $http, $route, fb_appId, fb_connect, Profile, editedProfile, Invites, updateInvites, Session, Auth) {
+
+
+        $scope.session = Session;
+
+        $scope.session.success(function(data) {
+            console.log('Data: '+data.session);
+
+            if (data.session == 'expired') {
+                $window.fbAsyncInit = function () {
+                    FB.init({
+                        appId: fb_appId,
+                        responseType: 'token',
+                        version: 'v2.2',
+                        cookie: true,
+                        status: true,
+                        xfbml: true
+                    });
+
+                    Auth.logout();
+                };
+            }
+        });
 
       editedProfile.get({ _id: $routeParams.id }, function(profile) {
         $scope.profile = profile;

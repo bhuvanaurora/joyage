@@ -1,5 +1,7 @@
 angular.module('MyApp')
-  .controller('MainCtrl', ['$scope', '$rootScope', 'fb_appId', '$window', '$location', 'Activity', function($scope, $rootScope, fb_appId, $window, $location, Activity) {
+  .controller('MainCtrl', ['$scope', '$rootScope', 'fb_appId', '$window', '$location', 'Activity', 'Session', 'Auth',
+      function($scope, $rootScope, fb_appId, $window, $location, Activity, Session, Auth) {
+
     $scope.cities = ['Bangalore', 'Delhi', 'Mumbai'];
     /*$scope.neighborhood = { 'Bangalore': ['Kormangala', 'JP Nagar', 'Indiranagar', 'MG Road'],
                               'Delhi': ['Connaught Place', 'Dwarka', 'Janak Puri', 'Saket', 'Defence Colony', 'Hauz Khas']
@@ -9,10 +11,31 @@ angular.module('MyApp')
         $location.path('/login');
       }*/
 
-      $scope.activ = [];
-      $scope.pagenumber = 1;
-      $scope.gDesc = '';
-      $scope.city = "Bangalore";
+    $scope.session = Session;
+
+    $scope.session.success(function(data) {
+      console.log('Data: '+data.session);
+
+      if (data.session == 'expired') {
+        $window.fbAsyncInit = function () {
+          FB.init({
+            appId: fb_appId,
+            responseType: 'token',
+            version: 'v2.2',
+            cookie: true,
+            status: true,
+            xfbml: true
+          });
+
+          Auth.logout();
+        };
+      }
+    });
+
+    $scope.activ = [];
+    $scope.pagenumber = 1;
+    $scope.gDesc = '';
+    $scope.city = "Bangalore";
 
     $scope.genres = ['Active', 'Posh', 'Calm', 'Adventure', 'Fun', 'Dark'];
     

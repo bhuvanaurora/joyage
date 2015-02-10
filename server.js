@@ -41,6 +41,8 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var multipart = require('connect-multiparty');
 var router = express.Router();
+var session = require('cookie-session');
+var cookieParser = require('cookie-parser');
 
 var crypto = require('crypto');
 var bcrypt = require('bcryptjs');
@@ -224,6 +226,9 @@ app.use(multipart({
   uploadDir: './tmp'
 }));
 
+app.use(cookieParser('$#!secretkeyforjoyage()*'));
+app.use(session({secret:'$%^jshdvf~98678*'}));
+
 // Robots.txt
 app.use(function (req, res, next) {
     if ('/robots.txt' == req.url) {
@@ -322,10 +327,13 @@ app.post('/auth/facebook', function(req, res, next) {
   }
 
   User.findOne({ facebookId: profile.id }, function(err, existingUser) {
+
     if (existingUser) {
       var token = createJwtToken(existingUser);
+      req.session.loginTime = Date.now();
       return res.send(token);
     }
+
     var user = new User({
       name: profile.first_name,
       gender: profile.gender,
@@ -347,15 +355,18 @@ app.post('/auth/facebook', function(req, res, next) {
       tipsCount: 0,
       selfies: []
     });
+
     user.save(function(err) {
       if (err) return next(err);
       var token = createJwtToken(user);
+      req.session.loginTime = Date.now();
       res.send(token);
     });
+
     //res.send(200);
+
   });
 });
-
 
 /*app.post('/auth/google', function(req, res, next) {
   var profile = req.body.profile;
@@ -515,6 +526,25 @@ app.get('/api/and_activities', function(req, res, next) {
     if (err) next(err);
     res.send(activities);
   });
+
+});
+
+
+app.get('/api/session', function(req, res, next) {
+
+  if (Date.now() - req.session.loginTime > 7200000) {               // Session expires in 2 hours
+
+    return res.status(200).json({
+      'session': 'expired'
+    });
+
+  } else {
+
+    return res.status(200).json({
+      'session': 'OK'
+    });
+
+  }
 
 });
 
@@ -1022,7 +1052,7 @@ app.post('/mob_api/subscribe', function(req, res, next) {
 
     activity.save(function(err) {
       if (err) return next(err);
-      res.status(200).end();
+      res.status(200).send({ message: 'Bookmarked' });
     })
   });
 
@@ -1053,7 +1083,7 @@ app.post('/mob_api/unsubscribe', function(req, res, next) {
 
     activity.save(function(err) {
       if (err) return next(err);
-      res.status(200).end();
+      res.status(200).send({ message: 'Un-Bookmarked' });
     });
   });
 
@@ -1092,7 +1122,7 @@ app.post('/mob_api/markDone', function(req, res, next) {
 
     activity.save(function(err) {
       if (err) return next(err);
-      res.status(200).end();
+      res.status(200).send({ message: 'Marked as done' });
     });
   });
 
@@ -1124,7 +1154,7 @@ app.post('/mob_api/markUndone', ensureAuthenticated, function(req, res, next) {
 
     activity.save(function(err) {
       if (err) return next(err);
-      res.status(200).end();
+      res.status(200).send({ message: 'Marked as Un-Done' });
     });
   });
 

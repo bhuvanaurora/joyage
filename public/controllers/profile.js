@@ -1,8 +1,29 @@
 angular.module('MyApp')
-  .controller('ProfileCtrl', ['$scope', '$routeParams', '$rootScope', '$location', '$window', 'Profile', 'Activity', 'fb_appId',
-                              function($scope, $routeParams, $rootScope, $location, $window, Profile, Activity, fb_appId) {
+  .controller('ProfileCtrl', ['$scope', '$routeParams', '$rootScope', '$location', '$window', 'Profile', 'Activity', 'fb_appId', 'Session', 'Auth',
+                              function($scope, $routeParams, $rootScope, $location, $window, Profile, Activity, fb_appId, Session, Auth) {
 
     $window.scrollTo(0,0);
+
+    $scope.session = Session;
+
+    $scope.session.success(function(data) {
+      console.log('Data: '+data.session);
+
+      if (data.session == 'expired') {
+        $window.fbAsyncInit = function () {
+          FB.init({
+            appId: fb_appId,
+            responseType: 'token',
+            version: 'v2.2',
+            cookie: true,
+            status: true,
+            xfbml: true
+          });
+
+          Auth.logout();
+        };
+      }
+    });
 
     Profile.get({ _id: $routeParams.id }, function(profile) {
       $scope.profile = profile;

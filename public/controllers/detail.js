@@ -1,10 +1,31 @@
 // Changes made
 
 angular.module('MyApp')
-  .controller('DetailCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$alert', '$upload', 'fb_appId', 'Activity', 'Profile', 'Subscription', 'DoneIt', 'Tips', 'Selfies', 'Accept', 'Delete',
-                             function($scope, $rootScope, $window, $routeParams, $location, $alert, $upload, fb_appId, Activity, Profile, Subscription, DoneIt, Tips, Selfies, Accept, Delete) {
+  .controller('DetailCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$alert', '$upload', 'fb_appId', 'Activity', 'Profile', 'Subscription', 'DoneIt', 'Tips', 'Selfies', 'Accept', 'Delete', 'Session', 'Auth',
+                             function($scope, $rootScope, $window, $routeParams, $location, $alert, $upload, fb_appId, Activity, Profile, Subscription, DoneIt, Tips, Selfies, Accept, Delete, Session, Auth) {
 
          $window.scrollTo(0,0);                                 // To scroll to the top of the page
+
+         $scope.session = Session;
+
+         $scope.session.success(function(data) {
+             console.log('Data: '+data.session);
+
+             if (data.session == 'expired') {
+                 $window.fbAsyncInit = function () {
+                     FB.init({
+                         appId: fb_appId,
+                         responseType: 'token',
+                         version: 'v2.2',
+                         cookie: true,
+                         status: true,
+                         xfbml: true
+                     });
+
+                     Auth.logout();
+                 };
+             }
+         });
 
         $window.fbAsyncInit = function() {
           FB.init({
