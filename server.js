@@ -410,6 +410,20 @@ app.get('/api/users', function(req, res, next) {
 });
 
 
+app.get('/mob_api/user', function(req, res, next) {
+
+  if (!req.query.userId) {
+    return res.send(400, { message: 'UserId parameter is required.' });
+  }
+
+  User.findOne({ _id: req.query.userId }, function(err, user) {
+    if (err) return next(err);
+    res.send(user);
+  });
+
+});
+
+
 app.get('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
   
   User.findById(req.params.id, function(err, profile) {
@@ -1159,6 +1173,7 @@ app.post('/mob_api/markUndone', ensureAuthenticated, function(req, res, next) {
   });
 
 });
+
 
 app.post('/api/selfies', ensureAuthenticated, function(req, res, next) {
 
