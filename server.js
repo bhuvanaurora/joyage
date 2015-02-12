@@ -410,6 +410,9 @@ app.get('/api/users', function(req, res, next) {
 });
 
 
+// --------------------------------- Temporary API ----------------------------------- //
+
+
 app.get('/mob_api/user', function(req, res, next) {
 
   if (!req.query.userId) {

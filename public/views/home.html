@@ -1,14 +1,43 @@
 <!----------------------------------------------------- Navbar -------------------------------------------->
 
-<header style="background-color:rgba(255,255,255,0.5);border:none;position:fixed;" ng-controller="NavbarCtrl">
+<header style="background-color:rgba(255,255,255,1);border:none;" ng-controller="NavbarCtrl">
     <div class="wrapper">
-        <div class="col-lg-4 col-sm-4 col-xs-6 col-md-4 padd-left-none">
+        <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
             <div class="head-brand" ng-click="go('/')" style="cursor:pointer">
                 Joyage
             </div>
         </div>
 
-        <div class="col-lg-8 col-sm-8 col-xs-6 col-md-8 padd-right-none">
+        <!--div class="nav-tabs col-lg-8 col-sm-8 col-xs-8 col-md-8"
+             style="tex-align:left;height:30px;font-family:Roboto;letter-spacing:1.5px;font-size:11px;">
+            <ul class="nav-tabs-list text-center" style="position:relative;top:50%;transform:translateY(-50%);margin-top:0px;">
+                <li class="nav-tabs-item" style="display:inline;margin-right:30px;">
+                    <a class="nav-tabs-anchor" href="/" style="cursor:pointer;">
+                        <b>ACTIVE</b>
+                    </a>
+                </li>
+                <li class="nav-tabs-item" style="display:inline;margin-right:30px;">
+                    <a class="nav-tabs-anchor" href="/" style="cursor:pointer"><b>POSH</b></a>
+                </li>
+                <li class="nav-tabs-item" style="display:inline;margin-right:30px;">
+                    <a class="nav-tabs-anchor" href="/"><b>CALM</b></a>
+                </li>
+                <li class="nav-tabs-item" style="display:inline;margin-right:30px;">
+                    <a class="nav-tabs-anchor" href="/"><b>ADVENTURE</b></a>
+                </li>
+                <li class="nav-tabs-item" style="display:inline;margin-right:30px;">
+                    <a class="nav-tabs-anchor" href="/"><b>FUN</b></a>
+                </li>
+                <li class="nav-tabs-item" style="display:inline;margin-right:30px;">
+                    <a class="nav-tabs-anchor" href="/"><b>DARK</b></a>
+                </li>
+                <li class="nav-tabs-item" style="display:inline;margin-right:30px;">
+                    <a class="nav-tabs-anchor" href="/"><b>ALL</b></a>
+                </li>
+            </ul>
+        </div-->
+
+        <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none">
             <div class="pull-right">
                 <div class="user-menu js-user-menu" ng-click="userMenu()">
                     <img ng-if="currentUser" src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
@@ -42,47 +71,125 @@
                 </div>
             </div>
         </div>
+
     </div>
+
+    <div class="nav-tabs col-lg-6 col-sm-6 col-xs-6 col-md-6 padd-left-none" style="position:fixed;">
+
+        <div class="nav-tabs-anchor col-lg-2 col-sm-2 col-xs-2 col-md-2 text-center" id="{{genres[0]}}" ng-click="filterByGenre(genres[0])">
+            <b>{{genres[0]}}</b>
+        </div>
+
+        <div class="nav-tabs-anchor col-lg-2 col-sm-2 col-xs-2 col-md-2 text-center" id="{{genres[1]}}" ng-click="filterByGenre(genres[1])">
+            <b>{{genres[1]}}</b>
+        </div>
+
+        <div class="nav-tabs-anchor col-lg-2 col-sm-2 col-xs-2 col-md-2 text-center" id="{{genres[2]}}" ng-click="filterByGenre(genres[2])">
+            <b>{{genres[2]}}</b>
+        </div>
+
+        <div class="nav-tabs-anchor col-lg-2 col-sm-2 col-xs-2 col-md-2 text-center" id="{{genres[3]}}" ng-click="filterByGenre(genres[3])">
+            <b>{{genres[3]}}</b>
+        </div>
+
+        <div class="nav-tabs-anchor col-lg-2 col-sm-2 col-xs-2 col-md-2 text-center" id="{{genres[4]}}" ng-click="filterByGenre(genres[4])">
+            <b>{{genres[4]}}</b>
+        </div>
+
+        <div class="nav-tabs-anchor col-lg-2 col-sm-2 col-xs-2 col-md-2 text-center" id="{{genres[5]}}" ng-click="filterByGenre(genres[5])">
+            <b>{{genres[5]}}</b>
+        </div>
+
+    </div>
+
+    <div class="nav-tabs col-lg-6 col-sm-6 col-xs-6 col-md-6 padd-right-none" style="position:fixed;margin-left:50%">
+
+        <div class="nav-tabs-anchor col-lg-2 col-sm-2 col-xs-2 col-md-2 text-center" id="allActivs" ng-click="allActivities()">
+            <b>All</b>
+        </div>
+
+        <div class="nav-tabs-anchor col-lg-3 col-sm-3 col-xs-3 col-md-3 text-right">
+        </div>
+
+        <div class="nav-city-dropdown col-lg-3 col-sm-3 col-xs-3 col-md-3 text-right" ng-mouseleave="closeMenu()">
+
+            <div class="text-left" ng-mouseover="displayMenu()" id="city-drop-text">
+                {{city}}
+            </div>
+
+            <ul class="text-left hide" id="nav-city">
+                <li>
+                    <div class="text-left" ng-click="filterByCity(cities[0])">
+                        {{cities[0]}}
+                    </div>
+                </li>
+                <li>
+                    <div class="text-left" ng-click="filterByCity(cities[1])">
+                        {{cities[1]}}
+                    </div>
+                </li>
+                <li>
+                    <div class="text-left" ng-click="filterByCity(cities[2])">
+                        {{cities[2]}}
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="nav-sort-dropdown col-lg-3 col-sm-3 col-xs-3 col-md-3 text-right" ng-mouseleave="closeMenu1()">
+
+            <div class="text-left" ng-mouseover="displayMenu1()" id="sort-drop-text">
+                {{sortSelected}}
+            </div>
+
+            <ul class="text-left hide" id="nav-sort">
+                <li style="margin-left:-20px;">
+                    <div class="text-left" ng-click="sort(1)">
+                        {{sortOrders[0]}}
+                    </div>
+                </li>
+                <li style="margin-left:-20px;">
+                    <div class="text-left" ng-click="sort(2)">
+                        {{sortOrders[1]}}
+                    </div>
+                </li>
+                <li style="margin-left:-20px;">
+                    <div class="text-left" ng-click="sort(3)">
+                        {{sortOrders[2]}}
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="nav-tabs-anchor col-lg-1 col-sm-1 col-xs-1 col-md-1 text-right">
+
+        </div>
+
+    </div>
+
 </header>
 
-<!--header ng-controller="NavbarCtrl">
-    <div class="wrapper">
-        <div class="col-lg-5 col-sm-6 col-xs-6 col-md-6">
-            <div class="head-brand">
-                Joyage
-            </div>
-            <div class="city-select js-city-select">
-                <div class="city-selected">Bangalore</div>
-                <div class="select-dropdown"></div>
-            </div>
-            <div class="city-select-drawer js-city-select-drawer">
-                <ul>
-                    <li class="open-modal modal-city-update">Ahmedabad</li>
-                    <li class="selected">Bangalore</li>
-                    <li class="open-modal modal-city-update">Delhi</li>
-                    <li class="open-modal modal-city-update">Mumbai</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</header><!-- Header ends -->
+
+
 <div class="mood-head-holde">
-    <img src="img/bangalore.jpg" style="width:100%;height:768px;">
-    <div class="overlay"></div>
+    <img src="img/Active-mood.jpg" id="gImg" style="width:100%;height:900px;">
+    <!--div class="overlay" style="margin-top:70px;"></div-->
     <div class="mood-showup-block absolute-center">
-        <h2>A perfect day to do this</h2>
-        <p>Here is the detailed information about this adventure.<br />Join the rush to make this memorable or sleep well.<br />Choice is yours.</p>
+        <!--h2>A perfect day to do this</h2>
+        <p>Here is the detailed information about this adventure.<br />Join the rush to make this memorable or sleep well.<br />Choice is yours.</p-->
     </div><!-- mood-showup-block -->
 </div><!-- mood head holder -->
 
 <!----------------------------- Categories -------------------------------------->
 
-<div class="sorting-head-holder">
+<!--div class="sorting-head-holder">
     <div class="sort-select-brick">
         <div class="wrapper">
             <div class="pick-mood-action js-filter-mood" ng-click="displayMenu()">
                 Pick Your Mood
-            </div><!-- pick mood action -->
+            </div>
 
             <div class="pull-right" style="display: inline-block;">
                 <div class="js-user-menu-drawer">
@@ -114,7 +221,7 @@
                     </ul>
                 </div>
             </div>
-        </div><!-- wrapper end -->
+        </div>
 
         <div class="mood-holder js-mood-holder hide" id="filter-container">
             <div class="wrapper">
@@ -124,58 +231,58 @@
                         <div class="emotion icon-emo-saint"></div>
                         <p class="filter-heading">{{genres[0]}}</p>
 
-                    </div><!-- emotions holder end -->
+                    </div>
                 </div>
 
                 <div class="col-lg-2 col-sm-2 col-xs-6 col-md-2" ng-click="filterByGenre(genres[1])">
                     <div class="emotions-holder">
                         <div class="emotion icon-emo-sunglasses"></div>
                         <p class="filter-heading">{{genres[1]}}</p>
-                    </div><!-- emotions holder end -->
+                    </div>
                 </div>
 
                 <div class="col-lg-2 col-sm-2 col-xs-6 col-md-2" ng-click="filterByGenre(genres[2])">
                     <div class="emotions-holder">
                         <div class="emotion icon-emo-happy"></div>
                         <p class="filter-heading">{{genres[2]}}</p>
-                    </div><!-- emotions holder end -->
+                    </div>
                 </div>
 
                 <div class="col-lg-2 col-sm-2 col-xs-6 col-md-2" ng-click="filterByGenre(genres[3])">
                     <div class="emotions-holder">
                         <div class="emotion icon-emo-thumbsup"></div>
                         <p class="filter-heading">{{genres[3]}}</p>
-                    </div><!-- emotions holder end -->
+                    </div>
                 </div>
 
                 <div class="col-lg-2 col-sm-2 col-xs-6 col-md-2" ng-click="filterByGenre(genres[4])">
                     <div class="emotions-holder">
                         <div class="emotion icon-emo-grin"></div>
                         <p class="filter-heading">{{genres[4]}}</p>
-                    </div><!-- emotions holder end -->
+                    </div>
                 </div>
 
                 <div class="col-lg-2 col-sm-2 col-xs-6 col-md-2" ng-click="filterByGenre(genres[5])">
                     <div class="emotions-holder">
                         <div class="emotion icon-emo-beer"></div>
                         <p class="filter-heading">{{genres[5]}}</p>
-                    </div><!-- emotions holder end -->
+                    </div>
                 </div>
-            </div><!-- wrapper end -->
+            </div>
             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                 <div class="pull-right">
                     <button class="button button-primary" ng-click="allActivities()">Show all activities</button>
                 </div>
             </div>
-        </div><!-- mood holder end -->
-    </div><!-- sort select brick end -->
+        </div>
+    </div>
 
     <div class="sorted-mood text-center" id="mood-def">
         <h3>{{headingTitle}}</h3>
         <p>{{gDesc}}</p>
-    </div><!-- sorted mood end -->
+    </div>
 
-</div><!-- sorting head holder -->
+</div-->
 
 <!------------------------------------------ Activities ----------------------------------->
 
