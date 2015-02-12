@@ -174,13 +174,10 @@
 
 
 <div class="mood-head-holde">
-    <img src="img/Active-mood.jpg" id="gImg" style="width:100%;height:900px;">
+    <img src="/img/Active-mood.jpg" id="gImg" style="width:100%;height:900px;">
     <!--div class="overlay" style="margin-top:70px;"></div-->
-    <div class="mood-showup-block absolute-center">
-        <!--h2>A perfect day to do this</h2>
-        <p>Here is the detailed information about this adventure.<br />Join the rush to make this memorable or sleep well.<br />Choice is yours.</p-->
-    </div><!-- mood-showup-block -->
-</div><!-- mood head holder -->
+    <div class="mood-showup-block absolute-center"></div>
+</div>
 
 <!----------------------------- Categories -------------------------------------->
 
@@ -190,38 +187,6 @@
             <div class="pick-mood-action js-filter-mood" ng-click="displayMenu()">
                 Pick Your Mood
             </div>
-
-            <div class="pull-right" style="display: inline-block;">
-                <div class="js-user-menu-drawer">
-                    <ul>
-                        <li ng-click="sort(1)" style="cursor:pointer">
-                            New on Joyage
-                        </li>
-                        <li ng-click="sort(2)" style="cursor:pointer">
-                            Popularity
-                        </li>
-                        <li ng-click="sort(3)" style="cursor:pointer">
-                            Upcoming
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="pull-right" style="display: inline-block;">
-                <div class="js-user-menu-drawer">
-                    <ul>
-                        <li ng-click="filterByCity('Bangalore')" style="cursor:pointer">
-                            Bangalore
-                        </li>
-                        <li ng-click="filterByCity('Delhi')" style="cursor:pointer">
-                            Delhi
-                        </li>
-                        <li ng-click="filterByCity('Mumbai')" style="cursor:pointer">
-                            Mumbai
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
 
         <div class="mood-holder js-mood-holder hide" id="filter-container">
             <div class="wrapper">
