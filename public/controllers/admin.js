@@ -2,7 +2,7 @@ angular.module('MyApp')
     .controller('AdminCtrl', ['$scope', '$alert', '$route', '$routeParams', '$location', 'Activity', 'Delete', 'Profile',
                               function($scope, $alert, $route, $routeParams, $location, Activity, Delete, Profile) {
         Profile.get({ _id: $routeParams.id }, function(profile) {
-            $scope.profile = profile; 
+            $scope.profile = profile;
             if ($scope.profile.curator === true) {
                 $scope.activities = Activity.query({ preview: false });
                 $scope.deleteActivity = function(activity) {

@@ -41,7 +41,7 @@ angular.module('MyApp')
       Activity.get({ _id: $routeParams.id }, function(activity) {
         $scope.activity = activity;
 
-        $scope.activities = Activity.query({limit: 3, id: activity._id});
+        //$scope.activities = Activity.query({limit: 3, id: activity._id});
 
         // Share dialog
         $scope.fb_share = function() {
@@ -224,7 +224,11 @@ angular.module('MyApp')
               var is_internetExplorer11= navigator.userAgent.toLowerCase().indexOf('trident') > -1;
               var marker_url = ( is_internetExplorer11 ) ? 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/cd-icon-location.png' : 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/cd-icon-location_1.svg';
 
-              if (activity.mapLat == 12.9667 && activity.mapLon == 77.5667) {
+              if (activity.mapLat == 12.9539 && activity.mapLon == 77.6309) {
+                  var mapZoom = 10;
+              } else if (activity.mapLat == 28.6336 && activity.mapLon == 77.2225) {
+                  var mapZoom = 10;
+              } else if (activity.mapLat == 19.0822 && activity.mapLon == 72.8812) {
                   var mapZoom = 10;
               } else {
                   var mapZoom = 15;

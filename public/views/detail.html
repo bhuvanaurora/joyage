@@ -60,7 +60,7 @@
         </ul>
 
         <img ng-if="!activity.poster" src="/images/{{activity.title}}.jpg">
-        <img ng-if="activity.poster" ng-src="/images/{{activity.poster}}">
+        <img ng-if="activity.poster" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.poster}}">
 
         <div class="event-action" ng-if="currentUser">
             <button class="open-modal">
