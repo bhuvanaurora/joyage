@@ -11,6 +11,8 @@ angular.module('MyApp')
         $location.path('/login');
       }*/
 
+    $window.scrollTo(0,0);
+
     $scope.sortOrders = ['New on Joyage', 'Popular', 'Upcoming'];
 
     $scope.session = Session;

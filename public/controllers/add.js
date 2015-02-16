@@ -103,9 +103,17 @@ angular.module('MyApp')
                           })
                       }
 
-                      if(!$scope.mapLat && !$scope.mapLon) {
-                          $scope.mapLat = 12.9667;
-                          $scope.mapLon = 77.5667;
+                      if (!$scope.mapLat && !$scope.mapLon) {
+                          if ($scope.city == 'Bangalore') {
+                              $scope.mapLat = 12.9539;
+                              $scope.mapLon = 77.6309;
+                          } else if ($scope.city == 'Delhi') {
+                              $scope.mapLat = 28.6336;
+                              $scope.mapLon = 77.2225;
+                          } else if ($scope.city == 'Mumbai') {
+                              $scope.mapLat = 19.0822;
+                              $scope.mapLon = 72.8812;
+                          }
                       }
 
                       Activity.save({
@@ -153,6 +161,7 @@ angular.module('MyApp')
                               $scope.description = '';
                               $scope.categories = '';
                               $scope.dateOfActivity = '';
+                              $scope.endDateOfActivity = '';
                               $scope.timeOfActivity = '';
                               $scope.city = '';
                               $scope.location = '';
@@ -181,6 +190,7 @@ angular.module('MyApp')
                               $scope.corner = '';
                               $scope.cornerPic = '';
                               $scope.cornerText = '';
+                              mediaVar = [];
                               $alert({
                                   content: 'Activity has been added.',
                                   placement: 'top-right',
@@ -206,7 +216,23 @@ angular.module('MyApp')
                   editedActivity.get({_id: $routeParams.rs}, function (activity) {
                       $scope.activity = activity;
 
-                      $scope.categories = activity.genre;
+                      $scope.categories = [];
+                      $scope.filterMoods = ['Active', 'Posh', 'Fun', 'Adventure', 'Party', 'Dark'];
+                      $scope.moods = '';
+                      $scope.filterTimes = ['Morning', 'Afternoon', 'Evening', 'Afterdark'];
+                      $scope.times = '';
+
+                      for (var i = 0; i < activity.genre.length; i++) {
+                          if (activity.genre[i] != null) {
+                              if ($scope.filterMoods.indexOf(activity.genre[i]) !== -1) {
+                                  $scope.moods = activity.genre[i];
+                              } else if ($scope.filterTimes.indexOf(activity.genre[i]) !== -1) {
+                                  $scope.times = activity.genre[i];
+                              } else {
+                                  $scope.categories.push(activity.genre[i]);
+                              }
+                          }
+                      }
 
                       $scope.genres = ['Athletic Activities', 'Fitness Classes', 'Hiking & Biking',
                           'Nature Appreciation', 'Bars', 'Breweries & Distilleries',
@@ -220,6 +246,7 @@ angular.module('MyApp')
                               $scope.genres.splice($scope.genres.indexOf($scope.categories[i]), 1);
                           }
                       }
+
                       $scope.addCategory = function (genre) {
                           $scope.categories.push(genre);
                           $scope.genres.splice($scope.genres.indexOf(genre), 1);
@@ -232,7 +259,7 @@ angular.module('MyApp')
                       $scope.title = activity.title;
                       $scope.description = activity.description;
                       $scope.dateOfActivity = activity.dateOfActivity;
-                      $scope.endDateOfActivity = activity.endDateaOfActivity;
+                      $scope.endDateOfActivity = activity.endDateOfActivity;
                       $scope.timeOfActivity = activity.timeOfActivity;
                       $scope.location = activity.location;
                       $scope.city = activity.city;
@@ -324,6 +351,19 @@ angular.module('MyApp')
                               text: $scope.mediaText4,
                               link: $scope.mediaLink4
                           })
+                      }
+
+                      if (!$scope.mapLat && !$scope.mapLon) {
+                          if ($scope.city == 'Bangalore') {
+                              $scope.mapLat = 12.9539;
+                              $scope.mapLon = 77.6309;
+                          } else if ($scope.city == 'Delhi') {
+                              $scope.mapLat = 28.6336;
+                              $scope.mapLon = 77.2225;
+                          } else if ($scope.city == 'Mumbai') {
+                              $scope.mapLat = 19.0822;
+                              $scope.mapLon = 72.8812;
+                          }
                       }
 
                       $scope.activity.title = $scope.title;

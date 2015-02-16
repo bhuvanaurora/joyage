@@ -575,56 +575,58 @@ app.get('/api/activities', function(req, res, next) {
     console.log(inspect(output, { depth: null }));
   });*/
 
-  if (req.query.genre && req.query.limit)
-  {
-    query.where({ genre: req.query.genre }).where({ city: req.query.city }).limit(req.query.limit);
-  }
-  else if (req.query.genre)
-  {
-    if (req.query.sortOrder === 'timeAdded')
-    {                                                                                          // Default category sort
-      query.where({ genre: req.query.genre }).where({ city: req.query.city }).where({ preview: {$ne: false} }).sort('timeAdded').skip(15 * (req.query.page-1)).limit(15);
-    }
-    else if (req.query.sortOrder === 'popularity')
-    {                                                                                  // Popularity category sort
-      query.where({ genre: req.query.genre }).where({ city: req.query.city }).where({ preview: {$ne: false} }).sort('-subscriptions').skip(15 * (req.query.page-1)).limit(15);
-    }
-    else if (req.query.sortOrder === 'dateOfActivity')
-    {                                                                              // Upcoming category sort
-      //query.where({ genre: req.query.genre }).where('dateOfActivity').gte(new Date().valueOf()).sort('-dateOfActivity').skip(9 * (req.query.page-1)).limit(9);
-      query.where({ 'dateOfActivity': {'$exists': false} }).where({ city: req.query.city }).where({ preview: {$ne: false} }).where({ genre: req.query.genre }).sort({ 'dateOfActivity': -1 }).skip(15 * (req.query.page-1)).limit(15);
-    }
-    /*else
+  if (req.query.preview === 'false') {                                                                                                             // Admin console preview
+    query.where({ preview: 'false' });
+  } else {
+
+    if (req.query.genre && req.query.limit)
     {
-      query.where({ genre: req.query.genre }).where({ preview: {$ne: false} }).skip(15 * (req.query.page-1)).limit(15);
-    }*/
-  }
-  else if (req.query.limit)
-  {                                                                                                         // Suggested activities
-    query.where({ preview: {$ne: false} }).where({ city: req.query.city }).where({ 'dateOfActivity': {'$exists': false} }).limit(req.query.limit);
-  }
-  else
-  {
-    if (req.query.sortOrder === 'dateOfActivity')
-    {                                                                                     // Upcoming sort
-      query.where('dateOfActivity').where({ city: req.query.city }).where({ preview: {$ne: false} }).gte(new Date().valueOf()).sort('-dateOfActivity').skip(15 * (req.query.page-1)).limit(15);
+      query.where({ genre: req.query.genre }).where({ city: req.query.city }).limit(req.query.limit);
     }
-    else if (req.query.sortOrder === 'timeAdded')
-    {                                                                                   // Default sort order
-      query.sort('timeAdded').where({ city: req.query.city }).where({ preview: {$ne: false} }).skip(15 * (req.query.page-1)).limit(15);
+    else if (req.query.genre)
+    {
+      if (req.query.sortOrder === 'timeAdded')
+      {                                                                                          // Default category sort
+        query.where({ genre: req.query.genre }).where({ city: req.query.city }).where({ preview: {$ne: false} }).sort('timeAdded').skip(15 * (req.query.page-1)).limit(15);
+      }
+      else if (req.query.sortOrder === 'popularity')
+      {                                                                                  // Popularity category sort
+        query.where({ genre: req.query.genre }).where({ city: req.query.city }).where({ preview: {$ne: false} }).sort('-subscriptions').skip(15 * (req.query.page-1)).limit(15);
+      }
+      else if (req.query.sortOrder === 'dateOfActivity')
+      {                                                                              // Upcoming category sort
+        //query.where({ genre: req.query.genre }).where('dateOfActivity').gte(new Date().valueOf()).sort('-dateOfActivity').skip(9 * (req.query.page-1)).limit(9);
+        query.where({ 'dateOfActivity': {'$exists': false} }).where({ city: req.query.city }).where({ preview: {$ne: false} }).where({ genre: req.query.genre }).sort({ 'dateOfActivity': -1 }).skip(15 * (req.query.page-1)).limit(15);
+      }
+      /*else
+      {
+        query.where({ genre: req.query.genre }).where({ preview: {$ne: false} }).skip(15 * (req.query.page-1)).limit(15);
+      }*/
     }
-    else if (req.query.sortOrder === 'popularity')
-    {                                                                                  // Popularity sort
-      query.sort('-subscriptions').where({ city: req.query.city }).where({ preview: {$ne: false} }).skip(15 * (req.query.page-1)).limit(15);
+    else if (req.query.limit)
+    {                                                                                                         // Suggested activities
+      query.where({ preview: {$ne: false} }).where({ city: req.query.city }).where({ 'dateOfActivity': {'$exists': false} }).limit(req.query.limit);
     }
     else
     {
-      query.sort('timeAdded').skip(15 * (req.query.page-1)).where({ city: req.query.city }).where({ preview: {$ne: false} }).limit(15);
+      if (req.query.sortOrder === 'dateOfActivity')
+      {                                                                                     // Upcoming sort
+        query.where('dateOfActivity').where({ city: req.query.city }).where({ preview: {$ne: false} }).gte(new Date().valueOf()).sort('-dateOfActivity').skip(15 * (req.query.page-1)).limit(15);
+      }
+      else if (req.query.sortOrder === 'timeAdded')
+      {                                                                                   // Default sort order
+        query.sort('timeAdded').where({ city: req.query.city }).where({ preview: {$ne: false} }).skip(15 * (req.query.page-1)).limit(15);
+      }
+      else if (req.query.sortOrder === 'popularity')
+      {                                                                                  // Popularity sort
+        query.sort('-subscriptions').where({ city: req.query.city }).where({ preview: {$ne: false} }).skip(15 * (req.query.page-1)).limit(15);
+      }
+      else
+      {
+        query.sort('timeAdded').skip(15 * (req.query.page-1)).where({ city: req.query.city }).where({ preview: {$ne: false} }).limit(15);
+      }
     }
-  }
 
-  if (req.query.preview) {                                                                                                              // Admin console preview
-    query.where({ preview: req.query.preview });
   }
 
   var date = new Date().getTime();
@@ -632,6 +634,9 @@ app.get('/api/activities', function(req, res, next) {
   var j = 0;
   query.exec(function(err, activities) {
     if (err) return next(err);
+
+    console.log('Query activities: ' + activities);
+
     if (!req.query.limit) {
       for (i=0; i<activities.length; i++) {
         if (date <= Date.parse(activities[i].dateOfActivity)) {
@@ -836,6 +841,8 @@ app.put('/api/activities/:id', ensureAuthenticated, function(req, res, next) {
     activity.city = req.body.city;
     activity.neighborhood = req.body.neighborhood;
     activity.location = req.body.location;
+    activity.mapLat = req.body.mapLat;
+    activity.mapLon = req.body.mapLon;
     activity.address = req.body.address;
     activity.phone = req.body.phone;
     activity.country = req.body.country;
