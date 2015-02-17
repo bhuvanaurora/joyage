@@ -9,8 +9,6 @@ angular.module('MyApp')
          $scope.session = Session;
 
          $scope.session.success(function(data) {
-             console.log('Data: '+data.session);
-
              if (data.session == 'expired') {
                  $window.fbAsyncInit = function () {
                      FB.init({

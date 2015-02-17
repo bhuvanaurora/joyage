@@ -260,8 +260,12 @@ angular.module('MyApp')
         logout: function () {
           delete $window.localStorage.token;
           $rootScope.currentUser = null;
-          $location.path('/');
-          FB.logout(function (response) {
+          FB.getLoginStatus(function (response) {
+            if (response && response.status === 'connected') {
+                FB.logout(function (response) {
+                    $location.path('/');
+                });
+            };
           });
           $alert({
             content: 'You have been logged out.',

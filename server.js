@@ -549,17 +549,17 @@ app.get('/api/and_activities', function(req, res, next) {
 
 app.get('/api/session', function(req, res, next) {
 
-  if (Date.now() - req.session.loginTime > 7200000) {               // Session expires in 2 hours
+  if (req.session) {
 
-    return res.status(200).json({
-      'session': 'expired'
-    });
-
-  } else {
-
-    return res.status(200).json({
-      'session': 'OK'
-    });
+    if (Date.now() - req.session.loginTime > 7200000) {               // Session expires in 2 hours
+      return res.status(200).json({
+        'session': 'expired'
+      });
+    } else {
+      return res.status(200).json({
+        'session': 'OK'
+      });
+    }
 
   }
 
@@ -634,9 +634,6 @@ app.get('/api/activities', function(req, res, next) {
   var j = 0;
   query.exec(function(err, activities) {
     if (err) return next(err);
-
-    console.log('Query activities: ' + activities);
-
     if (!req.query.limit) {
       for (i=0; i<activities.length; i++) {
         if (date <= Date.parse(activities[i].dateOfActivity)) {

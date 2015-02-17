@@ -37,10 +37,12 @@
             </ul>
         </div-->
 
+        <div id="fb-root"></div>
+
         <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none">
             <div class="pull-right">
                 <div class="user-menu js-user-menu" ng-click="userMenu()">
-                    <img ng-if="currentUser" src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
+                    <img ng-if="currentUser" ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
                     <span ng-if="currentUser" class="user-name">{{currentUser.name}}</span>
                     <span ng-if="!currentUser" class="user-name" ng-click="go('/login')">Login</span>
                 </div>
@@ -174,7 +176,7 @@
 
 
 <div class="mood-head-holde">
-    <img src="/img/Active-mood.jpg" id="gImg" style="width:100%;height:900px;">
+    <img ng-src="/img/Active-mood.jpg" id="gImg" style="width:100%;height:900px;">
     <!--div class="overlay" style="margin-top:70px;"></div-->
     <div class="mood-showup-block absolute-center"></div>
 </div>
@@ -286,7 +288,7 @@
                         <!--div class="col-lg-1 col-md-1 col-sm-2 col-xs-3"></div-->
                         <a ng-href="/activities/{{act._id}}">
                             <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
-                                <img src="images/{{act.title}}.jpg">
+                                <img ng-src="images/{{act.title}}.jpg">
                             </div>
                         </a>
                     </li>

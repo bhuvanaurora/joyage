@@ -18,8 +18,6 @@ angular.module('MyApp')
     $scope.session = Session;
 
     $scope.session.success(function(data) {
-      console.log('Data: '+data.session);
-
       if (data.session == 'expired') {
         $window.fbAsyncInit = function () {
           FB.init({
@@ -213,11 +211,13 @@ angular.module('MyApp')
 
       $scope.userMenu = function() {
         var elem = document.getElementById("user-menu-drawer");
-        if (elem.style) {
-          if (elem.style.display == 'block') {
-            elem.style.display = 'none';
-          } else {
-            elem.style.display = 'block';
+        if (elem) {
+          if (elem.style) {
+            if (elem.style.display == 'block') {
+              elem.style.display = 'none';
+            } else {
+              elem.style.display = 'block';
+            }
           }
         }
       };

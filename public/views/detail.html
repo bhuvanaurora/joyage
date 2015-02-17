@@ -8,10 +8,12 @@
             </div>
         </div>
 
+        <div id="fb-root"></div>
+
         <div class="col-lg-8 col-sm-8 col-xs-6 col-md-8 padd-right-none">
             <div class="pull-right">
                 <div class="user-menu js-user-menu" ng-click="userMenu()">
-                    <img ng-if="currentUser" src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
+                    <img ng-if="currentUser" ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
                     <span ng-if="currentUser" class="user-name">{{currentUser.name}}</span>
                     <span ng-if="!currentUser" class="user-name" ng-click="go('/login')">Login</span>
                 </div>
@@ -59,7 +61,7 @@
             </li>
         </ul>
 
-        <img ng-if="!activity.poster" src="/images/{{activity.title}}.jpg">
+        <img ng-if="!activity.poster" ng-src="/images/{{activity.title}}.jpg">
         <img ng-if="activity.poster" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.poster}}">
 
         <div class="event-action" ng-if="currentUser">
@@ -127,7 +129,7 @@
                 </div>
             </div><!-- bubble -end -->
             <div class="bubble-user-img" ng-if="activity.corner">
-                <img src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.cornerPic}}">
+                <img ng-if="activity.cornerPic" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.cornerPic}}">
                 <div class="corner-name pull-left" ng-if="activity.corner">{{activity.corner}}</div>
             </div>
         </div>
@@ -213,7 +215,7 @@
     <div class="tips-brick" ng-if="activity.tips!=''">
         <ul class="genres">
             <li ng-repeat="tip in activity.tips">
-                <img src="https://graph.facebook.com/v2.2/{{tip.tipperfbId}}/picture"
+                <img ng-src="https://graph.facebook.com/v2.2/{{tip.tipperfbId}}/picture"
                      style="width:50px;height:50px;" > {{tip.text}}
             </li>
         </ul>
@@ -394,7 +396,7 @@
         </div>
 
         <div class="bookmark-it-head-img text-center">
-            <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{selfieImg}}"/>
+            <img ng-if="selfieImg" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{selfieImg}}"/>
         </div>
 
         <div class="modal-footer text-right">
@@ -418,7 +420,7 @@
         </div>
 
         <div class="bookmark-it-head-img">
-            <img src="images/{{activity.title}}.jpg" style="width:600px;height:300px;">
+            <img ng-src="images/{{activity.title}}.jpg" style="width:600px;height:300px;">
         </div>
 
         <div class="modal-body">
