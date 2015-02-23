@@ -54,13 +54,22 @@ angular.module('MyApp')
       $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city }));
     };
 
-    function bgColorSwitch () {
+    /*function bgColorSwitch () {
       for (var i=0; i<6; i++) {
         var bcg1 = document.getElementById($scope.genres[i]);
         bcg1.style.backgroundColor = "#f2f2f2";
       }
       var bcg1 = document.getElementById('allActivs');
       bcg1.style.backgroundColor = "#f2f2f2";
+    }*/
+
+    function bgColorSwitch (color) {
+      title = document.getElementsByClassName('heading-title');
+      for (var i=0; i<title.length ;i++) {
+        console.log(title[i]);
+        title[i].style.color = color;
+        console.log(title[i].style.color);
+      }
     }
 
     $scope.filterByGenre = function(genre) {
@@ -75,60 +84,51 @@ angular.module('MyApp')
 
         elem.src="/img/Active-Mood.jpg";
         var bcg = document.getElementById(genre);
-        bgColorSwitch();
-        bcg.style.backgroundColor = "#e2e2e2";
+        bgColorSwitch("#e6214e");
 
       } else if (genre == 'Posh') {
 
         elem.src="/img/Posh-Mood.jpg";
         var bcg = document.getElementById(genre);
-        bgColorSwitch();
-        bcg.style.backgroundColor = "#e2e2e2";
+        bgColorSwitch("#1d58d0");
 
       } else if (genre == 'Calm') {
 
         elem.src="/img/Calm-Mood.jpg";
         var bcg = document.getElementById(genre);
-        bgColorSwitch();
-        bcg.style.backgroundColor = "#e2e2e2";
+        //bgColorSwitch();
 
       } else if (genre == 'Adventure') {
 
         elem.src="/img/Adventure-Mood.jpg";
         var bcg = document.getElementById(genre);
-        bgColorSwitch();
-        bcg.style.backgroundColor = "#e2e2e2";
+        //bgColorSwitch();
 
       } else if (genre == 'Party') {
 
         elem.src="/img/Party-Mood.jpg";
         var bcg = document.getElementById(genre);
-        bgColorSwitch();
-        bcg.style.backgroundColor = "#e2e2e2";
+        //bgColorSwitch();
 
       } else if (genre == 'Dark') {
 
         elem.src="/img/Dark-Mood.jpg";
         var bcg = document.getElementById(genre);
-        bgColorSwitch();
-        bcg.style.backgroundColor = "#e2e2e2";
+        //bgColorSwitch();
 
       }
 
     };
 
-    var bcg1 = document.getElementById('allActivs');
-    bcg1.style.backgroundColor = "#e2e2e2";
-    
     $scope.allActivities = function(){
       //$scope.activities = Activity.query({ page: 1, sortOrder: $scope.sortOrder });
       $scope.activ = [];
       $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city }));
       $scope.headingTitle = "all activities";
       $scope.gDesc = '';
-      bgColorSwitch();
+      bgColorSwitch("#e6214e");
       var bcg1 = document.getElementById('allActivs');
-      bcg1.style.backgroundColor = "#e2e2e2";
+      //bcg1.style.backgroundColor = "#e2e2e2";
     };
 
     $scope.pageClick = function() {
