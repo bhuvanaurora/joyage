@@ -791,7 +791,6 @@ app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
     mapLon: req.body.mapLon,
     status: req.body.status,
     poster: req.body.poster,
-    //poster: image,
     photoCredit: req.body.photoCredit,
     photoCreditLink: req.body.photoCreditLink,
     currency: req.body.currency,

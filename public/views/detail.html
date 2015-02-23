@@ -1,16 +1,16 @@
 <!----------------------------------------------------- Navbar -------------------------------------------->
 
-<header style="background-color:rgba(255,255,255,0.5);border:none;position:fixed;" ng-controller="NavbarCtrl">
+<header style="background-color:rgba(255,255,255,1);border:none;position:fixed;" ng-controller="NavbarCtrl">
     <div class="wrapper">
-        <div class="col-lg-4 col-sm-4 col-xs-6 col-md-4 padd-left-none">
+        <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
             <div class="head-brand" ng-click="go('/')" style="cursor:pointer">
-                Joyage
+                <img ng-src="/img/logo.png" style="height:100px;margin-top:-20px;"/>
             </div>
         </div>
 
         <div id="fb-root"></div>
 
-        <div class="col-lg-8 col-sm-8 col-xs-6 col-md-8 padd-right-none">
+        <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none">
             <div class="pull-right">
                 <div class="user-menu js-user-menu" ng-click="userMenu()">
                     <img ng-if="currentUser" ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">

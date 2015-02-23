@@ -470,27 +470,7 @@ angular.module('MyApp')
           // ---------------------------------------------- Google Maps end -------------------------------------- //
 
       $(function (){
-          /*$(".js-navigation").click (function(){
-              $(this).toggleClass("js-open-nav");
-              $("nav").toggleClass("js-open-nav");
-          });
 
-          $('.js-filter-activity:not(.js-activity-holder)').click(function() {
-              $('.js-activity-holder').slideToggle(200);
-          });
-
-          $('.js-filter-place:not(.js-place-holder)').click(function() {
-              $('.js-place-holder').slideToggle(200);
-          });
-
-          $(document).ready(function() { // for city select dropdown
-              $('.js-city-select').click(function() {
-                  $('.js-city-select-drawer').fadeToggle('fast', function() {
-                      // Animation complete
-                  });
-                  return false;
-              });
-          });*/
           $('.open-modal').click(function() {
               var el = $(this)[0],
                   classes = el.className.split(/\s+/);
