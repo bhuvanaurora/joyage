@@ -412,20 +412,19 @@ app.get('/api/users', function(req, res, next) {
 
 // --------------------------------- Temporary API ----------------------------------- //
 
+app.post('/mob_api/user', function(req, res, next) {
 
-app.get('/mob_api/user', function(req, res, next) {
-
-  if (!req.query.userId && !req.query.fbId) {
+  if (!req.body.userId && !req.body.fbId) {
     return res.send(400, { message: 'userId / fbId parameter is required.' });
   }
 
-  if (req.query.userId) {
-    User.findOne({ _id: req.query.userId }, function (err, user) {
+  if (req.body.userId) {
+    User.findOne({ _id: req.body.userId }, function (err, user) {
       if (err) return next(err);
       res.send(user);
     });
-  } else if (req.query.fbId) {
-    User.findOne({ facebookId: req.query.fbId }, function (err, user) {
+  } else if (req.body.fbId) {
+    User.findOne({ facebookId: req.body.fbId }, function (err, user) {
       if (err) return next(err);
       res.send(user);
     })
