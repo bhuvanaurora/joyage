@@ -1,16 +1,16 @@
 <!----------------------------------------------------- Navbar -------------------------------------------->
 
-<header style="background-color:rgba(255,255,255,1);border:none;position:fixed;" ng-controller="NavbarCtrl">
-    <div class="wrapper">
+<header style="background-color:rgba(71,162,190,1);border:none;position:fixed;" ng-controller="NavbarCtrl">
+    <div class="wrapper" style="margin-bottom:-25px;">
         <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
             <div class="head-brand" ng-click="go('/')" style="cursor:pointer">
-                <img ng-src="/img/logo.png" style="height:100px;margin-top:-20px;"/>
+                <img ng-src="/img/logo-white.png" style="height:100px;margin-top:-20px;"/>
             </div>
         </div>
 
         <div id="fb-root"></div>
 
-        <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none">
+        <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none" style="line-height:60px;">
             <div class="pull-right">
                 <div class="user-menu js-user-menu" ng-click="userMenu()">
                     <img ng-if="currentUser" ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
@@ -44,6 +44,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </header>
 
