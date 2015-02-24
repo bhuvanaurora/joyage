@@ -176,9 +176,8 @@
 
                             <div class="pull-left">
                                 <div class="star-holder" ng-click="bookmark(act.title)">
-                                    <!--img ng-if="!act.isSubscribed()" ng-src="img/favicon.png" style="max-width:150%;height:50px;margin-top:-12px;margin-right:-10px;"-->
-                                    <img ng-src="img/favicon2.png" style="max-width:150%;height:50px;margin-top:-12px;margin-right:-10px;">
-                                    <!--label for="name1" class="bookmark"></label-->
+                                    <img ng-if="!isSubscribed(act)" ng-src="img/favicon.png" ng-click="subscribe(act)" style="max-width:150%;height:50px;margin-top:-12px;margin-right:-10px;">
+                                    <img ng-if="isSubscribed(act)" ng-src="img/favicon2.png" ng-click="unsubscribe(act)" style="max-width:150%;height:50px;margin-top:-12px;margin-right:-10px;">
                                 </div>
                             </div>
                             <p class="event-location"><span style="font-size:18px;">{{act.location}}</span><br />

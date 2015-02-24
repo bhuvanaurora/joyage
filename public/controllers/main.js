@@ -1,6 +1,6 @@
 angular.module('MyApp')
-  .controller('MainCtrl', ['$scope', '$rootScope', 'fb_appId', '$window', '$location', 'Activity', 'Session', 'Auth',
-      function($scope, $rootScope, fb_appId, $window, $location, Activity, Session, Auth) {
+  .controller('MainCtrl', ['$scope', '$rootScope', 'fb_appId', '$window', '$location', 'Activity', 'Session', 'Auth', 'Subscription',
+      function($scope, $rootScope, fb_appId, $window, $location, Activity, Session, Auth, Subscription) {
 
     $scope.cities = ['Bangalore', 'Delhi', 'Mumbai'];
     /*$scope.neighborhood = { 'Bangalore': ['Kormangala', 'JP Nagar', 'Indiranagar', 'MG Road'],
@@ -161,6 +161,27 @@ angular.module('MyApp')
         $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city }));
       }
     };
+
+      $scope.isSubscribed = function (activity) {
+        if (activity.subscribers.indexOf($rootScope.currentUser._id) != -1) {
+          return true
+        } else {
+          return false
+        }
+      };
+
+        $scope.subscribe = function (activity) {
+          Subscription.subscribe(activity).success(function() {
+            activity.subscribers.push($rootScope.currentUser._id);
+          });
+        };
+
+        $scope.unsubscribe = function (activity) {
+          Subscription.unsubscribe(activity).success(function() {
+            var index = activity.subscribers.indexOf($rootScope.currentUser._id);
+            activity.subscribers.splice(index, 1);
+          });
+        };
 
     $scope.search = function() {                                  // Will not be required with infinite scroll
       $scope.pageClick();
