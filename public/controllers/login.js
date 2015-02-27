@@ -28,4 +28,8 @@ angular.module('MyApp')
         $(this).closest('.modal').fadeOut('fast');
       });
 
+      $scope.go = function (path) {
+        $location.path(path);
+      };
+
   }]);

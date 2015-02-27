@@ -1,12 +1,54 @@
-<div class="main-header top-header">
-    <div class="wrapper">
-        <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 text-center">
-            <div class="head-brand" style="float: none;">
-                <a href="/" style="font-family:Montserrat;color:white">Joyage</a>
+<header style="background-color:rgba(71,162,190,1);border:none;" ng-controller="NavbarCtrl">
+    <div class="wrapper" style="margin-bottom:-25px;">
+        <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
+            <div class="head-brand" ng-click="go('/')" style="cursor:pointer">
+                <img ng-src="/img/logo-white.png" style="height:100px;margin-top:-20px;"/>
             </div>
         </div>
-    </div><!-- wrapper end -->
-</div><!-- main header end -->
+
+        <div id="fb-root"></div>
+
+        <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none" style="line-height:60px;">
+            <div class="pull-right">
+                <div class="user-menu js-user-menu" ng-click="userMenu()">
+                    <img ng-if="currentUser" ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
+                    <span ng-if="currentUser" class="user-name">{{currentUser.name}}</span>
+                    <span ng-if="!currentUser" class="user-name" ng-click="go('/login')">Login</span>
+                </div>
+                <div ng-if="currentUser" class="user-menu-drawer js-user-menu-drawer" id="user-menu-drawer" hide ng-click="userMenu()">
+                    <ul>
+                        <a ng-href="/home">
+                            <li>
+                                <span class="batch" data-icon="&#xF162;"></span>  Home
+                            </li>
+                        </a>
+                        <a ng-href="/profile/{{currentUser._id}}">
+                            <li>
+                                <span class="batch" data-icon="&#xF043;"></span>  Profile
+                            </li>
+                        </a>
+                        <a ng-if="currentUser.curator === true" ng-href="/admin/{{currentUser._id}}">
+                            <li>
+                                <span class="batch" data-icon="&#xF04C;"></span>  Admin
+                            </li>
+                        </a>
+                        <a ng-href="/invite/{{currentUser._id}}">
+                            <li class="selected">
+                                <span class="batch" data-icon="&#xF0DB;"></span>  Invite friends
+                            </li>
+                        </a>
+                        <a ng-href="" ng-click="logout()">
+                            <li>
+                                <span class="batch" data-icon="&#xF069;"></span>  Logout
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>
 
 <div class="login-box-block absolute-center clearfix">
     <div class="login-box">

@@ -7,15 +7,21 @@ angular.module('MyApp')
                               'Delhi': ['Connaught Place', 'Dwarka', 'Janak Puri', 'Saket', 'Defence Colony', 'Hauz Khas']
                             };*/
 
-      /*if (!$rootScope.currentUser) {
+      if (!$rootScope.currentUser) {
         $location.path('/login');
-      }*/
+      }
 
     $window.scrollTo(0,0);
 
     $scope.sortOrders = ['New on Joyage', 'Popular', 'Upcoming'];
 
     $scope.session = Session;
+
+    // --------------------- Test and consider using for token errors ----------------------- //
+
+    /*$scope.session.error(function(err) {
+      $window.location = '/login';
+    });*/
 
     $scope.session.success(function(data) {
       if (data.session == 'expired') {

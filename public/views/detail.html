@@ -19,7 +19,11 @@
                 </div>
                 <div ng-if="currentUser" class="user-menu-drawer js-user-menu-drawer" id="user-menu-drawer" hide ng-click="userMenu()">
                     <ul>
-                        <li class="selected"><span class="batch" data-icon="&#xF162;"></span>  Home</li>
+                        <a ng-href="/home">
+                            <li>
+                                <span class="batch" data-icon="&#xF162;"></span>  Home
+                            </li>
+                        </a>
                         <a ng-href="/profile/{{currentUser._id}}">
                             <li>
                                 <span class="batch" data-icon="&#xF043;"></span>  Profile
@@ -421,7 +425,7 @@
         </div>
 
         <div class="bookmark-it-head-img">
-            <img ng-src="images/{{activity.title}}.jpg" style="width:600px;height:300px;">
+            <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.poster}}" style="width:600px;height:300px;">
         </div>
 
         <div class="modal-body">

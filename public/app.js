@@ -4,6 +4,11 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
 
     $routeProvider
       .when('/', {
+        templateUrl: 'views/landingPage.html',
+        controller: 'landPageCtrl'
+      })
+
+      .when('/home', {
         templateUrl: 'views/home.html',
         controller: 'MainCtrl'
       })

@@ -180,7 +180,8 @@ var userSchema = new mongoose.Schema({
   inviteString: String,
   completions: { type: Number, default: 0 },
   tipsCount: { type: Number, default: 0 },
-  selfies: [String]
+  selfies: [String],
+  selfieCount: { type: Number, default: 0 }
 });
 
 var invitesSchema = new mongoose.Schema({
@@ -353,7 +354,8 @@ app.post('/auth/facebook', function(req, res, next) {
       invitations_sent: 0,
       inviteString: "",
       tipsCount: 0,
-      selfies: []
+      selfies: [],
+      selfieCount: 0
     });
 
     user.save(function(err) {
@@ -593,11 +595,11 @@ app.get('/api/activities', function(req, res, next) {
     {
       if (req.query.sortOrder === 'timeAdded')
       {                                                                                          // Default category sort
-        query.where({ genre: req.query.genre }).where({ city: req.query.city }).where({ preview: {$ne: false} }).sort('timeAdded').skip(15 * (req.query.page-1)).limit(15);
+        query.where({ genre: req.query.genre }).where({ city: req.query.city }).where({ preview: {$ne: false} }).sort('-timeAdded').skip(15 * (req.query.page-1)).limit(15);
       }
       else if (req.query.sortOrder === 'popularity')
       {                                                                                  // Popularity category sort
-        query.where({ genre: req.query.genre }).where({ city: req.query.city }).where({ preview: {$ne: false} }).sort('-subscriptions').skip(15 * (req.query.page-1)).limit(15);
+        query.where({ genre: req.query.genre }).where({ city: req.query.city }).where({ preview: {$ne: false} }).sort('-subscriptions').sort('-timeAdded').skip(15 * (req.query.page-1)).limit(15);
       }
       else if (req.query.sortOrder === 'dateOfActivity')
       {                                                                              // Upcoming category sort
@@ -621,7 +623,7 @@ app.get('/api/activities', function(req, res, next) {
       }
       else if (req.query.sortOrder === 'timeAdded')
       {                                                                                   // Default sort order
-        query.sort('timeAdded').where({ city: req.query.city }).where({ preview: {$ne: false} }).skip(15 * (req.query.page-1)).limit(15);
+        query.sort('-timeAdded').where({ city: req.query.city }).where({ preview: {$ne: false} }).skip(15 * (req.query.page-1)).limit(15);
       }
       else if (req.query.sortOrder === 'popularity')
       {                                                                                  // Popularity sort
@@ -629,7 +631,7 @@ app.get('/api/activities', function(req, res, next) {
       }
       else
       {
-        query.sort('timeAdded').skip(15 * (req.query.page-1)).where({ city: req.query.city }).where({ preview: {$ne: false} }).limit(15);
+        query.sort('-timeAdded').skip(15 * (req.query.page-1)).where({ city: req.query.city }).where({ preview: {$ne: false} }).limit(15);
       }
     }
 
@@ -1155,7 +1157,7 @@ app.post('/mob_api/markDone', function(req, res, next) {
 });
 
 
-app.post('/mob_api/markUndone', ensureAuthenticated, function(req, res, next) {
+app.post('/mob_api/markUndone', function(req, res, next) {
 
   User.findById(req.body.userId, function(err, user) {
 
@@ -1194,6 +1196,13 @@ app.post('/api/selfies', ensureAuthenticated, function(req, res, next) {
     if (err) next(err);
 
     user.selfies.push(req.body.selfies);
+
+    if (user.selfieCount) {
+      user.selfieCount += 1;
+    } else {
+      user.selfieCount = 1;
+    }
+
     user.save(function(err) {
       if (err) next(err);
     })

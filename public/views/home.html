@@ -19,7 +19,9 @@
                 </div>
                 <div ng-if="currentUser" class="user-menu-drawer js-user-menu-drawer" id="user-menu-drawer" hide ng-click="userMenu()">
                     <ul>
-                        <li class="selected"><span class="batch" data-icon="&#xF162;"></span>  Home</li>
+                        <a ng-href="/home">
+                            <li class="selected"><span class="batch" data-icon="&#xF162;"></span>  Home</li>
+                        </a>
                         <a ng-href="/profile/{{currentUser._id}}">
                             <li>
                                 <span class="batch" data-icon="&#xF043;"></span>  Profile
@@ -35,7 +37,7 @@
                                 <span class="batch" data-icon="&#xF0DB;"></span>  Invite friends
                             </li>
                         </a>
-                        <a ng-href="javascript:void(0)" ng-click="logout()">
+                        <a ng-href="" ng-click="logout()">
                             <li>
                                 <span class="batch" data-icon="&#xF069;"></span>  Logout
                             </li>
@@ -47,7 +49,7 @@
 
     </div>
 
-    <div class="nav-tabs col-lg-12 col-sm-12 col-xs-24 col-md-12 padd-left-none" style="position:fixed;height:50px;line-height:0px;">
+    <div class="nav-tabs col-lg-12 col-sm-12 col-xs-24 col-md-12 padd-left-none" style="position:fixed;height:50px;line-height:0px;font-family:WebFontThin">
 
         <span class="nav-tabs-anchor text-center" style="cursor:auto;font-size:20px;margin:0px 20px 0px 20px;">
             PICK YOUR MOOD
@@ -186,7 +188,8 @@
                         <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3"></div>
                         <a ng-href="/activities/{{act._id}}">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <img ng-src="images/{{act.title}}.jpg" style="max-width:120%">
+                                <img ng-if="!act.poster" ng-src="/images/{{act.title}}.jpg" style="max-width:120%">
+                                <img ng-if="act.poster" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{act.poster}}" style="max-width:120%">
                             </div>
                         </a>
                         <div class="col-lg-1"></div>
