@@ -177,12 +177,16 @@ angular.module('MyApp')
       };
 
         $scope.subscribe = function (activity) {
+          poster = document.getElementById('posterSub');
+          poster.src = 'img/favicon2.png';
           Subscription.subscribe(activity).success(function() {
             activity.subscribers.push($rootScope.currentUser._id);
           });
         };
 
         $scope.unsubscribe = function (activity) {
+          poster = document.getElementById('posterUnsub');
+          poster.src = 'img/favicon.png';
           Subscription.unsubscribe(activity).success(function() {
             var index = activity.subscribers.indexOf($rootScope.currentUser._id);
             activity.subscribers.splice(index, 1);

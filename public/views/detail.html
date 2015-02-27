@@ -83,11 +83,13 @@
                     </span>
 
             </button>
+                </li>
+                <li style="list-style:inline">
             <button class="open-modal">
 
                     <span ng-if="!isDone()" ng-click="markDone()">
                         <i class="batch" data-icon="&#xF164;"></i>
-                        Mark as Done ({{completions}})
+                        Done ({{completions}})
                     </span>
 
                     <span ng-if="isDone()" ng-click="markUndone()">
@@ -96,26 +98,25 @@
                     </span>
 
             </button>
+                </li>
+                <li style="list-style:inline">
             <button class="open-modal">
 
                     <span ng-click="fb_share()">
-                        <i class="batch" data-icon="&#xF159;"></i> Share on facebook
+                        <i class="batch" data-icon="&#xF159;"></i> Share
                     </span>
 
             </button>
+                </li>
+            </ul>
         </div>
 
-        <div class="" ng-show="!currentUser">
-            <a class="btn btn-block btn-primary"
-               href="#/login"
-               style="color:white;font-weight:100;">Login</a>
-        </div><!-- event action end -->
+        <p style="width:700px;">{{activity.description}}</p>
 
-        <p>{{activity.description}}</p>
 
         <div onload='function changeFontSize(){if (activity.description!=="") {document.getElementById("description").style.font-size="15px"}();}'>
             <a href="{{activity.sourceWebsite}}">{{activity.sourceName}}</a>
-            <p>{{activity.sourceDescription}}</p>
+            <p style="width:700px;">{{activity.sourceDescription}}</p>
         </div>
 
     </div>

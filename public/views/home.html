@@ -172,14 +172,16 @@
                 <ul style="margin-bottom:-80px;margin-top:-80px;">
                     <li ng-repeat="act in acti | filter:query">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8" style="margin-left:40px;">
-                            <h3 class="heading-title" style="word-spacing:4px;">{{act.title}}</h3>
+                            <a ng-href="/activities/{{act._id}}">
+                                <h3 class="heading-title" style="word-spacing:4px;">{{act.title}}</h3>
+                            </a>
                             <p data-sr="enter left please, and hustle 20px">{{act.description}}</p>
                             <div class="clear-all"></div>
 
                             <div class="pull-left">
                                 <div class="star-holder" ng-click="bookmark(act.title)">
-                                    <img ng-if="!isSubscribed(act)" ng-src="img/favicon.png" ng-click="subscribe(act)" style="max-width:150%;height:50px;margin-top:-12px;margin-right:-10px;">
-                                    <img ng-if="isSubscribed(act)" ng-src="img/favicon2.png" ng-click="unsubscribe(act)" style="max-width:150%;height:50px;margin-top:-12px;margin-right:-10px;">
+                                    <img id="posterSub" ng-if="!isSubscribed(act)" ng-src="img/favicon.png" ng-click="subscribe(act)" style="max-width:150%;height:50px;margin-top:-12px;margin-right:-10px;">
+                                    <img id="posterUnsub" ng-if="isSubscribed(act)" ng-src="img/favicon2.png" ng-click="unsubscribe(act)" style="max-width:150%;height:50px;margin-top:-12px;margin-right:-10px;">
                                 </div>
                             </div>
                             <p class="event-location"><span style="font-size:18px;">{{act.location}}</span><br />
