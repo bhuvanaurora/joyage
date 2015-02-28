@@ -78,55 +78,111 @@ angular.module('MyApp')
           $scope.profile.invitations_sent = 0;
         }
 
-          $scope.fb_request = function () {
-            $alert({
-              content: 'Inviting friends',
-              placement: 'top-right',
-              type: 'material',
-              duration: 3
-            });
-            FB.ui({
-              method: 'apprequests',
-              message: 'Select the 10 most beautiful friends to join you on Joyage',
-              max_recipients: (10 - $scope.profile.invitations_sent)
-              //filters: ['app_non_users']
-            }, function (response) {
-              if (response) {
-                $scope.profile.requests = response.request;
-                $scope.profile.invitation_to = response.to;
-                $scope.profile.invitations_sent = response.to.length;
-                $scope.profile.inviteString = randomString;
-                FB.ui({
-                  to: response.to,
-                  method: 'send',
-                  name: 'Joyage | Discover the best activities in town',
-                  link: 'http://joyage.in/login/' + randomString
-                });
-              }
-              if(newString) {
-                Invites.save({id: randomString});
-              }
-              $scope.profile.$update(function () {
-                $route.reload();
-              });
+          if ($scope.profile.inviteString == 'Ferrell-Stark-Goofy-Biryani' || $scope.profile.inviteString == 'Underwood-Dostoyevsky-Phony-Lannister') {
 
-              if (response) {
-                $alert({
-                  content: 'successfully invited',
-                  placement: 'top-right',
-                  type: 'material',
-                  duration: 3
-                });
-              } else {
-                $alert({
-                  content: 'failed to invite',
-                  placement: 'top-right',
-                  type: 'material',
-                  duration: 3
-                });
-              }
-            });
-          };
+              $scope.fb_request = function () {
+                  $alert({
+                      content: 'Inviting friends',
+                      placement: 'top-right',
+                      type: 'material',
+                      duration: 3
+                  });
+                  FB.ui({
+                      method: 'apprequests',
+                      message: 'Select the 10 most beautiful friends to join you on Joyage',
+                      max_recipients: 10000
+                      //filters: ['app_non_users']
+                  }, function (response) {
+                      if (response) {
+                          $scope.profile.requests = response.request;
+                          $scope.profile.invitation_to = response.to;
+                          $scope.profile.invitations_sent = response.to.length;
+                          $scope.profile.inviteString = randomString;
+                          FB.ui({
+                              to: response.to,
+                              method: 'send',
+                              name: 'Joyage | Discover the best activities in town',
+                              link: 'http://joyage.in/login/' + randomString
+                          });
+                      }
+                      if (newString) {
+                          Invites.save({id: randomString});
+                      }
+                      $scope.profile.$update(function () {
+                          $route.reload();
+                      });
+
+                      if (response) {
+                          $alert({
+                              content: 'successfully invited',
+                              placement: 'top-right',
+                              type: 'material',
+                              duration: 3
+                          });
+                      } else {
+                          $alert({
+                              content: 'failed to invite',
+                              placement: 'top-right',
+                              type: 'material',
+                              duration: 3
+                          });
+                      }
+                  });
+              };
+
+          } else {
+
+              $scope.fb_request = function () {
+                  $alert({
+                      content: 'Inviting friends',
+                      placement: 'top-right',
+                      type: 'material',
+                      duration: 3
+                  });
+                  FB.ui({
+                      method: 'apprequests',
+                      message: 'Select the 10 most beautiful friends to join you on Joyage',
+                      max_recipients: (10 - $scope.profile.invitations_sent),
+                      filters: ['app_non_users']
+                  }, function (response) {
+                      if (response) {
+                          $scope.profile.requests = response.request;
+                          $scope.profile.invitation_to = response.to;
+                          $scope.profile.invitations_sent = response.to.length;
+                          $scope.profile.inviteString = randomString;
+                          FB.ui({
+                              to: response.to,
+                              method: 'send',
+                              name: 'Joyage | Discover the best activities in town',
+                              link: 'http://joyage.in/login/' + randomString
+                          });
+                      }
+                      if (newString) {
+                          Invites.save({id: randomString});
+                      }
+                      $scope.profile.$update(function () {
+                          $route.reload();
+                      });
+
+                      if (response) {
+                          $alert({
+                              content: 'successfully invited',
+                              placement: 'top-right',
+                              type: 'material',
+                              duration: 3
+                          });
+                      } else {
+                          $alert({
+                              content: 'failed to invite',
+                              placement: 'top-right',
+                              type: 'material',
+                              duration: 3
+                          });
+                      }
+                  });
+              };
+
+          }
 
           /*(function () {
            FB.api('/v2.2/me/friends?fields=name,location,id', function (response) {

@@ -42,17 +42,26 @@ angular.module('MyApp')
     })();*/
 
     return {
+
       facebookLogin: function () {
+
         if ($routeParams.id) {
+
           updateInvites.get({ _id: $routeParams.id }, function (invites) {
+
             if (invites) {
-              if (invites.invitations_accepted < 10) {
+
+              if (invites._id == 'Ferrell-Stark-Goofy-Biryani' || 'Underwood-Dostoyevsky-Phony-Lannister') {
+
                 FB.login(function (response) {
+
                   FB.api('/me', function (profile) {
+
                     var data = {
                       signedRequest: response.authResponse.signedRequest,
                       profile: profile
                     };
+
                     AuthProfile.get({_id: profile.id}, function (prof) {
                         if (prof) {
                             $http.post('/auth/facebook', data)
@@ -112,7 +121,77 @@ angular.module('MyApp')
                         });
                   });
                 }, {scope: 'email, public_profile, user_friends, publish_actions'});
+
+              } else if (invites.invitations_accepted < 10) {
+
+                  FB.login(function (response) {
+                      FB.api('/me', function (profile) {
+                          var data = {
+                              signedRequest: response.authResponse.signedRequest,
+                              profile: profile
+                          };
+                          AuthProfile.get({_id: profile.id}, function (prof) {
+                              if (prof) {
+                                  $http.post('/auth/facebook', data)
+                                      .success(function (token) {
+                                          console.log('Data: ' + data);
+                                          var payload = JSON.parse($window.atob(token.split('.')[1]));
+                                          $window.localStorage.token = token;
+                                          $rootScope.currentUser = payload.user;
+                                          $location.path('/');
+                                          $alert({
+                                              title: 'Cheers!',
+                                              content: 'You have successfully signed-in with Facebook.',
+                                              animation: 'fadeZoomFadeDown',
+                                              type: 'material',
+                                              duration: 3
+                                          });
+                                      })
+                                      .error(function () {
+                                          delete $window.localStorage.token;
+                                          $alert({
+                                              title: 'Error!',
+                                              content: 'Could not sign-in',
+                                              animation: 'fadeZoomFadeDown',
+                                              type: 'material',
+                                              duration: 3
+                                          });
+                                      });
+                              }
+                          });
+                          $http.post('/auth/facebook', data)
+                              .success(function (token) {
+                                  console.log('Data: ' + data);
+                                  var payload = JSON.parse($window.atob(token.split('.')[1]));
+                                  $window.localStorage.token = token;
+                                  $rootScope.currentUser = payload.user;
+                                  invites.$update(function () {
+
+                                  });
+                                  $location.path('/');
+                                  $alert({
+                                      title: 'Cheers!',
+                                      content: 'You have successfully signed-in with Facebook.',
+                                      animation: 'fadeZoomFadeDown',
+                                      type: 'material',
+                                      duration: 3
+                                  });
+                              })
+                              .error(function () {
+                                  delete $window.localStorage.token;
+                                  $alert({
+                                      title: 'Error!',
+                                      content: 'Could not sign-in',
+                                      animation: 'fadeZoomFadeDown',
+                                      type: 'material',
+                                      duration: 3
+                                  });
+                              });
+                      });
+                  }, {scope: 'email, public_profile, user_friends, publish_actions'});
+
               } else {
+
                 $alert({
                   title: 'Maximum number of invites reached for the invitation',
                   content: 'Could not sign-in',
@@ -122,7 +201,9 @@ angular.module('MyApp')
                 });
                 $location.path('/');
               }
+
             } else {
+
               $alert({
                 title: 'Incorrect invitation',
                 content: 'Could not sign-in',
@@ -131,9 +212,12 @@ angular.module('MyApp')
                 duration: 3
               });
               $location.path('/');
+
             }
           });
+
         } else {
+
           FB.login(function (response) {
               FB.api('/me', function (profile) {
                   var data = {
@@ -178,9 +262,9 @@ angular.module('MyApp')
                   });
               });
               }, {scope: 'email, public_profile, user_friends, publish_actions'});
+
         }
-        }
-        ,
+        },
         /*googleLogin: function() {
          gapi.auth.authorize({
          client_id: '412023566724-lbjlu1k9tg0331k3s29vghhac45f8916.apps.googleusercontent.com',      // Joyage API
