@@ -53,6 +53,7 @@ var moment = require('moment');
 var async = require('async');
 var request = require('request');
 var xml2js = require('xml2js');
+var searchPlugin = require('mongoose-search-plugin');
 var textSearch = require('mongoose-text-search');
 
 var agenda = require('agenda')({ db: {address: config.db} });
@@ -145,6 +146,25 @@ var activitySchema = new mongoose.Schema({
     link: String
   }]
 });
+
+/*var searchPluginOptions = {
+  keywordsPath: '_keywords', // path for keywords, `_keywords` as default
+  relevancePath: '_relevance', // path for relevance number, '_relevance' as default
+  fields: [], // array of fields to use as keywords (can be String or [String] types),
+  stemmer: 'PorterStemmer', // natural stemmer, PorterStemmer as default
+  distance: 'JaroWinklerDistance' // distance algorythm, JaroWinklerDistance as default
+};
+
+activitySchema.plugin(searchPlugin(searchPluginOptions));
+
+var searchModel = mongoose.model('SearchModel', activitySchema);
+
+searchModel.search('Twist', {title: 1}, {
+  limit: 10
+}, function(err, data) {
+  console.log(data.results);
+  console.log(data.totalCount);
+});*/
 
 //activitySchema.plugin(textSearch);
 //activitySchema.index({ genre: 'text' });
