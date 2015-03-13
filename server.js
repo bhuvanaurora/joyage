@@ -147,12 +147,13 @@ var activitySchema = new mongoose.Schema({
   }]
 });
 
+
 /*var searchPluginOptions = {
   keywordsPath: '_keywords', // path for keywords, `_keywords` as default
   relevancePath: '_relevance', // path for relevance number, '_relevance' as default
   fields: [], // array of fields to use as keywords (can be String or [String] types),
   stemmer: 'PorterStemmer', // natural stemmer, PorterStemmer as default
-  distance: 'JaroWinklerDistance' // distance algorythm, JaroWinklerDistance as default
+  distance: 'JaroWinklerDistance' // distance algorithm, JaroWinklerDistance as default
 };
 
 activitySchema.plugin(searchPlugin(searchPluginOptions));
@@ -168,6 +169,7 @@ searchModel.search('Twist', {title: 1}, {
 
 //activitySchema.plugin(textSearch);
 //activitySchema.index({ genre: 'text' });
+
 
 var userSchema = new mongoose.Schema({
   name: { type: String, trim: true, required: true },
@@ -233,8 +235,8 @@ var User = mongoose.model('User', userSchema);
 var Activity = mongoose.model('Activity', activitySchema);
 var Invites = mongoose.model('Invites', invitesSchema);
 
-mongoose.connect(config.db);
-//mongoose.connect("mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database");
+//mongoose.connect(config.db);
+mongoose.connect("mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database");
 //mongoose.connect("mongodb://bhuvan:joyage_database_password@ds051630.mongolab.com:51630/joyage_test_database");
 
 var app = express();
@@ -1301,28 +1303,28 @@ app.post('/mob_api/tips', function(req, res, next) {
       user.tipsCount = 1;
     }
 
+      Activity.findById(req.body.activityId, function(err, activity) {
+
+        if (err) return next(err);
+
+        activity.tips.push({
+          text: req.body.tips,
+          tipperfbId: user.facebookId,
+          tipper: req.body.userId
+        });
+
+        activity.tipper.push(req.body.userId);
+
+        activity.save(function(err) {
+          if (err) return next(err);
+          res.status(200).end();
+        });
+
+      });
+
     user.save(function(err) {
       if (err) return next(err);
     });
-  });
-
-  Activity.findById(req.body.activityId, function(err, activity) {
-
-    if (err) return next(err);
-
-    activity.tips.push({
-      text: req.body.tips.splice(-1),
-      tipperfbId: req.user.facebookId,
-      tipper: req.body.userId
-    });
-
-    activity.tipper.push(req.body.userId);
-
-    activity.save(function(err) {
-      if (err) return next(err);
-      res.status(200).end();
-    });
-
   });
 
 });

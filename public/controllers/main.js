@@ -194,8 +194,10 @@ angular.module('MyApp')
         };
 
     $scope.search = function() {                                  // Will not be required with infinite scroll
-      $scope.pageClick();
-      $scope.pageClick();
+
+
+      //$scope.pageClick();
+      //$scope.pageClick();
     };
 
       // ----------------------------------------------- For dynamic page elements --------------------------------------------- //
