@@ -1317,13 +1317,13 @@ app.post('/mob_api/tips', function(req, res, next) {
 
         activity.save(function(err) {
           if (err) return next(err);
-          res.status(200).end();
         });
 
       });
 
     user.save(function(err) {
       if (err) return next(err);
+      res.status(200).send({ message: 'Tip added' });
     });
   });
 
