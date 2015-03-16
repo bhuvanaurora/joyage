@@ -1,16 +1,16 @@
 <!----------------------------------------------------- Navbar -------------------------------------------->
 
-<header style="background-color:rgba(71,162,190,1);border:none;position:fixed;" ng-controller="NavbarCtrl">
+<header style="background-color:rgba(71,162,190,1);border:none;" ng-controller="NavbarCtrl">
     <div class="wrapper" style="margin-bottom:-25px;">
         <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
             <div class="head-brand" ng-click="go('/')" style="cursor:pointer">
-                <img ng-src="/img/logo-white.png" style="height:100px;margin-top:-20px;"/>
+                <img ng-src="/img/logo-white.png" style="height:46px"/>
             </div>
         </div>
 
         <div id="fb-root"></div>
 
-        <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none" style="line-height:60px;">
+        <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none" style="line-height:70px;margin-top:-10px;padding-bottom:10px;">
             <div class="pull-right">
                 <div class="user-menu js-user-menu" ng-click="userMenu()">
                     <img ng-if="currentUser" ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
@@ -20,12 +20,10 @@
                 <div ng-if="currentUser" class="user-menu-drawer js-user-menu-drawer" id="user-menu-drawer" hide ng-click="userMenu()">
                     <ul>
                         <a ng-href="/home">
-                            <li>
-                                <span class="batch" data-icon="&#xF162;"></span>  Home
-                            </li>
+                            <li><span class="batch" data-icon="&#xF162;"></span>  Home</li>
                         </a>
                         <a ng-href="/profile/{{currentUser._id}}">
-                            <li>
+                            <li class="selected">
                                 <span class="batch" data-icon="&#xF043;"></span>  Profile
                             </li>
                         </a>
@@ -39,7 +37,7 @@
                                 <span class="batch" data-icon="&#xF0DB;"></span>  Invite friends
                             </li>
                         </a>
-                        <a ng-href="javascript:void(0)" ng-click="logout()">
+                        <a ng-href="" ng-click="logout()">
                             <li>
                                 <span class="batch" data-icon="&#xF069;"></span>  Logout
                             </li>

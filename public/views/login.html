@@ -1,10 +1,30 @@
-<header style="background-color:rgba(71,162,190,1);border:none;">
+<!--header style="background-color:rgba(71,162,190,1);border:none;">
   <div class="wrapper" style="margin-bottom:-25px;">
     <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
       <a href="/" style="cursor:pointer">
         <img src="/img/logo-white.png" style="height:100px;margin-top:-20px;"/>
       </a>
     </div>
+  </div>
+</header-->
+
+<header style="background-color:rgba(71,162,190,1);border:none;" ng-controller="NavbarCtrl">
+  <div class="wrapper" style="margin-bottom:-25px;">
+    <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
+      <a href="/" style="cursor:pointer">
+        <img ng-src="/img/logo-white.png" style="height:46px"/>
+      </a>
+    </div>
+
+    <div id="fb-root"></div>
+
+    <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none" style="line-height:70px;margin-top:-10px;padding-bottom:10px;">
+      <div class="pull-right">
+        <div class="user-menu js-user-menu">
+        </div>
+      </div>
+    </div>
+
   </div>
 </header>
 
@@ -31,7 +51,7 @@
       <h2>Why we use facebook?</h2>
     </div><!-- modal head end -->
     <div class="modal-body clearfix">
-      <p class="margin-bottom-none margin-top-none">Privacy is the top most priority for us here at Joyage. And we are not joking here.</p>
+      <p class="margin-bottom-none margin-top-none">Privacy is the top most priority for us here at Joyage.</p>
       <p>We will not post on your timeline without your permission.</p>
       <div class="seperator-block"></div>
       <div class="facebook-features">

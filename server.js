@@ -478,6 +478,7 @@ app.get('/api/authprofile/:id', function(req, res, next) {
 
 });
 
+
 app.put('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
   
   User.findById(req.params.id, function(err, profile) {
@@ -496,6 +497,10 @@ app.put('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
   });
 
 });
+
+
+          //---- Invites APIs ----//
+
 
 app.post('/api/invites', ensureAuthenticated, function(req, res, next) {
   
@@ -699,6 +704,9 @@ app.get('/api/activities/:id', function(req, res, next) {
 });
 
 
+       //---- Image upload APIs ----//
+
+
 app.post('/upload', function(req, res, next) {
   
   var filePath = path.join(__dirname, req.files.file.path);
@@ -798,6 +806,9 @@ app.post('/uploadSelfie', function(req, res, next) {
 });
 
 
+        //---- Post Activity ----//
+
+
 app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
   
   var activity = new Activity({
@@ -852,6 +863,10 @@ app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
   
 });
 
+
+          //---- Edit Activity ----//
+
+
 app.put('/api/activities/:id', ensureAuthenticated, function(req, res, next) {
 
   Activity.findById(req.params.id, function(err, activity) {
@@ -903,6 +918,9 @@ app.put('/api/activities/:id', ensureAuthenticated, function(req, res, next) {
 
 });
 
+
+          //---- Send Invites ----//
+
 app.post('/sendInvites', ensureAuthenticated, function(req, res, next) {
 
   User.findById(req.body.id, function(err, user) {
@@ -925,41 +943,54 @@ app.post('/sendInvites', ensureAuthenticated, function(req, res, next) {
 });
 
 
+            //---- Web Subscribe and Done APIs ----//
+
+
 app.post('/api/subscribe', ensureAuthenticated, function(req, res, next) {
 
   User.findById(req.user._id, function(err, user) {
 
     if (err) return next(err);
 
-    user.subscribedActivities.push(req.body.activityId);
+    Activity.findById(req.body.activityId, function(err, activity) {
 
-    if (user.subscriptions) {
-      user.subscriptions += 1;
-    } else {
-      user.subscriptions = 1;
-    }
-
-    user.save(function(err) {
       if (err) return next(err);
+
+      if (activity.subscribers.indexOf(req.user._id) != -1) {
+
+        res.status(409).send({ message: 'Already bookmarked' });
+
+      } else {
+
+        user.subscribedActivities.push(req.body.activityId);
+
+        if (user.subscriptions) {
+          user.subscriptions += 1;
+        } else {
+          user.subscriptions = 1;
+        }
+
+        user.save(function(err) {
+          if (err) return next(err);
+        });
+
+        activity.subscribers.push(req.user._id);
+
+        if (activity.subscriptions) {
+          activity.subscriptions += 1;
+        } else {
+          activity.subscriptions = 1;
+        }
+
+        activity.save(function(err) {
+          if (err) return next(err);
+          res.status(200).send({ message: 'Bookmarked' });
+        });
+
+      }
+
     });
-  });
 
-  Activity.findById(req.body.activityId, function(err, activity) {
-
-    if (err) return next(err);
-
-    activity.subscribers.push(req.user._id);
-
-    if (activity.subscriptions) {
-      activity.subscriptions += 1;
-    } else {
-      activity.subscriptions = 1;
-    }
-
-    activity.save(function(err) {
-      if (err) return next(err);
-      res.status(200).end();
-    });
   });
 
 });
@@ -971,27 +1002,39 @@ app.post('/api/unsubscribe', ensureAuthenticated, function(req, res, next) {
 
     if (err) return next(err);
 
-    var index = user.subscribedActivities.indexOf(req.body.activityId);
-    user.subscribedActivities.splice(index, 1);
-    user.subscriptions -= 1;
+    Activity.findById(req.body.activityId, function(err, activity) {
 
-    user.save(function(err) {
       if (err) return next(err);
+
+      var userIndex = user.subscribedActivities.indexOf(req.body.activityId);
+      var index = activity.subscribers.indexOf(req.user._id);
+
+      if (userIndex == -1 || index == -1) {
+
+        res.send(409).send({ message: 'Not bookmarked' });
+
+      } else {
+
+        user.subscribedActivities.splice(userIndex, 1);
+        user.subscriptions -= 1;
+
+        user.save(function (err) {
+          if (err) return next(err);
+        });
+
+
+        activity.subscribers.splice(index, 1);
+        activity.subscriptions -= 1;
+
+        activity.save(function (err) {
+          if (err) return next(err);
+          res.status(200).send({ message: 'Un-bookmarked' });
+        });
+
+      }
+
     });
-  });
 
-  Activity.findById(req.body.activityId, function(err, activity) {
-
-    if (err) return next(err);
-
-    var index = activity.subscribers.indexOf(req.user._id);
-    activity.subscribers.splice(index, 1);
-    activity.subscriptions -= 1;
-
-    activity.save(function(err) {
-      if (err) return next(err);
-      res.status(200).end();
-    });
   });
 
 });
@@ -1003,35 +1046,45 @@ app.post('/api/markDone', ensureAuthenticated, function(req, res, next) {
 
     if (err) return next(err);
 
-    user.doneActivities.push(req.body.activityId);
+    Activity.findById(req.body.activityId, function(err, activity) {
 
-    if (user.completions) {
-      user.completions += 1;
-    } else {
-      user.completions = 1;
-    }
-
-    user.save(function(err) {
-    if (err) return next(err);
-    });
-  });
-
-  Activity.findById(req.body.activityId, function(err, activity) {
-
-    if (err) return next(err);
-
-    activity.doneIt.push(req.user._id);
-
-    if (activity.completions) {
-      activity.completions += 1;
-    } else {
-      activity.completions = 1;
-    }
-
-    activity.save(function(err) {
       if (err) return next(err);
-      res.status(200).end();
+
+      if (activity.doneIt.indexOf(req.user._id) != -1) {
+
+        res.status(409).send({ message: 'Marked as done already' });
+
+      } else {
+
+        user.doneActivities.push(req.body.activityId);
+
+        if (user.completions) {
+          user.completions += 1;
+        } else {
+          user.completions = 1;
+        }
+
+        user.save(function(err) {
+          if (err) return next(err);
+        });
+
+        activity.doneIt.push(req.user._id);
+
+        if (activity.completions) {
+          activity.completions += 1;
+        } else {
+          activity.completions = 1;
+        }
+
+        activity.save(function (err) {
+          if (err) return next(err);
+          res.status(200).send({ message: 'Marked as done' });
+        });
+
+      }
+
     });
+
   });
 
 });
@@ -1043,30 +1096,44 @@ app.post('/api/markUndone', ensureAuthenticated, function(req, res, next) {
 
     if (err) return next(err);
 
-    var index = user.doneActivities.indexOf(req.body.activityId);
-    user.doneActivities.splice(index, 1);
-    user.completions -= 1;
+    Activity.findById(req.body.activityId, function(err, activity) {
 
-    user.save(function(err) {
       if (err) return next(err);
+
+      var userIndex = user.doneActivities.indexOf(req.body.activityId);
+      var index = activity.doneIt.indexOf(req.user._id);
+
+      if (userIndex == -1 || user == -1) {
+
+        res.status(409).send({ message: 'Not marked as done' });
+
+      } else {
+
+        user.doneActivities.splice(userIndex, 1);
+        user.completions -= 1;
+
+        user.save(function (err) {
+          if (err) return next(err);
+        });
+
+        activity.doneIt.splice(index, 1);
+        activity.completions -= 1;
+
+        activity.save(function (err) {
+          if (err) return next(err);
+          res.status(200).end();
+        });
+
+      }
+
     });
-  });
 
-  Activity.findById(req.body.activityId, function(err, activity) {
-
-    if (err) return next(err);
-
-    var index = activity.doneIt.indexOf(req.user._id);
-    activity.doneIt.splice(index, 1);
-    activity.completions -= 1;
-
-    activity.save(function(err) {
-      if (err) return next(err);
-      res.status(200).end();
-    });
   });
 
 });
+
+
+              //---- Phone app Subscribe and Done APIs ----//
 
 
 app.post('/mob_api/subscribe', function(req, res, next) {
@@ -1075,35 +1142,46 @@ app.post('/mob_api/subscribe', function(req, res, next) {
 
     if (err) return next(err);
 
-    user.subscribedActivities.push(req.body.activityId);
+    Activity.findById(req.body.activityId, function(err, activity) {
 
-    if (user.subscriptions) {
-      user.subscriptions += 1;
-    } else {
-      user.subscriptions = 1;
-    }
-
-    user.save(function(err) {
       if (err) return next(err);
+
+      if (activity.subscribers.indexOf(req.body.userId) != -1) {
+
+        // To ensure an activity is bookmarked only once even in case of external access
+        res.status(409).send({ message: 'Already bookmarked' });
+
+      } else {
+
+        user.subscribedActivities.push(req.body.activityId);
+
+        if (user.subscriptions) {
+          user.subscriptions += 1;
+        } else {
+          user.subscriptions = 1;
+        }
+
+        user.save(function (err) {
+          if (err) return next(err);
+        });
+
+        activity.subscribers.push(req.body.userId);
+
+        if (activity.subscriptions) {
+          activity.subscriptions += 1;
+        } else {
+          activity.subscriptions = 1;
+        }
+
+        activity.save(function (err) {
+          if (err) return next(err);
+          res.status(200).send({ message: 'Bookmarked' });
+        })
+
+      }
+
     });
-  });
 
-  Activity.findById(req.body.activityId, function(err, activity) {
-
-    if (err) return next(err);
-
-    activity.subscribers.push(req.body.userId);
-
-    if (activity.subscriptions) {
-      activity.subscriptions += 1;
-    } else {
-      activity.subscriptions = 1;
-    }
-
-    activity.save(function(err) {
-      if (err) return next(err);
-      res.status(200).send({ message: 'Bookmarked' });
-    })
   });
 
 });
@@ -1114,27 +1192,39 @@ app.post('/mob_api/unsubscribe', function(req, res, next) {
 
     if (err) return next(err);
 
-    var index = user.subscribedActivities.indexOf(req.body.activityId);
-    user.subscribedActivities.splice(index, 1);
-    user.subscriptions -= 1;
+    Activity.findById(req.body.activityId, function(err, activity) {
 
-    user.save(function(err) {
       if (err) return next(err);
+
+      var userIndex = user.subscribedActivities.indexOf(req.body.activityId);
+      var index = activity.subscribers.indexOf(req.body.userId);
+
+      if (userIndex == -1 || index == -1) {
+
+        // To ensure an activity is un-bookmarked only once even in case of external access
+        res.status(409).send({ message: 'Not bookmarked' });
+
+      } else {
+
+        user.subscribedActivities.splice(userIndex, 1);
+        user.subscriptions -= 1;
+
+        user.save(function (err) {
+          if (err) return next(err);
+        });
+
+        activity.subscribers.splice(index, 1);
+        activity.subscriptions -= 1;
+
+        activity.save(function (err) {
+          if (err) return next(err);
+          res.status(200).send({ message: 'Un-Bookmarked' });
+        });
+
+      }
+
     });
-  });
 
-  Activity.findById(req.body.activityId, function(err, activity) {
-
-    if (err) return next(err);
-
-    var index = activity.subscribers.indexOf(req.body.userId);
-    activity.subscribers.splice(index, 1);
-    activity.subscriptions -= 1;
-
-    activity.save(function(err) {
-      if (err) return next(err);
-      res.status(200).send({ message: 'Un-Bookmarked' });
-    });
   });
 
 });
@@ -1145,35 +1235,47 @@ app.post('/mob_api/markDone', function(req, res, next) {
   User.findById(req.body.userId, function(err, user) {
 
     if (err) return next(err);
-    user.doneActivities.push(req.body.activityId);
 
-    if (user.completions) {
-      user.completions += 1;
-    } else {
-      user.completions = 1;
-    }
+    Activity.findById(req.body.activityId, function (err, activity) {
 
-    user.save(function(err) {
       if (err) return next(err);
+
+      if (activity.doneIt != -1) {
+
+        // To ensure an activity is marked as done only once even in case of external access
+        res.status(409).send({ message: 'Already marked as done' });
+
+      } else {
+
+        user.doneActivities.push(req.body.activityId);
+
+        if (user.completions) {
+          user.completions += 1;
+        } else {
+          user.completions = 1;
+        }
+
+        user.save(function (err) {
+          if (err) return next(err);
+        });
+
+        activity.doneIt.push(req.body.userId);
+
+        if (activity.completions) {
+          activity.completions += 1;
+        } else {
+          activity.completions = 1;
+        }
+
+        activity.save(function (err) {
+          if (err) return next(err);
+          res.status(200).send({ message: 'Marked as done' });
+        });
+
+      }
+
     });
-  });
 
-  Activity.findById(req.body.activityId, function(err, activity) {
-
-    if (err) return next(err);
-
-    activity.doneIt.push(req.body.userId);
-
-    if (activity.completions) {
-      activity.completions += 1;
-    } else {
-      activity.completions = 1;
-    }
-
-    activity.save(function(err) {
-      if (err) return next(err);
-      res.status(200).send({ message: 'Marked as done' });
-    });
   });
 
 });
@@ -1185,30 +1287,43 @@ app.post('/mob_api/markUndone', function(req, res, next) {
 
     if (err) return next(err);
 
-    var index = user.doneActivities.indexOf(req.body.activityId);
-    user.doneActivities.splice(index, 1);
-    user.completions -= 1;
+    Activity.findById(req.body.activityId, function (err, activity) {
 
-    user.save(function(err) {
       if (err) return next(err);
+
+      var userIndex = user.doneActivities.indexOf(req.body.activityId);
+      var index = activity.doneIt.indexOf(req.body.userId);
+
+      if (userIndex == -1 || index == -1) {
+
+        // To ensure an activity is marked as un-done only once even in case of external access
+        res.status(409).send({ message: 'Already not marked as done' });
+
+      }
+      user.doneActivities.splice(userIndex, 1);
+      user.completions -= 1;
+
+      user.save(function (err) {
+        if (err) return next(err);
+      });
+
+
+      activity.doneIt.splice(index, 1);
+      activity.completions -= 1;
+
+      activity.save(function (err) {
+        if (err) return next(err);
+        res.status(200).send({ message: 'Marked as Un-Done' });
+      });
+
     });
-  });
 
-  Activity.findById(req.body.activityId, function(err, activity) {
-
-    if (err) return next(err);
-
-    var index = activity.doneIt.indexOf(req.body.userId);
-    activity.doneIt.splice(index, 1);
-    activity.completions -= 1;
-
-    activity.save(function(err) {
-      if (err) return next(err);
-      res.status(200).send({ message: 'Marked as Un-Done' });
-    });
   });
 
 });
+
+
+              //---- Selfies API ----//
 
 
 app.post('/api/selfies', ensureAuthenticated, function(req, res, next) {
@@ -1217,39 +1332,51 @@ app.post('/api/selfies', ensureAuthenticated, function(req, res, next) {
 
     if (err) next(err);
 
-    user.selfies.push(req.body.selfies);
+    Activity.findById(req.body.activityId, function(err, activity) {
 
-    if (user.selfieCount) {
-      user.selfieCount += 1;
-    } else {
-      user.selfieCount = 1;
-    }
-
-    user.save(function(err) {
-      if (err) next(err);
-    })
-
-  });
-
-  Activity.findById(req.body.activityId, function(err, activity) {
-
-    if (err) return next(err);
-
-    activity.selfies.push({
-      url: req.body.selfies,
-      fbId: req.user.facebookId
-    });
-
-    activity.selfie_sub.push(req.user._id);
-
-    activity.save(function (err) {
       if (err) return next(err);
-      res.status(200).end();
+
+      if (activity.selfie_sub.indexOf(req.user._id == 0)) {
+
+        // To ensure a user gets to add only one selfie even through external means
+        res.status(409).send({ message: 'Only one selfie allowed per user' });
+
+      } else {
+
+        activity.selfies.push({
+          url: req.body.selfies,
+          fbId: req.user.facebookId
+        });
+
+        activity.selfie_sub.push(req.user._id);
+
+        user.selfies.push(req.body.selfies);
+
+        if (user.selfieCount) {
+          user.selfieCount += 1;
+        } else {
+          user.selfieCount = 1;
+        }
+
+        activity.save(function (err) {
+          if (err) return next(err);
+        });
+
+        user.save(function (err) {
+          if (err) next(err);
+          res.status(200).send({ message: 'Selfie added' });
+        })
+
+      }
+
     });
 
   });
 
 });
+
+
+      //---- Web Add tips API ----//
 
 
 app.post('/api/tips', ensureAuthenticated, function(req, res, next) {
@@ -1258,37 +1385,49 @@ app.post('/api/tips', ensureAuthenticated, function(req, res, next) {
 
     if (err) return next(err);
 
-    if (user.tipsCount) {
-      user.tipsCount += 1;
-    } else {
-      user.tipsCount = 1;
-    }
+    Activity.findById(req.body.activityId, function(err, activity) {
 
-    user.save(function(err) {
       if (err) return next(err);
-    });
-  });
 
-  Activity.findById(req.body.activityId, function(err, activity) {
+      if (activity.tipper.indexOf(req.user._id) != -1) {
 
-    if (err) return next(err);
+        res.status(409).send({ message: 'Only one tip allowed per user' });
 
-    activity.tips.push({
-      text: req.body.tips.splice(-1),
-      tipperfbId: req.user.facebookId,
-      tipper: req.user._id
-    });
+      } else {
 
-    activity.tipper.push(req.user._id);
+        activity.tips.push({
+          text: req.body.tips.splice(-1),
+          tipperfbId: req.user.facebookId,
+          tipper: req.user._id
+        });
 
-    activity.save(function(err) {
-      if (err) return next(err);
-      res.status(200).end();
+        activity.tipper.push(req.user._id);
+
+        if (user.tipsCount) {
+          user.tipsCount += 1;
+        } else {
+          user.tipsCount = 1;
+        }
+
+        activity.save(function(err) {
+          if (err) return next(err);
+        });
+
+        user.save(function(err) {
+          if (err) return next(err);
+          res.status(200).send({ message: 'Tip added' });
+        });
+
+      }
+
     });
 
   });
 
 });
+
+
+        //---- Phone app Add tips API ----//
 
 
 app.post('/mob_api/tips', function(req, res, next) {
@@ -1297,37 +1436,52 @@ app.post('/mob_api/tips', function(req, res, next) {
 
     if (err) return next(err);
 
-    if (user.tipsCount) {
-      user.tipsCount += 1;
-    } else {
-      user.tipsCount = 1;
-    }
-
       Activity.findById(req.body.activityId, function(err, activity) {
 
         if (err) return next(err);
 
-        activity.tips.push({
-          text: req.body.tips,
-          tipperfbId: user.facebookId,
-          tipper: req.body.userId
-        });
+        if (activity.tipper.indexOf(req.body.userId) != -1) {
 
-        activity.tipper.push(req.body.userId);
+          res.status(409).send({ message: 'Only one tip allowed per user' });
 
-        activity.save(function(err) {
-          if (err) return next(err);
-        });
+        } else {
+
+          console.log(activity.tipper.indexOf(req.body.userId));
+
+          activity.tips.push({
+            text: req.body.tips,
+            tipperfbId: user.facebookId,
+            tipper: req.body.userId
+          });
+
+          activity.tipper.push(req.body.userId);
+
+          if (user.tipsCount) {
+            user.tipsCount += 1;
+          } else {
+            user.tipsCount = 1;
+          }
+
+          activity.save(function(err) {
+            if (err) return next(err);
+          });
+
+          user.save(function(err) {
+            if (err) return next(err);
+            res.status(200).send({ message: 'Tip added' });
+          });
+
+        }
 
       });
 
-    user.save(function(err) {
-      if (err) return next(err);
-      res.status(200).send({ message: 'Tip added' });
-    });
   });
 
 });
+
+
+        //---- Activity review and staging APIs ----//
+
 
 app.post('/api/acceptActivity', ensureAuthenticated, function(req, res, next) {
 
