@@ -167,6 +167,12 @@
                 </button>
             </div>
         </div-->
+
+        <!--input list="business" name="busi" ng-model="busi" placeholder="Search by place" style="margin-top:20px;">
+        <datalist id="business">
+            <option ng-repeat="bus in business" value="{{bus}}">{{bus}}</option>
+        </datalist-->
+
         <ul>
             <li ng-repeat="acti in activ | orderBy:sortOrder:true">
                 <ul style="margin-bottom:-80px;margin-top:-80px;">

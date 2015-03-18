@@ -105,11 +105,26 @@
         
         <fieldset>
           <legend style="font-size:18px;">Location Details</legend>
+            <input class="form-control"
+                   type="text"
+                   name="business"
+                   ng-model="business"
+                   list="businessList"
+                   placeholder="Business"
+                   style="font-size:14px;margin-top:5px;">
+
+          <datalist id="businessList">
+              <option ng-repeat="busi in listOfBusinesses"
+                      value="{{busi.business}}">
+                  {{busi.business}}
+              </option>
+          </datalist>
+          <br />
           <input class="form-control"
                  type="text"
                  name="location"
                  ng-model="location"
-                 placeholder="Location"
+                 placeholder="Place"
                  style="font-size:14px;margin-top:5px;"
                  required>
           <br />
@@ -432,9 +447,16 @@
                ng-hide="true"
                ng-model="addedBy"
                value="currentUser.email">
+
+      <a ng-href="/admin/{{currentUser._id}}">
+          <button type="submit"
+                  style="font-size:16px;padding:5px;margin-top:25px;;width:45%;cursor:pointer;background-color:#3A6073;border-radius:5px;">
+              Cancel
+          </button>
+      </a>
         
         <button type="submit"
-                style="font-size:16px;padding:5px;margin-top:25px;;width:100%;cursor:pointer;background-color:#3A6073;border-radius:5px;">
+                style="font-size:16px;padding:5px;width:45%;cursor:pointer;background-color:#3A6073;border-radius:5px;">
             Add
         </button>
       </form>
@@ -442,7 +464,7 @@
         <br />
 
       <div class="text-center">
-        <a href="/admin/{{currentUser._id}}">Take me to admin console</a>
+        <a ng-href="/admin/{{currentUser._id}}">Take me to admin console</a>
       </div>
 
     </div>

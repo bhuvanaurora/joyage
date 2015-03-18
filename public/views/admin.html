@@ -1,6 +1,25 @@
-<div style="background-image:url('/images/add-background.jpg');width:1500px;height:900px;margin-top:-100px;position:fixed;z-index:-1"></div>
+<header style="background-color:rgba(71,162,190,1);border:none;" ng-controller="NavbarCtrl">
+    <div class="wrapper" style="margin-bottom:-25px;">
+        <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
+            <a href="/" style="cursor:pointer">
+                <img ng-src="/img/logo-white.png" style="height:46px"/>
+            </a>
+        </div>
+
+        <div id="fb-root"></div>
+
+        <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none" style="line-height:70px;margin-top:-10px;padding-bottom:10px;">
+            <div class="pull-right">
+                <div class="user-menu js-user-menu">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>
+
 <div class="container" ng-if="profile.curator === true"
-     style="width:1112px;margin-left:auto;margin-right:auto;margin-top:5%;margin-bottom:5%;padding:30px;min-height:600px;background-color:white;">
+     style="width:1112px;margin-left:auto;margin-right:auto;margin-top:5%;margin-bottom:5%;padding:30px;background-color:white;">
     <div class="panel panel-default">
         <div class="panel-heading" style="font-size:20px;">
             Admin Console
@@ -30,18 +49,21 @@
     </div>
 </div>
 
-<!---------------------------- Footer ---------------------------->
-
-<footer id="footer-1080" style="margin-bottom:-20px;z-index: 1001;clear:both;">
-    <div class="container_27 clearfix">
-        <div class="grid_6 pull-right">
-            <div class="footer-logo">
-                <h3 style="margin-top: 20px;color:#999;font-family:Roboto">
-                    <a href="/" style="color:#999;font-family:Roboto">
-                        Joyage
-                    </a>
-                </h3>
-            </div>
-        </div>
+<div class="container">
+    <div class="panel panel-default">
+        <ul>
+            <li ng-repeat="business in listOfBusinesses">
+                <div class="panel-body">
+                    <div>
+                        {{business.business}}
+                        {{business.city}}
+                        Activities: {{business.noOfAct}}
+                        Bookmarks: {{business.noOfBooks}}
+                        Done(s): {{business.noOfDones}}
+                        Selfies: {{business.noOfSelfies}}
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
-</footer>
+</div>

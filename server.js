@@ -63,6 +63,8 @@ var sendgrid = require('sendgrid')(config.sendgrid.id, config.sendgrid.password)
 var _ = require('lodash');
 var cors = require('express-cors');
 var argv = require('optimist').argv;
+var mime = require('mime');
+
 
 var fs = require('fs');
 var AWS = require('aws-sdk');
@@ -81,6 +83,8 @@ var activitySchema = new mongoose.Schema({
   endDateOfActivity: String,
   timeOfActivity: String,
   city: String,
+  business: String,
+  businessId: String,
   location: String,
   address: String,
   phone: String,
@@ -145,6 +149,18 @@ var activitySchema = new mongoose.Schema({
     text: String,
     link: String
   }]
+});
+
+
+var businessSchema = new mongoose.Schema({
+  business: String,
+  city: String,
+  country: String,
+  noOfAct: { type: Number, default: 0 },
+  noOfBooks: { type: Number, default: 0 },
+  noOfDones: { type: Number, default: 0 },
+  noOfSelfies: { type: Number, default: 0 },
+  noOfTips: { type: Number, default: 0 }
 });
 
 
@@ -234,6 +250,7 @@ var invitesSchema = new mongoose.Schema({
 var User = mongoose.model('User', userSchema);
 var Activity = mongoose.model('Activity', activitySchema);
 var Invites = mongoose.model('Invites', invitesSchema);
+var Business = mongoose.model('Business', businessSchema);
 
 //mongoose.connect(config.db);
 mongoose.connect("mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database");
@@ -290,7 +307,7 @@ function ensureAuthenticated(req, res, next) {
     }
   } else {
     res.set('Content-Type', 'application/json');
-    return res.staus(401).end();
+    return res.status(401).end();
   }
 
 }
@@ -306,6 +323,10 @@ function createJwtToken(user) {
 }
 
 // ------------------------------------------------- Authentication --------------------------------------- //
+
+
+        //---- Native Authentication ----//
+
 
 /*app.post('/auth/signup', function(req, res, next) {
   var user = new User({
@@ -333,6 +354,9 @@ app.post('/auth/login', function(req, res, next) {
     });
   });
 });*/
+
+
+        //---- Facebook Authentication ----//
 
 
 app.post('/auth/facebook', function(req, res, next) {
@@ -392,6 +416,10 @@ app.post('/auth/facebook', function(req, res, next) {
   });
 });
 
+
+        //---- Google Authentication ----//
+
+
 /*app.post('/auth/google', function(req, res, next) {
   var profile = req.body.profile;
   User.findOne({ google: profile.id }, function(err, existingUser) {
@@ -418,7 +446,9 @@ app.post('/auth/facebook', function(req, res, next) {
   });
 });*/
 
+
 // ------------------------------------------------------ APIs -----------------------------------------------------//
+
 
 app.get('/api/users', function(req, res, next) {
   
@@ -435,6 +465,7 @@ app.get('/api/users', function(req, res, next) {
 
 
 // --------------------------------- Temporary API ----------------------------------- //
+
 
 app.post('/mob_api/user', function(req, res, next) {
 
@@ -542,6 +573,10 @@ app.put('/api/invites/:id', function(req, res, next) {
 
 });
 
+
+        //---- Phone App Activities APIs ----//
+
+
 var converter = require('json-2-csv');
 
 app.get('/api/ios_activities', function(req, res, next) {
@@ -582,6 +617,9 @@ app.get('/api/and_activities', function(req, res, next) {
 });
 
 
+        //---- Sessions API ----//
+
+
 app.get('/api/session', function(req, res, next) {
 
   if (req.session) {
@@ -601,7 +639,55 @@ app.get('/api/session', function(req, res, next) {
 });
 
 
-app.get('/api/activities', function(req, res, next) {
+      //---- Businesses APIs ----//
+
+app.get('/api/businesses', ensureAuthenticated, function(req, res, next) {
+
+  if (req.body.business) {
+
+    var query = Business.find();
+
+    query.where({ business: req.body.business });
+
+    query.exec(function (err, business) {
+      if (err) return next(err);
+      res.send(business);
+    })
+
+  } else {
+
+    var query = Business.find();
+
+    query.exec(function (err, businesses) {
+      if (err) return next(err);
+      res.send(businesses);
+    });
+
+  }
+
+});
+
+
+app.post('/api/businesses', ensureAuthenticated, function(req, res, next) {
+
+  var business = new Business({
+    business: req.body.business,
+    city: req.body.city,
+    country: req.body.country
+  });
+
+  business.save(function(err) {
+    if (err) return next(err);
+    res.status(200).send({ message: 'Business added' });
+  })
+
+});
+
+
+       //---- Sorted list of Activities API ----//
+
+
+app.get('/api/activities', ensureAuthenticated, function(req, res, next) {
   
   var query = Activity.find();
   /*Activity.textSearch('Bars', function (err, output) {
@@ -691,10 +777,10 @@ app.get('/api/activities', function(req, res, next) {
 });
 
 
-var mime = require('mime');
+        //---- Activity by ID ----//
 
 
-app.get('/api/activities/:id', function(req, res, next) {
+app.get('/api/activities/:id', ensureAuthenticated, function(req, res, next) {
   
   Activity.findById(req.params.id, function(err, activity) {
     if (err) return next(err);
@@ -780,7 +866,6 @@ app.post('/uploadSelfie', function(req, res, next) {
       .stream(function(err, stdout, stderr) {
         var buf = new Buffer('');
         var imageName = 'selfie_' + Date.now() + req.files.file.name;
-        console.log(imageName);
         stdout.on('data', function(data) {
           buf = Buffer.concat([buf, data]);
         });
@@ -791,7 +876,6 @@ app.post('/uploadSelfie', function(req, res, next) {
             Body: buf,
             ContentType: mime.lookup(req.files.file.name)
           };
-          console.log(data);
           s3.putObject(data, function(err, res) {
             if (err) throw(err);
             else console.log('Selfie uploaded successfully');
@@ -806,11 +890,11 @@ app.post('/uploadSelfie', function(req, res, next) {
 });
 
 
-        //---- Post Activity ----//
+        //---- Add Activity ----//
 
 
 app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
-  
+
   var activity = new Activity({
     _id: req.body.id,
     title: req.body.title,
@@ -821,9 +905,11 @@ app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
     timeOfActivity: req.body.timeOfActivity,
     timeAdded: new Date,
     city: req.body.city,
+    business: req.body.business,
+    businessId: business._id,
     location: req.body.location,
     address: req.body.address,
-    phone:  req.body.phone,
+    phone: req.body.phone,
     sourceWebsite: req.body.sourceWebsite,
     locationWebsite: req.body.locationWebsite,
     neighborhood: req.body.neighborhood,
@@ -856,9 +942,9 @@ app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
     preview: false
   });
 
-  activity.save(function(err) {
+  activity.save(function (err) {
     if (err) return next(err);
-    res.status(200).end();
+    res.status(200).send({message: 'Activity added'});
   });
   
 });
@@ -869,7 +955,7 @@ app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
 
 app.put('/api/activities/:id', ensureAuthenticated, function(req, res, next) {
 
-  Activity.findById(req.params.id, function(err, activity) {
+  Activity.findById(req.params.id, function (err, activity) {
 
     if (err) return next(err);
 
@@ -909,7 +995,7 @@ app.put('/api/activities/:id', ensureAuthenticated, function(req, res, next) {
     activity.cornerText = req.body.cornerText;
     activity.media = req.body.media;
 
-    activity.save(function(err) {
+    activity.save(function (err) {
       if (err) return next(err);
       res.status(200).end();
     });
@@ -919,7 +1005,82 @@ app.put('/api/activities/:id', ensureAuthenticated, function(req, res, next) {
 });
 
 
-          //---- Send Invites ----//
+//---- Activity review and staging APIs ----//
+
+
+app.post('/api/acceptActivity', ensureAuthenticated, function(req, res, next) {
+
+  User.findById(req.body.userId, function(err, user) {
+
+    if (err) return next(err);
+
+    if (user.p2p === true) {
+
+      Activity.findById(req.body.activityId, function(err, activity) {
+
+        if (err) return next(err);
+
+        Business.findById(activity.businessId, function(err, business) {
+
+          if (err) return next(err);
+
+          business.noOfAct += 1;
+
+          business.save(function (err) {
+            if (err) return next(err);
+          });
+
+        });
+
+        activity.preview = true;
+
+        activity.save(function(err) {
+          if (err) return next(err);
+          console.log("Activity pushed into production");
+          res.status(200).end();
+        });
+
+      });
+    } else {
+      console.log('Permission denied');
+      res.status(400).end();
+    }
+  });
+
+});
+
+
+app.post('/api/deleteActivity', ensureAuthenticated, function(req, res, next) {
+
+  Activity.findById(req.body.activityId, function(err, activity) {
+
+    if (err) return next(err);
+
+    activity.remove(function(err) {
+      if (err) return next(err);
+      console.log("Activity deleted");
+      res.send(200);
+    });
+
+  });
+});
+
+
+app.get('/api/editActivity/:id', ensureAuthenticated, function(req, res, next) {
+
+  Activity.findById(req.params.id, function(err, activity) {
+
+    if (err) return next(err);
+
+    res.send(activity);
+
+  });
+
+});
+
+
+        //---- Send Invites ----//
+
 
 app.post('/sendInvites', ensureAuthenticated, function(req, res, next) {
 
@@ -961,6 +1122,18 @@ app.post('/api/subscribe', ensureAuthenticated, function(req, res, next) {
         res.status(409).send({ message: 'Already bookmarked' });
 
       } else {
+
+        Business.findById(activity.businessId, function(err, business) {
+
+          if (err) return next(err);
+
+          business.noOfBooks += 1;
+
+          business.save(function (err) {
+            if (err) return next(err);
+          });
+
+        });
 
         user.subscribedActivities.push(req.body.activityId);
 
@@ -1015,6 +1188,18 @@ app.post('/api/unsubscribe', ensureAuthenticated, function(req, res, next) {
 
       } else {
 
+        Business.findById(activity.businessId, function(err, business) {
+
+          if (err) return next(err);
+
+          business.noOfBooks -= 1;
+
+          business.save(function (err) {
+            if (err) return next(err);
+          });
+
+        });
+
         user.subscribedActivities.splice(userIndex, 1);
         user.subscriptions -= 1;
 
@@ -1055,6 +1240,18 @@ app.post('/api/markDone', ensureAuthenticated, function(req, res, next) {
         res.status(409).send({ message: 'Marked as done already' });
 
       } else {
+
+        Business.findById(activity.businessId, function(err, business) {
+
+          if (err) return next(err);
+
+          business.noOfDones += 1;
+
+          business.save(function (err) {
+            if (err) return next(err);
+          });
+
+        });
 
         user.doneActivities.push(req.body.activityId);
 
@@ -1109,6 +1306,18 @@ app.post('/api/markUndone', ensureAuthenticated, function(req, res, next) {
 
       } else {
 
+        Business.findById(activity.businessId, function(err, business) {
+
+          if (err) return next(err);
+
+          business.noOfDones -= 1;
+
+          business.save(function (err) {
+            if (err) return next(err);
+          });
+
+        });
+
         user.doneActivities.splice(userIndex, 1);
         user.completions -= 1;
 
@@ -1153,6 +1362,18 @@ app.post('/mob_api/subscribe', function(req, res, next) {
 
       } else {
 
+        Business.findById(activity.businessId, function(err, business) {
+
+          if (err) return next(err);
+
+          business.noOfBooks += 1;
+
+          business.save(function (err) {
+            if (err) return next(err);
+          });
+
+        });
+
         user.subscribedActivities.push(req.body.activityId);
 
         if (user.subscriptions) {
@@ -1186,6 +1407,7 @@ app.post('/mob_api/subscribe', function(req, res, next) {
 
 });
 
+
 app.post('/mob_api/unsubscribe', function(req, res, next) {
 
   User.findById(req.body.userId, function(err, user) {
@@ -1205,6 +1427,18 @@ app.post('/mob_api/unsubscribe', function(req, res, next) {
         res.status(409).send({ message: 'Not bookmarked' });
 
       } else {
+
+        Business.findById(activity.businessId, function(err, business) {
+
+          if (err) return next(err);
+
+          business.noOfBooks -= 1;
+
+          business.save(function (err) {
+            if (err) return next(err);
+          });
+
+        });
 
         user.subscribedActivities.splice(userIndex, 1);
         user.subscriptions -= 1;
@@ -1246,6 +1480,18 @@ app.post('/mob_api/markDone', function(req, res, next) {
         res.status(409).send({ message: 'Already marked as done' });
 
       } else {
+
+        Business.findById(activity.businessId, function(err, business) {
+
+          if (err) return next(err);
+
+          business.noOfDones += 1;
+
+          business.save(function (err) {
+            if (err) return next(err);
+          });
+
+        });
 
         user.doneActivities.push(req.body.activityId);
 
@@ -1299,22 +1545,37 @@ app.post('/mob_api/markUndone', function(req, res, next) {
         // To ensure an activity is marked as un-done only once even in case of external access
         res.status(409).send({ message: 'Already not marked as done' });
 
+      } else {
+
+        Business.findById(activity.businessId, function(err, business) {
+
+          if (err) return next(err);
+
+          business.noOfDones -= 1;
+
+          business.save(function (err) {
+            if (err) return next(err);
+          });
+
+        });
+
+        user.doneActivities.splice(userIndex, 1);
+        user.completions -= 1;
+
+        user.save(function (err) {
+          if (err) return next(err);
+        });
+
+
+        activity.doneIt.splice(index, 1);
+        activity.completions -= 1;
+
+        activity.save(function (err) {
+          if (err) return next(err);
+          res.status(200).send({message: 'Marked as Un-Done'});
+        });
+
       }
-      user.doneActivities.splice(userIndex, 1);
-      user.completions -= 1;
-
-      user.save(function (err) {
-        if (err) return next(err);
-      });
-
-
-      activity.doneIt.splice(index, 1);
-      activity.completions -= 1;
-
-      activity.save(function (err) {
-        if (err) return next(err);
-        res.status(200).send({ message: 'Marked as Un-Done' });
-      });
 
     });
 
@@ -1323,7 +1584,7 @@ app.post('/mob_api/markUndone', function(req, res, next) {
 });
 
 
-              //---- Selfies API ----//
+              //---- Web Add Selfie API ----//
 
 
 app.post('/api/selfies', ensureAuthenticated, function(req, res, next) {
@@ -1336,12 +1597,24 @@ app.post('/api/selfies', ensureAuthenticated, function(req, res, next) {
 
       if (err) return next(err);
 
-      if (activity.selfie_sub.indexOf(req.user._id == 0)) {
+      if (activity.selfie_sub.indexOf(req.user._id) != -1) {
 
         // To ensure a user gets to add only one selfie even through external means
         res.status(409).send({ message: 'Only one selfie allowed per user' });
 
       } else {
+
+        Business.findById(activity.businessId, function(err, business) {
+
+          if (err) return next(err);
+
+          business.noOfSelfies += 1;
+
+          business.save(function (err) {
+            if (err) return next(err);
+          });
+
+        });
 
         activity.selfies.push({
           url: req.body.selfies,
@@ -1376,7 +1649,71 @@ app.post('/api/selfies', ensureAuthenticated, function(req, res, next) {
 });
 
 
-      //---- Web Add tips API ----//
+        //---- Phone app Add Selfie API ----//
+
+app.post('/mob_api/selfies', function(req, res, next) {
+
+  User.findById(req.body.userId, function(err, user) {
+
+    if (err) next(err);
+
+    Activity.findById(req.body.activityId, function(err, activity) {
+
+      if (err) return next(err);
+
+      if (activity.selfie_sub.indexOf(req.body.userId) != -1) {
+
+        // To ensure a user gets to add only one selfie even through external means
+        res.status(409).send({ message: 'Only one selfie allowed per user' });
+
+      } else {
+
+        Business.findById(activity.businessId, function(err, business) {
+
+          if (err) return next(err);
+
+          business.noOfSelfies += 1;
+
+          business.save(function (err) {
+            if (err) return next(err);
+          });
+
+        });
+
+        activity.selfies.push({
+          url: req.body.selfies,
+          fbId: user.facebookId
+        });
+
+        activity.selfie_sub.push(req.body.userId);
+
+        user.selfies.push(req.body.selfies);
+
+        if (user.selfieCount) {
+          user.selfieCount += 1;
+        } else {
+          user.selfieCount = 1;
+        }
+
+        activity.save(function (err) {
+          if (err) return next(err);
+        });
+
+        user.save(function (err) {
+          if (err) next(err);
+          res.status(200).send({ message: 'Selfie added' });
+        })
+
+      }
+
+    });
+
+  });
+
+});
+
+
+        //---- Web Add tips API ----//
 
 
 app.post('/api/tips', ensureAuthenticated, function(req, res, next) {
@@ -1394,6 +1731,18 @@ app.post('/api/tips', ensureAuthenticated, function(req, res, next) {
         res.status(409).send({ message: 'Only one tip allowed per user' });
 
       } else {
+
+        Business.findById(activity.businessId, function(err, business) {
+
+          if (err) return next(err);
+
+          business.noOfTips += 1;
+
+          business.save(function (err) {
+            if (err) return next(err);
+          });
+
+        });
 
         activity.tips.push({
           text: req.body.tips.splice(-1),
@@ -1446,94 +1795,52 @@ app.post('/mob_api/tips', function(req, res, next) {
 
         } else {
 
-          console.log(activity.tipper.indexOf(req.body.userId));
+          if (req.body.tips == '') {
 
-          activity.tips.push({
-            text: req.body.tips,
-            tipperfbId: user.facebookId,
-            tipper: req.body.userId
-          });
+            res.status(400).send({ message: 'Enter tip text' });
 
-          activity.tipper.push(req.body.userId);
-
-          if (user.tipsCount) {
-            user.tipsCount += 1;
           } else {
-            user.tipsCount = 1;
+
+            Business.findById(activity.businessId, function (err, business) {
+
+              if (err) return next(err);
+
+              business.noOfTips += 1;
+
+              business.save(function (err) {
+                if (err) return next(err);
+              });
+
+            });
+
+            activity.tips.push({
+              text: req.body.tips,
+              tipperfbId: user.facebookId,
+              tipper: req.body.userId
+            });
+
+            activity.tipper.push(req.body.userId);
+
+            if (user.tipsCount) {
+              user.tipsCount += 1;
+            } else {
+              user.tipsCount = 1;
+            }
+
+            activity.save(function (err) {
+              if (err) return next(err);
+            });
+
+            user.save(function (err) {
+              if (err) return next(err);
+              res.status(200).send({message: 'Tip added'});
+            });
+
           }
-
-          activity.save(function(err) {
-            if (err) return next(err);
-          });
-
-          user.save(function(err) {
-            if (err) return next(err);
-            res.status(200).send({ message: 'Tip added' });
-          });
 
         }
 
       });
-
-  });
-
-});
-
-
-        //---- Activity review and staging APIs ----//
-
-
-app.post('/api/acceptActivity', ensureAuthenticated, function(req, res, next) {
-
-  User.findById(req.body.userId, function(err, user) {
-
-    if (err) return next(err);
-
-    if (user.p2p === true) {
-      Activity.findById(req.body.activityId, function(err, activity) {
-
-        if (err) return next(err);
-
-        activity.preview = true;
-
-        activity.save(function(err) {
-          if (err) return next(err);
-          console.log("Activity pushed into production");
-          res.status(200).end();
-        });
-
-      });
-    } else {
-      console.log('Permission denied');
-      res.status(400).end();
-    }
-  });
-
-});
-
-app.post('/api/deleteActivity', ensureAuthenticated, function(req, res, next) {
-
-  Activity.findById(req.body.activityId, function(err, activity) {
-
-    if (err) return next(err);
-
-    activity.remove(function(err) {
-      if (err) return next(err);
-      console.log("Activity deleted");
-      res.send(200);
-    });
-
-  });
-});
-
-
-app.get('/api/editActivity/:id', ensureAuthenticated, function(req, res, next) {
-
-  Activity.findById(req.params.id, function(err, activity) {
-
-    if (err) return next(err);
-
-    res.send(activity);
 
   });
 
