@@ -19,51 +19,71 @@
 </header>
 
 <div class="container" ng-if="profile.curator === true"
-     style="width:1112px;margin-left:auto;margin-right:auto;margin-top:5%;margin-bottom:5%;padding:30px;background-color:white;">
-    <div class="panel panel-default">
+     style="width:1112px;margin-left:auto;margin-right:auto;margin-top:5%;margin-bottom:5%;padding:30px">
+    <div class="panel">
         <div class="panel-heading" style="font-size:20px;">
             Admin Console
             <p class="pull-right" style="font-size:16px;">{{profile.name}}</p>
-        </div>
-
-        <div class="panel-body" style="margin-top:20px;">
+            <br /><br />
             <a href="/add/{{profile._id}}">Add activity</a>
         </div>
 
-        <div style="margin-top:40px" class="col-xs-4 col-md-4" ng-repeat="act in activities | orderBy:'timeAdded':true">
-            <div class="single-activity-box">
-                <div class="activity-image">
-                    <a href="/activities/{{act._id}}">
-                        <img style="height:222px;width:334px;" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{act.poster}}" alt="{{act.title}}">
-                    </a>
-                </div>
-                <div class="activity-info" style="height:120px;background-color: #606c88;">
-                    <a href="/activities/{{act._id}}" style="color:white;">
-                        {{act.title}}
-                        <p class="text-muted">{{act.location}} ({{act.neighborhood}})</p>
-                    </a>
-                    <button class='btn btn-danger btn-block' ng-click='deleteActivity(act)'>Delete Activity</button>
+        <div class="panel-body" style="margin-top:20px">
+            <div style="margin-top:40px" class="col-xs-4 col-md-4" ng-repeat="act in activities | orderBy:'timeAdded':true">
+                <div class="single-activity-box">
+                    <div class="activity-image">
+                        <a href="/activities/{{act._id}}">
+                            <img style="height:222px;width:334px;" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{act.poster}}" alt="{{act.title}}">
+                        </a>
+                    </div>
+                    <div class="activity-info" style="height:120px;background-color: #606c88;">
+                        <a href="/activities/{{act._id}}" style="color:white;">
+                            {{act.title}}
+                            <p class="text-muted">{{act.location}} ({{act.neighborhood}})</p>
+                        </a>
+                        <button class='btn btn-danger btn-block' ng-click='deleteActivity(act)'>Delete Activity</button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div>.</div>
     </div>
 </div>
 
-<div class="container">
+<div class="container"
+     style="width:1112px;margin-left:auto;margin-right:auto;padding-right:30px;">
     <div class="panel panel-default">
-        <ul>
-            <li ng-repeat="business in listOfBusinesses">
-                <div class="panel-body">
-                    <div>
-                        {{business.business}}
-                        {{business.city}}
-                        Activities: {{business.noOfAct}}
-                        Bookmarks: {{business.noOfBooks}}
-                        Done(s): {{business.noOfDones}}
-                        Selfies: {{business.noOfSelfies}}
-                    </div>
-                </div>
-            </li>
-        </ul>
+        <div class="panel-heading">
+            <h3>Businesses with us</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li ng-repeat="business in listOfBusinesses">
+                    <a ng-href="/business/{{business._id}}/{{profile._id}}">
+                        <div style="padding:10px;background-color:rgba(0,0,0,0.01);font-size:20px;margin-bottom:1px;cursor:pointer;">
+                            {{business.business}}
+                            <div class="pull-right" style="font-size:14px;">
+                                {{business.city}}
+                            </div>
+                        </div>
+                        <div style="padding:8px;background-color:rgba(0,0,0,0.05);font-size:16px;margin-bottom:10px;cursor:pointer;height:40px;">
+                            <div class="col-lg-3 col-md-3 col-xs-3">
+                                Activities: {{business.noOfAct}}
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-xs-3">
+                                Bookmarks: {{business.noOfBooks}}
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-xs-3">
+                                Done(s): {{business.noOfDones}}
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-xs-3">
+                                Selfies: {{business.noOfSelfies}}
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

@@ -24,7 +24,7 @@ angular.module('MyApp')
     });*/
 
     $scope.session.success(function(data) {
-      if (data.session == 'expired') {
+      if (data.session != 'OK') {
         $window.fbAsyncInit = function () {
           FB.init({
             appId: fb_appId,

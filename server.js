@@ -252,8 +252,8 @@ var Activity = mongoose.model('Activity', activitySchema);
 var Invites = mongoose.model('Invites', invitesSchema);
 var Business = mongoose.model('Business', businessSchema);
 
-mongoose.connect(config.db);
-//mongoose.connect("mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database");
+//mongoose.connect(config.db);
+mongoose.connect("mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database");
 //mongoose.connect("mongodb://bhuvan:joyage_database_password@ds051630.mongolab.com:51630/joyage_test_database");
 
 var app = express();
@@ -643,19 +643,6 @@ app.get('/api/session', function(req, res, next) {
 
 app.get('/api/businesses', ensureAuthenticated, function(req, res, next) {
 
-  if (req.body.business) {
-
-    var query = Business.find();
-
-    query.where({ business: req.body.business });
-
-    query.exec(function (err, business) {
-      if (err) return next(err);
-      res.send(business);
-    })
-
-  } else {
-
     var query = Business.find();
 
     query.exec(function (err, businesses) {
@@ -663,9 +650,18 @@ app.get('/api/businesses', ensureAuthenticated, function(req, res, next) {
       res.send(businesses);
     });
 
-  }
+});
+
+
+app.get('/api/businesses/:business', ensureAuthenticated, function(req, res, next) {
+
+  Business.findById(req.params.business, function(err, business) {
+    if (err) return next(err);
+    res.send(business);
+  });
 
 });
+
 
 
 app.post('/api/businesses', ensureAuthenticated, function(req, res, next) {
@@ -1088,18 +1084,18 @@ app.post('/sendInvites', ensureAuthenticated, function(req, res, next) {
 
     if (err) return next(err);
 
-    console.log(req.body.id);
+    /*console.log(req.body.id);
     console.log(req.body.response);
-    console.log(req.body.response.to.length);
+    console.log(req.body.response.to.length);*/
 
-    /*user.inviteSent += 1;
+    user.inviteSent += 1;
     user.invites.push(req.body.response.to);
 
     user.save(function(err) {
       if (err) return next(err);
       res.status(200).end();
-    })*/
-    res.status(200).end();
+    });
+
   });
 });
 
