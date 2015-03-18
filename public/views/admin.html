@@ -57,9 +57,12 @@
         <div class="panel-heading">
             <h3>Businesses with us</h3>
         </div>
+        <div>
+            <input ng-model="query" placeholder="Search Business" style="font-size:18px;"/>
+        </div>
         <div class="panel-body">
             <ul>
-                <li ng-repeat="business in listOfBusinesses">
+                <li ng-repeat="business in listOfBusinesses | filter:query">
                     <a ng-href="/business/{{business._id}}/{{profile._id}}">
                         <div style="padding:10px;background-color:rgba(0,0,0,0.01);font-size:20px;margin-bottom:1px;cursor:pointer;">
                             {{business.business}}

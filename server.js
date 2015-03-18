@@ -694,6 +694,10 @@ app.get('/api/activities', ensureAuthenticated, function(req, res, next) {
 
   if (req.query.preview === 'false') {                                                                                                             // Admin console preview
     query.where({ preview: 'false' });
+  } else if (req.query.business) {
+
+    query.where({ business: req.query.business }).where({ preview: {$ne: false} }).sort('-timeAdded');
+
   } else {
 
     if (req.query.genre && req.query.limit)

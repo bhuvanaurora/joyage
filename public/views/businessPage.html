@@ -23,6 +23,9 @@
         <div class="panel-heading">
             <span style="font-size:28px;">
                 {{business.business}}
+                <div class="pull-right" style="font-size:18px;">
+                    {{business.city}}
+                </div>
             </span>
         </div>
         <div class="panel-body" style="font-size:18px;margin-top:20px;height:40px;padding:2%;">
@@ -38,6 +41,31 @@
             <div class="col-lg-3 col-md-3 col-xs-3">
                 Selfies: {{business.noOfSelfies}}
             </div>
+
+            <div style="margin-top:80px;">
+                <ul>
+                    <li ng-repeat="act in activities">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8" style="margin-left:40px;">
+                            <a ng-href="/activities/{{act._id}}">
+                                <h3 class="heading-title" style="word-spacing:4px;">{{act.title}}</h3>
+                            </a>
+                            <p>{{act.description}}</p>
+                            <div class="clear-all"></div>
+
+                            <p class="event-location"><span style="font-size:18px;">{{act.location}}</span><br />
+                                {{act.neighborhood}}</p>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3"></div>
+                        <a ng-href="/activities/{{act._id}}">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{act.poster}}" style="max-width:120%">
+                            </div>
+                        </a>
+                        <div class="col-lg-1"></div>
+                    </li>
+                </ul>
+            </div>
+
         </div>
     </div>
 </div>

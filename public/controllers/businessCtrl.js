@@ -47,7 +47,11 @@ angular.module('MyApp')
                 }
 
                 Business.get({ business: $routeParams.business }, function(business) {
+
                     $scope.business = business;
+
+                    $scope.activities = Activity.query({ business: $scope.business.business });
+
                 });
 
 
