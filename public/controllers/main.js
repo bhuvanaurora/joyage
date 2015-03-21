@@ -8,7 +8,7 @@ angular.module('MyApp')
                             };*/
 
       if (!$rootScope.currentUser) {
-        $location.path('/login');
+        $location.path('/');
       }
 
     $window.scrollTo(0,0);
@@ -42,7 +42,15 @@ angular.module('MyApp')
 
     $scope.activ = [];
     $scope.pagenumber = 1;
-    $scope.gDesc = '';
+    $scope.gD = {
+      'Active': "Look, the sun is out. Go for a run, climb a mountain, learn to dance or play a game. Just get up, put the sneakers on and leave the world behind.",
+      'Posh': "Enough with the bourgeois. Simplicity is overrated and beige is boring. Nah, choose to be a diva instead. Splurge on luxury, fine dining and upscale shopping. Paint the town bright, bold red.",
+      'Calm': "You work hard. Or probably don't. But you deserve to relax a little. Walk in a park, check a museum, find a cafe, read a book, or watch a play. Blur the city noise and find a nirvana.",
+      'Adventure': "Do something new today. Something you have never done before. Something different, something crazy. Throw caution to the wind. Enter the realm of unknown.",
+      'Party': "Go to a club, hang out with old friends, or make new ones. Mix it up with laughter and karaoke, set the dance floor ablaze. Abandon the real world and just crank the volume up.",
+      'Dark': "Legend is, there is someone who wakes up at sundown, roams the dark alleys in search of hidden watering holes and turns every night into a legendary one. Is that someone, you?"
+    };
+    $scope.gDesc = $scope.gD['Active'];
     $scope.city = "Bangalore";
     $scope.sortSelected = 'New on Joyage';
 
@@ -60,79 +68,55 @@ angular.module('MyApp')
       $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city }));
     };
 
-    /*function bgColorSwitch () {
-      for (var i=0; i<6; i++) {
-        var bcg1 = document.getElementById($scope.genres[i]);
-        bcg1.style.backgroundColor = "#f2f2f2";
-      }
-      var bcg1 = document.getElementById('allActivs');
-      bcg1.style.backgroundColor = "#f2f2f2";
-    }*/
-
-    function bgColorSwitch (color) {
-      title = document.getElementsByClassName('heading-title');
-      for (var i=0; i<title.length ;i++) {
-        console.log(title[i]);
-        title[i].style.color = color;
-        console.log(title[i].style.color);
-      }
-    }
 
     $scope.filterByGenre = function(genre) {
-      //$scope.activities = Activity.query({ genre: genre, page: 1, sortOrder: $scope.sortOrder });
       $scope.activ = [];
       $scope.activ.push(Activity.query({ genre: genre, page: 1, sortOrder: $scope.sortOrder, city: $scope.city }));
       $scope.headingTitle = genre;
 
       var elem = document.getElementById("gImg");
+      var bcg = document.getElementById(genre);
+      for (var i=0; i<$scope.genres.length; i++) {
+        var el = document.getElementById($scope.genres[i]);
+        el.style.color = 'black';
+      }
+
+      bcg.style.color = 'rgba(71,162,190,1)';
+
+      $scope.gDesc = $scope.gD[genre];
 
       if (genre == 'Active') {
 
         elem.src="/img/Active-Mood.jpg";
-        var bcg = document.getElementById(genre);
-        bgColorSwitch("#e6214e");
 
       } else if (genre == 'Posh') {
 
         elem.src="/img/Posh-Mood.jpg";
-        var bcg = document.getElementById(genre);
-        bgColorSwitch("#1d58d0");
 
       } else if (genre == 'Calm') {
 
         elem.src="/img/Calm-Mood.jpg";
-        var bcg = document.getElementById(genre);
-        //bgColorSwitch();
 
       } else if (genre == 'Adventure') {
 
         elem.src="/img/Adventure-Mood.jpg";
-        var bcg = document.getElementById(genre);
-        //bgColorSwitch();
 
       } else if (genre == 'Party') {
 
         elem.src="/img/Party-Mood.jpg";
-        var bcg = document.getElementById(genre);
-        //bgColorSwitch();
 
       } else if (genre == 'Dark') {
 
         elem.src="/img/Dark-Mood.jpg";
-        var bcg = document.getElementById(genre);
-        //bgColorSwitch();
 
       }
 
     };
 
     $scope.allActivities = function(){
-      //$scope.activities = Activity.query({ page: 1, sortOrder: $scope.sortOrder });
       $scope.activ = [];
       $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city }));
       $scope.headingTitle = "all activities";
-      $scope.gDesc = '';
-      bgColorSwitch("#e6214e");
       var bcg1 = document.getElementById('allActivs');
       //bcg1.style.backgroundColor = "#e2e2e2";
     };
@@ -206,44 +190,34 @@ angular.module('MyApp')
         $location.path(path);
       };
 
-      $scope.displayMenu = function () {
-
-        var elem = document.getElementById("nav-city");
-        var container = document.getElementById("city-drop-text");
-        elem.style.display = "block";
-        container.style.marginTop = "88px";
-
-      };
-
-      $scope.closeMenu = function () {
-
-        var elem = document.getElementById("nav-city");
-        var container = document.getElementById("city-drop-text");
-        elem.style.display = "none";
-        container.style.marginTop = "0px";
-
-      };
-
-      $scope.displayMenu1 = function () {
-
-        var elem = document.getElementById("nav-sort");
-        var container = document.getElementById("sort-drop-text");
-        elem.style.display = "block";
-        container.style.marginTop = "88px";
-
-      };
-
-      $scope.closeMenu1 = function () {
-
-        var elem = document.getElementById("nav-sort");
-        var container = document.getElementById("sort-drop-text");
-        elem.style.display = "none";
-        container.style.marginTop = "0px";
-
-      };
-
       $scope.userMenu = function() {
         var elem = document.getElementById("user-menu-drawer");
+        if (elem) {
+          if (elem.style) {
+            if (elem.style.display == 'block') {
+              elem.style.display = 'none';
+            } else {
+              elem.style.display = 'block';
+            }
+          }
+        }
+      };
+
+      $scope.sortMenu = function() {
+        var elem = document.getElementById("sort-menu-drawer");
+        if (elem) {
+          if (elem.style) {
+            if (elem.style.display == 'block') {
+              elem.style.display = 'none';
+            } else {
+              elem.style.display = 'block';
+            }
+          }
+        }
+      };
+
+      $scope.cityMenu = function() {
+        var elem = document.getElementById("city-menu-drawer");
         if (elem) {
           if (elem.style) {
             if (elem.style.display == 'block') {

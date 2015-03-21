@@ -231,7 +231,7 @@ angular.module('MyApp')
                                   var payload = JSON.parse($window.atob(token.split('.')[1]));
                                   $window.localStorage.token = token;
                                   $rootScope.currentUser = payload.user;
-                                  $location.path('/');
+                                  $location.path('/home');
                                   $alert({
                                       title: 'Cheers!',
                                       content: 'You have successfully signed-in with Facebook.',
@@ -351,9 +351,11 @@ angular.module('MyApp')
                 });
             };
           });
+          $window.location = '/';
           $alert({
             content: 'You have been logged out.',
             animation: 'fadeZoomFadeDown',
+            placement: 'top-right',
             type: 'material',
             duration: 3
           });

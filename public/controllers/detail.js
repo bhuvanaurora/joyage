@@ -1,8 +1,8 @@
 // Changes made
 
 angular.module('MyApp')
-  .controller('DetailCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$alert', '$upload', 'fb_appId', 'Activity', 'Profile', 'Subscription', 'DoneIt', 'Tips', 'Selfies', 'Accept', 'Delete', 'Session', 'Auth',
-                             function($scope, $rootScope, $window, $routeParams, $location, $alert, $upload, fb_appId, Activity, Profile, Subscription, DoneIt, Tips, Selfies, Accept, Delete, Session, Auth) {
+  .controller('DetailCtrl', ['$scope', '$interval', '$rootScope', '$window', '$routeParams', '$location', '$alert', '$upload', 'fb_appId', 'Activity', 'Profile', 'Subscription', 'DoneIt', 'Tips', 'Selfies', 'Accept', 'Delete', 'Session', 'Auth',
+                             function($scope, $interval, $rootScope, $window, $routeParams, $location, $alert, $upload, fb_appId, Activity, Profile, Subscription, DoneIt, Tips, Selfies, Accept, Delete, Session, Auth) {
 
          $window.scrollTo(0,0);                                 // To scroll to the top of the page
 
@@ -71,7 +71,6 @@ angular.module('MyApp')
               })
           }, function(response){});*/
         };
-
 
 
           $scope.subscriptions = activity.subscriptions;
@@ -143,7 +142,6 @@ angular.module('MyApp')
               if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {
                   for (var i = 0; i < $files.length; i++) {
                       var file = $files[i];
-                      console.log('File: '+file);
                       $scope.upload = $upload.upload({
                           url: '/uploadSelfie',
                           data: {myObj: $scope.myModelObj},
@@ -174,11 +172,51 @@ angular.module('MyApp')
           }
       };
 
-          //$scope.addS = true;
+
      if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {
-          //$scope.addS = false;
           $scope.addS = true;
+     }
+
+      $scope.ii = [];
+      for (var i=1; i<=100; i++) {
+          $scope.ii.push(i);
       }
+
+      var refreshes = 0;
+
+      $interval(function () {
+
+          if (refreshes < 1) {
+
+              activity.selfies.forEach(function (self) {
+                  var elem = document.getElementById(self.url);
+                  var rand = Math.floor((Math.random() * 10) + 1) * 10;
+                  if (rand < 50) {
+                      rand += 50;
+                  }
+                  randS = rand.toString();
+                  elem.style.width = randS + 'px';
+                  elem.style.height = randS + 'px';
+              });
+
+              var index = 50 - $scope.activity.selfiesNumber;
+              for (var i = 1; i <= index; i++) {
+                  var elem = document.getElementById(i);
+                  var rand = Math.floor((Math.random() * 100) + 1);
+                  if (rand < 50) {
+                      rand += 50;
+                  }
+                  randS = rand.toString();
+                  elem.style.width = randS + 'px';
+                  elem.style.height = randS + 'px';
+              }
+
+          }
+
+          refreshes += 1;
+
+      }, 10);
+
 
       $scope.addSelfies = function() {
           if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {
@@ -233,7 +271,7 @@ angular.module('MyApp')
               }
 
               //define the basic color of your map, plus a value for saturation and brightness
-              var $main_color = '#2d313f',
+              var $main_color = '#47a2be',
                   $saturation= -20,
                   $brightness= 5;
 
@@ -513,7 +551,6 @@ angular.module('MyApp')
      // -------------- for modal
 
      $('.open-modal').click(function() {
-         console.log("Modal");
          var el = $(this)[0],
              classes = el.className.split(/\s+/);
          for(var i = 0; i < classes.length; i++) {

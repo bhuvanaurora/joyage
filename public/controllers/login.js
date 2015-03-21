@@ -1,11 +1,20 @@
 angular.module('MyApp')
-  .controller('LoginCtrl', ['$scope', 'Auth', function($scope, Auth) {
+  .controller('LoginCtrl', ['$scope', '$rootScope', '$location', '$window', '$interval', 'Auth', function($scope, $rootScope, $location, $window, $interval, Auth) {
     /*$scope.login = function() {
       Auth.login({ email: $scope.email, password: $scope.password });
     };*/
         /*$scope.googleLogin = function() {
       Auth.googleLogin();
     };*/
+
+      /*$interval(function() {
+        $window.location.reload();
+      },10000);*/
+
+      if ($rootScope.currentUser) {
+        $location.path('/home');
+      }
+
     $scope.facebookLogin = function() {
       Auth.facebookLogin();
     };

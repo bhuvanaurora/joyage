@@ -129,6 +129,7 @@ var activitySchema = new mongoose.Schema({
   tipper: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }],
+  tipsNumber: { type: Number, default: 0 },
   selfies: [{
     url: String,
     fbId: String
@@ -136,6 +137,7 @@ var activitySchema = new mongoose.Schema({
   selfie_sub: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }],
+  selfiesNumber: {type: Number, default: 0},
   subscribers: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }],
@@ -1623,6 +1625,8 @@ app.post('/api/selfies', ensureAuthenticated, function(req, res, next) {
 
         activity.selfie_sub.push(req.user._id);
 
+        activity.selfiesNumber += 1;
+
         user.selfies.push(req.body.selfies);
 
         if (user.selfieCount) {
@@ -1687,6 +1691,8 @@ app.post('/mob_api/selfies', function(req, res, next) {
 
         activity.selfie_sub.push(req.body.userId);
 
+        activity.selfiesNumber += 1;
+
         user.selfies.push(req.body.selfies);
 
         if (user.selfieCount) {
@@ -1749,6 +1755,8 @@ app.post('/api/tips', ensureAuthenticated, function(req, res, next) {
           tipperfbId: req.user.facebookId,
           tipper: req.user._id
         });
+
+        activity.tipsNumber += 1;
 
         activity.tipper.push(req.user._id);
 
@@ -1818,6 +1826,8 @@ app.post('/mob_api/tips', function(req, res, next) {
               tipperfbId: user.facebookId,
               tipper: req.body.userId
             });
+
+            activity.tipsNumber += 1;
 
             activity.tipper.push(req.body.userId);
 

@@ -1,6 +1,6 @@
 <!----------------------------------------------------- Navbar -------------------------------------------->
 
-<header style="background-color:rgba(71,162,190,1);border:none;" ng-controller="NavbarCtrl">
+<header ng-controller="NavbarCtrl">
     <div class="wrapper" style="margin-bottom:-25px;">
         <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
             <div class="head-brand" ng-click="go('/')" style="cursor:pointer">
@@ -52,7 +52,7 @@
 
 <!---------------------------------------------------- Activity Details ------------------------------------------------>
 
-<div class="wrapper text-center">
+<section class="wrapper text-center">
     <div class="event-head">
         <h1>{{activity.title}}</h1>
         <ul>
@@ -94,157 +94,244 @@
                     </span>
 
             </button>
-            <button class="open-modal">
+            <button class="open-modal" style="margin-right:0px;">
 
                     <span ng-click="fb_share()">
                         <i class="batch" data-icon="&#xF159;"></i> Share
                     </span>
 
             </button>
-        </div>
 
-        <p style="width:700px;">{{activity.description}}</p>
+            <p style="width:500px;text-align:justify;margin-top:30px;">{{activity.description}}</p>
 
+            <div style="margin-bottom:60px;"
+                    onload='function changeFontSize(){if (activity.description!=="") {document.getElementById("description").style.font-size="15px"}();}'>
 
-        <div onload='function changeFontSize(){if (activity.description!=="") {document.getElementById("description").style.font-size="15px"}();}'>
-            <a href="{{activity.sourceWebsite}}">{{activity.sourceName}}</a>
-            <p style="width:700px;">{{activity.sourceDescription}}</p>
+                <p style="width:900px;text-align:justify;">
+                    {{activity.sourceDescription}} <a href="{{activity.sourceWebsite}}" style="font-size:12px;">{{activity.sourceName}}</a>
+                </p>
+            </div>
+
         </div>
 
     </div>
 
-</div>
+</section>
 
-<div class="wrapper text-center event-extras">
 
-    <!--------------- Corner --------------->
+<!---------------------------------------- Additional Information ----------------------------------------------------->
 
-    <div class="col-lg-5 col-sm-5 col-md-5 col-xs-12" style="float:left">
-        <div class="tip-block" style="margin-bottom:40px;">
-            <div class="bubble-holder">
-                <div class="bubble-body" ng-if="activity.corner">
-                    <p>{{activity.cornerText}}</p>
-                </div>
-            </div><!-- bubble -end -->
-            <div class="bubble-user-img" ng-if="activity.corner">
-                <img ng-if="activity.cornerPic" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.cornerPic}}">
-                <div class="corner-name pull-left" ng-if="activity.corner">{{activity.corner}}</div>
+
+        <!----------------------- Media Speak ----------------------->
+
+
+<section style="background-color:rgba(0,0,0,0.04);margin-top:-80px;" ng-if="activity.media!=''">
+
+    <div class="wrapper text-center event-extras" style="padding-top:40px;padding-bottom:80px;border-bottom:1px solid #e3e3e3">
+
+        <h4 style="padding-bottom:40px;">Media Speak</h4>
+
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8" style="margin-left:40px;min-height:350px;overflow:scroll;">
+
+            <div style="transform:translateY(40%);">
+                <ul>
+                    <li ng-repeat="media in activity.media" style="text-align:justify;">
+                        <h5>
+                            {{media.title}}
+                            <br />
+                            <div style="text-align:right;"><a style="text-align:right;font-size:12px;" href="{{media.link}}">{{media.text}}</a></div>
+                        </h5>
+                    </li>
+                </ul>
+            </div>
+            <div class="clear-all"></div>
+
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2"></div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <img ng-src="/img/bangalore.jpg" style="width:600px;height:350px;">
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2"></div>
+
+    </div>
+
+</section>
+
+
+        <!-------------------------------- Venue -------------------------------->
+
+
+<section>
+
+    <div class="wrapper text-center event-extras" style="padding-top:40px;padding-bottom:80px;border-bottom:1px solid #e3e3e3">
+
+        <div class="text-center">
+            <div>
+                <img ng-src="/img/index/4.jpg" style="width:600px;height:400px;">
+                <h4>About Venue</h4>
+
+                <!------                                                                                    ------>
+                <!-------                       Need Venue details here once back-end made                  ------>
+                <!------                                                                                    ------>
+
+                <p style="text-align:justify;width:600px;margin-left:auto;margin-right:auto;">{{activity.cornerText}}</p>
             </div>
         </div>
+
+        <div ng-if="activity.corner && activity.goodies" class="text-center" style="padding-top:40px;width:500px;margin-left:auto;margin-right:auto;">
+
+            <div ng-if="activity.corner" style="float:left;max-width:240px;padding:20px;background-color:rgba(0,0,0,0.04);text-align:justify;">
+                <img style="width:240px;height:150px;" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.cornerPic}}">
+                <h5 class="text-center">{{activity.corner}}</h5>
+                {{activity.cornerText}}
+            </div>
+
+            <div ng-if="activity.goodies" style="float:right;max-width:240px;padding:20px;margin:0px;background-color:rgba(0,0,0,0.04);text-align:justify;">
+                <h5 class="text-center" style="margin-top:0px;">Goodies</h5>
+                {{activity.goodies}}
+                <img style="width:240px;height:150px;padding-top:20px;" ng-src="/img/index/5.jpg">
+            </div>
+
+        </div>
+
+        <div ng-if="!activity.goodies" class="text-center" style="padding-top:40px;width:240px;margin-left:auto;margin-right:auto;">
+
+            <div ng-if="activity.corner" style="float:left;max-width:240px;padding:20px;background-color:rgba(0,0,0,0.04);text-align:justify;">
+                <img style="width:240px;height:150px;" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.cornerPic}}">
+                <h5 class="text-center">{{activity.corner}}</h5>
+                {{activity.cornerText}}
+            </div>
+
+        </div>
+
+        <div ng-if="!activity.corner" class="text-center" style="padding-top:40px;width:240px;margin-left:auto;margin-right:auto;">
+
+            <div ng-if="activity.goodies" style="float:right;max-width:240px;padding:20px;margin:0px;background-color:rgba(0,0,0,0.04);text-align:justify;">
+                <h5 class="text-center" style="margin-top:0px;">Goodies</h5>
+                {{activity.goodies}}
+                <img style="width:240px;height:150px;padding-top:20px;" ng-src="/img/index/5.jpg">
+            </div>
+
+        </div>
+
     </div>
 
-    <!--------------- Media ---------------->
+</section>
 
-    <div class="col-lg-7 col-sm-7 col-md-7 col-xs-12" style="float:right;">
-        <div ng-if="activity.media[0]">
-            <h4>In Media</h4>
-            <ul>
-                <li ng-repeat="media in activity.media">
-                    <h5>{{media.title}}</h5>
-                    <a href="{{media.link}}">{{media.text}}</a>
+
+                <!------------------------------- Tips ---------------------------------------->
+
+
+<section style="background-color:rgba(0,0,0,0.04);margin-top:-60px;">
+
+    <div class="tips-holder" style="padding-bottom:40px;border-bottom:1px solid #e3e3e3">
+        <div class="tip-header text-center" ng-if="activity.tips!=''">
+            <b>TIPS ({{activity.tipsNumber}})</b>
+        </div>
+        <div class="tips-brick" ng-if="activity.tips!=''">
+            <ul class="genres">
+                <li ng-repeat="tip in activity.tips">
+                    <img ng-src="https://graph.facebook.com/v2.2/{{tip.tipperfbId}}/picture"
+                         style="width:50px;height:50px;" > {{tip.text}}
                 </li>
             </ul>
         </div>
+        <a href="" class="open-modal modal-pro-tip"><button style="margin-top:40px;" class="tips-button" ng-if="editTips">Leave a tip</button></a>
     </div>
 
-    <div class="info-section">
+</section>
 
-        <ul class="justified padd-left-none">
 
-            <!-------------- Goodies -------------->
-            <li ng-if="activity.goodies">
-                <h2>GOODIES</h2>
-                <p>{{activity.goodies}}</p>
-            </li>
+<section>
 
-            <!--------------- Payment -------------->
-            <li ng-if="activity.price">
-                <h2>PRICE</h2>
-                <p>{{activity.currency}} {{activity.price}}</p>
+    <div class="wrapper text-center event-extras" style="padding-top:40px;">
 
-                <div class="panel panel-default panel-right"
-                     style="height:50px;"
-                     ng-if="activity.payment || activity.bookRide">
-                    <table class="link-table">
-                        <tr>
-                            <td>
-                                <div class="text-center link-div">
-                                    <a href="{{activity.payment}}"
-                                       ng-if="activity.payment">
-                                        <div class="text-center">Tickets</div>
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="text-center link-div">
-                                    <a href="{{activity.bookRide}}"
-                                       ng-if="activity.bookRide">
-                                        <div class="text-center">Ride</div>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </li>
+        <h3>
+            CHEERS ({{activity.selfiesNumber}})
+        </h3>
 
-            <!--------------- Additional Info -------------->
-            <li ng-if="activity.moreInfo || activity.photoCredit">
-                <h2>MORE INFO</h2>
-                <p ng-if="activity.moreInfoLink">
-                    <a href="{{activity.moreInfoLink}}">{{activity.moreInfo}}</a>
-                </p>
-                <p ng-if="!activity.moreInfoLink">{{activity.moreInfo}}</p>
+        <img id="{{selfie.url}}" ng-repeat="selfie in activity.selfies" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{selfie.url}}" />
 
-                <p ng-if="activity.photoCredit">PHOTO CREDITS</p>
-                <a ng-if="activity.photoCredit" href="{{activity.photoCreditLink}}">{{activity.photoCredit}}</a>
-            </li>
-        </ul>
+        <img id="{{i}}" ng-repeat="i in ii" ng-src="" />
+
+        <br />
+
+        <a href="" class="open-modal modal-selfie" style="font-size:16px;cursor:pointer">
+            <span ng-if="addS">Spread the cheer</span>
+        </a>
 
     </div>
-</div>
 
-<!--------------- Tips --------------------->
+</section>
 
-<div class="tips-holder">
-    <div class="tip-header text-center" ng-if="activity.tips!=''">
-        TIPS
+
+
+
+<section>
+
+    <div class="wrapper text-center event-extras" style="padding-top:40px;">
+
+        <div class="info-section">
+
+            <ul class="justified padd-left-none">
+
+                <!--------------- Payment -------------->
+                <li ng-if="activity.price">
+                    <h2>PRICE</h2>
+                    <p>{{activity.currency}} {{activity.price}}</p>
+
+                    <div class="panel panel-default panel-right"
+                         style="height:50px;"
+                         ng-if="activity.payment || activity.bookRide">
+                        <table class="link-table">
+                            <tr>
+                                <td>
+                                    <div class="text-center link-div">
+                                        <a href="{{activity.payment}}"
+                                           ng-if="activity.payment">
+                                            <div class="text-center">Tickets</div>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="text-center link-div">
+                                        <a href="{{activity.bookRide}}"
+                                           ng-if="activity.bookRide">
+                                            <div class="text-center">Ride</div>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+
+                <!--------------- Additional Info -------------->
+                <li ng-if="activity.moreInfo || activity.photoCredit">
+                    <h2>MORE INFO</h2>
+                    <p ng-if="activity.moreInfoLink">
+                        <a href="{{activity.moreInfoLink}}">{{activity.moreInfo}}</a>
+                    </p>
+                    <p ng-if="!activity.moreInfoLink">{{activity.moreInfo}}</p>
+
+                    <p ng-if="activity.photoCredit">PHOTO CREDITS</p>
+                    <a ng-if="activity.photoCredit" href="{{activity.photoCreditLink}}">{{activity.photoCredit}}</a>
+                </li>
+            </ul>
+
+        </div>
+
     </div>
-    <div class="tips-brick" ng-if="activity.tips!=''">
-        <ul class="genres">
-            <li ng-repeat="tip in activity.tips">
-                <img ng-src="https://graph.facebook.com/v2.2/{{tip.tipperfbId}}/picture"
-                     style="width:50px;height:50px;" > {{tip.text}}
-            </li>
-        </ul>
-    </div>
-    <a href="" class="open-modal modal-pro-tip"><button class="tips-button" ng-if="editTips">Leave a tip</button></a>
-</div>
 
-<!-------------------------------- Selfies --------------------------------------->
+</section>
 
-<div class="text-center">
-    <h3>
-        SELFIES
-    </h3>
-    <a href="" class="open-modal modal-selfie" style="font-size:16px;cursor:pointer">
-        <span ng-if="addS">Selfie button</span>
-    </a>
-    <ul>
-        <li style="display:inline" ng-repeat="selfie in activity.selfies">
-            <!--img src="https://graph.facebook.com/v2.2/{{selfie.fbId}}/picture"
-                    style="width:50px;height:50px;border-radius:50%" /-->
-            <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{selfie.url}}"
-                 style="width:50px;height:50px;" />
-        </li>
-    </ul>
-</div>
+
 
 <!----------------- Map -------------------->
 
 <div class="event-extra-info">
     <div class="wrapper">
-        <div class="map-block">
+        <div class="map-block" style="width:900px;margin-left:auto;margin-right:auto">
 
             <section id="cd-google-map">
                 <div id="google-container"></div>
@@ -252,7 +339,9 @@
                 <div id="cd-zoom-out"></div>
                 <address>
                     <b>{{activity.location}}</b>
-                    <br/>{{activity.address}}
+                    <br/>
+                    <br />
+                    {{activity.address}}
                     <br/>{{activity.neighborhood}}, {{activity.city}}
                     <br/>{{activity.phone}}
                 </address>
@@ -273,27 +362,27 @@
             <div class="info-section"
                  ng-if="activity.locationWebsite || activity.zomatoLink || activity.facebookLink || activity.twitterLink">
                 <ul class="justified padd-left-none">
-                    <li class="text-center" ng-if="activity.locationWebsite">
+                    <li class="text-center" ng-if="activity.locationWebsite" style="padding:10px;">
                         <a href="{{activity.locationWebsite}}"
-                           ng-if="activity.locationWebsite">
+                           ng-if="activity.locationWebsite" style="padding:10px;padding-left:60px;padding-right:60px;">
                             Website
                         </a>
                     </li>
-                    <li class="text-center" ng-if="activity.zomatoLink">
+                    <li class="text-center" ng-if="activity.zomatoLink" style="padding:10px;">
                         <a href="{{activity.zomatoLink}}"
-                           ng-if="activity.zomatoLink">
+                           ng-if="activity.zomatoLink" style="padding:10px;padding-left:60px;padding-right:60px;">
                             Zomato
                         </a>
                     </li>
-                    <li class="text-center" ng-if="activity.facebookLink">
+                    <li class="text-center" ng-if="activity.facebookLink" style="padding:10px;">
                         <a href="{{activity.facebookLink}}"
-                           ng-if="activity.facebookLink">
+                           ng-if="activity.facebookLink" style="padding:10px;padding-left:60px;padding-right:60px;">
                             Facebook
                         </a>
                     </li>
-                    <li class="text-center" ng-if="activity.twitterLink">
+                    <li class="text-center" ng-if="activity.twitterLink" style="padding:10px;">
                         <a href="{{activity.twitterLink}}"
-                           ng-if="activity.twitterLink">
+                           ng-if="activity.twitterLink" style="padding:10px;padding-left:60px;padding-right:60px;">
                             Twitter
                         </a>
                     </li>

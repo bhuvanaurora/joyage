@@ -3,9 +3,14 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
     $locationProvider.html5Mode(true);
 
     $routeProvider
-      .when('/', {
+      /*.when('/', {
         templateUrl: 'views/landingPage.html',
         controller: 'landPageCtrl'
+      })*/
+
+      .when('/', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
       })
 
       .when('/home', {
@@ -37,10 +42,6 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
         controller: 'AddCtrl'
       })
 
-      .when('/login', {
-        templateUrl: 'views/login.html',
-        controller: 'LoginCtrl'
-      })
       .when('/login/:id', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'

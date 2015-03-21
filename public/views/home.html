@@ -1,6 +1,6 @@
 <!----------------------------------------------------- Navbar -------------------------------------------->
 
-<header style="background-color:rgba(71,162,190,1);border:none;" ng-controller="NavbarCtrl">
+<header ng-controller="NavbarCtrl">
     <div class="wrapper" style="margin-bottom:-25px;">
         <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
             <div class="head-brand" ng-click="go('/')" style="cursor:pointer">
@@ -49,105 +49,115 @@
 
     </div>
 
-    <div class="nav-tabs col-lg-12 col-sm-12 col-xs-24 col-md-12 padd-left-none" style="position:fixed;height:50px;line-height:0px;font-family:WebFontThin">
-
-        <span class="nav-tabs-anchor text-center" style="cursor:auto;font-size:20px;margin:0px 20px 0px 20px;">
-            PICK YOUR MOOD
-        </span>
-
-        <span class="nav-tabs-anchor text-center" id="{{genres[0]}}" ng-click="filterByGenre(genres[0])" style="margin-right:20px;color:#e6214e">
-            {{genres[0]}}
-        </span>
-
-        <span class="nav-tabs-anchor text-center" id="{{genres[1]}}" ng-click="filterByGenre(genres[1])" style="margin-right:20px;color:#1d58d0">
-            {{genres[1]}}
-        </span>
-
-        <span class="nav-tabs-anchor text-center" id="{{genres[2]}}" ng-click="filterByGenre(genres[2])" style="margin-right:20px;color:rgba(0,217,212,1)">
-            {{genres[2]}}
-        </span>
-
-        <span class="nav-tabs-anchor text-center" id="{{genres[3]}}" ng-click="filterByGenre(genres[3])" style="margin-right:20px;color:rgba(63,197,70,1)">
-            {{genres[3]}}
-        </span>
-
-        <span class="nav-tabs-anchor text-center" id="{{genres[4]}}" ng-click="filterByGenre(genres[4])" style="margin-right:20px;color:rgba(214,71,1,1)">
-            {{genres[4]}}
-        </span>
-
-        <span class="nav-tabs-anchor text-center" id="{{genres[5]}}" ng-click="filterByGenre(genres[5])" style="margin-right:20px;color:rgba(165,116,14,1)">
-            {{genres[5]}}
-        </span>
-
-        <span class="nav-tabs-anchor text-center" id="allActivs" ng-click="allActivities()" style="margin-right:20px;">
-            All
-        </span>
-
-        <div class="pull-right" style="width:35%">
-
-        <div class="pull-right" ng-mouseleave="closeMenu1()" style="margin-left:20%;margin-right:20px;width:200px;margin-top:25px;text-transform:uppercase;cursor:pointer;">
-
-            <span class="text-left" ng-click="displayMenu1()" id="sort-drop-text" style="padding-bottom:20px;margin-left:40px;">
-                {{sortSelected}}
-            </span>
-
-            <ul class="text-left hide pull-right" id="nav-sort" style="position:absolute;z-index:1;width:200px;line-height:20px;margin-top:25px;padding-bottom:5px;padding-top:5px;">
-                <li>
-                    <span class="text-left" ng-click="sort(1)">
-                        {{sortOrders[0]}}
-                    </span>
-                </li>
-                <li>
-                    <span class="text-left" ng-click="sort(2)">
-                        {{sortOrders[1]}}
-                    </span>
-                </li>
-                <li>
-                    <span class="text-left" ng-click="sort(3)">
-                        {{sortOrders[2]}}
-                    </span>
-                </li>
-            </ul>
-
-        </div>
-
-        <div class="pull-right" ng-mouseleave="closeMenu()" style="width:150px;margin-top:25px;text-transform:uppercase;cursor:pointer;">
-
-            <span class="text-left" ng-click="displayMenu()" id="city-drop-text" style="padding-bottom:20px;">
-                {{city}}
-            </span>
-
-            <ul class="text-left hide pull-right" id="nav-city" style="position:absolute;z-index:1;width:150px;line-height:20px;margin-top:22px;padding-top:5px;padding-bottom:5px;">
-                <li>
-                    <span class="text-left" ng-click="filterByCity(cities[0])">
-                        {{cities[0]}}
-                    </span>
-                </li>
-                <li>
-                    <span class="text-left" ng-click="filterByCity(cities[1])">
-                        {{cities[1]}}
-                    </span>
-                </li>
-                <li>
-                    <span class="text-left" ng-click="filterByCity(cities[2])">
-                        {{cities[2]}}
-                    </span>
-                </li>
-            </ul>
-
-        </div>
-        </div>
-
-    </div>
-
 </header>
 
 
 
 <div class="mood-head-holde">
-    <img src="/img/Active-Mood.jpg" id="gImg" style="width:100%;height:900px;">
-    <!--div class="overlay" style="margin-top:70px;"></div-->
-    <div class="mood-showup-block absolute-center"></div>
+    <img src="/img/Active-Mood.jpg" id="gImg" style="width:100%;height:760px;">
+    <div class="overlay" style="margin-top:0px;height:760px;background:linear-gradient(#999999, #333333);opacity:0.45">
+
+    </div>
+    <div class="over text-center" style="z-index:20;top:0;right:0;bottom:0;left:0;width:100%;height:200px;margin-top:320px;position:absolute;">
+        <div class="text-center" style="color:white;font-size:28px;font-family:Roboto;line-height:120%;">
+            <div style="width:60%;margin-left:auto;margin-right:auto">
+                {{gDesc}}
+            </div>
+
+        </div>
+    </div>
+    <!--div class="mood-showup-block absolute-center"></div-->
+    <div class="nav-tabs col-lg-12 col-sm-12 col-xs-24 col-md-12 padd-left-none" style="height:50px;line-height:0px;font-family:Roboto">
+
+        <span class="nav-tabs-anchor text-center" style="color:white;cursor:auto;font-size:12px;margin:-20px 20px 0px 20px;background-color:rgba(71,162,190,1);padding:3px 0px 3px 3px;">
+            PICK YOUR MOOD
+        </span>
+
+        <span class="nav-tabs-anchor text-center" id="{{genres[0]}}" ng-click="filterByGenre(genres[0])" style="margin-right:20px;height:50px;color:rgba(71,162,190,1);">
+            {{genres[0]}}
+        </span>
+
+        <span class="nav-tabs-anchor text-center" id="{{genres[1]}}" ng-click="filterByGenre(genres[1])" style="margin-right:20px;">
+            {{genres[1]}}
+        </span>
+
+        <span class="nav-tabs-anchor text-center" id="{{genres[2]}}" ng-click="filterByGenre(genres[2])" style="margin-right:20px;">
+            {{genres[2]}}
+        </span>
+
+        <span class="nav-tabs-anchor text-center" id="{{genres[3]}}" ng-click="filterByGenre(genres[3])" style="margin-right:20px;">
+            {{genres[3]}}
+        </span>
+
+        <span class="nav-tabs-anchor text-center" id="{{genres[4]}}" ng-click="filterByGenre(genres[4])" style="margin-right:20px;">
+            {{genres[4]}}
+        </span>
+
+        <span class="nav-tabs-anchor text-center" id="{{genres[5]}}" ng-click="filterByGenre(genres[5])" style="margin-right:20px;">
+            {{genres[5]}}
+        </span>
+
+        <!--span class="nav-tabs-anchor text-center" id="allActivs" ng-click="allActivities()" style="margin-right:20px;">
+            All
+        </span-->
+
+        <span class="text-center nav-tabs-anchor" style="background-color:rgba(71,162,190,1);padding:3px 3px 3px 3px;color:white;font-size:12px;margin-left:100px;">
+            SORT BY
+        </span>
+
+        <span class="nav-tabs-anchor user-menu js-user-menu" ng-click="sortMenu()" style="margin-left:20px;">
+            {{sortSelected}}
+        </span>
+
+        <div class="sort-menu-drawer" id="sort-menu-drawer" hide ng-click="sortMenu()" style="margin-left:750px;">
+            <ul>
+                <li>
+                        <span class="text-left" ng-click="sort(1)">
+                            {{sortOrders[0]}}
+                        </span>
+                </li>
+                <li>
+                        <span class="text-left" ng-click="sort(2)">
+                            {{sortOrders[1]}}
+                        </span>
+                </li>
+                <li>
+                        <span class="text-left" ng-click="sort(3)">
+                            {{sortOrders[2]}}
+                        </span>
+                </li>
+            </ul>
+        </div>
+
+        <span class="nav-tabs-anchor text-center" style="background-color:rgba(71,162,190,1);padding:3px 3px 3px 3px;color:white;font-size:12px;margin-left:80px;">
+            MARK YOUR CITY
+        </span>
+
+        <span class="nav-tabs-anchor user-menu js-user-menu" ng-click="cityMenu()" style="margin-left:20px;">
+            {{city}}
+        </span>
+
+        <div class="sort-menu-drawer" id="city-menu-drawer" hide ng-click="cityMenu()" style="margin-left:1070px;">
+            <ul>
+                <li>
+                        <span class="text-left" ng-click="filterByCity(cities[0])">
+                            {{cities[0]}}
+                        </span>
+                </li>
+                <li>
+                        <span class="text-left" ng-click="filterByCity(cities[1])">
+                            {{cities[1]}}
+                        </span>
+                </li>
+                <li>
+                        <span class="text-left" ng-click="filterByCity(cities[2])">
+                            {{cities[2]}}
+                        </span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
 </div>
 
 <!------------------------------------------ Activities ----------------------------------->
