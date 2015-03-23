@@ -668,16 +668,31 @@ app.get('/api/businesses/:business', ensureAuthenticated, function(req, res, nex
 
 app.post('/api/businesses', ensureAuthenticated, function(req, res, next) {
 
-  var business = new Business({
-    business: req.body.business,
-    city: req.body.city,
-    country: req.body.country
-  });
+  var query = Business.findOne();
 
-  business.save(function(err) {
+  query.where({ business: req.body.business });
+  query.exec(function(err, bus) {
     if (err) return next(err);
-    res.status(200).send({ message: 'Business added' });
-  })
+
+    if (bus) {
+
+      res.status(200).send({ message: 'Business exists' });
+
+    } else {
+
+      var business = new Business({
+        business: req.body.business,
+        city: req.body.city,
+        country: req.body.country
+      });
+
+      business.save(function(err) {
+        if (err) return next(err);
+        res.status(200).send({ message: 'Business added' });
+      })
+
+    }
+  });
 
 });
 
@@ -897,56 +912,64 @@ app.post('/uploadSelfie', function(req, res, next) {
 
 app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
 
-  var activity = new Activity({
-    _id: req.body.id,
-    title: req.body.title,
-    description: req.body.description,
-    genre: req.body.genre,
-    dateOfActivity: req.body.dateOfActivity,
-    endDateOfActivity: req.body.endDateOfActivity,
-    timeOfActivity: req.body.timeOfActivity,
-    timeAdded: new Date,
-    city: req.body.city,
-    business: req.body.business,
-    businessId: business._id,
-    location: req.body.location,
-    address: req.body.address,
-    phone: req.body.phone,
-    sourceWebsite: req.body.sourceWebsite,
-    locationWebsite: req.body.locationWebsite,
-    neighborhood: req.body.neighborhood,
-    country: req.body.country,
-    mapLat: req.body.mapLat,
-    mapLon: req.body.mapLon,
-    status: req.body.status,
-    poster: req.body.poster,
-    photoCredit: req.body.photoCredit,
-    photoCreditLink: req.body.photoCreditLink,
-    currency: req.body.currency,
-    price: req.body.price,
-    facebookLink: req.body.facebookLink,
-    zomatoLink: req.body.zomatoLink,
-    twitterLink: req.body.twitterLink,
-    payment: req.body.payment,
-    bookRide: req.body.bookRide,
-    goodies: req.body.goodies,
-    moreInfo: req.body.moreInfo,
-    moreInfoLink: req.body.moreInfoLink,
-    sourceName: req.body.sourceName,
-    sourceDescription: req.body.sourceDescription,
-    addedBy: req.body.addedBy,
-    corner: req.body.corner,
-    cornerPic: req.body.cornerPic,
-    cornerText: req.body.cornerText,
-    media: req.body.media,
-    selfie: [],
-    selfie_sub: [],
-    preview: false
-  });
+  var query = Business.findOne();
 
-  activity.save(function (err) {
+  query.where({ business: req.body.business });
+  query.exec(function(err, busi) {
     if (err) return next(err);
-    res.status(200).send({message: 'Activity added'});
+
+    var activity = new Activity({
+      _id: req.body.id,
+      title: req.body.title,
+      description: req.body.description,
+      genre: req.body.genre,
+      dateOfActivity: req.body.dateOfActivity,
+      endDateOfActivity: req.body.endDateOfActivity,
+      timeOfActivity: req.body.timeOfActivity,
+      timeAdded: new Date,
+      city: req.body.city,
+      business: req.body.business,
+      businessId: busi._id,
+      location: req.body.location,
+      address: req.body.address,
+      phone: req.body.phone,
+      sourceWebsite: req.body.sourceWebsite,
+      locationWebsite: req.body.locationWebsite,
+      neighborhood: req.body.neighborhood,
+      country: req.body.country,
+      mapLat: req.body.mapLat,
+      mapLon: req.body.mapLon,
+      status: req.body.status,
+      poster: req.body.poster,
+      photoCredit: req.body.photoCredit,
+      photoCreditLink: req.body.photoCreditLink,
+      currency: req.body.currency,
+      price: req.body.price,
+      facebookLink: req.body.facebookLink,
+      zomatoLink: req.body.zomatoLink,
+      twitterLink: req.body.twitterLink,
+      payment: req.body.payment,
+      bookRide: req.body.bookRide,
+      goodies: req.body.goodies,
+      moreInfo: req.body.moreInfo,
+      moreInfoLink: req.body.moreInfoLink,
+      sourceName: req.body.sourceName,
+      sourceDescription: req.body.sourceDescription,
+      addedBy: req.body.addedBy,
+      corner: req.body.corner,
+      cornerPic: req.body.cornerPic,
+      cornerText: req.body.cornerText,
+      media: req.body.media,
+      selfie: [],
+      selfie_sub: [],
+      preview: false
+    });
+
+    activity.save(function (err) {
+      if (err) return next(err);
+      res.status(200).send({message: 'Activity added'});
+    });
+
   });
   
 });

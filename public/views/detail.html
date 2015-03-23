@@ -65,7 +65,10 @@
         </ul>
 
         <img ng-if="!activity.poster" ng-src="/images/{{activity.title}}.jpg">
-        <img ng-if="activity.poster" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.poster}}">
+        <img ng-if="activity.poster" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.poster}}"><br />
+        <div class="text-right" style="margin-top:-40px;width:900px;margin-left:auto;margin-right:auto;color:rgba(0,0,0,0.6);font-size:12px;">
+            Image credits: <a ng-if="activity.photoCredit" href="{{activity.photoCreditLink}}">{{activity.photoCredit}}</a>
+        </div>
 
         <div class="event-action" ng-if="currentUser">
             <button class="open-modal">
@@ -175,6 +178,13 @@
                 <!------                                                                                    ------>
 
                 <p style="text-align:justify;width:600px;margin-left:auto;margin-right:auto;">{{activity.cornerText}}</p>
+                <p ng-if="activity.moreInfo">
+                    <p ng-if="activity.moreInfoLink && activity.moreInfo" style="text-align:justify;width:600px;margin-left:auto;margin-right:auto;">
+                        <a href="{{activity.moreInfoLink}}">ALSO: {{activity.moreInfo}}</a>
+                    </p>
+                    <p style="text-align:justify;width:600px;margin-left:auto;margin-right:auto;" ng-if="!activity.moreInfoLink && activity.moreInfo"><span>ALSO:</span> {{activity.moreInfo}}</p>
+                </p>
+
             </div>
         </div>
 
@@ -236,29 +246,43 @@
                 </li>
             </ul>
         </div>
-        <a href="" class="open-modal modal-pro-tip"><button style="margin-top:40px;" class="tips-button" ng-if="editTips">Leave a tip</button></a>
+        <a href="" class="open-modal modal-pro-tip">
+            <button style="margin-top:40px;width:300px;" class="tips-button" ng-if="editTips">
+                <img ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture"
+                     style="width:50px;height:50px;margin-right:40px;" >
+                Leave your tip
+            </button>
+        </a>
     </div>
 
 </section>
 
 
+<!--------------------------------------- CHEERS/SELFIES ------------------------------------------------>
+
+
 <section>
 
-    <div class="wrapper text-center event-extras" style="padding-top:40px;">
+    <div class="wrapper text-center event-extras" style="padding-top:40px;max-height:400px;overflow:scroll;">
 
         <h3>
             CHEERS ({{activity.selfiesNumber}})
         </h3>
 
-        <img id="{{selfie.url}}" ng-repeat="selfie in activity.selfies" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{selfie.url}}" />
+        <img id="{{selfie.url}}" style="line-height:0px;width:96px;height:100px" ng-repeat="selfie in activity.selfies" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{selfie.url}}" />
 
-        <img id="{{i}}" ng-repeat="i in ii" ng-src="" />
+        <img id="{{i}}" ng-repeat="i in ii" ng-src="" style="line-height:0px;width:100px;height:100px;"/>
 
         <br />
+        <br />
 
-        <a href="" class="open-modal modal-selfie" style="font-size:16px;cursor:pointer">
-            <span ng-if="addS">Spread the cheer</span>
-        </a>
+        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+            <div class="text-center">
+                <a href="" class="open-modal modal-selfie">
+                    <button class="button button-primary">Spread the cheer</button>
+                </a>
+            </div>
+        </div>
 
     </div>
 
@@ -275,7 +299,6 @@
 
             <ul class="justified padd-left-none">
 
-                <!--------------- Payment -------------->
                 <li ng-if="activity.price">
                     <h2>PRICE</h2>
                     <p>{{activity.currency}} {{activity.price}}</p>
@@ -293,30 +316,11 @@
                                         </a>
                                     </div>
                                 </td>
-                                <td>
-                                    <div class="text-center link-div">
-                                        <a href="{{activity.bookRide}}"
-                                           ng-if="activity.bookRide">
-                                            <div class="text-center">Ride</div>
-                                        </a>
-                                    </div>
-                                </td>
                             </tr>
                         </table>
                     </div>
                 </li>
 
-                <!--------------- Additional Info -------------->
-                <li ng-if="activity.moreInfo || activity.photoCredit">
-                    <h2>MORE INFO</h2>
-                    <p ng-if="activity.moreInfoLink">
-                        <a href="{{activity.moreInfoLink}}">{{activity.moreInfo}}</a>
-                    </p>
-                    <p ng-if="!activity.moreInfoLink">{{activity.moreInfo}}</p>
-
-                    <p ng-if="activity.photoCredit">PHOTO CREDITS</p>
-                    <a ng-if="activity.photoCredit" href="{{activity.photoCreditLink}}">{{activity.photoCredit}}</a>
-                </li>
             </ul>
 
         </div>
@@ -329,70 +333,79 @@
 
 <!----------------- Map -------------------->
 
-<div class="event-extra-info">
-    <div class="wrapper">
-        <div class="map-block" style="width:900px;margin-left:auto;margin-right:auto">
 
-            <section id="cd-google-map">
-                <div id="google-container"></div>
-                <div id="cd-zoom-in"></div>
-                <div id="cd-zoom-out"></div>
-                <address>
-                    <b>{{activity.location}}</b>
-                    <br/>
-                    <br />
-                    {{activity.address}}
-                    <br/>{{activity.neighborhood}}, {{activity.city}}
-                    <br/>{{activity.phone}}
-                </address>
-            </section>
+<section style="background-color:rgba(0,0,0,0.04);margin-top:160px;">
 
-            <form action="http://maps.google.com/maps"
-                  method="get"
-                  target="_blank">
-                <input type="hidden"
-                       name="daddr"
-                       value="{{activity.location}} {{activity.address}} {{activity.neighborhood}}" />
-                <input type="submit"
-                       class="btn-block"
-                       value="Get directions"
-                        style="cursor:pointer"/>
-            </form>
+    <div class="event-extra-info">
+        <div class="wrapper">
+            <div class="map-block" style="width:900px;margin-left:auto;margin-right:auto">
 
-            <div class="info-section"
-                 ng-if="activity.locationWebsite || activity.zomatoLink || activity.facebookLink || activity.twitterLink">
-                <ul class="justified padd-left-none">
-                    <li class="text-center" ng-if="activity.locationWebsite" style="padding:10px;">
-                        <a href="{{activity.locationWebsite}}"
-                           ng-if="activity.locationWebsite" style="padding:10px;padding-left:60px;padding-right:60px;">
-                            Website
-                        </a>
-                    </li>
-                    <li class="text-center" ng-if="activity.zomatoLink" style="padding:10px;">
-                        <a href="{{activity.zomatoLink}}"
-                           ng-if="activity.zomatoLink" style="padding:10px;padding-left:60px;padding-right:60px;">
-                            Zomato
-                        </a>
-                    </li>
-                    <li class="text-center" ng-if="activity.facebookLink" style="padding:10px;">
-                        <a href="{{activity.facebookLink}}"
-                           ng-if="activity.facebookLink" style="padding:10px;padding-left:60px;padding-right:60px;">
-                            Facebook
-                        </a>
-                    </li>
-                    <li class="text-center" ng-if="activity.twitterLink" style="padding:10px;">
-                        <a href="{{activity.twitterLink}}"
-                           ng-if="activity.twitterLink" style="padding:10px;padding-left:60px;padding-right:60px;">
-                            Twitter
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                <section id="cd-google-map">
+                    <div id="google-container"></div>
+                    <div id="cd-zoom-in"></div>
+                    <div id="cd-zoom-out"></div>
+                    <address>
+                        <b>{{activity.location}}</b>
+                        <br/>
+                        <br />
+                        {{activity.address}}
+                        <br/>{{activity.neighborhood}}, {{activity.city}}
+                        <br/>{{activity.phone}}
+                        <br/> <br />
+                        <span ng-if="activity.bookRide" style="font-size:20px;">
+                            <a ng-href="{{activity.bookRide}}">GET A RIDE</a>
+                        </span>
+                    </address>
+                </section>
 
-        </div><!-- map block end here -->
+                <form action="http://maps.google.com/maps"
+                      method="get"
+                      target="_blank">
+                    <input type="hidden"
+                           name="daddr"
+                           value="{{activity.location}} {{activity.address}} {{activity.neighborhood}}" />
+                    <input type="submit"
+                           class="btn-block"
+                           value="Get directions"
+                            style="cursor:pointer"/>
+                </form>
+
+                <div class="info-section"
+                     ng-if="activity.locationWebsite || activity.zomatoLink || activity.facebookLink || activity.twitterLink">
+                    <ul class="justified padd-left-none">
+                        <li class="text-center" ng-if="activity.locationWebsite" style="padding:10px;">
+                            <a href="{{activity.locationWebsite}}"
+                               ng-if="activity.locationWebsite" style="padding:10px;padding-left:60px;padding-right:60px;">
+                                Website
+                            </a>
+                        </li>
+                        <li class="text-center" ng-if="activity.zomatoLink" style="padding:10px;">
+                            <a href="{{activity.zomatoLink}}"
+                               ng-if="activity.zomatoLink" style="padding:10px;padding-left:60px;padding-right:60px;">
+                                Zomato
+                            </a>
+                        </li>
+                        <li class="text-center" ng-if="activity.facebookLink" style="padding:10px;">
+                            <a href="{{activity.facebookLink}}"
+                               ng-if="activity.facebookLink" style="padding:10px;padding-left:60px;padding-right:60px;">
+                                Facebook
+                            </a>
+                        </li>
+                        <li class="text-center" ng-if="activity.twitterLink" style="padding:10px;">
+                            <a href="{{activity.twitterLink}}"
+                               ng-if="activity.twitterLink" style="padding:10px;padding-left:60px;padding-right:60px;">
+                                Twitter
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div><!-- map block end here -->
+        </div>
+
     </div>
 
-</div>
+</section>
 
 <!----------------------- Activity review ------------------------------------------>
 

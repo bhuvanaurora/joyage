@@ -178,7 +178,8 @@ angular.module('MyApp')
      }
 
       $scope.ii = [];
-      for (var i=1; i<=100; i++) {
+      var index = 24 - $scope.activity.selfiesNumber;
+      for (var i=1; i<=index; i++) {
           $scope.ii.push(i);
       }
 
@@ -188,7 +189,7 @@ angular.module('MyApp')
 
           if (refreshes < 1) {
 
-              activity.selfies.forEach(function (self) {
+              /*activity.selfies.forEach(function (self) {
                   var elem = document.getElementById(self.url);
                   var rand = Math.floor((Math.random() * 10) + 1) * 10;
                   if (rand < 50) {
@@ -197,18 +198,12 @@ angular.module('MyApp')
                   randS = rand.toString();
                   elem.style.width = randS + 'px';
                   elem.style.height = randS + 'px';
-              });
+              });*/
 
-              var index = 50 - $scope.activity.selfiesNumber;
               for (var i = 1; i <= index; i++) {
                   var elem = document.getElementById(i);
-                  var rand = Math.floor((Math.random() * 100) + 1);
-                  if (rand < 50) {
-                      rand += 50;
-                  }
-                  randS = rand.toString();
-                  elem.style.width = randS + 'px';
-                  elem.style.height = randS + 'px';
+                  elem.style.width = '100px';
+                  elem.style.height = '100px';
               }
 
           }
