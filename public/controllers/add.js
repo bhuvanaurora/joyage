@@ -44,6 +44,38 @@ angular.module('MyApp')
                       }
                   };
 
+                  var mediaImage = '';
+                  $scope.onMediaImageSelect = function ($files) {
+                      for (var i = 0; i < $files.length; i++) {
+                          var file = $files[i];
+                          $scope.upload = $upload.upload({
+                              url: '/uploadMediaImage',
+                              data: {myObj: $scope.myModelObj},
+                              file: file,
+                          }).progress(function (evt) {
+                              console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                          }).success(function (data, status, headers, config) {
+                              mediaImage = data.imageurl;
+                          });
+                      }
+                  };
+
+                  var venueImage = '';
+                  $scope.onVenueImageSelect = function ($files) {
+                      for (var i = 0; i < $files.length; i++) {
+                          var file = $files[i];
+                          $scope.upload = $upload.upload({
+                              url: '/uploadVenueImage',
+                              data: {myObj: $scope.myModelObj},
+                              file: file,
+                          }).progress(function (evt) {
+                              console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                          }).success(function (data, status, headers, config) {
+                              venueImage = data.imageurl;
+                          });
+                      }
+                  };
+
                   if (!$routeParams.rs) {
 
                       // ------------------------------------------------------------- For adding activities ------------------------------------------------------ //
@@ -145,6 +177,9 @@ angular.module('MyApp')
                                   business: $scope.business,
                                   location: $scope.location,
                                   address: $scope.address,
+                                  venueImage: venueImage,
+                                  venueDescription: $scope.venueDescription,
+                                  mediaImage: mediaImage,
                                   media: mediaVar,
                                   phone: $scope.phone,
                                   sourceName: $scope.sourceName,
@@ -186,6 +221,9 @@ angular.module('MyApp')
                                   $scope.location = '';
                                   $scope.address = '';
                                   $scope.phone = '';
+                                  $scope.venueDescription = '';
+                                  $scope.venueImage = '';
+                                  $scope.mediaImage = '';
                                   $scope.sourceName = '';
                                   $scope.sourceDescription = '';
                                   $scope.sourceWebsite = '';
@@ -305,7 +343,11 @@ angular.module('MyApp')
                               $scope.mediaText4 = activity.media[3].text;
                               $scope.mediaLink4 = activity.media[3].link;
                           }
+
+                          $scope.mediaImage = activity.mediaImage;
                           $scope.phone = activity.phone;
+                          $scope.venueImage = activity.venueImage;
+                          $scope.venueDescription = activity.venueDescription;
                           $scope.sourceName = activity.sourceName;
                           $scope.sourceDescription = activity.sourceDescription;
                           $scope.sourceWebsite = activity.sourceWebsite;
@@ -332,6 +374,7 @@ angular.module('MyApp')
                           $scope.corner = activity.corner;
                           $scope.cornerPic = activity.cornerPic;
                           $scope.cornerText = activity.cornerText;
+                          $scope.mediaImage = activity.mediaImage;
                       });
 
                       $scope.addActivity = function () {
@@ -398,6 +441,8 @@ angular.module('MyApp')
                           $scope.activity.address = $scope.address;
                           $scope.activity.media = mediaVar;
                           $scope.activity.phone = $scope.phone;
+                          $scope.activity.venueImage = $scope.venueImage;
+                          $scope.activity.venueDescription = $scope.venueDescription;
                           $scope.activity.sourceName = $scope.sourceName;
                           $scope.activity.sourceDescription = $scope.sourceDescription;
                           $scope.activity.sourceWebsite = $scope.sourceWebsite;
@@ -423,6 +468,7 @@ angular.module('MyApp')
                           $scope.activity.corner = $scope.corner;
                           $scope.activity.cornerPic = $scope.cornerPic;
                           $scope.activity.cornerText = $scope.cornerText;
+                          $scope.activity.mediaImage = $scope.mediaImage;
 
                           $scope.activity.$update(function () {
                               $route.reload();

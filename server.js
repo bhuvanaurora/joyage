@@ -150,7 +150,10 @@ var activitySchema = new mongoose.Schema({
     title: String,
     text: String,
     link: String
-  }]
+  }],
+  mediaImage: String,
+  venueImage: String,
+  venueDescription: String
 });
 
 
@@ -874,6 +877,70 @@ app.post('/uploadCornerPic', function(req, res, next) {
 });
 
 
+app.post('/uploadMediaImage', function(req, res, next) {
+
+  var filePath = path.join(__dirname, req.files.file.path);
+
+  gm(filePath)
+      .resize(600, 350)
+      .stream(function(err, stdout, stderr) {
+        var buf = new Buffer('');
+        var imageName = 'media_' + Date.now() + req.files.file.name;
+        stdout.on('data', function(data) {
+          buf = Buffer.concat([buf, data]);
+        });
+        stdout.on('end', function(data) {
+          var data = {
+            Bucket: "joyage-images",
+            Key: imageName,
+            Body: buf,
+            ContentType: mime.lookup(req.files.file.name)
+          };
+          s3.putObject(data, function(err, res) {
+            if (err) throw(err);
+          });
+          res.status(200).json({
+            imageurl: imageName
+          });
+          console.log('Media Image uploaded');
+        });
+      });
+
+});
+
+
+app.post('/uploadVenueImage', function(req, res, next) {
+
+  var filePath = path.join(__dirname, req.files.file.path);
+
+  gm(filePath)
+      .resize(600,400)
+      .stream(function(err, stdout, stderr) {
+        var buf = new Buffer('');
+        var imageName = 'venue_' + Date.now() + req.files.file.name;
+        stdout.on('data', function(data) {
+          buf = Buffer.concat([buf, data]);
+        });
+        stdout.on('end', function(data) {
+          var data = {
+            Bucket: "joyage-images",
+            Key: imageName,
+            Body: buf,
+            ContentType: mime.lookup(req.files.file.name)
+          };
+          s3.putObject(data, function(err, res) {
+            if (err) throw(err);
+          });
+          res.status(200).json({
+            imageurl: imageName
+          });
+          console.log('Venue Image uploaded');
+        });
+      });
+
+});
+
+
 app.post('/uploadSelfie', function(req, res, next) {
   
   var filePath = path.join(__dirname, req.files.file.path);
@@ -933,6 +1000,8 @@ app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
       location: req.body.location,
       address: req.body.address,
       phone: req.body.phone,
+      venueImage: req.body.venueImage,
+      venueDescription: req.body.venueDescription,
       sourceWebsite: req.body.sourceWebsite,
       locationWebsite: req.body.locationWebsite,
       neighborhood: req.body.neighborhood,
@@ -959,6 +1028,7 @@ app.post('/api/activities', ensureAuthenticated, function(req, res, next) {
       corner: req.body.corner,
       cornerPic: req.body.cornerPic,
       cornerText: req.body.cornerText,
+      mediaImage: req.body.mediaImage,
       media: req.body.media,
       selfie: [],
       selfie_sub: [],
@@ -998,6 +1068,8 @@ app.put('/api/activities/:id', ensureAuthenticated, function(req, res, next) {
     activity.address = req.body.address;
     activity.phone = req.body.phone;
     activity.country = req.body.country;
+    activity.venueImage = req.body.venueImage;
+    activity.venueDescription = req.body.venueDescription;
     activity.sourceWebsite = req.body.sourceWebsite;
     activity.locationWebsite = req.body.locationWebsite;
     activity.poster = req.body.poster;
@@ -1019,6 +1091,7 @@ app.put('/api/activities/:id', ensureAuthenticated, function(req, res, next) {
     activity.cornerPic = req.body.cornerPic;
     activity.cornerText = req.body.cornerText;
     activity.media = req.body.media;
+    activity.mediaImage = req.body.mediaImage;
 
     activity.save(function (err) {
       if (err) return next(err);

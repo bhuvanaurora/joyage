@@ -191,7 +191,28 @@
 
         </fieldset>
         <br />
-        
+
+        <fieldset>
+            <legend style="font-size:18px;">Venue</legend>
+            <input type="file"
+                   ng-file-select="onVenueImageSelect($files)"
+                   style="margin-top:20px;font-size:14px;padding:10px;"
+                   ng-if="!activity.venueImage"
+                   required />
+            <br />
+            <img ng-if="activity.venueImage" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.venueImage}}" />
+            <br />
+            <textarea class="form-control"
+                      type="text"
+                      name="venueDescription"
+                      ng-model="venueDescription"
+                      placeholder="Venue Description"
+                      style="font-size:14px;margin-top:5px;">
+
+            </textarea>
+        </fieldset>
+
+        <br />
         <fieldset>
           <legend style="font-size:18px;">Source Details</legend>
           <input class="form-control"
@@ -215,7 +236,7 @@
                     placeholder="Description from source"
                     style="font-size:14px;margin-top:5px;">
 
-                    </textarea>
+          </textarea>
           <br />
         </fieldset>
           <br />
@@ -251,7 +272,7 @@
                ng-if="!activity.poster"
                required />
           <br />
-          <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.poster}}" />
+          <img ng-if="activity.poster" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.poster}}" />
           <input class="form-control"
                  type="text"
                  name="photoCredit"
@@ -282,8 +303,8 @@
                ng-file-select="onPicSelect($files)"
                style="margin-top:20px;font-size:14px;padding:10px;"
                ng-if="!activity.cornerPic"/>
-          <br />
-          <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.cornerPic}}" />
+            <br />
+          <img ng-if="activity.cornerPic" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.cornerPic}}" />
           <input class="form-control"
                  type="text"
                  name="cornerText"
@@ -296,6 +317,13 @@
 
         <fieldset>
           <legend style="font-size:18px;">In Media</legend>
+          <input type="file"
+               ng-file-select="onMediaImageSelect($files)"
+               style="margin-top:20px;font-size:14px;padding:10px;"
+               ng-if="!activity.mediaImage"/>
+          <br/>
+          <img ng-if="activity.mediaImage" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.mediaImage}}" />
+
           <input class="form-control"
                  type="text"
                  name="mediaTitle1"
