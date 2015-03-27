@@ -258,8 +258,8 @@ var Activity = mongoose.model('Activity', activitySchema);
 var Invites = mongoose.model('Invites', invitesSchema);
 var Business = mongoose.model('Business', businessSchema);
 
-//mongoose.connect(config.db);
-mongoose.connect("mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database");
+mongoose.connect(config.db);
+//mongoose.connect("mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database");
 //mongoose.connect("mongodb://bhuvan:joyage_database_password@ds051630.mongolab.com:51630/joyage_test_database");
 
 var app = express();
@@ -506,11 +506,14 @@ app.get('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
 
 
 app.get('/api/authprofile/:id', function(req, res, next) {
+
+  console.log(req.params.id);
   
   var query = User.findOne({ 'facebookId': req.params.id });
   
   query.exec(function(err, profile) {
     if (err) next(err);
+    console.log(profile);
     res.send(profile);
   });
 

@@ -65,7 +65,7 @@ angular.module('MyApp')
                     };
 
                     AuthProfile.get({_id: profile.id}, function (prof) {
-                        if (prof.id) {
+                        if (prof._id) {
                             $http.post('/auth/facebook', data)
                                 .success(function (token) {
                                     console.log('Data: ' + data);
@@ -133,7 +133,7 @@ angular.module('MyApp')
                               profile: profile
                           };
                           AuthProfile.get({_id: profile.id}, function (prof) {
-                              if (prof.id) {
+                              if (prof._id) {
                                   $http.post('/auth/facebook', data)
                                       .success(function (token) {
                                           console.log('Data: ' + data);
@@ -215,7 +215,7 @@ angular.module('MyApp')
                       profile: profile
                   };
                   AuthProfile.get({_id: profile.id}, function (prof) {
-                      if(prof.id) {
+                      if(prof._id) {
                           console.log('Signing in');
                           $http.post('/auth/facebook', data)
                               .success(function (token) {
