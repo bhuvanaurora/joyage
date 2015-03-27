@@ -101,7 +101,7 @@ angular.module('MyApp')
 
                       $scope.city = 'Bangalore';
                       $scope.country = 'India';
-                      $scope.currency = 'Rs';
+                      $scope.currency = '&#8377';
 
                       $scope.addActivity = function () {
 
@@ -274,7 +274,7 @@ angular.module('MyApp')
                           $scope.activity = activity;
 
                           $scope.categories = [];
-                          $scope.filterMoods = ['Active', 'Posh', 'Fun', 'Adventure', 'Party', 'Dark'];
+                          $scope.filterMoods = ['Active', 'Posh', 'Fun', 'Adventure', 'Party', 'Underground'];
                           $scope.moods = '';
                           $scope.filterTimes = ['Morning', 'Afternoon', 'Evening', 'Afterdark'];
                           $scope.times = '';

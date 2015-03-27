@@ -62,6 +62,14 @@
             <li ng-if="activity.dateOfActivity">
                 <span class="batch" data-icon="&#xF05C;"></span> {{activity.dateOfActivity | date: shortDate}}
             </li>
+            <li ng-if="activity.price && activity.payment">
+                <a href="{{activity.payment}}">
+                    {{activity.currency}} {{activity.price}}
+                </a>
+            </li>
+            <li ng-if="activity.price && !activity.payment">
+                <span style="font-size:24px;font-weight:400">{{activity.currency}}</span> {{activity.price}}
+            </li>
         </ul>
 
         <img ng-if="!activity.poster" ng-src="/images/{{activity.title}}.jpg">
@@ -132,7 +140,7 @@
 
     <div class="wrapper text-center event-extras" style="padding-top:40px;padding-bottom:80px;border-bottom:1px solid #e3e3e3">
 
-        <h4 style="padding-bottom:40px;">Media Speak</h4>
+        <h4 style="padding-bottom:40px;font-family:Roboto;font-weight:300;">Media Speak</h4>
 
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8" style="margin-left:40px;min-height:350px;overflow:scroll;">
 
@@ -171,11 +179,7 @@
         <div class="text-center">
             <div>
                 <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.venueImage}}" style="width:600px;height:400px;">
-                <h4>About Venue</h4>
-
-                <!------                                                                                    ------>
-                <!-------                       Need Venue details here once back-end made                  ------>
-                <!------                                                                                    ------>
+                <h4 style="font-family:Roboto;font-weight:300;">About Venue</h4>
 
                 <p style="text-align:justify;width:600px;margin-left:auto;margin-right:auto;">{{activity.venueDescription}}</p>
                 <p ng-if="activity.moreInfo">
@@ -289,52 +293,10 @@
 </section>
 
 
-
-
-<section>
-
-    <div class="wrapper text-center event-extras" style="padding-top:40px;">
-
-        <div class="info-section">
-
-            <ul class="justified padd-left-none">
-
-                <li ng-if="activity.price">
-                    <h2>PRICE</h2>
-                    <p>{{activity.currency}} {{activity.price}}</p>
-
-                    <div class="panel panel-default panel-right"
-                         style="height:50px;"
-                         ng-if="activity.payment || activity.bookRide">
-                        <table class="link-table">
-                            <tr>
-                                <td>
-                                    <div class="text-center link-div">
-                                        <a href="{{activity.payment}}"
-                                           ng-if="activity.payment">
-                                            <div class="text-center">Tickets</div>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </li>
-
-            </ul>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
 <!----------------- Map -------------------->
 
 
-<section style="background-color:rgba(0,0,0,0.04);margin-top:160px;">
+<section style="background-color:rgba(0,0,0,0.04);margin-top:100px;">
 
     <div class="event-extra-info">
         <div class="wrapper">
@@ -352,7 +314,7 @@
                         <br/>{{activity.neighborhood}}, {{activity.city}}
                         <br/>{{activity.phone}}
                         <br/> <br />
-                        <span ng-if="activity.bookRide" style="font-size:20px;">
+                        <span class="get-ride" ng-if="activity.bookRide" style="font-size:20px;">
                             <a ng-href="{{activity.bookRide}}">GET A RIDE</a>
                         </span>
                     </address>

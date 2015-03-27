@@ -48,24 +48,28 @@ angular.module('MyApp')
       'Calm': "You work hard. Or probably don't. But you deserve to relax a little. Walk in a park, check a museum, find a cafe, read a book, or watch a play. Blur the city noise and find a nirvana.",
       'Adventure': "Do something new today. Something you have never done before. Something different, something crazy. Throw caution to the wind. Enter the realm of unknown.",
       'Party': "Go to a club, hang out with old friends, or make new ones. Mix it up with laughter and karaoke, set the dance floor ablaze. Abandon the real world and just crank the volume up.",
-      'Dark': "Legend is, there is someone who wakes up at sundown, roams the dark alleys in search of hidden watering holes and turns every night into a legendary one. Is that someone, you?"
+      'Underground': "Legend is, there is someone who wakes up at sundown, roams the dark alleys in search of hidden watering holes and turns every night into a legendary one. Is that someone, you?"
     };
     $scope.gDesc = $scope.gD['Active'];
     $scope.city = "Bangalore";
     $scope.sortSelected = 'New on Joyage';
 
-    $scope.genres = ['Active', 'Posh', 'Calm', 'Adventure', 'Party', 'Dark'];
+    $scope.genres = ['Active', 'Posh', 'Calm', 'Adventure', 'Party', 'Underground'];
+    $scope.genre = 'Active';
     
     $scope.headingTitle = 'all activities';
     
     $scope.sortOrder = 'timeAdded';
+
+        // Pass "genre: $scope.genre" in the query to default sort the activities by genre
+
     $scope.activities = Activity.query({ page: 1,  sortOrder: $scope.sortOrder, city: $scope.city });
     $scope.activ.push($scope.activities);
 
     $scope.filterByCity = function(city) {
       $scope.city = city;
       $scope.activ = [];
-      $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city }));
+      $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city, genre: $scope.genre }));
     };
 
 
@@ -73,6 +77,7 @@ angular.module('MyApp')
       $scope.activ = [];
       $scope.activ.push(Activity.query({ genre: genre, page: 1, sortOrder: $scope.sortOrder, city: $scope.city }));
       $scope.headingTitle = genre;
+      $scope.genre = genre;
 
       var elem = document.getElementById("gImg");
       var bcg = document.getElementById(genre);
@@ -105,9 +110,9 @@ angular.module('MyApp')
 
         elem.src="/img/Party-Mood.jpg";
 
-      } else if (genre == 'Dark') {
+      } else if (genre == 'Underground') {
 
-        elem.src="/img/Dark-Mood.jpg";
+        elem.src="/img/Underground-Mood.jpg";
 
       }
 
