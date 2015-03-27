@@ -49,7 +49,9 @@ angular.module('MyApp')
 
           updateInvites.get({ _id: $routeParams.id }, function (invites) {
 
-            if (invites) {
+              console.log(invites);
+
+            if (invites._id) {
 
               if (invites._id == 'Ferrell-Stark-Goofy-Biryani' || 'Underwood-Dostoyevsky-Phony-Lannister') {
 
@@ -63,7 +65,7 @@ angular.module('MyApp')
                     };
 
                     AuthProfile.get({_id: profile.id}, function (prof) {
-                        if (prof) {
+                        if (prof.id) {
                             $http.post('/auth/facebook', data)
                                 .success(function (token) {
                                     console.log('Data: ' + data);
@@ -103,7 +105,7 @@ angular.module('MyApp')
                             $location.path('/');
                             $alert({
                                 title: 'Cheers!',
-                                content: 'You have successfully signed-in with Facebook.',
+                                content: 'You have successfully signed-up with Facebook.',
                                 animation: 'fadeZoomFadeDown',
                                 type: 'material',
                                 duration: 3
@@ -131,7 +133,7 @@ angular.module('MyApp')
                               profile: profile
                           };
                           AuthProfile.get({_id: profile.id}, function (prof) {
-                              if (prof) {
+                              if (prof.id) {
                                   $http.post('/auth/facebook', data)
                                       .success(function (token) {
                                           console.log('Data: ' + data);
@@ -192,25 +194,13 @@ angular.module('MyApp')
 
               } else {
 
-                $alert({
-                  title: 'Maximum number of invites reached for the invitation',
-                  content: 'Could not sign-in',
-                  animation: 'fadeZoomFadeDown',
-                  type: 'material',
-                  duration: 3
-                });
+                alert('Maximum number of invites reached for the invitation');
                 $location.path('/');
               }
 
             } else {
 
-              $alert({
-                title: 'Incorrect invitation',
-                content: 'Could not sign-in',
-                animation: 'fadeZoomFadeDown',
-                type: 'material',
-                duration: 3
-              });
+              alert("Incorrect invitation");
               $location.path('/');
 
             }
@@ -225,7 +215,8 @@ angular.module('MyApp')
                       profile: profile
                   };
                   AuthProfile.get({_id: profile.id}, function (prof) {
-                      if(prof) {
+                      if(prof.id) {
+                          console.log('Signing in');
                           $http.post('/auth/facebook', data)
                               .success(function (token) {
                                   var payload = JSON.parse($window.atob(token.split('.')[1]));
@@ -251,13 +242,8 @@ angular.module('MyApp')
                                   });
                               });
                       } else {
-                          $alert({
-                              title: 'Invitation error!',
-                              content: 'You do not have an invitation',
-                              animation: 'fadeZoomFadeDown',
-                              type: 'material',
-                              duration: 3
-                          });
+                          alert("You require an invitation to sign up");
+                          console.log('You do not have an invitation');
                       }
                   });
               });
