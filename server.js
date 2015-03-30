@@ -507,13 +507,13 @@ app.get('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
 
 app.get('/api/authprofile/:id', function(req, res, next) {
 
-  console.log(req.params.id);
+  //console.log(req.params.id);
   
   var query = User.findOne({ 'facebookId': req.params.id });
   
   query.exec(function(err, profile) {
     if (err) next(err);
-    console.log(profile);
+    //console.log(profile);
     res.send(profile);
   });
 
@@ -1577,7 +1577,7 @@ app.post('/mob_api/markDone', function(req, res, next) {
 
       if (err) return next(err);
 
-      if (activity.doneIt != -1) {
+      if (activity.doneIt.indexOf(req.body.userId) != -1) {
 
         // To ensure an activity is marked as done only once even in case of external access
         res.status(409).send({ message: 'Already marked as done' });
