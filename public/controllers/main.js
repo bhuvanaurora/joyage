@@ -63,7 +63,7 @@ angular.module('MyApp')
 
         // Pass "genre: $scope.genre" in the query to default sort the activities by genre
 
-    $scope.activities = Activity.query({ page: 1,  sortOrder: $scope.sortOrder, city: $scope.city });
+    $scope.activities = Activity.query({ page: 1,  sortOrder: $scope.sortOrder, city: $scope.city, genre: $scope.genre });
     $scope.activ.push($scope.activities);
 
     $scope.filterByCity = function(city) {
