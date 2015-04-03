@@ -92,6 +92,8 @@ angular.module('MyApp')
           $scope.profile.invitations_sent = 0;
         }
 
+          console.log(randomString);
+
           if ($scope.profile.inviteString == 'Ferrell-Stark-Goofy-Biryani' || $scope.profile.inviteString == 'Underwood-Dostoyevsky-Phony-Lannister') {
 
               $scope.fb_request = function () {
@@ -102,10 +104,11 @@ angular.module('MyApp')
                       duration: 3
                   });
                   FB.ui({
+                      title: 'Joyage invite',
                       method: 'apprequests',
                       message: 'Select the 10 most beautiful friends to join you on Joyage',
-                      max_recipients: 10000,
-                      filters: ['app_non_users']
+                      max_recipients: 10000
+                      //filters: ['app_non_users']
                   }, function (response) {
                       if (response) {
                           $scope.profile.requests = response.request;
@@ -115,7 +118,6 @@ angular.module('MyApp')
                           FB.ui({
                               to: response.to,
                               method: 'send',
-                              name: 'Joyage | Discover the best activities in town',
                               link: 'http://joyage.in/login/' + randomString
                           });
                       }
@@ -155,6 +157,7 @@ angular.module('MyApp')
                   });
                   FB.ui({
                       method: 'apprequests',
+                      title: 'Joyage invite',
                       message: 'Select the 10 most beautiful friends to join you on Joyage',
                       max_recipients: (10 - $scope.profile.invitations_sent),
                       filters: ['app_non_users']
@@ -167,7 +170,6 @@ angular.module('MyApp')
                           FB.ui({
                               to: response.to,
                               method: 'send',
-                              name: 'Joyage | Discover the best activities in town',
                               link: 'http://joyage.in/login/' + randomString
                           });
                       }
