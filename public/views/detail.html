@@ -144,7 +144,7 @@
 
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8" style="margin-left:40px;min-height:350px;overflow:scroll;">
 
-            <div style="transform:translateY(40%);">
+            <div>
                 <ul>
                     <li ng-repeat="media in activity.media" style="text-align:justify;">
                         <h5>
@@ -336,25 +336,25 @@
                      ng-if="activity.locationWebsite || activity.zomatoLink || activity.facebookLink || activity.twitterLink">
                     <ul class="justified padd-left-none">
                         <li class="text-center" ng-if="activity.locationWebsite" style="padding:10px;">
-                            <a href="{{activity.locationWebsite}}"
+                            <a ng-href="{{activity.locationWebsite}}"
                                ng-if="activity.locationWebsite" style="padding:10px;padding-left:60px;padding-right:60px;">
                                 Website
                             </a>
                         </li>
                         <li class="text-center" ng-if="activity.zomatoLink" style="padding:10px;">
-                            <a href="{{activity.zomatoLink}}"
+                            <a ng-href="{{activity.zomatoLink}}"
                                ng-if="activity.zomatoLink" style="padding:10px;padding-left:60px;padding-right:60px;">
                                 Zomato
                             </a>
                         </li>
                         <li class="text-center" ng-if="activity.facebookLink" style="padding:10px;">
-                            <a href="{{activity.facebookLink}}"
+                            <a ng-href="{{activity.facebookLink}}"
                                ng-if="activity.facebookLink" style="padding:10px;padding-left:60px;padding-right:60px;">
                                 Facebook
                             </a>
                         </li>
                         <li class="text-center" ng-if="activity.twitterLink" style="padding:10px;">
-                            <a href="{{activity.twitterLink}}"
+                            <a ng-href="{{activity.twitterLink}}"
                                ng-if="activity.twitterLink" style="padding:10px;padding-left:60px;padding-right:60px;">
                                 Twitter
                             </a>
