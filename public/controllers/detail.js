@@ -47,7 +47,7 @@ angular.module('MyApp')
                 method: 'feed',
                 name: activity.title,
                 link: "http://joyage.in/activities/"+activity._id,
-                //picture: 'https://s3-ap-southeast-1.amazonaws.com/joyage-images/1422006228358mCxtRgP.jpg',
+                picture: 'https://s3-ap-southeast-1.amazonaws.com/joyage-images/'+activity.poster,
                 description: activity.description
             });
             /*FB.api('me/objects/_joyage_:activity', 'post', {

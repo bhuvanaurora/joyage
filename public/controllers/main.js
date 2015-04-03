@@ -61,8 +61,6 @@ angular.module('MyApp')
     
     $scope.sortOrder = 'timeAdded';
 
-        // Pass "genre: $scope.genre" in the query to default sort the activities by genre
-
     $scope.activities = Activity.query({ page: 1,  sortOrder: $scope.sortOrder, city: $scope.city, genre: $scope.genre });
     $scope.activ.push($scope.activities);
 

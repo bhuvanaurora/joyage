@@ -55,6 +55,15 @@
                             <p class="event-location"><span style="font-size:18px;">{{act.location}}</span><br />
                                 {{act.neighborhood}}</p>
                         </div>
+
+                        <!----------------------- Activity review ------------------------------------------>
+
+                        <div ng-if="currentUser.god === true">
+                            <div class="text-center">
+                                <a href="/editActivity/{{act._id}}/{{currentUser._id}}">Edit Activity</a>
+                            </div>
+                        </div>
+
                         <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3"></div>
                         <a ng-href="/activities/{{act._id}}">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

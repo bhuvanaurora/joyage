@@ -13,9 +13,8 @@
         <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none custom-user-menu">
             <div class="pull-right">
                 <div class="user-menu js-user-menu" ng-click="userMenu()">
-                    <img ng-if="currentUser" ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
-                    <span ng-if="currentUser" class="user-name">{{currentUser.name}}</span>
-                    <span ng-if="!currentUser" class="user-name" ng-click="go('/login')">Login</span>
+                    <img ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
+                    <span class="user-name">{{currentUser.name}}</span>
                 </div>
                 <div ng-if="currentUser" class="user-menu-drawer js-user-menu-drawer" id="user-menu-drawer" hide ng-click="userMenu()">
                     <ul>
@@ -72,8 +71,7 @@
             </li>
         </ul>
 
-        <img ng-if="!activity.poster" ng-src="/images/{{activity.title}}.jpg">
-        <img ng-if="activity.poster" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.poster}}"><br />
+        <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.poster}}"><br />
         <div class="text-right" style="margin-top:-40px;width:900px;margin-left:auto;margin-right:auto;color:rgba(0,0,0,0.6);font-size:12px;">
             Image credits: <a ng-if="activity.photoCredit" href="{{activity.photoCreditLink}}">{{activity.photoCredit}}</a>
         </div>
@@ -273,14 +271,14 @@
             CHEERS ({{activity.selfiesNumber}})
         </h3>
 
-        <img id="{{selfie.url}}" style="line-height:0px;width:98px;height:100px;" ng-repeat="selfie in activity.selfies" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{selfie.url}}" />
+        <img id="{{selfie.url}}" style="line-height:0px;width:100px;height:100px;" ng-repeat="selfie in activity.selfies" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{selfie.url}}" />
 
         <img id="{{i}}" ng-repeat="i in ii" ng-src="" style="line-height:0px;width:100px;height:100px;margin-right:2px;"/>
 
         <br />
         <br />
 
-        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12" ng-if="addS">
             <div class="text-center">
                 <a href="" class="open-modal modal-selfie">
                     <button class="button button-primary">Spread the cheer</button>
@@ -436,7 +434,7 @@
 
         <!------------------------------- Selfie modal ------------------------->
 
-<div class="modal modal-selfie">
+<div class="modal modal-selfie" ng-if="addS">
 
     <span class="modal-overlay"></span>
 
@@ -453,16 +451,14 @@
                    ng-file-select="onSelfieSelect($files)"
                    style="margin-top:20px;font-size:14px;padding:10px;width:240px;"
                    required />
-            <button ng-if="addS"
-                    ng-click="addSelfies()">Upload Selfie</button>
         </div>
 
         <div class="bookmark-it-head-img text-center">
-            <img ng-if="selfieImg" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{selfieImg}}"/>
+            <!--img ng-if="selfieImg" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{selfieImg}}"/-->
         </div>
 
         <div class="modal-footer text-right">
-            <button class="button button-primary" ng-if="addS" ng-click="addSelfies()">Let 'er rip</button>
+            <button class="button button-primary" ng-if="addS" ng-click="addSelfies()">Upload Selfie</button>
         </div>
 
     </div>
