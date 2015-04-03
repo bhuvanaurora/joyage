@@ -1,9 +1,9 @@
 <header style="background-color:rgba(71,162,190,1);border:none;" ng-controller="NavbarCtrl">
     <div class="wrapper" style="margin-bottom:-25px;">
         <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
-            <div class="head-brand" ng-click="go('/')" style="cursor:pointer">
+            <a class="head-brand" ng-href="/home" style="cursor:pointer">
                 <img ng-src="/img/logo-white.png" style="height:46px"/>
-            </div>
+            </a>
         </div>
 
         <div id="fb-root"></div>
@@ -48,16 +48,22 @@
     </div>
 </header>
 
-<div class="login-box-block absolute-center clearfix">
-    <div class="login-box">
-        <div class="login-box-head text-center">
-            Invite Friends
-        </div>
-        <div class="login-body clearfix">
-            <div class="with-facebook text-center" ng-click="fb_request()">
-                <img src="https://www.facebookbrand.com/img/facebook.icon.png">
-                Invite facebook friends {{profile.name}}
-            </div>
-        </div>
+<div style="background-image:url('/images/add-background.jpg');z-index:-1;width:100%;height:900px;"></div>
+<div style="background:radial-gradient(#000000, #999999);margin-top:-835px;width:100%;height:835px;opacity:0.3;position:absolute"></div>
+
+<div class="login-box-block absolute-center clearfix" style="width:600px;">
+
+    <div style="font-size:18px;color:white;line-height:35px;font-family:Roboto;">
+        Joyage is a beautiful journey crafted for beautiful people. So, go ahead and pick your <span style="font-size:30px;">10 most beautiful Facebook friends</span> to be sent invitations to join you in your Joyage.
     </div>
+
+    <div class="with-facebook text-center" ng-click="fb_request()" style="margin-top:80px;margin-bottom:80px;width:400px;margin-left:auto;margin-right:auto;">
+        <img src="https://www.facebookbrand.com/img/facebook.icon.png">
+        Invite facebook friends {{profile.name}}
+    </div>
+
+    <div style="font-size:18px;color:white;line-height:35px;font-family:Roboto;">
+        As you are now a Joyage member, we trust your judgement while inviting your 10 Facebook friends. Just remember that <span style="font-size:30px;">only the most beautiful people</span> should be on Joyage.
+    </div>
+
 </div>

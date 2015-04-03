@@ -3,9 +3,9 @@
 <header ng-controller="NavbarCtrl">
     <div class="wrapper" style="margin-bottom:-25px;">
         <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
-            <div class="head-brand" ng-click="go('/')" style="cursor:pointer">
+            <a class="head-brand" ng-href="/home" style="cursor:pointer">
                 <img ng-src="/img/logo-white.png" style="height:46px"/>
-            </div>
+            </a>
         </div>
 
         <div id="fb-root"></div>
@@ -149,11 +149,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/jobs/">
-                        Jobs
-                    </a>
-                </li>
-                <li>
                     <a href="/privacy/">
                         Privacy Policy
                     </a>
@@ -175,7 +170,7 @@
         <div class="grid_6 pull-right" style="margin-right:100px;">
             <div class="footer-logo">
                 <h3 style="margin-top: 20px;color:#999;font-family:Montserrat">
-                    <a href="/" style="color:#999;font-family:Montserrat">
+                    <a href="/home" style="color:#999;font-family:Montserrat">
                         JOYAGE
                     </a>
                 </h3>

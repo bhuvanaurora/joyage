@@ -221,10 +221,6 @@ angular.module('MyApp')
 
         // ----------------------------------------------- For dynamic page elements --------------------------------------------- //
 
-        $scope.go = function (path) {
-            $location.path(path);
-        };
-
         $scope.userMenu = function() {
             var elem = document.getElementById("user-menu-drawer");
             if (elem) {

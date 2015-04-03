@@ -3,14 +3,14 @@
 <header ng-controller="NavbarCtrl">
     <div class="wrapper" style="margin-bottom:-25px;">
         <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
-            <div class="head-brand" ng-click="go('/')" style="cursor:pointer">
+            <a class="head-brand" ng-href="/home" style="cursor:pointer">
                 <img ng-src="/img/logo-white.png" style="height:46px"/>
-            </div>
+            </a>
         </div>
 
         <div id="fb-root"></div>
 
-        <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none" style="line-height:70px;margin-top:-10px;padding-bottom:10px;">
+        <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none custom-user-menu">
             <div class="pull-right">
                 <div class="user-menu js-user-menu" ng-click="userMenu()">
                     <img ng-if="currentUser" ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
@@ -54,19 +54,18 @@
 
 
 <div class="mood-head-holde">
-    <img src="/img/Active-Mood.jpg" id="gImg" style="width:100%;height:760px;">
-    <div class="overlay" style="margin-top:0px;height:760px;background:radial-gradient(#999999, #333333);opacity:0.45">
+    <img src="/img/Active-Mood.jpg" id="gImg" class="mood-image">
+    <div class="overlay">
 
     </div>
-    <div class="over text-center" style="z-index:20;top:0;right:0;bottom:0;left:0;width:100%;height:200px;margin-top:320px;position:absolute;">
-        <div class="text-center" style="color:white;font-size:28px;font-family:Roboto;line-height:120%;">
-            <div style="width:60%;margin-left:auto;margin-right:auto">
+    <div class="mood-desc-container text-center">
+        <div class="text-center mood-desc-wrap">
+            <div class="mood-desc">
                 {{gDesc}}
             </div>
 
         </div>
     </div>
-    <!--div class="mood-showup-block absolute-center"></div-->
     <div class="nav-tabs col-lg-12 col-sm-12 col-xs-24 col-md-12 padd-left-none" style="height:50px;line-height:0px;font-family:Roboto">
 
         <span class="nav-tabs-anchor text-center" style="color:white;cursor:auto;font-size:12px;margin:-20px 20px 0px 20px;background-color:rgba(71,162,190,1);padding:3px 0px 3px 3px;">
@@ -164,24 +163,6 @@
 
 <div class="events-list-holder">
     <div class="wrapper">
-        <!--div class="col-lg-9 col-md-9 col-xs-18 col-sm-9">
-            <input ng-model="query"
-                   placeholder="Search"
-                   style="margin-top: 20px;font-size: 14px;">
-        </div>
-        <div class="col-lg-3 col-md-3 col-xs-6 col-sm-3">
-            <div class="text-center">
-                <button ng-click="search()"
-                        style="width:240px;height:40px;margin-top:20px;font-size:14px;background-color:rgba(100,100,240,0.4);box-shadow:none;text-shadow:none;border-radius:5px;">
-                    Start the magic
-                </button>
-            </div>
-        </div-->
-
-        <!--input list="business" name="busi" ng-model="busi" placeholder="Search by place" style="margin-top:20px;">
-        <datalist id="business">
-            <option ng-repeat="bus in business" value="{{bus}}">{{bus}}</option>
-        </datalist-->
 
         <ul>
             <li ng-repeat="acti in activ | orderBy:sortOrder:true">
@@ -215,6 +196,7 @@
                 </ul>
             </li>
         </ul>
+
     </div>
     <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
         <div class="text-center">

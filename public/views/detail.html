@@ -3,14 +3,14 @@
 <header ng-controller="NavbarCtrl">
     <div class="wrapper" style="margin-bottom:-25px;">
         <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
-            <div class="head-brand" ng-click="go('/')" style="cursor:pointer">
+            <a class="head-brand" ng-href="/home" style="cursor:pointer">
                 <img ng-src="/img/logo-white.png" style="height:46px"/>
-            </div>
+            </a>
         </div>
 
         <div id="fb-root"></div>
 
-        <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none" style="line-height:70px;margin-top:-10px;padding-bottom:10px;">
+        <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none custom-user-menu">
             <div class="pull-right">
                 <div class="user-menu js-user-menu" ng-click="userMenu()">
                     <img ng-if="currentUser" ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
@@ -273,9 +273,9 @@
             CHEERS ({{activity.selfiesNumber}})
         </h3>
 
-        <img id="{{selfie.url}}" style="line-height:0px;width:100px;height:100px" ng-repeat="selfie in activity.selfies" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{selfie.url}}" />
+        <img id="{{selfie.url}}" style="line-height:0px;width:98px;height:100px;" ng-repeat="selfie in activity.selfies" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{selfie.url}}" />
 
-        <img id="{{i}}" ng-repeat="i in ii" ng-src="" style="line-height:0px;width:100px;height:100px;"/>
+        <img id="{{i}}" ng-repeat="i in ii" ng-src="" style="line-height:0px;width:100px;height:100px;margin-right:2px;"/>
 
         <br />
         <br />
@@ -512,11 +512,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/jobs/">
-                        Jobs
-                    </a>
-                </li>
-                <li>
                     <a href="/privacy/">
                         Privacy Policy
                     </a>
@@ -538,7 +533,7 @@
         <div class="grid_6 pull-right" style="margin-right:100px;">
             <div class="footer-logo">
                 <h3 style="margin-top: 20px;color:#999;font-family:Montserrat">
-                    <a href="/" style="color:#999;font-family:Montserrat">
+                    <a href="/home" style="color:#999;font-family:Montserrat">
                         JOYAGE
                     </a>
                 </h3>
