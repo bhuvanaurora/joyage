@@ -1,6 +1,6 @@
 angular.module('MyApp')
-  .controller('InviteCtrl', ['$scope', '$window', '$alert', '$routeParams', '$http', '$route', 'fb_appId', 'fb_connect', 'Profile', 'editedProfile', 'Invites', 'updateInvites', 'Session', 'Auth',
-    function($scope, $window, $alert, $routeParams, $http, $route, fb_appId, fb_connect, Profile, editedProfile, Invites, updateInvites, Session, Auth) {
+  .controller('InviteCtrl', ['$scope', '$window', '$alert', '$routeParams', '$http', '$route', '$interval', 'fb_appId', 'fb_connect', 'Profile', 'editedProfile', 'Invites', 'updateInvites', 'Session', 'Auth',
+    function($scope, $window, $alert, $routeParams, $http, $route, $interval, fb_appId, fb_connect, Profile, editedProfile, Invites, updateInvites, Session, Auth) {
 
 
         $scope.session = Session;
@@ -48,27 +48,41 @@ angular.module('MyApp')
           randomString = $scope.profile.inviteString;
         }
 
-        $window.fbAsyncInit = function() {
-          FB.init({
-            appId: fb_appId,
-            responseType: 'token',
-            version: 'v2.2',
-            oauth: true,
-            xfbml: true
-          });
-        };
+          var refreshes = 0;
 
-        // Asynchronously load Facebook SDK
-        (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) {
-            return;
-          }
-          js = d.createElement(s);
-          js.id = id;
-          js.src = fb_connect;
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+          $interval(function () {
+
+              if (refreshes < 1) {
+
+                  $window.fbAsyncInit = function() {
+                      FB.init({
+                          appId: fb_appId,
+                          responseType: 'token',
+                          version: 'v2.2',
+                          oauth: true,
+                          xfbml: true
+                      });
+                  };
+
+                  // Asynchronously load Facebook SDK
+                  (function(d, s, id) {
+                      var js, fjs = d.getElementsByTagName(s)[0];
+                      if (d.getElementById(id)) {
+                          return;
+                      }
+                      js = d.createElement(s);
+                      js.id = id;
+                      js.src = fb_connect;
+                      fjs.parentNode.insertBefore(js, fjs);
+                  }(document, 'script', 'facebook-jssdk'));
+
+              }
+
+              refreshes += 1;
+
+          }, 10);
+
+
 
           $scope.fb_invite = function () {
             console.log("Im ready to invite");
@@ -90,8 +104,8 @@ angular.module('MyApp')
                   FB.ui({
                       method: 'apprequests',
                       message: 'Select the 10 most beautiful friends to join you on Joyage',
-                      max_recipients: 10000
-                      //filters: ['app_non_users']
+                      max_recipients: 10000,
+                      filters: ['app_non_users']
                   }, function (response) {
                       if (response) {
                           $scope.profile.requests = response.request;
