@@ -99,7 +99,7 @@ angular.module('MyApp')
               $scope.fb_request = function () {
                   $alert({
                       content: 'Inviting friends',
-                      placement: 'top-right',
+                      placement: 'bottom-left',
                       type: 'material',
                       duration: 3
                   });
@@ -131,14 +131,14 @@ angular.module('MyApp')
                       if (response) {
                           $alert({
                               content: 'successfully invited',
-                              placement: 'top-right',
+                              placement: 'bottom-left',
                               type: 'material',
                               duration: 3
                           });
                       } else {
                           $alert({
                               content: 'failed to invite',
-                              placement: 'top-right',
+                              placement: 'bottom-left',
                               type: 'material',
                               duration: 3
                           });
@@ -151,7 +151,7 @@ angular.module('MyApp')
               $scope.fb_request = function () {
                   $alert({
                       content: 'Inviting friends',
-                      placement: 'top-right',
+                      placement: 'bottom-left',
                       type: 'material',
                       duration: 3
                   });
@@ -183,14 +183,14 @@ angular.module('MyApp')
                       if (response) {
                           $alert({
                               content: 'successfully invited',
-                              placement: 'top-right',
+                              placement: 'bottom-left',
                               type: 'material',
                               duration: 3
                           });
                       } else {
                           $alert({
                               content: 'failed to invite',
-                              placement: 'top-right',
+                              placement: 'bottom-left',
                               type: 'material',
                               duration: 3
                           });

@@ -429,6 +429,19 @@ angular.module('MyApp')
                               }
                           }
 
+                          if ($scope.poster != poster) {
+                              $scope.poster = poster;
+                          }
+                          if ($scope.venueImage != venueImage) {
+                              $scope.venueImage = venueImage;
+                          }
+                          if ($scope.cornerPic != cornerPic) {
+                              $scope.cornerPic = cornerPic;
+                          }
+                          if ($scope.mediaImage != mediaImage) {
+                              $scope.mediaImage = mediaImage;
+                          }
+
                           $scope.activity.title = $scope.title;
                           $scope.activity.description = $scope.description;
                           $scope.activity.genre = $scope.categories;

@@ -157,7 +157,7 @@ angular.module('MyApp')
               } else {
                   $alert({
                       content: 'You can upload only one selfie per activity',
-                      placement: 'top-right',
+                      placement: 'bottom-left',
                       type: 'material',
                       duration: 3
                   });
@@ -165,7 +165,7 @@ angular.module('MyApp')
           } else {
               $alert({
                   content: 'You can upload only one selfie per activity',
-                  placement: 'top-right',
+                  placement: 'bottom-left',
                   type: 'material',
                   duration: 3
               });
@@ -227,7 +227,7 @@ angular.module('MyApp')
             Accept.acceptActivity(activity, userId).success(function() {
                 $alert({
                     content: 'Activity has been added.',
-                    placement: 'top-right',
+                    placement: 'bottom-left',
                     type: 'success',
                     duration: 3
                   });
@@ -239,7 +239,7 @@ angular.module('MyApp')
             Delete.deleteActivity(activity).success(function() {
                 $alert({
                     content: 'Activity deleted',
-                    placement: 'top-right',
+                    placement: 'bottom-left',
                     type: 'material',
                     duration: 3
                 });

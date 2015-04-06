@@ -198,7 +198,6 @@
             <input type="file"
                    ng-file-select="onVenueImageSelect($files)"
                    style="margin-top:20px;font-size:14px;padding:10px;"
-                   ng-if="!activity.venueImage"
                    required />
             <br />
             <img ng-if="activity.venueImage" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.venueImage}}" />
@@ -270,7 +269,6 @@
           <input type="file"
                ng-file-select="onFileSelect($files)"
                style="margin-top:20px;font-size:14px;padding:10px;"
-               ng-if="!activity.poster"
                required />
           <br />
           <img ng-if="activity.poster" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.poster}}" />
@@ -302,8 +300,7 @@
           <br />
           <input type="file"
                ng-file-select="onPicSelect($files)"
-               style="margin-top:20px;font-size:14px;padding:10px;"
-               ng-if="!activity.cornerPic"/>
+               style="margin-top:20px;font-size:14px;padding:10px;"/>
             <br />
           <img ng-if="activity.cornerPic" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.cornerPic}}" />
           <input class="form-control"
@@ -320,8 +317,7 @@
           <legend style="font-size:18px;">In Media</legend>
           <input type="file"
                ng-file-select="onMediaImageSelect($files)"
-               style="margin-top:20px;font-size:14px;padding:10px;"
-               ng-if="!activity.mediaImage"/>
+               style="margin-top:20px;font-size:14px;padding:10px;"/>
           <br/>
           <img ng-if="activity.mediaImage" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.mediaImage}}" />
 
