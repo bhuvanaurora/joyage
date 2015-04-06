@@ -43,6 +43,7 @@ var multipart = require('connect-multiparty');
 var router = express.Router();
 var session = require('cookie-session');
 var cookieParser = require('cookie-parser');
+var bson = require('bson');
 
 var crypto = require('crypto');
 var bcrypt = require('bcryptjs');
@@ -266,7 +267,10 @@ var app = express();
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+//app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(multipart({
   uploadDir: './tmp'
@@ -363,7 +367,6 @@ app.post('/auth/login', function(req, res, next) {
 
 
         //---- Facebook Authentication ----//
-
 
 app.post('/auth/facebook', function(req, res, next) {
   var profile = req.body.profile;

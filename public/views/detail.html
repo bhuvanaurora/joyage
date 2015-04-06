@@ -243,15 +243,19 @@
         <div class="tips-brick" ng-if="activity.tips!=''">
             <ul class="genres">
                 <li ng-repeat="tip in activity.tips">
-                    <img ng-src="https://graph.facebook.com/v2.2/{{tip.tipperfbId}}/picture"
-                         style="width:50px;height:50px;" > {{tip.text}}
+                    <a ng-href="/profile/{{tip.tipper}}">
+                        <img ng-src="https://graph.facebook.com/v2.2/{{tip.tipperfbId}}/picture"
+                             style="width:50px;height:50px;" > {{tip.text}}
+                    </a>
                 </li>
             </ul>
         </div>
         <a href="" class="open-modal modal-pro-tip">
             <button style="margin-top:40px;width:300px;" class="tips-button" ng-if="editTips">
-                <img ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture"
-                     style="width:50px;height:50px;margin-right:40px;" >
+                <a ng-href="/profile/{{currentUser._id}}">
+                    <img ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture"
+                         style="width:50px;height:50px;margin-right:40px;">
+                </a>
                 Leave your tip
             </button>
         </a>

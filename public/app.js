@@ -87,6 +87,7 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
         redirectTo: '/'
       });
   })
+
   .config(function ($httpProvider) {
     $httpProvider.interceptors.push(function ($rootScope, $q, $window, $location) {
       return {
