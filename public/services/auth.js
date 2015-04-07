@@ -73,13 +73,7 @@ angular.module('MyApp')
                                     $window.localStorage.token = token;
                                     $rootScope.currentUser = payload.user;
                                     $location.path('/');
-                                    $alert({
-                                        title: 'Cheers!',
-                                        content: 'You have successfully signed-in with Facebook.',
-                                        animation: 'fadeZoomFadeDown',
-                                        type: 'material',
-                                        duration: 3
-                                    });
+                                    // Signed in
                                 })
                                 .error(function () {
                                     delete $window.localStorage.token;
@@ -103,13 +97,7 @@ angular.module('MyApp')
 
                             });
                             $location.path('/');
-                            $alert({
-                                title: 'Cheers!',
-                                content: 'You have successfully signed-up with Facebook.',
-                                animation: 'fadeZoomFadeDown',
-                                type: 'material',
-                                duration: 3
-                            });
+                            // Signed in
                         })
                         .error(function () {
                             delete $window.localStorage.token;
@@ -141,13 +129,7 @@ angular.module('MyApp')
                                           $window.localStorage.token = token;
                                           $rootScope.currentUser = payload.user;
                                           $location.path('/');
-                                          $alert({
-                                              title: 'Cheers!',
-                                              content: 'You have successfully signed-in with Facebook.',
-                                              animation: 'fadeZoomFadeDown',
-                                              type: 'material',
-                                              duration: 3
-                                          });
+                                          // Signed in
                                       })
                                       .error(function () {
                                           delete $window.localStorage.token;
@@ -171,13 +153,7 @@ angular.module('MyApp')
 
                                   });
                                   $location.path('/');
-                                  $alert({
-                                      title: 'Cheers!',
-                                      content: 'You have successfully signed-in with Facebook.',
-                                      animation: 'fadeZoomFadeDown',
-                                      type: 'material',
-                                      duration: 3
-                                  });
+                                  // Signed in
                               })
                               .error(function () {
                                   delete $window.localStorage.token;
@@ -223,13 +199,7 @@ angular.module('MyApp')
                                   $window.localStorage.token = token;
                                   $rootScope.currentUser = payload.user;
                                   $location.path('/home');
-                                  $alert({
-                                      title: 'Cheers!',
-                                      content: 'You have successfully signed-in with Facebook.',
-                                      animation: 'fadeZoomFadeDown',
-                                      type: 'material',
-                                      duration: 3
-                                  });
+                                  // Signed in
                               })
                               .error(function () {
                                   delete $window.localStorage.token;
@@ -338,13 +308,7 @@ angular.module('MyApp')
             };
           });
           $window.location = '/';
-          $alert({
-            content: 'You have been logged out.',
-            animation: 'fadeZoomFadeDown',
-            placement: 'top-right',
-            type: 'material',
-            duration: 3
-          });
+          // Logged out
         }
       };
   }]);
