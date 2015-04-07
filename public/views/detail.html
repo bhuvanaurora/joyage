@@ -206,22 +206,28 @@
 
         </div>
 
-        <div ng-if="!activity.goodies" class="text-center" style="padding-top:40px;width:240px;margin-left:auto;margin-right:auto;">
+        <div ng-if="!activity.goodies" class="text-center" style="padding-top:40px;width:700px;margin-left:auto;margin-right:auto;">
 
-            <div ng-if="activity.corner" style="float:left;max-width:240px;padding:20px;background-color:rgba(0,0,0,0.04);text-align:justify;">
+            <div ng-if="activity.corner" style="float:left;width:300px;height:200px;padding:20px;background-color:rgba(0,0,0,0.04);text-align:justify;">
                 <img style="width:240px;height:150px;" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.cornerPic}}">
-                <h5 class="text-center">{{activity.corner}}</h5>
-                {{activity.cornerText}}
+            </div>
+
+            <div style="float:left;width:400px;min-height:200px;padding:20px;background-color:rgba(0,0,0,0.04);text-align:justify;">
+                <b>{{activity.corner}}</b>
+                <i>{{activity.cornerText}}</i>
             </div>
 
         </div>
 
-        <div ng-if="!activity.corner" class="text-center" style="padding-top:40px;width:240px;margin-left:auto;margin-right:auto;">
+        <div ng-if="!activity.corner" class="text-center" style="padding-top:40px;width:700px;margin-left:auto;margin-right:auto;">
 
-            <div ng-if="activity.goodies" style="float:right;max-width:240px;padding:20px;margin:0px;background-color:rgba(0,0,0,0.04);text-align:justify;">
-                <h5 class="text-center" style="margin-top:0px;">Goodies</h5>
-                {{activity.goodies}}
+            <div ng-if="activity.goodies" style="float:left;width:300px;height:200px;padding:20px;margin:0px;background-color:rgba(0,0,0,0.04);text-align:justify;">
                 <img style="width:240px;height:150px;padding-top:20px;" ng-src="/img/index/5.jpg">
+            </div>
+
+            <div style="float:left;width:400px;min-height:200px;padding:20px;background-color:rgba(0,0,0,0.04);text-align:justify;">
+                <b class="text-center" style="margin-top:0px;">GOODIES</b>
+                {{activity.goodies}}
             </div>
 
         </div>
