@@ -31,7 +31,7 @@
                                 <span class="batch" data-icon="&#xF04C;"></span>  Admin
                             </li>
                         </a>
-                        <a ng-href="/invite/{{currentUser._id}}">
+                        <a ng-if="currentUser.invitations_sent<10" ng-href="/invite/{{currentUser._id}}">
                             <li>
                                 <span class="batch" data-icon="&#xF0DB;"></span>  Invite friends
                             </li>
@@ -212,7 +212,7 @@
                 <img style="width:240px;height:150px;" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.cornerPic}}">
             </div>
 
-            <div style="float:left;width:400px;min-height:200px;padding:20px;background-color:rgba(0,0,0,0.04);text-align:justify;">
+            <div ng-if="activity.corner" style="float:left;width:400px;min-height:200px;padding:20px;background-color:rgba(0,0,0,0.04);text-align:justify;">
                 <b>{{activity.corner}}</b>
                 <i>{{activity.cornerText}}</i>
             </div>
@@ -225,7 +225,7 @@
                 <img style="width:240px;height:150px;padding-top:20px;" ng-src="/img/index/5.jpg">
             </div>
 
-            <div style="float:left;width:400px;min-height:200px;padding:20px;background-color:rgba(0,0,0,0.04);text-align:justify;">
+            <div ng-if="activity.goodies" style="float:left;width:400px;min-height:200px;padding:20px;background-color:rgba(0,0,0,0.04);text-align:justify;">
                 <b class="text-center" style="margin-top:0px;">GOODIES</b>
                 <i>{{activity.goodies}}</i>
             </div>

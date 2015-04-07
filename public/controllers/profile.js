@@ -1,6 +1,6 @@
 angular.module('MyApp')
-  .controller('ProfileCtrl', ['$scope', '$routeParams', '$rootScope', '$location', '$window', 'Profile', 'Activity', 'fb_appId', 'Session', 'Auth',
-                              function($scope, $routeParams, $rootScope, $location, $window, Profile, Activity, fb_appId, Session, Auth) {
+  .controller('ProfileCtrl', ['$scope', '$routeParams', '$rootScope', '$location', '$window', 'Profile', 'Activity', 'fb_appId', 'Session', 'SessionO', 'Auth',
+                              function($scope, $routeParams, $rootScope, $location, $window, Profile, Activity, fb_appId, Session, SessionO, Auth) {
 
     $window.scrollTo(0,0);
 
@@ -24,6 +24,9 @@ angular.module('MyApp')
         };
       }
     });
+
+    $scope.sessionO = SessionO;
+    $scope.sessionO.success(function(){});
 
     Profile.get({ _id: $routeParams.id }, function(profile) {
       $scope.profile = profile;

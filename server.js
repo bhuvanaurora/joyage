@@ -387,6 +387,7 @@ app.post('/auth/facebook', function(req, res, next) {
     if (existingUser) {
       var token = createJwtToken(existingUser);
       req.session.loginTime = Date.now();
+      req.session.invitePage = 1;
       return res.send(token);
     }
 
@@ -418,6 +419,7 @@ app.post('/auth/facebook', function(req, res, next) {
       if (err) return next(err);
       var token = createJwtToken(user);
       req.session.loginTime = Date.now();
+      req.session.invitePage = 1;
       res.send(token);
     });
 
@@ -648,6 +650,28 @@ app.get('/api/session', function(req, res, next) {
     }
 
   }
+
+});
+
+
+app.get('/api/sessionI', function(req, res, next) {
+
+  req.session.invitePage += 1;
+
+  return res.status(200).json({
+    'invitePage': req.session.invitePage
+  });
+
+});
+
+
+app.get('/api/sessionO', function(req, res, next) {
+
+  req.session.invitePage = 1;
+
+  return res.status(200).json({
+    'invitePage': req.session.invitePage
+  });
 
 });
 

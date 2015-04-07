@@ -1,6 +1,6 @@
 angular.module('MyApp')
-  .controller('InviteCtrl', ['$scope', '$window', '$alert', '$routeParams', '$http', '$route', '$interval', 'fb_appId', 'fb_connect', 'Profile', 'editedProfile', 'Invites', 'updateInvites', 'Session', 'Auth',
-    function($scope, $window, $alert, $routeParams, $http, $route, $interval, fb_appId, fb_connect, Profile, editedProfile, Invites, updateInvites, Session, Auth) {
+  .controller('InviteCtrl', ['$scope', '$window', '$alert', '$routeParams', '$http', '$route', '$interval', 'fb_appId', 'fb_connect', 'Profile', 'editedProfile', 'Invites', 'updateInvites', 'Session', 'SessionI', 'SessionO', 'Auth',
+    function($scope, $window, $alert, $routeParams, $http, $route, $interval, fb_appId, fb_connect, Profile, editedProfile, Invites, updateInvites, Session, SessionI, SessionO, Auth) {
 
 
         $scope.session = Session;
@@ -24,15 +24,20 @@ angular.module('MyApp')
             }
         });
 
+        $scope.sessionI = SessionI;
+
+        $scope.sessionI.success(function(data) {
+            if (data.invitePage % 2 == 0) {
+                $window.location.reload();
+            }
+        });
+
       editedProfile.get({ _id: $routeParams.id }, function(profile) {
         $scope.profile = profile;
 
-        //$scope.disabled = true;
-        /*if ($scope.profile.inviteSent) {
-          if ($scope.profile.inviteSent < 10) {
-            $scope.disabled = false;
-          }
-        }*/
+        if ($scope.profile.p2p != true && $scope.profile.invitations_sent >= 10) {
+            $window.location.href('/home');
+        }
 
         if (!$scope.profile.inviteString) {
 
@@ -82,8 +87,6 @@ angular.module('MyApp')
 
           }, 10);
 
-
-
           $scope.fb_invite = function () {
             console.log("Im ready to invite");
           };
@@ -97,12 +100,7 @@ angular.module('MyApp')
           if ($scope.profile.inviteString == 'Ferrell-Stark-Goofy-Biryani' || $scope.profile.inviteString == 'Underwood-Dostoyevsky-Phony-Lannister') {
 
               $scope.fb_request = function () {
-                  $alert({
-                      content: 'Inviting friends',
-                      placement: 'bottom-left',
-                      type: 'material',
-                      duration: 3
-                  });
+                  // Inviting friends
                   FB.ui({
                       title: 'Joyage invite',
                       method: 'apprequests',
@@ -129,19 +127,9 @@ angular.module('MyApp')
                       });
 
                       if (response) {
-                          $alert({
-                              content: 'successfully invited',
-                              placement: 'bottom-left',
-                              type: 'material',
-                              duration: 3
-                          });
+                          // Successfully invited
                       } else {
-                          $alert({
-                              content: 'failed to invite',
-                              placement: 'bottom-left',
-                              type: 'material',
-                              duration: 3
-                          });
+                          // Failed to invite
                       }
                   });
               };
@@ -181,12 +169,7 @@ angular.module('MyApp')
                       });
 
                       if (response) {
-                          $alert({
-                              content: 'successfully invited',
-                              placement: 'bottom-left',
-                              type: 'material',
-                              duration: 3
-                          });
+                          // Successfully invited
                       } else {
                           $alert({
                               content: 'failed to invite',
@@ -199,39 +182,6 @@ angular.module('MyApp')
               };
 
           }
-
-          /*(function () {
-           FB.api('/v2.2/me/friends?fields=name,location,id', function (response) {
-           if (response && !response.error) {
-           $scope.friend_list = response;
-           }
-           })
-           }());*/
-
-          /*(function() {
-           var e = document.createElement(script);
-           e.async = true;
-           e.src = document.location.protocol + '//connect/facebook.net/en_US/all.js';
-           document.getElementById('fb-root').appendChild(e);
-           }());*/
-
-          /*$scope.fb_invite = function (id) {
-           FB.ui({
-           to: id,
-           method: 'send',
-           name: 'Joyage | Discover the best activities in town',
-           link: 'http://joyage.in'
-           });
-           };
-
-           $scope.fb_invite = function () {
-           FB.ui({
-           to: '',
-           method: 'send',
-           name: 'Joyage | Discover the best activities in town',
-           link: 'http://joyage.in'
-           });
-           };*/
 
       });
 

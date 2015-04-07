@@ -1,6 +1,6 @@
 angular.module('MyApp')
-  .controller('MainCtrl', ['$scope', '$rootScope', 'fb_appId', '$window', '$location', 'Activity', 'Session', 'Auth', 'Subscription',
-      function($scope, $rootScope, fb_appId, $window, $location, Activity, Session, Auth, Subscription) {
+  .controller('MainCtrl', ['$scope', '$rootScope', 'fb_appId', '$window', '$location', 'Activity', 'Session', 'SessionO', 'Auth', 'Subscription',
+      function($scope, $rootScope, fb_appId, $window, $location, Activity, Session, SessionO, Auth, Subscription) {
 
     $scope.cities = ['Bangalore', 'Delhi', 'Mumbai'];
     /*$scope.neighborhood = { 'Bangalore': ['Kormangala', 'JP Nagar', 'Indiranagar', 'MG Road'],
@@ -39,6 +39,9 @@ angular.module('MyApp')
         };
       }
     });
+
+    $scope.sessionO = SessionO;
+    $scope.sessionO.success(function(){});
 
     $scope.activ = [];
     $scope.pagenumber = 1;
