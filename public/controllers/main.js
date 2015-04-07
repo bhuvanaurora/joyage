@@ -48,7 +48,7 @@ angular.module('MyApp')
       'Calm': "You work hard. Or probably don't. But you deserve to relax a little. Walk in a park, check a museum, find a cafe, read a book, or watch a play. Blur the city noise and find a nirvana.",
       'Adventure': "Do something new today. Something you have never done before. Something different, something crazy. Throw caution to the wind. Enter the realm of unknown.",
       'Party': "Go to a club, hang out with old friends, or make new ones. Mix it up with laughter and karaoke, set the dance floor ablaze. Abandon the real world and just crank the volume up.",
-      'Underground': "Legend is, there is someone who wakes up at sundown, roams the dark alleys in search of hidden watering holes and turns every night into a legendary one. Is that someone, you?"
+      'Underground': "Legend goes, the beastly creatures of underworld wake up at sundown, roam the dark alleys in search of hidden watering holes and turn every night into a legendary one."
     };
     $scope.gDesc = $scope.gD['Active'];
     $scope.city = "Bangalore";
