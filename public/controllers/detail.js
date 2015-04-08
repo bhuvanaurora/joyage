@@ -104,13 +104,15 @@ angular.module('MyApp')
           }
 
         $scope.addTips = function(tip) {
-            if ($scope.activity.tipper) {
-                if ($scope.activity.tipper.indexOf($rootScope.currentUser._id) == -1) {
-                    $scope.activity.tips.push(tip);
-                    Tips.addTip(activity).success(function () {
-                        $scope.tip = '';
-                    });
-                    $window.location.reload();
+            if (tip) {
+                if ($scope.activity.tipper) {
+                    if ($scope.activity.tipper.indexOf($rootScope.currentUser._id) == -1) {
+                        $scope.activity.tips.push(tip);
+                        Tips.addTip(activity).success(function () {
+                            $scope.tip = '';
+                        });
+                        $window.location.reload();
+                    }
                 }
             }
         };
