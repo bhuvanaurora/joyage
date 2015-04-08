@@ -115,8 +115,7 @@
 
           <datalist id="businessList">
               <option ng-repeat="busi in listOfBusinesses"
-                      value="{{busi.business}}"
-                      required>
+                      value="{{busi.business}}">
                   {{busi.business}}
               </option>
           </datalist>
@@ -126,8 +125,7 @@
                  name="location"
                  ng-model="location"
                  placeholder="Place"
-                 style="font-size:14px;margin-top:5px;"
-                 required>
+                 style="font-size:14px;margin-top:5px;">
           <br />
           <input class="form-control"
                  type="text"
@@ -141,8 +139,7 @@
                  name="neighborhood"
                  ng-model="neighborhood"
                  placeholder="Neighborhood"
-                 style="font-size:14px;margin-top:5px;"
-                 required>
+                 style="font-size:14px;margin-top:5px;">
                  <br />
           
           <select style="width:300px;font-size:14px;margin-top:5px;"
@@ -197,8 +194,7 @@
             <legend style="font-size:18px;">Venue</legend>
             <input type="file"
                    ng-file-select="onVenueImageSelect($files)"
-                   style="margin-top:20px;font-size:14px;padding:10px;"
-                   required />
+                   style="margin-top:20px;font-size:14px;padding:10px;"/>
             <br />
             <img ng-if="activity.venueImage" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.venueImage}}" />
             <br />
@@ -268,8 +264,7 @@
           <legend style="font-size:18px;">HQ Image</legend>
           <input type="file"
                ng-file-select="onFileSelect($files)"
-               style="margin-top:20px;font-size:14px;padding:10px;"
-               required />
+               style="margin-top:20px;font-size:14px;padding:10px;"/>
           <br />
           <img ng-if="activity.poster" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.poster}}" />
           <input class="form-control"

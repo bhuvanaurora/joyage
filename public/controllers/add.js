@@ -429,17 +429,25 @@ angular.module('MyApp')
                               }
                           }
 
-                          if ($scope.poster != poster) {
-                              $scope.poster = poster;
+                          if (poster != '') {
+                              if ($scope.poster != poster) {
+                                  $scope.poster = poster;
+                              }
                           }
-                          if ($scope.venueImage != venueImage) {
-                              $scope.venueImage = venueImage;
+                          if (venueImage != '') {
+                              if ($scope.venueImage != venueImage) {
+                                  $scope.venueImage = venueImage;
+                              }
                           }
-                          if ($scope.cornerPic != cornerPic) {
-                              $scope.cornerPic = cornerPic;
+                          if (cornerPic != '') {
+                              if ($scope.cornerPic != cornerPic) {
+                                  $scope.cornerPic = cornerPic;
+                              }
                           }
-                          if ($scope.mediaImage != mediaImage) {
-                              $scope.mediaImage = mediaImage;
+                          if (mediaImage != '') {
+                              if ($scope.mediaImage != mediaImage) {
+                                  $scope.mediaImage = mediaImage;
+                              }
                           }
 
                           $scope.activity.title = $scope.title;
