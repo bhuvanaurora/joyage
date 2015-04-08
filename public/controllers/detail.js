@@ -1,4 +1,3 @@
-// Changes made
 
 angular.module('MyApp')
   .controller('DetailCtrl', ['$scope', '$interval', '$rootScope', '$window', '$routeParams', '$location', '$alert', '$upload', 'fb_appId', 'Activity', 'Profile', 'Subscription', 'DoneIt', 'Tips', 'Selfies', 'Accept', 'Delete', 'Session', 'Auth',
@@ -50,26 +49,6 @@ angular.module('MyApp')
                 picture: 'https://s3-ap-southeast-1.amazonaws.com/joyage-images/'+activity.poster,
                 description: activity.description
             });
-            /*FB.api('me/objects/_joyage_:activity', 'post', {
-                    'og:url': 'http://samples.ogp.me/1494352094179892',
-                    'og:title': activity.title,
-                    'og:type': '_joyage_:activity',
-                    'og:image': 'https://fbstatic-a.akamaihd.net/images/devsite/attachment_blank.png',
-                    'og:description': activity.description,
-                    'fb:app_id': 1486280281653740
-                }, function(response) {
-                // handle the response
-            }
-          );*/
-          /*FB.ui({
-              method: 'share_open_graph',
-              action_type: 'post',
-              title: activity.title,
-              description: activity.description,
-              action_properties: JSON.stringify({
-                  object: 'http://joyage.in/'+activity._id
-              })
-          }, function(response){});*/
         };
 
 
@@ -118,17 +97,21 @@ angular.module('MyApp')
           });
         };
 
-        if ($scope.activity.tipper.indexOf($rootScope.currentUser._id) == -1) {
-            $scope.editTips = true;
-        }
+          if ($scope.activity.tipper) {
+              if ($scope.activity.tipper.indexOf($rootScope.currentUser._id) == -1) {
+                  $scope.editTips = true;
+              }
+          }
 
         $scope.addTips = function(tip) {
-            if ($scope.activity.tipper.indexOf($rootScope.currentUser._id) == -1) {
-                $scope.activity.tips.push(tip);
-                Tips.addTip(activity).success(function () {
-                    $scope.tip = '';
-                });
-                $window.location.reload();
+            if ($scope.activity.tipper) {
+                if ($scope.activity.tipper.indexOf($rootScope.currentUser._id) == -1) {
+                    $scope.activity.tips.push(tip);
+                    Tips.addTip(activity).success(function () {
+                        $scope.tip = '';
+                    });
+                    $window.location.reload();
+                }
             }
         };
 
@@ -172,10 +155,11 @@ angular.module('MyApp')
           }
       };
 
-
-     if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {
-          $scope.addS = true;
-     }
+        if ($scope.activity.selfie_sub) {
+             if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {
+                  $scope.addS = true;
+             }
+        }
 
       $scope.ii = [];
       var index = 24 - $scope.activity.selfiesNumber;
@@ -188,17 +172,6 @@ angular.module('MyApp')
       $interval(function () {
 
           if (refreshes < 1) {
-
-              /*activity.selfies.forEach(function (self) {
-                  var elem = document.getElementById(self.url);
-                  var rand = Math.floor((Math.random() * 10) + 1) * 10;
-                  if (rand < 50) {
-                      rand += 50;
-                  }
-                  randS = rand.toString();
-                  elem.style.width = randS + 'px';
-                  elem.style.height = randS + 'px';
-              });*/
 
               for (var i = 1; i <= index; i++) {
                   var elem = document.getElementById(i);
@@ -214,12 +187,16 @@ angular.module('MyApp')
 
 
       $scope.addSelfies = function() {
-          if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {
-              $scope.activity.selfies = selfie;
-              Selfies.addSelfie($scope.activity).success(function () {
-                  $scope.selfies = '';
-              });
-              $window.location.reload();
+          if ($scope.activity.selfie_sub) {
+              if ($scope.activity.selfie_sub.indexOf($rootScope.currentUser._id) == -1) {
+                  if (selfie != '') {
+                      $scope.activity.selfies = selfie;
+                      Selfies.addSelfie($scope.activity).success(function () {
+                          $scope.selfies = '';
+                      });
+                      $window.location.reload();
+                  }
+              }
           }
       };
 

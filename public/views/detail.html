@@ -258,10 +258,8 @@
         </div>
         <a href="" class="open-modal modal-pro-tip">
             <button style="margin-top:40px;width:300px;" class="tips-button" ng-if="editTips">
-                <a ng-href="/profile/{{currentUser._id}}">
-                    <img ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture"
-                         style="width:50px;height:50px;margin-right:40px;">
-                </a>
+                <img ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture"
+                     style="width:50px;height:50px;margin-right:40px;">
                 Leave your tip
             </button>
         </a>
@@ -288,10 +286,10 @@
         <br />
         <br />
 
-        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12" ng-if="addS">
+        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
             <div class="text-center">
                 <a href="" class="open-modal modal-selfie">
-                    <button class="button button-primary">Upload selfie</button>
+                    <button class="button button-primary" ng-if="addS">Upload selfie</button>
                 </a>
             </div>
         </div>
@@ -444,7 +442,7 @@
 
         <!------------------------------- Selfie modal ------------------------->
 
-<div class="modal modal-selfie" ng-if="addS">
+<div class="modal modal-selfie">
 
     <span class="modal-overlay"></span>
 

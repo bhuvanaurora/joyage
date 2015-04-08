@@ -974,34 +974,34 @@ app.post('/uploadVenueImage', function(req, res, next) {
 
 
 app.post('/uploadSelfie', function(req, res, next) {
-  
-  var filePath = path.join(__dirname, req.files.file.path);
-  
-  gm(filePath)
-      .resize(200, 200)
-      .stream(function(err, stdout, stderr) {
-        var buf = new Buffer('');
-        var imageName = 'selfie_' + Date.now() + req.files.file.name;
-        stdout.on('data', function(data) {
-          buf = Buffer.concat([buf, data]);
-        });
-        stdout.on('end', function(data) {
-          var data = {
-            Bucket: "joyage-images",
-            Key: imageName,
-            Body: buf,
-            ContentType: mime.lookup(req.files.file.name)
-          };
-          s3.putObject(data, function(err, res) {
-            if (err) throw(err);
-            else console.log('Selfie uploaded successfully');
+
+    var filePath = path.join(__dirname, req.files.file.path);
+
+    gm(filePath)
+        .resize(200, 200)
+        .stream(function (err, stdout, stderr) {
+          var buf = new Buffer('');
+          var imageName = 'selfie_' + Date.now() + req.files.file.name;
+          stdout.on('data', function (data) {
+            buf = Buffer.concat([buf, data]);
           });
-          console.log('Selfie uploaded');
-          res.status(200).json({
-            imageurl: imageName
-          }).end();
+          stdout.on('end', function (data) {
+            var data = {
+              Bucket: "joyage-images",
+              Key: imageName,
+              Body: buf,
+              ContentType: mime.lookup(req.files.file.name)
+            };
+            s3.putObject(data, function (err, res) {
+              if (err) throw(err);
+              else console.log('Selfie uploaded successfully');
+            });
+            console.log('Selfie uploaded');
+            res.status(200).json({
+              imageurl: imageName
+            }).end();
+          });
         });
-      });
 
 });
 
@@ -1314,7 +1314,7 @@ app.post('/api/unsubscribe', ensureAuthenticated, function(req, res, next) {
 
       if (userIndex == -1 || index == -1) {
 
-        res.send(409).send({ message: 'Not bookmarked' });
+        res.status(409).send({ message: 'Not bookmarked' });
 
       } else {
 
