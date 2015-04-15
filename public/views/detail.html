@@ -56,10 +56,10 @@
         <h1>{{activity.title}}</h1>
         <ul>
             <li>
-                <span class="batch" data-icon="&#xF07C;"></span> {{activity.location}}
+                <span class="batch" data-icon="&#xF07C;"></span> {{activity.location}}, {{activity.neighborhood}}
             </li>
             <li ng-if="activity.dateOfActivity">
-                <span class="batch" data-icon="&#xF05C;"></span> {{activity.dateOfActivity | date: shortDate}}
+                <span class="batch" data-icon="&#xF05C;"></span> {{activity.dateOfActivity | date: 'EEEE, MMM d'}}
             </li>
             <li ng-if="activity.price && activity.payment">
                 <a href="{{activity.payment}}">
@@ -251,8 +251,7 @@
                 <li ng-repeat="tip in activity.tips">
                     <a ng-href="/profile/{{tip.tipper}}">
                         <img ng-src="https://graph.facebook.com/v2.2/{{tip.tipperfbId}}/picture"
-                             style="width:50px;height:50px;" > {{tip.text}}
-                    </a>
+                             style="width:50px;height:50px;margin-right:20px;" ></a> {{tip.text}}
                 </li>
             </ul>
         </div>
@@ -274,7 +273,6 @@
 <section>
 
     <div class="wrapper text-center event-extras" style="padding-top:40px;max-height:400px;overflow:scroll;">
-
         <h3>
             CHEERS ({{activity.selfiesNumber}})
         </h3>
@@ -285,15 +283,14 @@
 
         <br />
         <br />
+    </div>
 
-        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-            <div class="text-center">
-                <a href="" class="open-modal modal-selfie">
-                    <button class="button button-primary" ng-if="addS">Upload selfie</button>
-                </a>
-            </div>
+    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+        <div class="text-center">
+            <a href="" class="open-modal modal-selfie">
+                <button class="button button-primary" ng-if="addS">Upload selfie</button>
+            </a>
         </div>
-
     </div>
 
 </section>
