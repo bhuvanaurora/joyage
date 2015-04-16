@@ -53,6 +53,8 @@ angular.module('MyApp')
           randomString = $scope.profile.inviteString;
         }
 
+          $scope.userInviteString = 'http://joyage.in/login/'+randomString;
+
           var refreshes = 0;
 
           $interval(function () {
