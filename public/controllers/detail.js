@@ -210,7 +210,7 @@ angular.module('MyApp')
                     type: 'success',
                     duration: 3
                   });
-                $location.path('/admin');
+                $location.path('/admin/'+$rootScope.currentUser._id);
             });
         };
 
@@ -222,7 +222,7 @@ angular.module('MyApp')
                     type: 'material',
                     duration: 3
                 });
-                $location.path('/admin');
+                $location.path('/admin'+$rootScope.currentUser._id);
             });
         };
 
