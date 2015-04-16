@@ -20,7 +20,7 @@ angular.module('MyApp')
                     });
                 };
             } else {
-                $location.path('/');
+                $location.path('/home');
             }
         });
         
