@@ -48,7 +48,7 @@ angular.module('MyApp')
     $scope.gD = {
       'Active': "Look, the sun is out. Go for a run, climb a mountain, learn to dance or play a game. Just get up, put the sneakers on and leave the world behind.",
       'Posh': "Enough with the bourgeois. Simplicity is overrated and beige is boring. Nah, choose to be a diva instead. Splurge on luxury, fine dining and upscale shopping. Paint the town bright, bold red.",
-      'Calm': "You work hard. Or probably don't. But you deserve to relax a little. Walk in a park, check a museum, find a cafe, read a book, or watch a play. Blur the city noise and find a nirvana.",
+      'Calm': "You work hard. Or probably don't. But you deserve to relax a little. Walk in a park, check a museum, find a cafe, read a book, or watch a play. Blur the city noise and find your nirvana.",
       'Adventure': "Do something new today. Something you have never done before. Something different, something crazy. Throw caution to the wind. Enter the realm of unknown.",
       'Party': "Go to a club, hang out with old friends, or make new ones. Mix it up with laughter and karaoke, set the dance floor ablaze. Abandon the real world and just crank the volume up.",
       'Underground': "Legend goes, the beastly creatures of underworld wake up at sundown, roam the dark alleys in search of hidden watering holes and turn every night into a legendary one."
