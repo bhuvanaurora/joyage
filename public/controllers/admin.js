@@ -23,5 +23,20 @@ angular.module('MyApp')
                 $location.path('/home');
             }
         });
+
+      // ----------------------------------------------- For dynamic page elements --------------------------------------------- //
+
+      $scope.userMenu = function() {
+          var elem = document.getElementById("user-menu-drawer");
+          if (elem) {
+              if (elem.style) {
+                  if (elem.style.display == 'block') {
+                      elem.style.display = 'none';
+                  } else {
+                      elem.style.display = 'block';
+                  }
+              }
+          }
+      };
         
     }]);

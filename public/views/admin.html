@@ -1,21 +1,53 @@
-<header style="background-color:rgba(71,162,190,1);border:none;" ng-controller="NavbarCtrl">
+<!----------------------------------------------------- Navbar -------------------------------------------->
+
+<header ng-controller="NavbarCtrl">
     <div class="wrapper" style="margin-bottom:-25px;">
         <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
-            <a href="/" style="cursor:pointer">
+            <a class="head-brand" ng-href="/home" style="cursor:pointer">
                 <img ng-src="/img/logo-white.png" style="height:46px"/>
             </a>
         </div>
 
         <div id="fb-root"></div>
 
-        <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none" style="line-height:70px;margin-top:-10px;padding-bottom:10px;">
+        <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none custom-user-menu">
             <div class="pull-right">
-                <div class="user-menu js-user-menu">
+                <div class="user-menu js-user-menu" ng-click="userMenu()">
+                    <img ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
+                    <span class="user-name">{{currentUser.name}}</span>
+                </div>
+                <div ng-if="currentUser" class="user-menu-drawer js-user-menu-drawer" id="user-menu-drawer" hide ng-click="userMenu()">
+                    <ul>
+                        <a ng-href="/home">
+                            <li><span class="batch" data-icon="&#xF162;"></span>  Home</li>
+                        </a>
+                        <a ng-href="/profile/{{currentUser._id}}">
+                            <li>
+                                <span class="batch" data-icon="&#xF043;"></span>  Profile
+                            </li>
+                        </a>
+                        <a ng-if="currentUser.curator === true" ng-href="/admin/{{currentUser._id}}">
+                            <li class="selected">
+                                <span class="batch" data-icon="&#xF04C;"></span>  Admin
+                            </li>
+                        </a>
+                        <!--a ng-if="currentUser.invitations_sent<10" ng-href="/invite/{{currentUser._id}}">
+                            <li>
+                                <span class="batch" data-icon="&#xF0DB;"></span>  Invite friends
+                            </li>
+                        </a-->
+                        <a ng-href="" ng-click="logout()">
+                            <li>
+                                <span class="batch" data-icon="&#xF069;"></span>  Logout
+                            </li>
+                        </a>
+                    </ul>
                 </div>
             </div>
         </div>
 
     </div>
+
 </header>
 
 <div class="container" ng-if="profile.curator === true"
@@ -23,7 +55,7 @@
     <div class="panel">
         <div class="panel-heading" style="font-size:20px;">
             Admin Console
-            <p class="pull-right" style="font-size:16px;">{{profile.name}} <a ng-href="/invite/{{currentUser._id}}">Invite Friends</a></p>
+            <p class="pull-right" style="font-size:16px;">{{profile.name}} <a ng-href="/invite/{{currentUser._id}}" style="margin-left:40px;">Invite Friends</a><a ng-if="currentUser.god===true" ng-href="/listUsersToGod/{{currentUser._id}}" style="margin-left:40px;">List Users</a></p></p>
             <br /><br />
             <a href="/add/{{profile._id}}">Add activity</a>
         </div>

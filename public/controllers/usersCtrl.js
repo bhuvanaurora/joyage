@@ -1,6 +1,6 @@
 angular.module('MyApp')
-    .controller('BusinessCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', 'fb_appId', 'Activity', 'Profile', 'Session', 'Auth', 'Business',
-        function($scope, $rootScope, $window, $routeParams, $location, fb_appId, Activity, Profile, Session, Auth, Business) {
+    .controller('UsersCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', 'fb_appId', 'Activity', 'Profile', 'Session', 'Auth', 'ListUsers',
+        function($scope, $rootScope, $window, $routeParams, $location, fb_appId, Activity, Profile, Session, Auth, ListUsers) {
 
             $window.scrollTo(0, 0);                                 // To scroll to the top of the page
 
@@ -21,12 +21,6 @@ angular.module('MyApp')
                 };
             }
 
-            $scope.session.success(function (data) {
-                if (data.session != 'OK') {
-                    logout();
-                }
-            });
-
             $window.fbAsyncInit = function () {
                 FB.init({
                     appId: fb_appId,
@@ -42,18 +36,11 @@ angular.module('MyApp')
 
                 $scope.profile = profile;
 
-                if ($scope.profile.p2p != true) {
+                if ($scope.profile.god != true) {
                     logout();
                 }
 
-                Business.get({ business: $routeParams.business }, function(business) {
-
-                    $scope.business = business;
-
-                    $scope.activities = Activity.query({ business: $scope.business.business });
-
-                });
-
+                $scope.users = ListUsers.query({ id: $routeParams.id });
 
             });
 
@@ -72,4 +59,4 @@ angular.module('MyApp')
                 }
             };
 
-    }]);
+        }]);

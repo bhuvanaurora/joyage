@@ -201,6 +201,7 @@ var userSchema = new mongoose.Schema({
   age: String,
   curator: Boolean,
   p2p: Boolean,
+  god: Boolean,
   facebookId: String,
   facebook: {
     id: String,
@@ -726,6 +727,26 @@ app.post('/api/businesses', ensureAuthenticated, function(req, res, next) {
         res.status(200).send({ message: 'Business added' });
       })
 
+    }
+  });
+
+});
+
+
+      //----------- List Users API ----------//
+
+app.get('/api/listUsers/:id', ensureAuthenticated, function(req, res, next) {
+
+  var query2 = User.findById(req.params.id, function(err, isGod) {
+    if (isGod) {
+      if (isGod.god === true) {
+        var query = User.find();
+
+        query.exec(function (err, users) {
+          if (err) return next(err);
+          res.send(users);
+        });
+      }
     }
   });
 

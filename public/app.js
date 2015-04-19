@@ -27,6 +27,11 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
           controller: 'BusinessCtrl'
         })
 
+        .when('/listUsersToGod/:id', {
+          templateUrl: 'views/usersPage.html',
+          controller: 'UsersCtrl'
+        })
+
       .when('/invite/:id', {
         templateUrl: 'views/invite.html',
         controller: 'InviteCtrl'
