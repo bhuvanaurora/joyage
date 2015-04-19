@@ -53,7 +53,8 @@ angular.module('MyApp')
           randomString = $scope.profile.inviteString;
         }
 
-          $scope.userInviteString = 'http://joyage.in/login/'+randomString;
+          //$scope.userInviteString = 'http://joyage.in/login/'+randomString;
+          $scope.userInviteString = 'http://joyage.in/';
 
           var refreshes = 0;
 
@@ -97,8 +98,6 @@ angular.module('MyApp')
           $scope.profile.invitations_sent = 0;
         }
 
-          console.log(randomString);
-
           if ($scope.profile.inviteString == 'Ferrell-Stark-Goofy-Biryani' || $scope.profile.inviteString == 'Underwood-Dostoyevsky-Phony-Lannister') {
 
               $scope.fb_request = function () {
@@ -118,7 +117,8 @@ angular.module('MyApp')
                           FB.ui({
                               to: response.to,
                               method: 'send',
-                              link: 'http://joyage.in/login/' + randomString
+                              //link: 'http://joyage.in/login/' + randomString
+                              link: 'http://joyage.in/'
                           });
                       }
                       if (newString) {
@@ -160,7 +160,8 @@ angular.module('MyApp')
                           FB.ui({
                               to: response.to,
                               method: 'send',
-                              link: 'http://joyage.in/login/' + randomString
+                              //link: 'http://joyage.in/login/' + randomString
+                              link: 'http://joyage.in/'
                           });
                       }
                       if (newString) {
