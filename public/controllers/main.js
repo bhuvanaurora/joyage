@@ -1,6 +1,6 @@
 angular.module('MyApp')
-  .controller('MainCtrl', ['$scope', '$rootScope', 'fb_appId', '$window', '$location', 'Activity', 'Session', 'SessionO', 'Auth', 'Subscription',
-      function($scope, $rootScope, fb_appId, $window, $location, Activity, Session, SessionO, Auth, Subscription) {
+  .controller('MainCtrl', ['$scope', '$rootScope', 'fb_appId', '$window', '$location', 'Activity', 'Session', 'SessionO', 'Auth', 'Subscription', 'Location',
+      function($scope, $rootScope, fb_appId, $window, $location, Activity, Session, SessionO, Auth, Subscription, Location) {
 
     $scope.cities = ['Bangalore', 'Delhi', 'Mumbai'];
     /*$scope.neighborhood = { 'Bangalore': ['Kormangala', 'JP Nagar', 'Indiranagar', 'MG Road'],
@@ -16,6 +16,11 @@ angular.module('MyApp')
     $scope.sortOrders = ['New on Joyage', 'Popular', 'Upcoming'];
 
     $scope.session = Session;
+
+
+    Location.get(function(location) {
+      console.log(location.ip);
+    });
 
     // --------------------- Test and consider using for token errors ----------------------- //
 

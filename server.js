@@ -199,6 +199,7 @@ var userSchema = new mongoose.Schema({
   //password: String,
   gender: String,
   age: String,
+  city: String,
   curator: Boolean,
   p2p: Boolean,
   god: Boolean,
@@ -750,6 +751,17 @@ app.get('/api/listUsers/:id', ensureAuthenticated, function(req, res, next) {
     }
   });
 
+});
+
+
+      //------------ Location API --------------//
+
+app.get('/userLocation', ensureAuthenticated, function(req, res, next) {
+
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
+  console.log(ip);
+
+  res.status(200).json({'ip': ip});
 });
 
 

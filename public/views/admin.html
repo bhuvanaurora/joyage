@@ -97,7 +97,7 @@
                 <li ng-repeat="business in listOfBusinesses | filter:query">
                     <a ng-href="/business/{{business._id}}/{{profile._id}}">
                         <div style="padding:10px;background-color:rgba(0,0,0,0.01);font-size:20px;margin-bottom:1px;cursor:pointer;">
-                            {{business.business}}
+                            #{{$index + 1}} {{business.business}}
                             <div class="pull-right" style="font-size:14px;">
                                 {{business.city}}
                             </div>

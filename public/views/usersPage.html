@@ -62,7 +62,6 @@
                     <th>Name</th>
                     <th>Gender</th>
                     <th>Email</th>
-                    <th>Profile</th>
                     <th>Tips</th>
                     <th>Selfies</th>
                     <th>Done</th>
@@ -74,12 +73,11 @@
                     <th>{{user.name}}</th>
                     <th>{{user.gender}}</th>
                     <th>{{user.facebook.email}}</th>
-                    <th><a ng-href="{{user.facebook.profileLink}}">Link</a></th>
                     <th>{{user.tipsCount}}</th>
                     <th>{{user.selfieCount}}</th>
                     <th>{{user.completions}}</th>
                     <th>{{user.subscriptions}}</th>
-                    <th><img ng-src="https://graph.facebook.com/v2.2/{{user.facebookId}}/picture"></th>
+                    <th><a ng-href="{{user.facebook.profileLink}}"><img ng-src="https://graph.facebook.com/v2.2/{{user.facebookId}}/picture"></a></th>
                 </tr>
             </table>
         </div>
