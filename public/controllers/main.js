@@ -19,7 +19,7 @@ angular.module('MyApp')
 
 
     Location.get(function(location) {
-      console.log(location.ip);
+      console.log(location.gD);
     });
 
     // --------------------- Test and consider using for token errors ----------------------- //

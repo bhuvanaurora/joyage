@@ -75,6 +75,8 @@ var buf = new Buffer('');
 
 var tokenSecret = config.tokenSecret;
 
+var satelize = require('satelize');
+
 // ------------------------------------- Schemas ---------------------------------------------------- //
 
 var activitySchema = new mongoose.Schema({
@@ -761,7 +763,13 @@ app.get('/userLocation', ensureAuthenticated, function(req, res, next) {
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
   console.log(ip);
 
-  res.status(200).json({'ip': ip});
+  satelize.satelize({ ip: ip }, function(err, geoData) {
+    if (err) return next(err);
+
+    var obj = JSON.parse(geoData);
+    res.status(200).json({'gD': obj});
+  });
+
 });
 
 
