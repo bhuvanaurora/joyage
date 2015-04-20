@@ -31,6 +31,7 @@ angular.module('MyApp')
     });*/
 
     $scope.session.success(function(data) {
+
       if (data.session != 'OK') {
         $window.fbAsyncInit = function () {
           FB.init({
@@ -45,6 +46,15 @@ angular.module('MyApp')
           Auth.logout();
         };
       }
+
+      console.log(data);
+      console.log(data.city);
+      if (data.city) {
+        $scope.city = data.city;
+      } else {
+        $scope.city = "Bangalore";
+      }
+
     });
 
     $scope.sessionO = SessionO;
@@ -62,14 +72,14 @@ angular.module('MyApp')
     };
     $scope.gDesc = $scope.gD['Active'];
 
-    $scope.session.success(function(data) {
+    /*$scope.session.success(function(data) {
       console.log(data.city);
       if (data.city) {
         $scope.city = data.city;
       } else {
         $scope.city = "Bangalore";
       }
-    });
+    });*/
 
     $scope.sortSelected = 'New on Joyage';
 
