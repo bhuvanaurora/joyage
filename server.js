@@ -761,12 +761,26 @@ app.get('/api/listUsers/:id', ensureAuthenticated, function(req, res, next) {
 app.get('/userLocation', ensureAuthenticated, function(req, res, next) {
 
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
-  console.log(ip);
 
   satelize.satelize({ ip: ip }, function(err, geoData) {
     if (err) return next(err);
 
     var obj = JSON.parse(geoData);
+
+    if (obj.city) {
+
+      if (obj.city == "Delhi" || obj.city == "Noida" || obj.city == "Gurgaon") {
+        req.session.city = "Delhi";
+      } else if (obj.city == "Mumbai" || obj.city == "Pune") {
+        req.session.city = "Mumbai";
+      } else {
+        req.session.city = "Bangalore";
+      }
+
+    } else {
+      req.session.city = "Bangalore";
+    };
+
     res.status(200).json({'gD': obj});
   });
 

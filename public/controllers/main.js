@@ -18,8 +18,10 @@ angular.module('MyApp')
     $scope.session = Session;
 
 
+    var cityLocation = '';
     Location.get(function(location) {
-      console.log(location.gD);
+      console.log(location.gD.city);
+      cityLocation = location.gD.city;
     });
 
     // --------------------- Test and consider using for token errors ----------------------- //
@@ -59,7 +61,16 @@ angular.module('MyApp')
       'Underground': "Legend goes, the beastly creatures of underworld wake up at sundown, roam the dark alleys in search of hidden watering holes and turn every night into a legendary one."
     };
     $scope.gDesc = $scope.gD['Active'];
-    $scope.city = "Bangalore";
+
+    $scope.session.success(function(data) {
+      console.log(data.city);
+      if (data.city) {
+        $scope.city = data.city;
+      } else {
+        $scope.city = "Bangalore";
+      }
+    });
+
     $scope.sortSelected = 'New on Joyage';
 
     $scope.genres = ['Active', 'Posh', 'Calm', 'Adventure', 'Party', 'Underground'];
