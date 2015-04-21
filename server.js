@@ -687,10 +687,10 @@ app.get('/api/and_activities', function(req, res, next) {
   var query = Activity.find();
   query.where({ preview: {$ne: false} }).sort('timeAdded');
   
-  query.exec(function(err, activities) {
+  /*query.exec(function(err, activities) {
     if (err) next(err);
     res.send(activities);
-  });
+  });*/
 
   var date = new Date().getTime();
   act = [];
