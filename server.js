@@ -538,7 +538,7 @@ app.get('/api/authprofile/:id', function(req, res, next) {
 });
 
 
-app.post('/api/authprofile/:id', function(req, res, next) {
+app.post('/api/postAuthProfile/:id', function(req, res, next) {
 
   var query = User.findOne({ 'facebookId': req.params.id });
   
