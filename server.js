@@ -514,12 +514,32 @@ app.get('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
 });
 
 
+app.get('/api/authprofile/:id', function(req, res, next) {
+
+  var query = User.findOne({ 'facebookId': req.params.id });
+
+  query.exec(function(err, existingUser) {
+    if (err) next(err);
+
+    if (existingUser) {
+
+      res.send(existingUser);
+
+    } else {
+
+      res.status(200).json({
+        'message': "new user"
+      })
+      
+    }
+
+  });
+
+});
+
+
 app.post('/api/authprofile/:id', function(req, res, next) {
 
-  var profile = req.body.profile;
-
-  console.log(req.body.profileemail);
-  
   var query = User.findOne({ 'facebookId': req.params.id });
   
   query.exec(function(err, existingUser) {
