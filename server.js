@@ -672,6 +672,28 @@ app.get('/api/and_activities', function(req, res, next) {
     res.send(activities);
   });
 
+  var date = new Date().getTime();
+  act = [];
+  var j = 0;
+  query.exec(function(err, activities) {
+    if (err) return next(err);
+
+    for (i = 0; i < activities.length; i++) {
+      if (date <= Date.parse(activities[i].dateOfActivity)) {
+        act[j] = activities[i];
+        ++j;
+      } else if (!activities[i].dateOfActivity) {
+        act[j] = activities[i];
+        ++j;
+      } else if (activities[i].dateOfActivity === "") {
+        act[j] = activities[i];
+        ++j;
+      }
+    }
+    res.send(act);
+
+  });
+
 });
 
 
