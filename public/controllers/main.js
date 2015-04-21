@@ -1,6 +1,6 @@
 angular.module('MyApp')
-  .controller('MainCtrl', ['$scope', '$rootScope', 'fb_appId', '$window', '$location', 'Activity', 'Session', 'SessionO', 'Auth', 'Subscription', 'Location',
-      function($scope, $rootScope, fb_appId, $window, $location, Activity, Session, SessionO, Auth, Subscription, Location) {
+  .controller('MainCtrl', ['$scope', '$interval', '$rootScope', 'fb_appId', '$window', '$location', 'Activity', 'Session', 'SessionO', 'Auth', 'Subscription',
+      function($scope, $interval, $rootScope, fb_appId, $window, $location, Activity, Session, SessionO, Auth, Subscription) {
 
     $scope.cities = ['Bangalore', 'Delhi', 'Mumbai'];
     /*$scope.neighborhood = { 'Bangalore': ['Kormangala', 'JP Nagar', 'Indiranagar', 'MG Road'],
@@ -15,14 +15,6 @@ angular.module('MyApp')
 
     $scope.sortOrders = ['New on Joyage', 'Popular', 'Upcoming'];
 
-    $scope.session = Session;
-
-
-    var cityLocation = '';
-    Location.get(function(location) {
-      console.log(location.gD.city);
-      cityLocation = location.gD.city;
-    });
 
     // --------------------- Test and consider using for token errors ----------------------- //
 
@@ -30,32 +22,92 @@ angular.module('MyApp')
       $window.location = '/login';
     });*/
 
-    $scope.session.success(function(data) {
+    var refreshes = 0;
 
-      if (data.session != 'OK') {
-        $window.fbAsyncInit = function () {
-          FB.init({
-            appId: fb_appId,
-            responseType: 'token',
-            version: 'v2.2',
-            cookie: true,
-            status: true,
-            xfbml: true
-          });
+    $interval(function () {
 
-          Auth.logout();
-        };
+      if (refreshes < 1) {
+
+        Session.success(function(data) {
+
+          if (data.session != 'OK') {
+            $window.fbAsyncInit = function () {
+              FB.init({
+                appId: fb_appId,
+                responseType: 'token',
+                version: 'v2.2',
+                cookie: true,
+                status: true,
+                xfbml: true
+              });
+
+              Auth.logout();
+            };
+          }
+
+          if (data.city) {
+            if ($rootScope.city) {
+              $scope.city = $rootScope.city;
+            } else {
+              $scope.city = data.city;
+            }
+          } else {
+            $scope.city = "Bangalore";
+          }
+
+          if ($rootScope.genre) {
+            $scope.gDesc = $scope.gD[$rootScope.genre];
+            $scope.genre = $rootScope.genre;
+          } else {
+            $scope.gDesc = $scope.gD['Active'];
+            $scope.genre = 'Active';
+          }
+
+          $scope.activities = Activity.query({ page: 1,  sortOrder: $scope.sortOrder, city: $scope.city, genre: $scope.genre });
+          $scope.activ.push($scope.activities);
+
+          var elem = document.getElementById("gImg");
+          var bcg = document.getElementById($scope.genre);
+          for (var i=0; i<$scope.genres.length; i++) {
+            var el = document.getElementById($scope.genres[i]);
+            el.style.color = 'black';
+          }
+
+          bcg.style.color = 'rgba(71,162,190,1)';
+
+          if ($scope.genre == 'Active') {
+
+            elem.src="/img/Active-Mood.jpg";
+
+          } else if ($scope.genre == 'Posh') {
+
+            elem.src="/img/Posh-Mood.jpg";
+
+          } else if ($scope.genre == 'Calm') {
+
+            elem.src="/img/Calm-Mood.jpg";
+
+          } else if ($scope.genre == 'Adventure') {
+
+            elem.src="/img/Adventure-Mood.jpg";
+
+          } else if ($scope.genre == 'Party') {
+
+            elem.src="/img/Party-Mood.jpg";
+
+          } else if ($scope.genre == 'Underground') {
+
+            elem.src="/img/Underground-Mood.jpg";
+
+          }
+
+        });
+
       }
 
-      console.log(data);
-      console.log(data.city);
-      if (data.city) {
-        $scope.city = data.city;
-      } else {
-        $scope.city = "Bangalore";
-      }
+      refreshes += 1;
 
-    });
+    }, 1);
 
     $scope.sessionO = SessionO;
     $scope.sessionO.success(function(){});
@@ -70,28 +122,12 @@ angular.module('MyApp')
       'Party': "Go to a club, hang out with old friends, or make new ones. Mix it up with laughter and karaoke, set the dance floor ablaze. Abandon the real world and just crank the volume up.",
       'Underground': "Legend goes, the beastly creatures of underworld wake up at sundown, roam the dark alleys in search of hidden watering holes and turn every night into a legendary one."
     };
-    $scope.gDesc = $scope.gD['Active'];
-
-    /*$scope.session.success(function(data) {
-      console.log(data.city);
-      if (data.city) {
-        $scope.city = data.city;
-      } else {
-        $scope.city = "Bangalore";
-      }
-    });*/
-
-    $scope.sortSelected = 'New on Joyage';
 
     $scope.genres = ['Active', 'Posh', 'Calm', 'Adventure', 'Party', 'Underground'];
-    $scope.genre = 'Active';
-    
-    $scope.headingTitle = 'all activities';
-    
+
     $scope.sortOrder = 'timeAdded';
 
-    $scope.activities = Activity.query({ page: 1,  sortOrder: $scope.sortOrder, city: $scope.city, genre: $scope.genre });
-    $scope.activ.push($scope.activities);
+    $scope.sortSelected = $scope.sortOrders[0];
 
     $scope.filterByCity = function(city) {
       $scope.city = city;
@@ -145,22 +181,16 @@ angular.module('MyApp')
 
     };
 
-    $scope.allActivities = function(){
+    /*$scope.allActivities = function(){
       $scope.activ = [];
       $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city }));
       $scope.headingTitle = "all activities";
       var bcg1 = document.getElementById('allActivs');
-      //bcg1.style.backgroundColor = "#e2e2e2";
-    };
+    };*/
 
     $scope.pageClick = function() {
-      if ($scope.headingTitle !== "all activities") {
-        $scope.pagenumber += 1;
-        $scope.activ.push(Activity.query({ genre: $scope.headingTitle, page: $scope.pagenumber, sortOrder: $scope.sortOrder, city: $scope.city }));
-      } else {
-        $scope.pagenumber += 1;
-        $scope.activ.push(Activity.query({ page: $scope.pagenumber, sortOrder: $scope.sortOrder, city: $scope.city }));
-      }
+      $scope.pagenumber += 1;
+      $scope.activ.push(Activity.query({ page: $scope.pagenumber, sortOrder: $scope.sortOrder, city: $scope.city, genre: $scope.genre }));
     };
     
     $scope.sort = function(sortType) {
@@ -175,13 +205,9 @@ angular.module('MyApp')
         $scope.sortSelected = $scope.sortOrders[2];
       }
 
-      if ($scope.headingTitle !== "all activities") {
-        $scope.activ = [];
-        $scope.activ.push(Activity.query({ genre: $scope.headingTitle, page: 1, sortOrder: $scope.sortOrder, city: $scope.city }));
-      } else {
-        $scope.activ = [];
-        $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city }));
-      }
+      $scope.activ = [];
+      $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city, genre: $scope.genre }));
+
     };
 
       $scope.isSubscribed = function (activity) {

@@ -600,7 +600,7 @@ var converter = require('json-2-csv');
 
 app.get('/api/ios_activities', function(req, res, next) {
   var query = Activity.find();
-  query.sort('tineAdded');
+  query.sort('timeAdded');
   var genres = "";
   var act = [];
   query.exec(function(err, activities) {
@@ -645,11 +645,13 @@ app.get('/api/session', function(req, res, next) {
 
     if (Date.now() - req.session.loginTime > 7200000) {               // Session expires in 2 hours
       return res.status(200).json({
-        'session': 'expired'
+        'session': 'expired',
+        'city': req.session.city
       });
     } else {
       return res.status(200).json({
-        'session': 'OK'
+        'session': 'OK',
+        'city': req.session.city
       });
     }
 
@@ -678,6 +680,7 @@ app.get('/api/sessionO', function(req, res, next) {
   });
 
 });
+
 
 
       //---- Businesses APIs ----//
@@ -756,9 +759,11 @@ app.get('/api/listUsers/:id', ensureAuthenticated, function(req, res, next) {
 });
 
 
-      //------------ Location API --------------//
 
-app.get('/userLocation', ensureAuthenticated, function(req, res, next) {
+       //---- Sorted list of Activities API ----//
+
+
+app.get('/api/activities', ensureAuthenticated, function(req, res, next) {
 
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
 
@@ -767,30 +772,25 @@ app.get('/userLocation', ensureAuthenticated, function(req, res, next) {
 
     var obj = JSON.parse(geoData);
 
-    if (obj.city) {
+    if (!req.session.city || req.session.city == "") {
 
-      if (obj.city == "Delhi" || obj.city == "Noida" || obj.city == "Gurgaon") {
-        req.session.city = "Delhi";
-      } else if (obj.city == "Mumbai" || obj.city == "Pune") {
-        req.session.city = "Mumbai";
+      if (obj.city) {
+
+        if (obj.city == "Delhi" || obj.city == "Noida" || obj.city == "Gurgaon") {
+          req.session.city = "Delhi";
+        } else if (obj.city == "Mumbai" || obj.city == "Pune") {
+          req.session.city = "Mumbai";
+        } else {
+          req.session.city = "Bangalore";
+        }
+
       } else {
         req.session.city = "Bangalore";
       }
 
-    } else {
-      req.session.city = "Bangalore";
-    };
+    }
 
-    res.status(200).json({'gD': obj});
   });
-
-});
-
-
-       //---- Sorted list of Activities API ----//
-
-
-app.get('/api/activities', ensureAuthenticated, function(req, res, next) {
   
   var query = Activity.find();
   /*Activity.textSearch('Bars', function (err, output) {

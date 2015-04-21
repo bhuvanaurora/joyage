@@ -38,6 +38,20 @@ angular.module('MyApp')
       Activity.get({ _id: $routeParams.id }, function(activity) {
         $scope.activity = activity;
 
+      var GENRE = $scope.activity.genre[$scope.activity.genre.length - 2];
+      var GENRE2 = $scope.activity.genre[$scope.activity.genre.length - 1];
+      if (GENRE == 'Active' || GENRE == 'Posh' || GENRE == 'Calm' ||
+          GENRE == 'Underground' || GENRE == 'Adventure' || GENRE == 'Party') {
+        $rootScope.genre = $scope.activity.genre[$scope.activity.genre.length - 2];
+      } else if (GENRE2 == 'Active' || GENRE2 == 'Posh' || GENRE2 == 'Calm' ||
+          GENRE2 == 'Underground' || GENRE2 == 'Adventure' || GENRE2 == 'Party') {
+          $rootScope.genre = $scope.activity.genre[$scope.activity.genre.length - 1];
+      } else {
+          $rootScope.genre = 'Active';
+      }
+
+      $rootScope.city = $scope.activity.city;
+
         //$scope.activities = Activity.query({limit: 3, id: activity._id});
 
         // Share dialog
