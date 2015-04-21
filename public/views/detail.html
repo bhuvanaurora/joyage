@@ -375,7 +375,7 @@
 <!----------------------- Activity review ------------------------------------------>
 
 <div style="background-color:rgba(0,0,0,0.2)"
-     ng-if="activity.preview === false">
+     ng-if="activity.preview === false || currentUser.god === true">
     <div class="text-center">
         <button class="btn btn-primary"
                 ng-click="acceptActivity(currentUser._id)"
