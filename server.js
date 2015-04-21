@@ -516,14 +516,52 @@ app.get('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
 
 app.get('/api/authprofile/:id', function(req, res, next) {
 
-  //console.log(req.params.id);
+  var profile = req.body.profile;
   
   var query = User.findOne({ 'facebookId': req.params.id });
   
-  query.exec(function(err, profile) {
+  query.exec(function(err, existingUser) {
     if (err) next(err);
-    //console.log(profile);
-    res.send(profile);
+
+    if (existingUser) {
+
+      res.send(existingUser);
+
+    } else {
+
+      var profileLink = 'https://www.facebook.com/app_scoped_user_id/'+profile.id+'/';
+
+      var user = new User({
+        name: profile.first_name,
+        gender: profile.gender,
+        age: profile.age_range,
+        curator: false,
+        p2p: false,
+        facebookId: profile.id,
+        facebook: {
+          id: profile.id,
+          email: profile.email,
+          profileLink: profileLink
+        },
+        joinedOn: Date.now(),
+        subscribedActivities: [],
+        doneActivities: [],
+        requests: [],
+        invitation_to: [],
+        invitations_sent: 0,
+        inviteString: "",
+        tipsCount: 0,
+        selfies: [],
+        selfieCount: 0
+      });
+
+      user.save(function(err) {
+        if (err) return next(err);
+      });
+
+      res.send(user);
+    }
+
   });
 
 });
