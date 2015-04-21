@@ -514,9 +514,11 @@ app.get('/api/profile/:id', ensureAuthenticated, function(req, res, next) {
 });
 
 
-app.get('/api/authprofile/:id', function(req, res, next) {
+app.post('/api/authprofile/:id', function(req, res, next) {
 
   var profile = req.body.profile;
+
+  console.log(req.body.profileemail);
   
   var query = User.findOne({ 'facebookId': req.params.id });
   
@@ -529,18 +531,17 @@ app.get('/api/authprofile/:id', function(req, res, next) {
 
     } else {
 
-      var profileLink = 'https://www.facebook.com/app_scoped_user_id/'+profile.id+'/';
+      var profileLink = 'https://www.facebook.com/app_scoped_user_id/'+req.params.id+'/';
 
       var user = new User({
-        name: profile.first_name,
-        gender: profile.gender,
-        age: profile.age_range,
+        name: req.body.profilefirst_name,
+        gender: req.body.profilegender,
         curator: false,
         p2p: false,
-        facebookId: profile.id,
+        facebookId: req.params.id,
         facebook: {
-          id: profile.id,
-          email: profile.email,
+          id: req.params.id,
+          email: req.body.profileemail,
           profileLink: profileLink
         },
         joinedOn: Date.now(),
@@ -664,7 +665,7 @@ app.get('/api/ios_activities', function(req, res, next) {
 app.get('/api/and_activities', function(req, res, next) {
 
   var query = Activity.find();
-  query.sort('timeAdded');
+  query.where({ preview: {$ne: false} }).sort('timeAdded');
   
   query.exec(function(err, activities) {
     if (err) next(err);
