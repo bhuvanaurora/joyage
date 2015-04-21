@@ -45,14 +45,14 @@ angular.module('MyApp')
             };
           }
 
-          if (data.city) {
-            if ($rootScope.city) {
-              $scope.city = $rootScope.city;
-            } else {
-              $scope.city = data.city;
-            }
+          if ($rootScope.city) {
+            $scope.city = $rootScope.city;
           } else {
-            $scope.city = "Bangalore";
+            if (data.city) {
+              $scope.city = data.city;
+            } else {
+              $scope.city = 'Bangalore';
+            }
           }
 
           if ($rootScope.genre) {
