@@ -59,47 +59,33 @@ angular.module('MyApp')
             $scope.gDesc = $scope.gD[$rootScope.genre];
             $scope.genre = $rootScope.genre;
           } else {
-            $scope.gDesc = $scope.gD['Active'];
-            $scope.genre = 'Active';
+            $scope.gDesc = $scope.gD[''];
+            $scope.genre = '';
           }
 
-          $scope.activities = Activity.query({ page: 1,  sortOrder: $scope.sortOrder, city: $scope.city, genre: $scope.genre });
+          if ($scope.genre != '') $scope.activities = Activity.query({ page: 1,  sortOrder: $scope.sortOrder, city: $scope.city, genre: $scope.genre });
+          else $scope.activities = Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city });
           $scope.activ.push($scope.activities);
 
-          var elem = document.getElementById("gImg");
-          var bcg = document.getElementById($scope.genre);
           for (var i=0; i<$scope.genres.length; i++) {
             var el = document.getElementById($scope.genres[i]);
             el.style.color = 'black';
           }
 
-          bcg.style.color = 'rgba(71,162,190,1)';
+          document.getElementById($scope.genre).style.color = 'rgba(71,162,190,1)';
+          if ($scope.genre == '') document.getElementById('allActivs').style.color = 'rgba(71,162,190,1)';
+          else document.getElementById('allActivs').style.color = 'black';
 
-          if ($scope.genre == 'Active') {
+          var elem = document.getElementById("gImg");
+          if ($scope.genre == 'Active') elem.src="/img/Active-Mood.jpg";
+          else if ($scope.genre == 'Posh') elem.src="/img/Posh-Mood.jpg";
+          else if ($scope.genre == 'Calm') elem.src="/img/Calm-Mood.jpg";
+          else if ($scope.genre == 'Adventure') elem.src="/img/Adventure-Mood.jpg";
+          else if ($scope.genre == 'Party') elem.src="/img/Party-Mood.jpg";
+          else if ($scope.genre == 'Underground') elem.src="/img/Underground-Mood.jpg";
+          else if ($scope.genre == '') elem.src="/img/All-Mood.jpg";
 
-            elem.src="/img/Active-Mood.jpg";
-
-          } else if ($scope.genre == 'Posh') {
-
-            elem.src="/img/Posh-Mood.jpg";
-
-          } else if ($scope.genre == 'Calm') {
-
-            elem.src="/img/Calm-Mood.jpg";
-
-          } else if ($scope.genre == 'Adventure') {
-
-            elem.src="/img/Adventure-Mood.jpg";
-
-          } else if ($scope.genre == 'Party') {
-
-            elem.src="/img/Party-Mood.jpg";
-
-          } else if ($scope.genre == 'Underground') {
-
-            elem.src="/img/Underground-Mood.jpg";
-
-          }
+          document.getElementById("overlay").style.display = 'block';
 
         });
 
@@ -132,65 +118,62 @@ angular.module('MyApp')
     $scope.filterByCity = function(city) {
       $scope.city = city;
       $scope.activ = [];
-      $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city, genre: $scope.genre }));
+      if ($scope.genre == '') $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city }));
+      else $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city, genre: $scope.genre }));
     };
 
 
     $scope.filterByGenre = function(genre) {
       $scope.activ = [];
       $scope.activ.push(Activity.query({ genre: genre, page: 1, sortOrder: $scope.sortOrder, city: $scope.city }));
-      $scope.headingTitle = genre;
       $scope.genre = genre;
+      $rootScope.genre = genre;
 
-      var elem = document.getElementById("gImg");
-      var bcg = document.getElementById(genre);
+
       for (var i=0; i<$scope.genres.length; i++) {
         var el = document.getElementById($scope.genres[i]);
         el.style.color = 'black';
       }
+      document.getElementById(genre).style.color = 'rgba(71,162,190,1)';
 
-      bcg.style.color = 'rgba(71,162,190,1)';
+      document.getElementById('allActivs').style.color = 'black';
 
       $scope.gDesc = $scope.gD[genre];
 
-      if (genre == 'Active') {
+      var elem = document.getElementById("gImg");
+      if (genre == 'Active') elem.src="/img/Active-Mood.jpg";
+      else if (genre == 'Posh') elem.src="/img/Posh-Mood.jpg";
+      else if (genre == 'Calm') elem.src="/img/Calm-Mood.jpg";
+      else if (genre == 'Adventure') elem.src="/img/Adventure-Mood.jpg";
+      else if (genre == 'Party') elem.src="/img/Party-Mood.jpg";
+      else if (genre == 'Underground') elem.src="/img/Underground-Mood.jpg";
+      else if ($scope.genre == '') elem.src="/img/All-Mood.jpg";
 
-        elem.src="/img/Active-Mood.jpg";
-
-      } else if (genre == 'Posh') {
-
-        elem.src="/img/Posh-Mood.jpg";
-
-      } else if (genre == 'Calm') {
-
-        elem.src="/img/Calm-Mood.jpg";
-
-      } else if (genre == 'Adventure') {
-
-        elem.src="/img/Adventure-Mood.jpg";
-
-      } else if (genre == 'Party') {
-
-        elem.src="/img/Party-Mood.jpg";
-
-      } else if (genre == 'Underground') {
-
-        elem.src="/img/Underground-Mood.jpg";
-
-      }
+      document.getElementById("overlay").style.display = 'block';
 
     };
 
-    /*$scope.allActivities = function(){
+    $scope.allActivities = function(){
       $scope.activ = [];
-      $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city }));
-      $scope.headingTitle = "all activities";
-      var bcg1 = document.getElementById('allActivs');
-    };*/
+      $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city}));
+
+      $scope.genre = '';
+      $rootScope.genre = '';
+      $scope.gDesc = '';
+      var elem = document.getElementById("gImg");
+      elem.src="/img/All-Mood.jpg";
+      document.getElementById("overlay").style.display = 'none';
+      document.getElementById('allActivs').style.color = 'rgba(71,162,190,1)';
+      for (var i=0; i<$scope.genres.length; i++) {
+        var el = document.getElementById($scope.genres[i]);
+        el.style.color = 'black';
+      }
+    };
 
     $scope.pageClick = function() {
       $scope.pagenumber += 1;
-      $scope.activ.push(Activity.query({ page: $scope.pagenumber, sortOrder: $scope.sortOrder, city: $scope.city, genre: $scope.genre }));
+      if ($scope.genre == '') $scope.activ.push(Activity.query({ page: $scope.pagenumber, sortOrder: $scope.sortOrder, city: $scope.city }));
+      else $scope.activ.push(Activity.query({ page: $scope.pagenumber, sortOrder: $scope.sortOrder, city: $scope.city, genre: $scope.genre }));
     };
     
     $scope.sort = function(sortType) {
@@ -206,7 +189,8 @@ angular.module('MyApp')
       }
 
       $scope.activ = [];
-      $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city, genre: $scope.genre }));
+      if ($scope.genre = '') $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city }));
+      else $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city, genre: $scope.genre }));
 
     };
 

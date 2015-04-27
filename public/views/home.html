@@ -53,8 +53,8 @@
 
 
 <div class="mood-head-holde">
-    <img src="/img/Active-Mood.jpg" id="gImg" class="mood-image">
-    <div class="overlay">
+    <img src="/img/All-Mood.jpg" id="gImg" class="mood-image">
+    <div class="overlay" id="overlay" hidden>
 
     </div>
     <div class="mood-desc-container text-center">
@@ -71,7 +71,7 @@
             PICK YOUR MOOD
         </span>
 
-        <span class="nav-tabs-anchor text-center" id="{{genres[0]}}" ng-click="filterByGenre(genres[0])" style="margin-right:20px;height:50px;color:rgba(71,162,190,1);">
+        <span class="nav-tabs-anchor text-center" id="{{genres[0]}}" ng-click="filterByGenre(genres[0])" style="margin-right:20px;height:50px;">
             {{genres[0]}}
         </span>
 
@@ -95,9 +95,9 @@
             {{genres[5]}}
         </span>
 
-        <!--span class="nav-tabs-anchor text-center" id="allActivs" ng-click="allActivities()" style="margin-right:20px;">
+        <span class="nav-tabs-anchor text-center" id="allActivs" ng-click="allActivities()" style="margin-right:20px;color:rgba(71,162,190,1);">
             All
-        </span-->
+        </span>
 
         <span class="text-center nav-tabs-anchor" style="background-color:rgba(71,162,190,1);padding:3px 3px 3px 3px;color:white;font-size:12px;margin-left:100px;cursor:auto">
             SORT BY
@@ -107,7 +107,7 @@
             {{sortSelected}}
         </span>
 
-        <div class="sort-menu-drawer" id="sort-menu-drawer" hide ng-click="sortMenu()" style="margin-left:820px;">
+        <div class="sort-menu-drawer" id="sort-menu-drawer" hide ng-click="sortMenu()" style="margin-left:865px;">
             <ul>
                 <li>
                         <span class="text-left" ng-click="sort(1)">
@@ -135,7 +135,7 @@
             {{city}}
         </span>
 
-        <div class="sort-menu-drawer" id="city-menu-drawer" hide ng-click="cityMenu()" style="margin-left:1140px;">
+        <div class="sort-menu-drawer" id="city-menu-drawer" hide ng-click="cityMenu()" style="margin-left:1190px;">
             <ul>
                 <li>
                         <span class="text-left" ng-click="filterByCity(cities[0])">
