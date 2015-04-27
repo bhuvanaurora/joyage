@@ -115,7 +115,12 @@ angular.module('MyApp')
 
     $scope.sortSelected = $scope.sortOrders[0];
 
+
+        //-------------------------------- Filter by City -------------------------------------//
+
+
     $scope.filterByCity = function(city) {
+      $scope.pagenumber = 1;
       $scope.city = city;
       $scope.activ = [];
       if ($scope.genre == '') $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city }));
@@ -123,12 +128,15 @@ angular.module('MyApp')
     };
 
 
+        //-------------------------------- Filter by Genre -------------------------------------//
+
+
     $scope.filterByGenre = function(genre) {
+      $scope.pagenumber = 1;
       $scope.activ = [];
       $scope.activ.push(Activity.query({ genre: genre, page: 1, sortOrder: $scope.sortOrder, city: $scope.city }));
       $scope.genre = genre;
       $rootScope.genre = genre;
-
 
       for (var i=0; i<$scope.genres.length; i++) {
         var el = document.getElementById($scope.genres[i]);
@@ -153,7 +161,12 @@ angular.module('MyApp')
 
     };
 
+
+        //-------------------------------- All activities -------------------------------------//
+
+
     $scope.allActivities = function(){
+      $scope.pagenumber = 1;
       $scope.activ = [];
       $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city}));
 
@@ -170,13 +183,22 @@ angular.module('MyApp')
       }
     };
 
+
+        //-------------------------------- Show more button -------------------------------------//
+
+
     $scope.pageClick = function() {
       $scope.pagenumber += 1;
       if ($scope.genre == '') $scope.activ.push(Activity.query({ page: $scope.pagenumber, sortOrder: $scope.sortOrder, city: $scope.city }));
       else $scope.activ.push(Activity.query({ page: $scope.pagenumber, sortOrder: $scope.sortOrder, city: $scope.city, genre: $scope.genre }));
     };
+
+
+        //----------------------------------- Sort Order ----------------------------------------//
+
     
     $scope.sort = function(sortType) {
+      $scope.pagenumber = 1;
       if (sortType === 1) {
         $scope.sortOrder = 'timeAdded';
         $scope.sortSelected = $scope.sortOrders[0];
@@ -193,6 +215,9 @@ angular.module('MyApp')
       else $scope.activ.push(Activity.query({ page: 1, sortOrder: $scope.sortOrder, city: $scope.city, genre: $scope.genre }));
 
     };
+
+
+
 
       $scope.isSubscribed = function (activity) {
         if (activity.subscribers.indexOf($rootScope.currentUser._id) != -1) {
