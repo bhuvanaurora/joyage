@@ -1,9 +1,20 @@
-<header style="background-color:rgba(71,162,190,1);border:none;">
+<header style="background-color:rgba(71,162,190,1);border:none;" ng-controller="NavbarCtrl">
     <div class="wrapper" style="margin-bottom:-25px;">
         <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
-            <a href="/" style="cursor:pointer">
-                <img src="/img/logo-white.png" style="height:100px;margin-top:-20px;"/>
+            <a href="/home" style="cursor:pointer">
+                <img ng-src="/img/logo-white.png" style="height:46px"/>
             </a>
+        </div>
+
+        <div id="fb-root"></div>
+
+        <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none" style="line-height:70px;margin-top:-10px;padding-bottom:10px;">
+            <div class="pull-right">
+                <div class="user-menu js-user-menu">
+
+                </div>
+            </div>
+
         </div>
     </div>
 </header>
@@ -170,17 +181,22 @@
 
 <!---------------------------- Footer ---------------------------->
 
-<footer style="height:160px;clear:both;background-color:rgba(0,0,0,0.1);margin-top:30px;">
+<footer style="height:160px;clear:both;background-color:rgba(0,0,0,0.1);margin-top:50px;">
     <div class="container_27 clearfix">
         <div class="grid_4 pull-left" style="margin-left:100px;">
 
             <ul>
                 <li>
-                    JOYAGE
+                    <b>JOYAGE</b>
                 </li>
                 <li>
                     <a href="/about/">
-                        About Us
+                        About us
+                    </a>
+                </li>
+                <li>
+                    <a href="/contact/">
+                        Contact us
                     </a>
                 </li>
                 <li>
@@ -197,18 +213,55 @@
 
         </div>
 
+        <div class="grid_4 pull-left" style="margin-left:50px;">
+            <ul>
+                <li>
+                    <b>CITIES</b>
+                </li>
+                <li>
+                    <a href="/home?cit=Bangalore">
+                        Bangalore
+                    </a>
+                </li>
+                <li>
+                    <a href="/home?cit=Delhi">
+                        Delhi
+                    </a>
+                </li>
+                <li>
+                    <a href="/home?cit=Mumbai">
+                        Mumbai
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="grid_6 pull-left" style="margin-left:250px;">
+            <div style="font-size:15px;margin-top:30px;color:#222;margin-left:50px;">
+                <b>Get the app</b>
+            </div>
+            <div class="footer-logo">
+                <h3 style="margin-top:0px;">
+                    <a href="https://play.google.com/store/apps/details?id=in.joyage">
+                        <img alt="Get it on Google Play"
+                             src="https://developer.android.com/images/brand/en_generic_rgb_wo_60.png" />
+                    </a>
+                </h3>
+            </div>
+        </div>
+
         <div class="grid_6 pull-right" style="margin-right:100px;">
             <div class="footer-logo">
-                <h3 style="margin-top: 20px;color:#999;font-family:Montserrat">
-                    <a href="/" style="color:#999;font-family:Montserrat">
+                <h3 style="margin-top:40px;color:#777;font-family:Montserrat">
+                    <a href="/home" style="color:#777;font-family:Montserrat">
                         JOYAGE
                     </a>
                 </h3>
             </div>
-            <div style="font-size: 10px;margin-top: 20px;color:#999;">
-                COPYRIGHT 2014
+            <div style="font-size: 10px;margin-top:-10px;color:#777;">
+                COPYRIGHT 2015
             </div>
-            <div style="font-size: 10px;color:#999">
+            <div style="font-size: 10px;color:#777">
                 JOYAGE INC.
             </div>
         </div>

@@ -1,6 +1,6 @@
 angular.module('MyApp')
-  .controller('MainCtrl', ['$scope', '$interval', '$rootScope', '$routeParams','fb_appId', '$window', '$location', 'Activity', 'Session', 'SessionO', 'Auth', 'Subscription',
-      function($scope, $interval, $rootScope, $routeParams, fb_appId, $window, $location, Activity, Session, SessionO, Auth, Subscription) {
+  .controller('MainCtrl', ['$scope', '$interval', '$rootScope', '$routeParams','fb_appId', 'fb_connect', '$window', '$location', 'Activity', 'Session', 'SessionO', 'Auth', 'Subscription',
+      function($scope, $interval, $rootScope, $routeParams, fb_appId, fb_connect, $window, $location, Activity, Session, SessionO, Auth, Subscription) {
 
     $scope.cities = ['Bangalore', 'Delhi', 'Mumbai'];
     /*$scope.neighborhood = { 'Bangalore': ['Kormangala', 'JP Nagar', 'Indiranagar', 'MG Road'],
