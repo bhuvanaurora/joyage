@@ -61,7 +61,14 @@ angular.module('MyApp')
                 name: activity.title,
                 link: "http://joyage.in/activities/"+activity._id,
                 picture: 'https://s3-ap-southeast-1.amazonaws.com/joyage-images/'+activity.poster,
-                description: activity.description
+                description: activity.description,
+                display: 'popup'
+            }, function(response) {
+                if (response && response.post._id) {
+                    console.log('Shared on Facebook');
+                } else {
+                    console.log('Could not post to Facebook');
+                }
             });
         };
 
