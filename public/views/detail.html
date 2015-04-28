@@ -382,7 +382,7 @@
                 ng-if="currentUser.p2p">
             Accept Activity
         </button>
-        <a href="/editActivity/{{activity._id}}/{{currentUser._id}}">Edit</a>
+        <span ng-click="editActivity()" style="cursor:pointer">Edit</span>
         <button class="btn btn-danger"
                 ng-click="deleteActivity()">
             Delete Activity

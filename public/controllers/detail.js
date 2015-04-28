@@ -519,6 +519,13 @@ angular.module('MyApp')
 
       });
 
+
+     $scope.editActivity = function() {
+         $window.location = '/editActivity/'+$scope.activity._id+'/'+$rootScope.currentUser._id;
+     };
+
+
+
      // ----------------------------------------------- For Navbar --------------------------------------------- //
 
      $scope.userMenu = function() {

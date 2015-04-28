@@ -1,6 +1,6 @@
 angular.module('MyApp')
-  .controller('AddCtrl', ['$scope', '$alert', '$routeParams', '$http', '$route', '$upload', 'Activity', 'editedActivity', 'Profile', 'Business',
-                          function($scope, $alert, $routeParams, $http, $route, $upload, Activity, editedActivity, Profile, Business) {
+  .controller('AddCtrl', ['$scope', '$alert', '$routeParams', '$http', '$route', '$upload', '$window','Activity', 'editedActivity', 'Profile', 'Business',
+                          function($scope, $alert, $routeParams, $http, $route, $upload, $window, Activity, editedActivity, Profile, Business) {
 
       $scope.businessNames = [];
       $scope.listOfBusinesses = Business.query({},function(value) {
@@ -500,4 +500,11 @@ angular.module('MyApp')
               }
           });
       });
+
+
+      $scope.adminConsole = function() {
+          $window.location = '/admin/'+$routeParams.id;
+      }
+
+
   }]);

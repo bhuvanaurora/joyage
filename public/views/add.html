@@ -469,12 +469,11 @@
                ng-model="addedBy"
                value="currentUser.email">
 
-      <a ng-href="/admin/{{currentUser._id}}">
-          <button type="submit"
-                  style="font-size:16px;padding:5px;margin-top:25px;;width:45%;cursor:pointer;background-color:#3A6073;border-radius:5px;">
-              Cancel
-          </button>
-      </a>
+      <button type="submit"
+              style="font-size:16px;padding:5px;margin-top:25px;;width:45%;cursor:pointer;background-color:#3A6073;border-radius:5px;"
+              ng-click="adminConsole()">
+          Cancel
+      </button>
         
         <button type="submit"
                 style="font-size:16px;padding:5px;width:45%;cursor:pointer;background-color:#3A6073;border-radius:5px;">
@@ -485,7 +484,7 @@
         <br />
 
       <div class="text-center">
-        <a ng-href="/admin/{{currentUser._id}}">Take me to admin console</a>
+        <span ng-click="adminConsole()" style="cursor:pointer">Take me to admin console</span>
       </div>
 
     </div>
