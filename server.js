@@ -943,7 +943,9 @@ app.get('/api/activities', ensureAuthenticated, function(req, res, next) {
   var j = 0;
   query.exec(function(err, activities) {
     if (err) return next(err);
-    if (!req.query.limit) {
+    if (req.query.business) {
+      res.send(activities);
+    } else if (!req.query.limit) {
       for (i=0; i<activities.length; i++) {
         if (date <= Date.parse(activities[i].dateOfActivity)) {
           act[j] = activities[i];
@@ -1321,6 +1323,22 @@ app.post('/api/deleteActivity', ensureAuthenticated, function(req, res, next) {
   Activity.findById(req.body.activityId, function(err, activity) {
 
     if (err) return next(err);
+
+    if (activity.preview == true) {
+
+      Business.findById(activity.businessId, function (err, business) {
+
+        if (err) return next(err);
+
+        business.noOfAct -= 1;
+
+        business.save(function (err) {
+          if (err) return next(err);
+        });
+
+      });
+
+    }
 
     activity.remove(function(err) {
       if (err) return next(err);
