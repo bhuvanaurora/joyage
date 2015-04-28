@@ -4,7 +4,7 @@
     <div class="wrapper" style="margin-bottom:-25px;">
         <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
             <a class="head-brand" ng-href="/home" style="cursor:pointer">
-                <img ng-src="/img/logo-white.png" style="height:46px"/>
+                <img ng-src="/img/logo-white.png" alt="Joyage-logo" style="height:46px"/>
             </a>
         </div>
 
@@ -13,7 +13,7 @@
         <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none custom-user-menu">
             <div class="pull-right">
                 <div class="user-menu js-user-menu" ng-click="userMenu()">
-                    <img ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
+                    <img ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture" alt="User-pic">
                     <span class="user-name">{{currentUser.name}}</span>
                 </div>
                 <div ng-if="currentUser" class="user-menu-drawer js-user-menu-drawer" id="user-menu-drawer" hide ng-click="userMenu()">
@@ -71,7 +71,7 @@
             </li>
         </ul>
 
-        <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.poster}}"><br />
+        <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.poster}}" alt="{{activity.title}}."><br />
         <div class="text-right" ng-if="activity.photoCredit" style="margin-top:-40px;width:900px;margin-left:auto;margin-right:auto;color:rgba(0,0,0,0.6);font-size:12px;">
             Image credits: <a href="{{activity.photoCreditLink}}">{{activity.photoCredit}}</a>
         </div>
@@ -158,7 +158,7 @@
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2"></div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.mediaImage}}" style="width:600px;height:350px;">
+            <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.mediaImage}}" alt="In media" style="width:600px;height:350px;">
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2"></div>
 
@@ -176,7 +176,7 @@
 
         <div class="text-center">
             <div>
-                <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.venueImage}}" style="width:600px;height:400px;">
+                <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.venueImage}}" alt="{{activity.location}}." style="width:600px;height:400px;">
                 <h4 style="font-family:Roboto;font-weight:300;">About Venue</h4>
 
                 <p style="text-align:justify;width:600px;margin-left:auto;margin-right:auto;">{{activity.venueDescription}}</p>
@@ -193,7 +193,7 @@
         <div ng-if="activity.corner && activity.goodies" class="text-center" style="padding-top:40px;width:500px;margin-left:auto;margin-right:auto;">
 
             <div ng-if="activity.corner" style="float:left;max-width:240px;padding:20px;background-color:rgba(0,0,0,0.04);text-align:justify;">
-                <img style="width:240px;height:150px;" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.cornerPic}}">
+                <img style="width:240px;height:150px;" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.cornerPic}}" alt="{{activity.corner}}">
                 <h5 class="text-center">{{activity.corner}}</h5>
                 {{activity.cornerText}}
             </div>
@@ -201,7 +201,7 @@
             <div ng-if="activity.goodies" style="float:right;max-width:240px;padding:20px;margin:0px;background-color:rgba(0,0,0,0.04);text-align:justify;">
                 <h5 class="text-center" style="margin-top:0px;">Goodies</h5>
                 {{activity.goodies}}
-                <img style="width:240px;height:150px;padding-top:20px;" ng-src="/img/index/5.jpg">
+                <img style="width:240px;height:150px;padding-top:20px;" ng-src="/img/gift.png" alt="Goodies stock image">
             </div>
 
         </div>
@@ -209,7 +209,7 @@
         <div ng-if="!activity.goodies" class="text-center" style="padding-top:40px;width:700px;margin-left:auto;margin-right:auto;">
 
             <div ng-if="activity.corner" style="float:left;width:300px;height:200px;padding:20px;background-color:rgba(0,0,0,0.04);text-align:justify;">
-                <img style="width:240px;height:150px;" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.cornerPic}}">
+                <img style="width:240px;height:150px;" ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.cornerPic}}" alt="{{activity.corner}}">
             </div>
 
             <div ng-if="activity.corner" style="float:left;width:400px;min-height:200px;padding:20px;background-color:rgba(0,0,0,0.04);text-align:justify;">
@@ -222,7 +222,7 @@
         <div ng-if="!activity.corner" class="text-center" style="padding-top:40px;width:700px;margin-left:auto;margin-right:auto;">
 
             <div ng-if="activity.goodies" style="float:left;width:300px;height:200px;padding:20px;margin:0px;background-color:rgba(0,0,0,0.04);text-align:justify;">
-                <img style="width:240px;height:150px;padding-top:20px;" ng-src="/img/index/5.jpg">
+                <img style="width:240px;height:150px;padding-top:20px;" ng-src="/img/gift.png" alt="Goodies stock image">
             </div>
 
             <div ng-if="activity.goodies" style="float:left;width:400px;min-height:200px;padding:20px;background-color:rgba(0,0,0,0.04);text-align:justify;">
@@ -483,7 +483,7 @@
         </div>
 
         <div class="bookmark-it-head-img">
-            <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.poster}}" style="width:600px;height:300px;">
+            <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{activity.poster}}" alt="{{activity.title}}." style="width:600px;height:300px;">
         </div>
 
         <div class="modal-body">
@@ -505,11 +505,16 @@
 
             <ul>
                 <li>
-                    JOYAGE
+                    <b>JOYAGE</b>
                 </li>
                 <li>
                     <a href="/about/">
-                        About Us
+                        About us
+                    </a>
+                </li>
+                <li>
+                    <a href="/contact/">
+                        Contact us
                     </a>
                 </li>
                 <li>
@@ -522,23 +527,42 @@
                         Terms of Service
                     </a>
                 </li>
-                <li>
-                    <a href="mailto:admin@joyage.in?Subject=Problem%20detected%20on%20the%20website">
-                        Report a problem
-                    </a>
-                </li>
             </ul>
 
         </div>
 
-        <div class="grid_6 pull-left" style="margin-left:350px;">
-            <div style="font-size:15px;margin-top:30px;color:#222;margin-left:15px;">
-                Want to spice it up a notch?
+        <div class="grid_4 pull-left" style="margin-left:50px;">
+            <ul>
+                <li>
+                    <b>CITIES</b>
+                </li>
+                <li>
+                    <a href="/home?cit=Bangalore">
+                        Bangalore
+                    </a>
+                </li>
+                <li>
+                    <a href="/home?cit=Delhi">
+                        Delhi
+                    </a>
+                </li>
+                <li>
+                    <a href="/home?cit=Mumbai">
+                        Mumbai
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="grid_6 pull-left" style="margin-left:250px;">
+            <div style="font-size:15px;margin-top:30px;color:#222;margin-left:50px;">
+                <b>Get the app</b>
             </div>
             <div class="footer-logo">
                 <h3 style="margin-top:0px;">
                     <a href="https://play.google.com/store/apps/details?id=in.joyage">
-                        <img ng-src="/img/gplay.png"/>
+                        <img alt="Get it on Google Play"
+                             src="https://developer.android.com/images/brand/en_generic_rgb_wo_60.png" />
                     </a>
                 </h3>
             </div>

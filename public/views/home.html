@@ -4,7 +4,7 @@
     <div class="wrapper" style="margin-bottom:-25px;">
         <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 padd-left-none">
             <a class="head-brand" ng-href="/home" style="cursor:pointer">
-                <img ng-src="/img/logo-white.png" style="height:46px"/>
+                <img ng-src="/img/logo-white.png" alt="Joyage logo" style="height:46px"/>
             </a>
         </div>
 
@@ -13,7 +13,7 @@
         <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 padd-right-none custom-user-menu">
             <div class="pull-right">
                 <div class="user-menu js-user-menu" ng-click="userMenu()">
-                    <img ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture">
+                    <img ng-src="https://graph.facebook.com/v2.2/{{currentUser.facebookId}}/picture" alt="User pic">
                     <span class="user-name">{{currentUser.name}}</span>
                 </div>
                 <div ng-if="currentUser" class="user-menu-drawer js-user-menu-drawer" id="user-menu-drawer" hide ng-click="userMenu()">
@@ -53,7 +53,7 @@
 
 
 <div class="mood-head-holde">
-    <img src="/img/All-Mood.jpg" id="gImg" class="mood-image">
+    <img src="/img/All-Mood.jpg" id="gImg" class="mood-image"">
     <div class="overlay" id="overlay" hidden>
 
     </div>
@@ -186,7 +186,7 @@
                         <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3"></div>
                         <a ng-href="/activities/{{act._id}}">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{act.poster}}" style="max-width:120%">
+                                <img ng-src="https://s3-ap-southeast-1.amazonaws.com/joyage-images/{{act.poster}}" alt="{{act.title}}" style="max-width:120%">
                             </div>
                         </a>
                         <div class="col-lg-1"></div>

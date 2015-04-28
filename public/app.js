@@ -71,6 +71,10 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'ngAnimate', 'mg
         templateUrl: 'views/pages/about.html'
       })
 
+      .when('/contact', {
+        templateUrl: 'views/pages/contact.html'
+      })
+
       .when('/jobs', {
         templateUrl: 'views/pages/jobs.html'
       })

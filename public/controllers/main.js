@@ -1,6 +1,6 @@
 angular.module('MyApp')
-  .controller('MainCtrl', ['$scope', '$interval', '$rootScope', 'fb_appId', '$window', '$location', 'Activity', 'Session', 'SessionO', 'Auth', 'Subscription',
-      function($scope, $interval, $rootScope, fb_appId, $window, $location, Activity, Session, SessionO, Auth, Subscription) {
+  .controller('MainCtrl', ['$scope', '$interval', '$rootScope', '$routeParams','fb_appId', '$window', '$location', 'Activity', 'Session', 'SessionO', 'Auth', 'Subscription',
+      function($scope, $interval, $rootScope, $routeParams, fb_appId, $window, $location, Activity, Session, SessionO, Auth, Subscription) {
 
     $scope.cities = ['Bangalore', 'Delhi', 'Mumbai'];
     /*$scope.neighborhood = { 'Bangalore': ['Kormangala', 'JP Nagar', 'Indiranagar', 'MG Road'],
@@ -45,7 +45,11 @@ angular.module('MyApp')
             };
           }
 
-          if ($rootScope.city) {
+          if ($routeParams.cit) {
+            $scope.city = $routeParams.cit;
+            $rootScope.city = $scope.city;
+          }
+          else if ($rootScope.city) {
             $scope.city = $rootScope.city;
           } else {
             if (data.city) {
