@@ -60,7 +60,7 @@
     "qs": "^2.4.1",
     "querystring": "^0.2.0",
     "raw-body": "^1.3.3",
-    "request": "^2.34.0",
+    "request": "^2.55.0",
     "satelize": "^0.1.1",
     "sax": "^0.6.1",
     "sendgrid": "^1.2.1",
@@ -68,9 +68,11 @@
     "swig": "^1.4.2",
     "type-is": "^1.6.1",
     "universal-analytics": "^0.3.4",
+    "useragent": "^2.1.5",
     "util": "^0.10.3",
     "xml2js": "^0.4.2",
-    "xmlbuilder": "^2.6.2"
+    "xmlbuilder": "^2.6.2",
+    "yamlparser": "0.0.2"
   },
   "devDependencies": {
     "gulp": "^3.6.2",

@@ -44,6 +44,8 @@ var router = express.Router();
 var session = require('cookie-session');
 var cookieParser = require('cookie-parser');
 var bson = require('bson');
+var useragent = require('useragent');
+useragent(true);
 
 var crypto = require('crypto');
 var bcrypt = require('bcryptjs');
@@ -201,7 +203,7 @@ var userSchema = new mongoose.Schema({
   //password: String,
   gender: String,
   age: String,
-  city: String,
+  city: String,                                                             // Get city for each user
   curator: Boolean,
   p2p: Boolean,
   god: Boolean,
@@ -238,6 +240,66 @@ var invitesSchema = new mongoose.Schema({
   invitations_accepted: { type: Number, default: 0 }
 });
 
+
+var analyticsSchema = new mongoose.Schema({
+  _id: String,
+  sessions: [{
+    sessionStart: Date,
+    sessionEnd: Date,
+    loginTime: Date,
+    logoutTime: Date,
+    ipAdd: String,
+    city: String,
+    country: String,
+    isp: String,
+    asn: String,
+    userAgent: String,
+    latitude: Number,
+    longitude: Number,
+    focusAway: [Date],
+    focusBack: [Date],
+    subSessions: [{
+      subSessionStart: Date,
+      subSessionEnd: Date,
+      mood: String,
+      sortOrder: String,
+      city: String,
+      bookmarkedAct: [{
+        id: String,
+        time: Date
+      }],
+      subActivity: [{
+        subActivityStart: Date,
+        subActivityEnd: Date,
+        activityId: String,
+        bookmarkTime: Date,
+        doneTime: Date,
+        tip: {
+          text: String,
+          time: Date
+        },
+        selfie: {
+          link: String,
+          time: Date
+        },
+        shareTime: Date,
+        sourceLinkTime: Date,
+        mediaLink: [{
+          link: String,
+          time: Date
+        }],
+        webTime: Date,
+        zomTime: Date,
+        fbTime: Date,
+        twTime: Date,
+        rideTime: Date,
+        tcktTime: Date
+      }]
+    }]
+  }]
+});
+
+
 /*userSchema.pre('save', function(next) {
   var user = this;
   if (!user.isModified('password')) return next();
@@ -262,6 +324,7 @@ var User = mongoose.model('User', userSchema);
 var Activity = mongoose.model('Activity', activitySchema);
 var Invites = mongoose.model('Invites', invitesSchema);
 var Business = mongoose.model('Business', businessSchema);
+var Analytics = mongoose.model('Analytics', analyticsSchema);
 
 mongoose.connect(config.db);
 //mongoose.connect("mongodb://bhuvan:joyage_database_password@ds035280.mongolab.com:35280/joyage_database");
@@ -386,48 +449,129 @@ app.post('/auth/facebook', function(req, res, next) {
     return res.send(400, 'Invalid Request Signature');
   }
 
-  User.findOne({ facebookId: profile.id }, function(err, existingUser) {
+  var agent = useragent.parse(req.headers['user-agent']);
 
-    if (existingUser) {
-      var token = createJwtToken(existingUser);
-      req.session.loginTime = Date.now();
-      req.session.invitePage = 1;
-      return res.send(token);
-    }
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
 
-    var user = new User({
-      name: profile.first_name,
-      gender: profile.gender,
-      age: profile.age_range,
-      curator: false,
-      p2p: false,
-      facebookId: profile.id,
-      facebook: {
-        id: profile.id,
-        email: profile.email,
-        profileLink: profile.link
-      },
-      joinedOn: Date.now(),
-      subscribedActivities: [],
-      doneActivities: [],
-      requests: [],
-      invitation_to: [],
-      invitations_sent: 0,
-      inviteString: "",
-      tipsCount: 0,
-      selfies: [],
-      selfieCount: 0
+  satelize.satelize({ip: ip}, function (err, geoData) {
+    if (err) return next(err);
+
+    var obj = JSON.parse(geoData);
+
+    User.findOne({ facebookId: profile.id }, function(err, existingUser) {
+
+      if (existingUser) {
+        var token = createJwtToken(existingUser);
+
+        Analytics.findOne({ _id: existingUser._id }, function(err, analytics) {
+
+          if (analytics) {
+
+            analytics.sessions.push({
+              sessionStart: Date.now(),
+              loginTime: Date.now(),
+              ipAdd: obj.ip,
+              city: obj.city,
+              country: obj.country,
+              isp: obj.isp,
+              asn: obj.asn,
+              userAgent: agent,
+              latitude: obj.latitude,
+              longitude: obj.longitude
+            });
+
+            analytics.save(function(err) {
+              if (err) return next(err);
+            });
+
+          } else {
+
+            var newAnalytics = new Analytics({
+              _id: existingUser._id,
+              sessions: []
+            });
+
+            newAnalytics.sessions.push({
+              sessionStart: Date.now(),
+              loginTime: Date.now(),
+              ipAdd: obj.ip,
+              city: obj.city,
+              country: obj.country,
+              isp: obj.isp,
+              asn: obj.asn,
+              userAgent: agent,
+              latitude: obj.latitude,
+              longitude: obj.longitude
+            });
+
+            newAnalytics.save(function(err) {
+              if (err) return next(err);
+            });
+
+          }
+        });
+
+        req.session.loginTime = Date.now();
+        req.session.invitePage = 1;
+        return res.send(token);
+      }
+
+      var user = new User({
+        name: profile.first_name,
+        gender: profile.gender,
+        age: profile.age_range,
+        curator: false,
+        p2p: false,
+        facebookId: profile.id,
+        facebook: {
+          id: profile.id,
+          email: profile.email,
+          profileLink: profile.link
+        },
+        joinedOn: Date.now(),
+        subscribedActivities: [],
+        doneActivities: [],
+        requests: [],
+        invitation_to: [],
+        invitations_sent: 0,
+        inviteString: "",
+        tipsCount: 0,
+        selfies: [],
+        selfieCount: 0
+      });
+
+      user.save(function(err) {
+        if (err) return next(err);
+        var token = createJwtToken(user);
+
+        var analytics = new Analytics({
+          _id: user._id,
+          sessions: []
+        });
+
+        analytics.sessions.push({
+          sessionStart: Date.now(),
+          loginTime: Date.now(),
+          ipAdd: obj.ip,
+          city: obj.city,
+          country: obj.country,
+          isp: obj.isp,
+          asn: obj.asn,
+          userAgent: agent,
+          latitude: obj.latitude,
+          longitude: obj.longitude
+        });
+
+        analytics.save(function(err) {
+          if (err) return next(err);
+        });
+
+        req.session.loginTime = Date.now();
+        req.session.invitePage = 1;
+        res.send(token);
+      });
+
     });
-
-    user.save(function(err) {
-      if (err) return next(err);
-      var token = createJwtToken(user);
-      req.session.loginTime = Date.now();
-      req.session.invitePage = 1;
-      res.send(token);
-    });
-
-    //res.send(200);
 
   });
 });

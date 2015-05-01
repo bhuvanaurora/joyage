@@ -7,6 +7,8 @@ angular.module('MyApp')
 
          $scope.session = Session;
 
+                                 
+
          $scope.session.success(function(data) {
              if (data.session != 'OK') {
                  $window.fbAsyncInit = function () {
