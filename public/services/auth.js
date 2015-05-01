@@ -234,7 +234,7 @@ angular.module('MyApp')
                                   var payload = JSON.parse($window.atob(token.split('.')[1]));
                                   $window.localStorage.token = token;
                                   $rootScope.currentUser = payload.user;
-
+                                  
                                   $location.path('/activities/' + $rootScope.fb_ref);
                                   // Signed in
                               })

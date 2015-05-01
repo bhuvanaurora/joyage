@@ -3,6 +3,10 @@ angular.module('MyApp')
   .controller('DetailCtrl', ['$scope', '$interval', '$rootScope', '$window', '$routeParams', '$location', '$alert', '$upload', 'fb_appId', 'fb_connect','Activity', 'Profile', 'Subscription', 'DoneIt', 'Tips', 'Selfies', 'Accept', 'Delete', 'Session', 'Auth',
                              function($scope, $interval, $rootScope, $window, $routeParams, $location, $alert, $upload, fb_appId, fb_connect, Activity, Profile, Subscription, DoneIt, Tips, Selfies, Accept, Delete, Session, Auth) {
 
+         if (!$rootScope.currentUser) {
+             $window.location('/');
+         }
+
          $window.scrollTo(0,0);                                 // To scroll to the top of the page
 
          $scope.session = Session;
