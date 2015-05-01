@@ -226,7 +226,7 @@ angular.module('MyApp')
                       profile: profile
                   };
 
-                  if($rootScope.fb_ref) {
+                  /*if($rootScope.fb_ref) {
 
                       AuthProfile.get({_id: profile.id}, function (prof) {
                           $http.post('/auth/facebook', data)
@@ -250,7 +250,7 @@ angular.module('MyApp')
                               });
                       });
 
-                  } else {
+                  } else {*/
 
                       AuthProfile.get({_id: profile.id}, function (prof) {
                           $http.post('/auth/facebook', data)
@@ -258,8 +258,7 @@ angular.module('MyApp')
                                   var payload = JSON.parse($window.atob(token.split('.')[1]));
                                   $window.localStorage.token = token;
                                   $rootScope.currentUser = payload.user;
-
-                                  $location.path('/home');
+                                  $location.path('/'+$routeParams.id+'/'+$routeParams.fb_ref);
                                   // Signed in
                               })
                               .error(function () {
@@ -274,7 +273,7 @@ angular.module('MyApp')
                               });
                       });
 
-                  }
+                 // }
 
 
               });
