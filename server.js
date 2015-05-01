@@ -453,7 +453,7 @@ app.post('/auth/facebook', function(req, res, next) {
 
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
 
-  satelize.satelize({ip: ip, timeout: 10000000}, function (err, geoData) {
+  satelize.satelize({ip: ip, timeout: 10000000 }, function (err, geoData) {
     if (err) return next(err);
 
     var obj = JSON.parse(geoData);
@@ -992,7 +992,7 @@ app.get('/api/activities', ensureAuthenticated, function(req, res, next) {
 
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
 
-  satelize.satelize({ ip: ip }, function(err, geoData) {
+  satelize.satelize({ ip: ip, timeout: 10000000}, function(err, geoData) {
     if (err) return next(err);
 
     var obj = JSON.parse(geoData);

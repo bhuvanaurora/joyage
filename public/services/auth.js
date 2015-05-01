@@ -234,7 +234,7 @@ angular.module('MyApp')
                                   if ($rootScope.fb_ref) {
                                       $location.path('/activities/'+$rootScope.fb_ref);
                                   } else {
-                                      $location.path('/home');
+                                    $location.path('/home');
                                   }
                                   // Signed in
                               })

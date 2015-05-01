@@ -11,7 +11,9 @@ angular.module('MyApp')
         $window.location.reload();
       },10000);*/
 
-      if ($rootScope.currentUser) {
+      if ($rootScope.fb_ref && $rootScope.currentUser) {
+        $location.path('/activities/'+$rootScope.fb_ref);
+      } else if ($rootScope.currentUser) {
         $location.path('/home');
       }
 
