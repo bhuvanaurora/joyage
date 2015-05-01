@@ -7,7 +7,9 @@ angular.module('MyApp')
 
          $scope.session = Session;
 
-                                 
+         if ($routeParams.fb_ref) {
+             $rootScope.fb_ref = $routeParams.id;
+         }
 
          $scope.session.success(function(data) {
              if (data.session != 'OK') {

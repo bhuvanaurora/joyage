@@ -394,7 +394,7 @@ function createJwtToken(user) {
   var payload = {
     user: user,
     iat: new Date().getTime(),
-    exp: moment().add('days', 7).valueOf()
+    exp: moment().add(1, 'days').valueOf()
   };
   return jwt.encode(payload, tokenSecret);
 }
@@ -453,7 +453,7 @@ app.post('/auth/facebook', function(req, res, next) {
 
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
 
-  satelize.satelize({ip: ip}, function (err, geoData) {
+  satelize.satelize({ip: ip, timeout: 10000000}, function (err, geoData) {
     if (err) return next(err);
 
     var obj = JSON.parse(geoData);
