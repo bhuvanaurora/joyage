@@ -234,7 +234,7 @@ angular.module('MyApp')
                                   var payload = JSON.parse($window.atob(token.split('.')[1]));
                                   $window.localStorage.token = token;
                                   $rootScope.currentUser = payload.user;
-                                  
+
                                   $location.path('/activities/' + $rootScope.fb_ref);
                                   // Signed in
                               })
@@ -360,6 +360,7 @@ angular.module('MyApp')
         logout: function () {
           delete $window.localStorage.token;
           $rootScope.currentUser = null;
+          $rootScope.fb_ref = null;
           FB.getLoginStatus(function (response) {
             if (response && response.status === 'connected') {
                 FB.logout(function (response) {
