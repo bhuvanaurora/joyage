@@ -1,6 +1,6 @@
 angular.module('MyApp')
-  .controller('AddCtrl', ['$scope', '$alert', '$routeParams', '$http', '$route', '$upload', '$window','Activity', 'editedActivity', 'Profile', 'Business',
-                          function($scope, $alert, $routeParams, $http, $route, $upload, $window, Activity, editedActivity, Profile, Business) {
+  .controller('AddCtrl', ['$scope', '$alert', '$routeParams', '$rootScope', '$http', '$route', '$upload', '$window','Activity', 'editedActivity', 'Profile', 'Business',
+                          function($scope, $alert, $routeParams, $rootScope, $http, $route, $upload, $window, Activity, editedActivity, Profile, Business) {
 
       $scope.businessNames = [];
       $scope.listOfBusinesses = Business.query({},function(value) {
@@ -248,12 +248,8 @@ angular.module('MyApp')
                                   $scope.cornerPic = '';
                                   $scope.cornerText = '';
                                   mediaVar = [];
-                                  $alert({
-                                      content: 'Activity has been added.',
-                                      placement: 'top-right',
-                                      type: 'success',
-                                      duration: 3
-                                  });
+                                  alert('Activity added successfully!');
+                                  $window.location = '/editActivity/'+id+'/'+$rootScope.currentUser._id;
                               },
                               function (response) {
                                   $alert({
@@ -492,7 +488,8 @@ angular.module('MyApp')
                           $scope.activity.mediaImage = $scope.mediaImage;
 
                           $scope.activity.$update(function () {
-                              $route.reload();
+                              alert('Activity updated successfully!');
+                              $window.location = '/editActivity/'+$scope.activity._id+'/'+$rootScope.currentUser._id;
                           });
 
                       };

@@ -1,6 +1,6 @@
 angular.module('MyApp')
-    .controller('AdminCtrl', ['$scope', '$alert', '$route', '$routeParams', '$location', 'Activity', 'Delete', 'Profile', 'Business',
-                              function($scope, $alert, $route, $routeParams, $location, Activity, Delete, Profile, Business) {
+    .controller('AdminCtrl', ['$scope', '$alert', '$route', '$routeParams', '$rootScope', '$window', '$location', 'Activity', 'Delete', 'Profile', 'Business',
+                              function($scope, $alert, $route, $routeParams, $rootScope, $window, $location, Activity, Delete, Profile, Business) {
 
           $scope.listOfBusinesses = Business.query();
 
@@ -10,14 +10,12 @@ angular.module('MyApp')
                 $scope.activities = Activity.query({ preview: false });
                 $scope.deleteActivity = function(activity) {
                     Delete.deleteActivity(activity).success(function() {
-                        $alert({
-                            content: 'Activity deleted',
-                            placement: 'top-right',
-                            type: 'material',
-                            duration: 3
-                        });
+                        alert('Activity deleted!');
                         $route.reload();
                     });
+                };
+                $scope.editActivity = function(activity) {
+                    $window.location = '/editActivity/'+activity._id+'/'+$rootScope.currentUser._id;
                 };
             } else {
                 $location.path('/home');
