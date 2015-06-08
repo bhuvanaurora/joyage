@@ -18,3 +18,8 @@ build/Release
 
 # tmp folder
 /tmp
+
+# config files
+s3_config.json
+config.dev.json
+config.prod.json
